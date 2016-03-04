@@ -5,13 +5,19 @@
 
 class Predator
 {
-    static const int days_without_meal = 5;
-    int direction;
-    Point prey_Point;
-    void find_prey;
-    void go;
+    char direction;
+    int did_turn;
+    int life_time;
+    Point target;
+    Point my_place;
+    Point find_prey();
+    void create_predator(const Point);
+    void go(const char);
+    char directionfinding(const Point);
+
 public:
-    Predator();
+
+    Predator(const int a, const int b);
 };
 
 #endif // PREDATOR_H

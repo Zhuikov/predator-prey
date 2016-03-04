@@ -12,7 +12,6 @@ CONFIG += staticlib
 
 SOURCES += \
     predator.cpp \
-    point.cpp \
     prey.cpp
 
 HEADERS += \

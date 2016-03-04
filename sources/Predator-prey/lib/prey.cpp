@@ -1,6 +1,6 @@
 #include "prey.h"
 
-Prey::Prey()
+Prey::Prey(const int a, const int b)
 {
 
 }
