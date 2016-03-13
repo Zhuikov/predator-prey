@@ -19,6 +19,6 @@
 ## Диаграмма последовательностей
 
 ## Диаграмма компонентов
-
+![Диаграмма компонентов](https://github.com/Zhuikov/predator-prey/blob/master/report/pictures/ComponentDiagram1.png)
 
   
