@@ -12,12 +12,14 @@ CONFIG += staticlib
 
 SOURCES += \
     predator.cpp \
-    prey.cpp
+    prey.cpp \
+    settings.cpp
 
 HEADERS += \
     predator.h \
     point.h \
-    prey.h
+    prey.h \
+    settings.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
