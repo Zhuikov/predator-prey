@@ -1,11 +1,12 @@
 #include "consoleDialog.h"
+#include "constants.h"
 #include <iostream>
 
 void ConsoleDialog::changeField()
 {
     int new_length = 0, new_height = 0;
 
-    std::cout << "Введите высоту поля: ";
+    std::cout << "Введите ширину поля: ";
     std::cin >> new_height;
     std::cout << "Введите длину поля";
     std::cin >> new_length;

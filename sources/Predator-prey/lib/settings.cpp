@@ -1,7 +1,7 @@
-#include "settings.h"
+//#include "settings.h"
 
-Settings::Settings()
-{
+//Settings::Settings()
+//{
 
-}
+//}
 

@@ -19,7 +19,9 @@ HEADERS += \
     predator.h \
     point.h \
     prey.h \
-    settings.h
+    settings.h \
+    constants.h \
+    exceptions.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
