@@ -13,7 +13,8 @@ CONFIG += staticlib
 SOURCES += \
     predator.cpp \
     prey.cpp \
-    settings.cpp
+    settings.cpp \
+    modelapi.cpp
 
 HEADERS += \
     predator.h \
@@ -21,7 +22,8 @@ HEADERS += \
     prey.h \
     settings.h \
     constants.h \
-    exceptions.h
+    exceptions.h \
+    modelapi.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
