@@ -6,7 +6,6 @@
 class Predator
 {
     char direction;
-    int did_turn;
     int life_time;
     Point target;
     Point my_place;

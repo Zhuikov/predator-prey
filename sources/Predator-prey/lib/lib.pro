@@ -14,7 +14,8 @@ SOURCES += \
     predator.cpp \
     prey.cpp \
     settings.cpp \
-    modelapi.cpp
+    modelapi.cpp \
+    modelpp.cpp
 
 HEADERS += \
     predator.h \
@@ -23,7 +24,8 @@ HEADERS += \
     settings.h \
     constants.h \
     exceptions.h \
-    modelapi.h
+    modelapi.h \
+    modelpp.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
