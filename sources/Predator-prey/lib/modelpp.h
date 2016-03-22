@@ -5,8 +5,8 @@
 
 class ModelPP: ModelAPI
 {
-    vector< Predator > predatorVector;
-    vector< Prey > preyVector;
+    std::vector< Predator > predatorVector;
+    std::vector< Prey > preyVector;
     int time;
     int day;
 

@@ -1,6 +1,6 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
-
+#include "modelpp.h"
 
 class Settings
 {
@@ -9,6 +9,11 @@ class Settings
     int day_without_meal;
     int num_of_predators;
     int num_of_preys;
+
+    friend class ModelPP;
+
+public:
+    Settings();
 };
 
 #endif // SETTINGS_H
