@@ -12,8 +12,9 @@ public:
     Point(const int a, const int b): x(a), y(b) {}
     void setX(const int a) { this->x = a; }
     void setY(const int b) { this->y = b; }
-    int getX() { return x; }
-    int getY() { return y; }
+    int getX() const { return x; }
+    int getY() const { return y; }
+    double operator-(const Point& point2);
 
 };
 

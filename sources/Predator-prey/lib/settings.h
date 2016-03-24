@@ -1,6 +1,6 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
-#include "modelpp.h"
+#include "modelapi.h"
 
 class Settings
 {
@@ -10,7 +10,7 @@ class Settings
     int num_of_predators;
     int num_of_preys;
 
-    friend class ModelPP;
+    friend class ModelAPI;
 
 public:
     Settings();

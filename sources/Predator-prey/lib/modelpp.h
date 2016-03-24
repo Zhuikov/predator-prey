@@ -1,17 +1,18 @@
 #ifndef MODELPP_H
 #define MODELPP_H
 #include "modelapi.h"
+#include "units.h"
 #include <vector>
 
-class ModelPP: ModelAPI
+class Settings;
+
+class ModelPP: public ModelAPI
 {
-    std::vector< Predator > predatorVector;
-    std::vector< Prey > preyVector;
-    int time;
+    int model_time;
     int day;
 
 public:
-    void initializeModel(const Settings &sett);
+    void initializeModel(const Settings &sett, Units &units);
     void saveModel();
     void loadModel();
     void changeTime(int time);

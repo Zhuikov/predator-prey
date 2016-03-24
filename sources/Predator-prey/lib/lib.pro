@@ -15,17 +15,19 @@ SOURCES += \
     prey.cpp \
     settings.cpp \
     modelapi.cpp \
-    modelpp.cpp
+    modelpp.cpp \
+    point.cpp
 
 HEADERS += \
+    settings.h \
     predator.h \
     point.h \
     prey.h \
-    settings.h \
     constants.h \
     exceptions.h \
     modelapi.h \
-    modelpp.h
+    modelpp.h \
+    units.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

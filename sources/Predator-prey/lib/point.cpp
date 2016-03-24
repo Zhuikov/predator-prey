@@ -1,0 +1,10 @@
+#include "point.h"
+#include <cmath>
+
+double Point::operator-(const Point &point2)
+{
+    double distance_between_points;
+    distance_between_points = sqrt(pow(this->getX() - point2.getX(), 2) + pow(this->getY() - point2.getY(), 2));
+
+    return distance_between_points;
+}

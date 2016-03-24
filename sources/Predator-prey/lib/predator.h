@@ -1,7 +1,9 @@
 #ifndef PREDATOR_H
 #define PREDATOR_H
 #include "point.h"
-
+#include "prey.h"
+#include "units.h"
+#include <vector>
 
 class Predator
 {
@@ -9,14 +11,14 @@ class Predator
     int life_time;
     Point target;
     Point my_place;
-    Point find_prey();
-    void create_predator(const Point);
-    void go(const char);
+    const Units *units_struct;
     char directionfinding(const Point);
 
 public:
-
     Predator(const int a, const int b);
+    void go(const char);
+    void create_predator(const Point);
+    void setPtrToUnitsStruct(Units *ptr);
 };
 
 #endif // PREDATOR_H
