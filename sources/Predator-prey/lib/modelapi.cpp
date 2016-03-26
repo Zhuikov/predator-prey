@@ -3,12 +3,12 @@
 #include <ctime>
 #include <cstdlib>
 
-void ModelAPI::initializeModel(const Settings &sett, Units &units)
+void ModelAPI::initializeModel(const Settings &sett, Units &units, Field &field)
 {
     for(int i = 0; i < sett.num_of_predators; i++) {
         srand(time(0));
         Predator pred(rand() % sett.field_length, rand() % sett.field_height);
-        pred.setPtrToUnitsStruct(&units);
+        pred.setPtrs(&units, &field);
         units.predators[i] = pred;
     }
 

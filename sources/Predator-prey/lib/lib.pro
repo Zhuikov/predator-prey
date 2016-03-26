@@ -16,7 +16,8 @@ SOURCES += \
     settings.cpp \
     modelapi.cpp \
     modelpp.cpp \
-    point.cpp
+    point.cpp \
+    field.cpp
 
 HEADERS += \
     settings.h \
@@ -27,7 +28,8 @@ HEADERS += \
     exceptions.h \
     modelapi.h \
     modelpp.h \
-    units.h
+    units.h \
+    field.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

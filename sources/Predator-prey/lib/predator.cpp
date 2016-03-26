@@ -4,13 +4,40 @@
 #include "units.h"
 #include <ctime>
 #include <cstdlib>
+#include <vector>
+
+void Predator::directionfinding()
+{
+    if (this->target.getX() != -1) {
+        double dist;
+        dist = this->my_place - this->target;
+        if ((dist > 0.9) && (dist < 1.1)) {
+      //      this->killPrey(target);
+        }
+        else {
+               //////////////////////////////////////////////
+        }
+    }
+
+}
+
+void Predator::findPrey()
+{
+    double dist = 0;
+    for (unsigned int i = 0; i < this->units_struct->preys.size(); i++){
+        dist = this->my_place - this->units_struct->preys[i].my_place;
+        if (dist <= 1.5) { this->target = this->units_struct->preys[i].my_place; }
+    }
+
+}
 
 Predator::Predator(const int a, const int b)
 {
     my_place.setX(a);
     my_place.setY(b);
-    target.setX(0);
-    target.setY(0);
+    field->setPosition(a, b, 'X');
+    target.setX(-1);
+    target.setY(-1);
     life_time = 0;
 
     srand(time(0));
@@ -33,8 +60,9 @@ void Predator::go(const char)
     }
 }
 
-void Predator::setPtrToUnitsStruct(Units *ptr)
+void Predator::setPtrs(Units* ptrU, Field* ptrF)
 {
-    this->units_struct = ptr;
+    this->units_struct = ptrU;
+    this->field = ptrF;
 }
 

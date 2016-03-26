@@ -4,14 +4,16 @@
 #include "prey.h"
 #include "settings.h"
 #include "units.h"
+#include "field.h"
 #include <vector>
 
 class Settings;
+class Field;
 
 class ModelAPI
 {
 public:
-    void initializeModel(const Settings &sett, Units &units);
+    void initializeModel(const Settings &sett, Units &units, Field &field);
     void saveModel();
     void loadModel();
     virtual void changeTime(int model_time);

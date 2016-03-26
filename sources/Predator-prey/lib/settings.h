@@ -11,6 +11,7 @@ class Settings
     int num_of_preys;
 
     friend class ModelAPI;
+    friend class Field;
 
 public:
     Settings();
