@@ -15,9 +15,10 @@ class Predator
     Point target;
     Point my_place;
     Field* field;
-    const Units* units_struct;
+    Units* units_struct;
     void directionfinding();
     void findPrey();
+    void killPrey(Point targ);
 
 public:
     Predator(const int a, const int b);

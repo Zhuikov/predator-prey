@@ -15,6 +15,7 @@ Field::Field()
 
 int Field::isEmpty(int x, int y)
 {
+    if ((x < 0) || (x > length) || (y < 0) || y > height) return 0;
     if (this->field[x][y] == '.') return 1;
     return 0;
 }

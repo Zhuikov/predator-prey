@@ -8,3 +8,9 @@ double Point::operator-(const Point &point2)
 
     return distance_between_points;
 }
+
+bool Point::operator==(Point a)
+{
+    if ((this->x == a.x) && (this->y == a.y)) return true;
+    return false;
+}
