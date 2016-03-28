@@ -1,5 +1,6 @@
 #include "consoleDialog.h"
 #include "constants.h"
+#include "exceptions.h"
 #include <iostream>
 
 void ConsoleDialog::changeField()
@@ -11,10 +12,11 @@ void ConsoleDialog::changeField()
     std::cout << "Введите длину поля";
     std::cin >> new_length;
     if ((new_height <= MIN_FIELD_SIZE) || (new_height >= MAX_FIELD_SIZE) ||
-            (new_length <= MIN_FIELD_SIZE) || (new_length >= MAX_FIELD_SIZE)) throw BadFieldBoundary;
+            (new_length <= MIN_FIELD_SIZE) || (new_length >= MAX_FIELD_SIZE))
+                throw BadFieldBoundary(new_length, new_height);
         else {
             std::cout << "Настройки успешно изменены!" << std::endl;
-            this->setNewFieldBoundary(new_length, new_height);
+       ///     this->setNewFieldBoundary(new_length, new_height);
         }
     this->settingsPresentation();
 }
@@ -24,10 +26,10 @@ void ConsoleDialog::changeDayWithoutMeal()
     std::cout << "Введите новое время жизни хищника (в днях): ";
     int new_time = 0;
     std::cin >> new_time;
-    if ((new_time <= 0) || (new_time > MAX_DAY_WITHOUT_MEAL)) throw BadDayWithoutMeal();
+    if ((new_time <= 0) || (new_time > MAX_DAY_WITHOUT_MEAL)) throw BadDayWithoutMeal(new_time);
          else {
                 std::cout << "Настройки успешно изменены!" << std::endl;
-                this->setNewDayWithoutMeal(new_time);
+       ///         this->setNewDayWithoutMeal(new_time);
          }
     this->settingsPresentation();
 }

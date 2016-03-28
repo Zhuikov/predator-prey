@@ -12,9 +12,11 @@ class Field
     int height;
 
 public:
-    Field();
+    Field(int n, int m);
     int isEmpty(int x, int y);
-    void setPosition(int x, int y, char ch);
+    void setPosition(const int x, const int y, char ch);
+    char whatIsEmpty(int x, int y);
+    char getChar(const int x, const int y) const;
 
     ~Field();
 };

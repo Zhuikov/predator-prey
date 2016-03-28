@@ -4,7 +4,6 @@
 #include "prey.h"
 #include "units.h"
 #include "field.h"
-#include <vector>
 
 class Field;
 

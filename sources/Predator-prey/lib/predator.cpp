@@ -37,10 +37,26 @@ void Predator::directionfinding()
         srand(time(0));
         int flag = rand() % 4;
         switch (flag) {
-            case 0: { direction = 'u'; break; }
-            case 1: { direction = 'r'; break; }
-            case 2: { direction = 'l'; break; }
-            case 3: { direction = 'd'; break; }
+            case 0: {
+                if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) direction = 'u';
+                    else direction = this->field->whatIsEmpty(my_place.getX(), my_place.getY());
+                break;
+            }
+            case 1: {
+                if (field->isEmpty(my_place.getX() + 1, my_place.getY())) direction = 'r';
+                    else direction = this->field->whatIsEmpty(my_place.getX(), my_place.getY());
+                break;
+            }
+            case 2: {
+                if (field->isEmpty(my_place.getX() - 1, my_place.getY())) direction = 'l';
+                    else direction = this->field->whatIsEmpty(my_place.getX(), my_place.getY());
+                break;
+            }
+            case 3: {
+                if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) direction = 'd';
+                    else direction = this->field->whatIsEmpty(my_place.getX(), my_place.getY());
+                break;
+            }
         }
     }
 
@@ -58,8 +74,8 @@ void Predator::findPrey()
 
 void Predator::killPrey(Point targ)
 {
-    int vec_size = this->units_struct->preys.size();
-    for (int i = 0; i < vec_size; i++) {
+    unsigned int vec_size = this->units_struct->preys.size();
+    for (unsigned int i = 0; i < vec_size; i++) {
         if (this->units_struct->preys[i].my_place == targ) {
             this->units_struct->preys[i] = this->units_struct->preys[vec_size];
             this->units_struct->preys.pop_back();
