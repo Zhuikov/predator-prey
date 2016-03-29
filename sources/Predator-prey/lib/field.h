@@ -13,9 +13,9 @@ class Field
 
 public:
     Field(int n, int m);
-    int isEmpty(int x, int y);
-    void setPosition(const int x, const int y, char ch);
-    char whatIsEmpty(int x, int y);
+    int isEmpty(int a, int b);
+    void setPosition(const int a, const int b, char ch);
+    char whatIsEmpty(int a, int b);
     char getChar(const int x, const int y) const;
 
     ~Field();

@@ -13,23 +13,23 @@ Field::Field(int n, int m)
     }
 }
 
-int Field::isEmpty(int x, int y)
+int Field::isEmpty(int a, int b)
 {
-    if ((x < 0) || (x >= length) || (y < 0) || (y >= height)) return 0;
-    if (this->field[x][y] == '.') return 1;
+    if ((a < 0) || (a >= height) || (b < 0) || (b >= length)) return 0;
+    if (this->field[a][b] == '.') return 1;
     return 0;
 }
 
-void Field::setPosition(const int x, const int y, char ch)
+void Field::setPosition(const int a, const int b, char ch)
 {
-    this->field[x][y] = ch;
+    this->field[a][b] = ch;
 }
 
-char Field::whatIsEmpty(int x, int y)
+char Field::whatIsEmpty(int a, int b)
 {
-    if (isEmpty(x, y - 1)) return 'u';
-    if (isEmpty(x + 1, y)) return 'r';
-    if (isEmpty(x, y + 1)) return 'd';
+    if (isEmpty(a - 1, b)) return 'u';
+    if (isEmpty(a, b + 1)) return 'r';
+    if (isEmpty(a + 1, b)) return 'd';
     return 'l';
 }
 

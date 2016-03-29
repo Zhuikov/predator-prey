@@ -48,14 +48,22 @@ void ModelTest::fieldTest()
 
     QCOMPARE(field.isEmpty(0, 0), 1);
     QCOMPARE(field.isEmpty(4, 2), 1);
-//    QCOMPARE(field.isEmpty(2, 5), 1);
-//    QCOMPARE(field.getChar(2, 5), '.');
+    QCOMPARE(field.isEmpty(2, 5), 1);
+    QCOMPARE(field.isEmpty(4, 6), 1);
+    QCOMPARE(field.isEmpty(5, 7), 0);
+    QCOMPARE(field.getChar(2, 5), '.');
 
-//    field.setPosition(1, 4, 'X');
-//    QCOMPARE(field.isEmpty(1, 4), 0);
-//    QCOMPARE(field.whatIsEmpty(4, 0), 'd');
-//    QCOMPARE(field.whatIsEmpty(1, 4), 'u');
-//    QCOMPARE(field.whatIsEmpty(1, 5), 'r');
+    field.setPosition(1, 4, 'X');
+    QCOMPARE(field.isEmpty(1, 4), 0);
+    QCOMPARE(field.whatIsEmpty(4, 0), 'u');
+    QCOMPARE(field.whatIsEmpty(0, 0), 'r');
+    QCOMPARE(field.whatIsEmpty(1, 4), 'u');
+    QCOMPARE(field.whatIsEmpty(2, 4), 'r');
+    QCOMPARE(field.whatIsEmpty(0, 6), 'd');
+
+    field.setPosition(2, 5, 'X');
+    field.setPosition(3, 4, 'O');
+    QCOMPARE(field.whatIsEmpty(2, 4), 'l');
 }
 
 QTEST_APPLESS_MAIN(ModelTest)
