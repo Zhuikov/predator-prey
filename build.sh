@@ -86,10 +86,10 @@ zip_files() {
 		fi
 		zip --version
 		zip $TITLE.zip $TITLE/*
-	else
-		echo "ConsoleApp does not exist"
-		echo "Zip failure!"
-		exit 1
+#	else
+#		echo "ConsoleApp does not exist"
+#		echo "Zip failure!"
+#		exit 1
 #	fi
 
 }
