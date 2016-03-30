@@ -20,7 +20,7 @@ build_release_version() {
 build_debug_version() {
 	cd sources/Predator-prey
 	cloc --version
-	cloc —exclude-lang=<make> —by-file —xml —out=./cloc_result *
+	cloc --exclude-lang=<make> -by-file -xml -out=./cloc_result *
 	qmake --version
 	qmake "QMAKE_CXXFLAGS+=-fprofile-arcs -ftest-coverage -fPIC -O0 -g --coverage" "LIBS+=-lgcov"
 	if [ -e "Makefile" ]; then
