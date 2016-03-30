@@ -37,7 +37,7 @@ build_debug_version() {
 			
 		cd ../../report
 		if [ -e "configfile" ]; then
-			doxygen --versio
+			doxygen --version
 			doxygen configfile
 		else
 			echo "Doxygen failed"
