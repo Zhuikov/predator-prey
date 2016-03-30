@@ -34,17 +34,9 @@ build_debug_version() {
 		
 		valgrind --version
 		valgrind --leak-check=full --xml=yes --xml-file=/opt/tomcat/.jenkins/jobs/Predator-prey/workspace/tst_modeltest.%p.result /opt/tomcat/.jenkins/jobs/Predator-prey/workspace/sources/Predator-prey/tests/tst_modeltest || true
-			
-		cd ../../report
-		if [ -e "configfile" ]; then
-			doxygen --version
-			doxygen configfile
-		else
-			echo "Doxygen failed"
-			echo "configfile does not exist"
-		fi
+		
 
-		cd ..
+		cd ../..
 	else
 		echo "Makefile does not exist"
 		echo "Build debug version failure!"
@@ -53,7 +45,15 @@ build_debug_version() {
 }
 
 make_report() {
-	cd report/latex/
+	cd report
+		if [ -e "configfile" ]; then
+			doxygen --version
+			doxygen configfile
+		else
+			echo "Doxygen failed"
+			echo "configfile does not exist"
+		fi
+	cd latex
 	if [ -e "Makefile" ]; then
 		make --version
 		make
