@@ -82,7 +82,7 @@ zip_files() {
 			cp report/Predator.pdf $TITLE/Predator-prey${BUILD_NUMBER}.pdf
 		fi
 		if [ -e "report/latex/refman.pdf" ]; then
-			cp sources/Predator-prey/doxygen/latex/refman.pdf $TITLE/Predator-preyDoxygen${BUILD_NUMBER}.pdf
+			cp report/latex/refman.pdf $TITLE/Predator-preyDoxygen${BUILD_NUMBER}.pdf
 		fi
 		zip --version
 		zip $TITLE.zip $TITLE/*
