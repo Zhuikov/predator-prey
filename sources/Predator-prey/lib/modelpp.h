@@ -1,10 +1,7 @@
 #ifndef MODELPP_H
 #define MODELPP_H
 #include "modelapi.h"
-#include "units.h"
 #include <vector>
-
-class Settings;
 
 class ModelPP: public ModelAPI
 {

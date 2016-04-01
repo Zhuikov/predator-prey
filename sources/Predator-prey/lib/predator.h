@@ -1,13 +1,12 @@
 #ifndef PREDATOR_H
 #define PREDATOR_H
-#include "point.h"
-#include "prey.h"
-#include "units.h"
-#include "field.h"
+#include "modelapi.h"
+#include "animal.h"
 
+struct Units;
 class Field;
 
-class Predator
+class Predator: public Animal
 {
     char direction;
     int life_time;

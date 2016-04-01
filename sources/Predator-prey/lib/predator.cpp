@@ -1,6 +1,5 @@
 #include "predator.h"
 #include "point.h"
-#include "prey.h"
 #include "units.h"
 #include <ctime>
 #include <cstdlib>

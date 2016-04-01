@@ -1,14 +1,10 @@
 #ifndef MODELAPI_H
 #define MODELAPI_H
-#include "predator.h"
-#include "prey.h"
-#include "settings.h"
 #include "units.h"
 #include "field.h"
 #include <vector>
 
-class Settings;
-class Field;
+class Predator;
 
 class ModelAPI
 {
