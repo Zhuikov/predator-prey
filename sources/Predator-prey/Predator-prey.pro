@@ -1,9 +1,9 @@
 TEMPLATE = subdirs
 
-app.depends = lib
+consoleApp.depends = lib
 tests.depends = lib
 
 SUBDIRS += \
-    app \
+    consoleApp \
     lib \
     tests

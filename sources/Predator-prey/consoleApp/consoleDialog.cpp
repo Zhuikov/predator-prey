@@ -7,18 +7,17 @@ void ConsoleDialog::changeField()
 {
     int new_length = 0, new_height = 0;
 
-    std::cout << "Введите ширину поля: ";
+    std::cout << "Введите высоту поля: ";
     std::cin >> new_height;
-    std::cout << "Введите длину поля";
+    std::cout << "Введите длину поля ";
     std::cin >> new_length;
     if ((new_height <= MIN_FIELD_SIZE) || (new_height >= MAX_FIELD_SIZE) ||
             (new_length <= MIN_FIELD_SIZE) || (new_length >= MAX_FIELD_SIZE))
-                throw BadFieldBoundary(new_length, new_height);
+                throw BadFieldBoundary(new_height, new_length);
         else {
             std::cout << "Настройки успешно изменены!" << std::endl;
-       ///     this->setNewFieldBoundary(new_length, new_height);
+            this->setNewFieldBoundary(sett, new_length, new_height);
         }
-    this->settingsPresentation();
 }
 
 void ConsoleDialog::changeDayWithoutMeal()
@@ -34,14 +33,21 @@ void ConsoleDialog::changeDayWithoutMeal()
     this->settingsPresentation();
 }
 
+ConsoleDialog::ConsoleDialog(Settings* settings)
+{
+    this->sett = settings;
+}
+
 void ConsoleDialog::settingsPresentation()
 {
-    std::cout << "1. Именить размеры поля" << std::endl;
+    std::cout << "1. Именить размеры поля. Текущие размеры ";
+    std::cout << this->sett->field_height << " x " << this->sett->field_length << std::endl;
     std::cout << "2. Изменить время жизни хищника без еды" << std::endl;
     std::cout << "0. Назад" << std::endl;
     std::cout << "Выберите нужный пункт меню: ";
 
-    int choice = 0, good_choice = 0;
+    int choice = 0;
+    int good_choice = 0;
 
     while (good_choice == 0) {
         std::cin >> choice;
@@ -56,24 +62,36 @@ void ConsoleDialog::settingsPresentation()
 
 }
 
-void ConsoleDialog::menuPresentation()
+void ConsoleDialog::setNewFieldBoundary(Settings *sett, int new_length, int new_height)
+{
+    sett->field_length = new_length;
+    sett->field_height = new_height;
+
+    this->settingsPresentation();
+}
+
+int ConsoleDialog::menuPresentation()
 {
     std::cout << "Модель \"Хищник-Жертва\"" << std::endl;
     std::cout << "1. Создать новую модель." << std::endl;
     std::cout << "2. Загрузить модель." << std::endl;
     std::cout << "3. Настройки." << std::endl;
     std::cout << "0. Выход." << std::endl;
-    std::cout << "Выберите нужный пункт меню: ";
 
-    int choice = 0, good_choice = 0;
+    int choice = 0;
+    int good_choice = 0;
 
     while(good_choice == 0) {
+        std::cout << "Выберите нужный пункт меню: ";
         std::cin >> choice;
         switch (choice)
         {
             case 3: { this->settingsPresentation(); break; }
+            case 0: { return 0; }
+            default: { std::cout << "Выбран неверный пункт меню" << std::endl; }
         }
     }
+    return 0;
 
 }
 

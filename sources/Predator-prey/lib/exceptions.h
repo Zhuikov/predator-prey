@@ -13,7 +13,7 @@ public:
     void showMessage() { std::cerr << "Невозможно создать поле с размерами " <<
                          length << "x" << height << std::endl << "Минимальная длина и ширина поля: " <<
                          MIN_FIELD_SIZE << std::endl << "Максимальная длина и ширина поля: " <<
-                         MAX_FIELD_SIZE; }
+                         MAX_FIELD_SIZE << std::endl; }
 };
 
 class BadDayWithoutMeal
@@ -23,7 +23,7 @@ class BadDayWithoutMeal
 public:
     BadDayWithoutMeal(int a): bad_value(a) {}
     void showMessage() { std::cerr << "Введенное значение недопустимо." << std::endl <<
-                         "Число должно быть в диапазоне от 1 до " << MAX_DAY_WITHOUT_MEAL; }
+                         "Число должно быть в диапазоне от 1 до " << MAX_DAY_WITHOUT_MEAL << std::endl; }
 };
 
 #endif // EXCEPTIONS_H

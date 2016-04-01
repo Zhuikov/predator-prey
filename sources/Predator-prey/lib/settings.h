@@ -11,6 +11,7 @@ class Settings
 
     friend class ModelAPI;
     friend class Field;
+    friend class ConsoleDialog;
 
 public:
     Settings();
