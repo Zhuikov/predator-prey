@@ -1,8 +1,6 @@
 #include "predator.h"
 #include "point.h"
 #include "units.h"
-#include <ctime>
-#include <cstdlib>
 #include <vector>
 
 void Predator::directionfinding()
@@ -33,31 +31,8 @@ void Predator::directionfinding()
         }
     }
     else {
-        srand(time(0));
-        int flag = rand() % 4;
-        switch (flag) {
-            case 0: {
-                if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) direction = 'u';
-                    else direction = this->field->whatIsEmpty(my_place.getX(), my_place.getY());
-                break;
-            }
-            case 1: {
-                if (field->isEmpty(my_place.getX() + 1, my_place.getY())) direction = 'r';
-                    else direction = this->field->whatIsEmpty(my_place.getX(), my_place.getY());
-                break;
-            }
-            case 2: {
-                if (field->isEmpty(my_place.getX() - 1, my_place.getY())) direction = 'l';
-                    else direction = this->field->whatIsEmpty(my_place.getX(), my_place.getY());
-                break;
-            }
-            case 3: {
-                if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) direction = 'd';
-                    else direction = this->field->whatIsEmpty(my_place.getX(), my_place.getY());
-                break;
-            }
+        chooseRandomDirection();
         }
-    }
 
 }
 
@@ -95,15 +70,10 @@ Predator::Predator(const int a, const int b)
     target.setX(-1);
     target.setY(-1);
     life_time = 0;
+    energy = 0;
 
-    srand(time(0));
-    int flag = rand() % 4;
-    switch (flag) {
-        case 0: { direction = 'u'; break; }
-        case 1: { direction = 'r'; break; }
-        case 2: { direction = 'l'; break; }
-        case 3: { direction = 'd'; break; }
-    }    
+    chooseRandomDirection();
+
 }
 
 void Predator::setPtrs(Units* ptrU, Field* ptrF)

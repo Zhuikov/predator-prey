@@ -6,7 +6,10 @@
 class Animal
 {
 protected:
+    int life_time;
+    int energy;
     char direction;
+    void chooseRandomDirection();
     virtual void directionfinding() = 0;
     Field* field;
 
