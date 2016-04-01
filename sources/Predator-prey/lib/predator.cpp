@@ -106,16 +106,6 @@ Predator::Predator(const int a, const int b)
     }    
 }
 
-void Predator::go(const char)
-{
-    switch (this->direction) {
-        case 'u': { this->my_place.setY(this->my_place.getY() - 1); break; }
-        case 'r': { this->my_place.setX(this->my_place.getX() + 1); break; }
-        case 'l': { this->my_place.setX(this->my_place.getX() - 1); break; }
-        case 'd': { this->my_place.setY(this->my_place.getY() + 1); break; }
-    }
-}
-
 void Predator::setPtrs(Units* ptrU, Field* ptrF)
 {
     this->units_struct = ptrU;

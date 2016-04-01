@@ -2,18 +2,16 @@
 #define PREY_H
 #include "animal.h"
 
-class Prey: public Animal
+class Prey: protected Animal
 {
-    int direction;
+protected:
     int warning;
-    char directionfinding(Point);
+    void directionfinding();
 
 public:
-
     Prey(const int a, const int b) { my_place.setX(a); my_place.setY(b); }
-    Point my_place;
     int chase;
-    void go(char ch);
+    Point my_place;
 };
 
 #endif // PREY_H

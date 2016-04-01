@@ -6,23 +6,21 @@
 struct Units;
 class Field;
 
-class Predator: public Animal
+class Predator: protected Animal
 {
-    char direction;
+protected:
     int life_time;
     Point target;
-    Point my_place;
-    Field* field;
     Units* units_struct;
     void directionfinding();
     void findPrey();
     void killPrey(Point targ);
+    void create_predator(const Point);
 
 public:
     Predator(const int a, const int b);
-    void go(const char);
-    void create_predator(const Point);
     void setPtrs(Units* ptrU, Field* ptrF);
+    Point my_place;
 };
 
 #endif // PREDATOR_H
