@@ -14,20 +14,23 @@ void Predator::directionfinding()
         }
         else {
             if ((target.getX() < my_place.getX()) && (target.getY() < my_place.getY())) {
-                if (field->isEmpty(my_place.getX() - 1, my_place.getY())) { this->direction = 'l'; }
-                else { this->direction = 'u'; }
+                if (field->isEmpty(my_place.getX() - 1, my_place.getY())) this->direction = 'l';
+                else if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) this->direction = 'u';
+                else chooseRandomDirection();
             }
             if ((target.getX() < my_place.getX()) && (target.getY() > my_place.getY())) {
-                if (field->isEmpty(my_place.getX() - 1, my_place.getY())) { this->direction = 'l'; }
-                else { this->direction = 'd'; }
+                if (field->isEmpty(my_place.getX() - 1, my_place.getY())) this->direction = 'l';
+                else if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) this->direction = 'd';
+                else chooseRandomDirection();
             }
             if ((target.getX() > my_place.getX()) && (target.getY() < my_place.getY())) {
-                if (field->isEmpty(my_place.getX() + 1, my_place.getY())) { this->direction = 'r'; }
-                else { this->direction = 'u'; }
+                if (field->isEmpty(my_place.getX() + 1, my_place.getY())) this->direction = 'r';
+                else if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) this->direction = 'u';
             }
             if ((target.getX() > my_place.getX()) && (target.getY() > my_place.getY())) {
-                if (field->isEmpty(my_place.getX() + 1, my_place.getY())) { this->direction = 'r'; }
-                else { this->direction = 'd'; }
+                if (field->isEmpty(my_place.getX() + 1, my_place.getY())) this->direction = 'r';
+                else if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) this->direction = 'd';
+                else chooseRandomDirection();
             }
         }
     }
@@ -122,5 +125,13 @@ void Predator::setPtrs(Units* ptrU, Field* ptrF)
 {
     this->units_struct = ptrU;
     this->field = ptrF;
+}
+
+void Predator::movePredator()
+{
+    this->findPrey();
+    this->directionfinding();
+    this->go(direction);
+
 }
 
