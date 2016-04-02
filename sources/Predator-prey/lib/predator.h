@@ -14,7 +14,7 @@ protected:
     void directionfinding();
     void findPrey();
     void killPrey(Point targ);
-    void create_predator(const Point);
+    void createPredator();
 
 public:
     Predator(const int a, const int b);

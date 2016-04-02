@@ -1,6 +1,7 @@
 #include "predator.h"
 #include "point.h"
 #include "units.h"
+#include "constants.h"
 #include <vector>
 
 void Predator::directionfinding()
@@ -30,9 +31,7 @@ void Predator::directionfinding()
             }
         }
     }
-    else {
-        chooseRandomDirection();
-        }
+    else chooseRandomDirection();
 
 }
 
@@ -56,10 +55,53 @@ void Predator::killPrey(Point targ)
             break;
         }
     }
+
     if (targ.getX() < my_place.getX()) direction = 'l';
     else if (targ.getX() > my_place.getX()) direction = 'r';
     else if (targ.getY() < my_place.getY()) direction = 'u';
     else if (targ.getY() > my_place.getY()) direction = 'd';
+
+    target.setX(-1);
+    target.setY(-1);
+    energy++;
+
+
+    if (energy == PREDATOR_CREATE_ENERGY) this->createPredator();
+
+}
+
+void Predator::createPredator()
+{
+    chooseRandomDirection();
+
+    switch (direction) {
+    case 'u': {
+        Predator pred(my_place.getX(), my_place.getY() - 1);
+        units_struct->predators.push_back(pred);
+        break;
+    }
+    case 'r': {
+        Predator pred(my_place.getX() + 1, my_place.getY());
+        units_struct->predators.push_back(pred);
+        break;
+    }
+    case 'd': {
+        Predator pred(my_place.getX(), my_place.getY() + 1);
+        units_struct->predators.push_back(pred);
+        break;
+    }
+    case 'l': {
+        Predator pred(my_place.getX() - 1, my_place.getY());
+        units_struct->predators.push_back(pred);
+    }
+    }
+
+    unsigned int vec_size = units_struct->predators.size();
+    units_struct->predators[vec_size].setPtrs(this->units_struct, this->field);
+
+    chooseRandomDirection();
+    this->energy = 0;
+
 }
 
 Predator::Predator(const int a, const int b)
