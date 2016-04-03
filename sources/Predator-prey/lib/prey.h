@@ -8,12 +8,14 @@ class Prey: public Animal
 {
 protected:
     int warning;
+    Point pred;
     Units* units_struct;
     void directionfinding();
-    void CreatePrey(Point);
+    void createPrey();
 
 public:
     Prey(const int a, const int b);
+    void setPtrs(Units* ptrU, Field* ptrF);
 };
 
 #endif // PREY_H

@@ -130,8 +130,10 @@ void Predator::setPtrs(Units* ptrU, Field* ptrF)
 void Predator::movePredator()
 {
     this->findPrey();
+    this->field->setPosition(this->my_place.getX(), this->my_place.getY(), '.');
     this->directionfinding();
     this->go(direction);
+    this->field->setPosition(this->my_place.getX(), this->my_place.getY(), 'X');
 
 }
 
