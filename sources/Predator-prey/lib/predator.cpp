@@ -42,8 +42,8 @@ void Predator::findPrey()
 {
     double dist = 0;
     for (unsigned int i = 0; i < this->units_struct->preys.size(); i++){
-        dist = this->my_place - this->units_struct->preys[i].my_place;
-        if (dist < 1.5) { this->target = this->units_struct->preys[i].my_place; }
+        dist = this->my_place - this->units_struct->preys[i]->my_place;
+        if (dist < 1.5) this->target = this->units_struct->preys[i]->my_place;
     }
 
 }
@@ -52,7 +52,7 @@ void Predator::killPrey(Point targ)
 {
     unsigned int vec_size = this->units_struct->preys.size();
     for (unsigned int i = 0; i < vec_size; i++) {
-        if (this->units_struct->preys[i].my_place == targ) {
+        if (this->units_struct->preys[i]->my_place == targ) {
             this->units_struct->preys[i] = this->units_struct->preys[vec_size];
             this->units_struct->preys.pop_back();
             break;
@@ -77,30 +77,28 @@ void Predator::createPredator()
 {
     chooseRandomDirection();
 
+    Predator *pred;
     switch (direction) {
     case 'u': {
-        Predator pred(my_place.getX(), my_place.getY() - 1);
-        units_struct->predators.push_back(pred);
+        pred = new Predator(my_place.getX(), my_place.getY() - 1);
         break;
     }
     case 'r': {
-        Predator pred(my_place.getX() + 1, my_place.getY());
-        units_struct->predators.push_back(pred);
+        pred = new Predator(my_place.getX() + 1, my_place.getY());
         break;
     }
     case 'd': {
-        Predator pred(my_place.getX(), my_place.getY() + 1);
-        units_struct->predators.push_back(pred);
+        pred = new Predator(my_place.getX(), my_place.getY() + 1);
         break;
     }
     case 'l': {
-        Predator pred(my_place.getX() - 1, my_place.getY());
-        units_struct->predators.push_back(pred);
+        pred = new Predator(my_place.getX() - 1, my_place.getY());
     }
     }
 
+    units_struct->predators.push_back(pred);
     unsigned int vec_size = units_struct->predators.size();
-    units_struct->predators[vec_size].setPtrs(this->units_struct, this->field);
+    units_struct->predators[vec_size]->setPtrs(this->units_struct, this->field);
 
     chooseRandomDirection();
     this->energy = 0;

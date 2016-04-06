@@ -19,7 +19,7 @@ class ConsoleDialog
 
 public:
     ConsoleDialog(Settings* settings);
-    int menuPresentation();
+    void menuPresentation();
 
 };
 

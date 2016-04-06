@@ -5,6 +5,8 @@
 #include <vector>
 
 class Predator;
+class Units;
+class Prey;
 
 class ModelAPI
 {

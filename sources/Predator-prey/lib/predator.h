@@ -3,7 +3,7 @@
 #include "modelapi.h"
 #include "animal.h"
 
-struct Units;
+class Units;
 class Field;
 
 class Predator: public Animal
@@ -20,6 +20,7 @@ public:
     Predator(const int a, const int b);
     void setPtrs(Units* ptrU, Field* ptrF);
     void movePredator();
+
 };
 
 #endif // PREDATOR_H

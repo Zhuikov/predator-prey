@@ -2,7 +2,7 @@
 #define PREY_H
 #include "animal.h"
 
-struct Units;
+class Units;
 
 class Prey: public Animal
 {

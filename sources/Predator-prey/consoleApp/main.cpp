@@ -7,23 +7,31 @@ int main()
 {
     Settings settings;
     ConsoleDialog CD(&settings);
-    while (CD.menuPresentation()) {
-    try {
-            CD.menuPresentation();
-    }
-    catch (BadFieldBoundary& e)
-    {
-        e.showMessage();
-    }
-    catch (BadNumOfPredators& e)
-    {
-        e.showMessage();
 
+    int flag = 0;
+
+    while(!flag) {
+        try {
+        flag = 1;
+        CD.menuPresentation();
+        }
+        catch (BadFieldBoundary& e)
+        {
+            flag = 0;
+            e.showMessage();
+        }
+        catch (BadNumOfPredators& e)
+        {
+            flag = 0;
+            e.showMessage();
+        }
+        catch (BadNumOfPreys& e)
+        {
+            flag = 0;
+            e.showMessage();
+        }
     }
-    catch (BadNumOfPreys& e)
-    {
-        e.showMessage();
-    }
-    }
+
+
     return 0;
 }

@@ -26,42 +26,40 @@ void Prey::createPrey()
 {
     chooseRandomDirection();
 
-        switch (direction) {
+    Prey *prey;
+    switch (direction) {
         case 'u': {
-            Prey prey(my_place.getX(), my_place.getY() - 1);
-            units_struct->preys.push_back(prey);
+            prey = new Prey(my_place.getX(), my_place.getY() - 1);
             break;
         }
         case 'r': {
-            Prey prey(my_place.getX() + 1, my_place.getY());
-            units_struct->preys.push_back(prey);
+            prey = new Prey(my_place.getX() + 1, my_place.getY());
             break;
         }
         case 'd': {
-            Prey prey(my_place.getX(), my_place.getY() + 1);
-            units_struct->preys.push_back(prey);
+            prey = new Prey(my_place.getX(), my_place.getY() + 1);
             break;
         }
         case 'l': {
-            Prey prey(my_place.getX() - 1, my_place.getY());
-            units_struct->preys.push_back(prey);
+            prey = new Prey(my_place.getX() - 1, my_place.getY());
         }
         }
 
-        unsigned int vec_size = units_struct->preys.size();
-        units_struct->preys[vec_size].setPtrs(this->units_struct, this->field);
+    units_struct->preys.push_back(prey);
+    unsigned int vec_size = units_struct->preys.size();
+    units_struct->preys[vec_size]->setPtrs(this->units_struct, this->field);
 
-        chooseRandomDirection();
-        this->energy = 0;
+    chooseRandomDirection();
+    this->energy = 0;
 }
 
 void Prey::isChase()
 {
     warning = 0;
     for (unsigned int i = 0; i < units_struct->predators.size(); i++) {
-        if (this->my_place - units_struct->predators[i].my_place < 1.1) {
+        if (this->my_place - units_struct->predators[i]->my_place < 1.1) {
             warning = 1;
-            this->dangerous_pred = units_struct->predators[i].my_place;
+            this->dangerous_pred = units_struct->predators[i]->my_place;
         }
     }
 }

@@ -18,7 +18,8 @@ SOURCES += \
     modelpp.cpp \
     point.cpp \
     field.cpp \
-    animal.cpp
+    animal.cpp \
+    units.cpp
 
 HEADERS += \
     settings.h \

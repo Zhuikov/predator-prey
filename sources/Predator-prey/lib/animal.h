@@ -16,6 +16,8 @@ protected:
 public:
     virtual void go(char ch);
     Point my_place;
+
+    virtual ~Animal() {}
 };
 
 #endif // ANIMAL_H

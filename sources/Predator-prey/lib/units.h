@@ -6,10 +6,13 @@
 
 class Predator;
 
-struct Units
+class Units
 {
-    std::vector<Prey> preys;
-    std::vector<Predator> predators;
+public:
+    std::vector<Prey*> preys;
+    std::vector<Predator*> predators;
+
+    ~Units();
 };
 
 #endif // UNITS_H
