@@ -76,8 +76,8 @@ zip_files() {
 	TITLE="${JOB_NAME}${BUILD_NUMBER}"
 	mkdir "$TITLE"
 
-#	if [ -e "sources/FootballEditor16/ConsoleApp/ConsoleApp" ]; then
-#		cp sources/FootballEditor16/ConsoleApp/ConsoleApp $TITLE/FootballEditor16${BUILD_NUMBER}
+	if [ -e "sources/Predator-prey/consoleApp/consoleApp" ]; then
+		cp sources/Predator-prey/consoleApp/consoleApp $TITLE/Predator-prey${BUILD_NUMBER}
 		if [ -e "report/Predator-prey.pdf" ]; then
 			cp report/Predator.pdf $TITLE/Predator-prey${BUILD_NUMBER}.pdf
 		fi
@@ -86,11 +86,11 @@ zip_files() {
 		fi
 		zip --version
 		zip $TITLE.zip $TITLE/*
-#	else
-#		echo "ConsoleApp does not exist"
-#		echo "Zip failure!"
-#		exit 1
-#	fi
+	else
+		echo "ConsoleApp does not exist"
+		echo "Zip failure!"
+		exit 1
+	fi
 
 }
 
