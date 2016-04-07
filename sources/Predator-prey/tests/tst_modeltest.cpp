@@ -46,6 +46,8 @@ void ModelTest::fieldTest()
 {
     Field field(5, 7);
 
+    QCOMPARE(field.getNumOfCols(), 7);
+    QCOMPARE(field.getNumOfRows(), 5);
     QCOMPARE(field.isEmpty(0, 0), 1);
     QCOMPARE(field.isEmpty(4, 2), 1);
     QCOMPARE(field.isEmpty(2, 5), 1);
@@ -64,6 +66,12 @@ void ModelTest::fieldTest()
     field.setPosition(2, 5, 'X');
     field.setPosition(3, 4, 'O');
     QCOMPARE(field.whatIsEmpty(2, 4), 'l');
+
+    Field field2(10, 10);
+    field2 = field;
+    QCOMPARE(field2.getChar(2, 5), 'X');
+    QCOMPARE(field2.getChar(3, 4), 'O');
+    QCOMPARE(field2.whatIsEmpty(2, 4), 'l');
 }
 
 QTEST_APPLESS_MAIN(ModelTest)
