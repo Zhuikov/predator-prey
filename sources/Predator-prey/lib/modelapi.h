@@ -11,12 +11,14 @@ class Prey;
 class ModelAPI
 {
 public:
-    void initializeModel(const Settings &sett, Units &units, Field &field);
+    virtual void initializeModel() = 0;
     void saveModel();
     void loadModel();
-    virtual void changeTime(int model_time);
-    virtual void changeDay(int day);
-    virtual int checkPredators(const std::vector< Predator > &predatorVector);
-    virtual int checkPreys(const std::vector< Prey > &preyVector);
+    void changeTime(int model_time);
+    void changeDay(int day);
+    int checkPredators(const std::vector< Predator > &predatorVector);
+    int checkPreys(const std::vector< Prey > &preyVector);
+
+    ~ModelAPI() {}
 };
 #endif // MODELAPI_H

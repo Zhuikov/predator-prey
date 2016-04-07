@@ -1,5 +1,18 @@
 #include "field.h"
 
+Field::Field()
+{
+    this->height = 10;
+    this->length = 10;
+
+    field = new char*[height];
+    for (int i = 0; i < height; i++) {
+        field[i] = new char[length];
+        for (int j = 0; j < length; j++)
+            field[i][j] = '.';
+    }
+}
+
 Field::Field(int n, int m)
 {
     this->height = n;
@@ -11,6 +24,25 @@ Field::Field(int n, int m)
         for (int j = 0; j < length; j++)
             field[i][j] = '.';
     }
+}
+
+Field& Field::operator=(Field &field2)
+{
+    if (this != &field2) {
+        for (int i = 0; i < this->getNumOfRows(); i++)
+            delete[] this->field[i];
+        delete[] this->field;
+
+        this->field = new char*[height];
+        for (int i = 0; i < height; i++)
+            field[i] = new char[length];
+
+        for (int i = 0; i < field2.getNumOfRows(); i++)
+            for (int j = 0; j < field2.getNumOfCols(); j++)
+                this->field[i][j] = field2.getChar(i, j);
+    }
+
+    return *this;
 }
 
 int Field::isEmpty(int a, int b)
@@ -36,6 +68,16 @@ char Field::whatIsEmpty(int a, int b)
 char Field::getChar(const int x, const int y) const
 {
     return field[x][y];
+}
+
+int Field::getNumOfCols()
+{
+    return this->length;
+}
+
+int Field::getNumOfRows()
+{
+    return this->height;
 }
 
 Field::~Field()

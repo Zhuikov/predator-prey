@@ -1,12 +1,14 @@
 #include <iostream>
-#include "modelapi.h"
+#include "modelpp.h"
 #include "consoleDialog.h"
 #include"exceptions.h"
 
 int main()
 {
     Settings settings;
-    ConsoleDialog CD(&settings);
+
+    ModelPP model(&settings);
+    ConsoleDialog CD(&model, &settings);
 
     int flag = 0;
 

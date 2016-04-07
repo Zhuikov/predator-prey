@@ -80,49 +80,49 @@ void Predator::createPredator()
     Predator *pred;
     switch (direction) {
     case 'u': {
-        pred = new Predator(my_place.getX(), my_place.getY() - 1);
+        pred = new Predator(my_place.getX(), my_place.getY() - 1, this->field);
         break;
     }
     case 'r': {
-        pred = new Predator(my_place.getX() + 1, my_place.getY());
+        pred = new Predator(my_place.getX() + 1, my_place.getY(), this->field);
         break;
     }
     case 'd': {
-        pred = new Predator(my_place.getX(), my_place.getY() + 1);
+        pred = new Predator(my_place.getX(), my_place.getY() + 1, this->field);
         break;
     }
     case 'l': {
-        pred = new Predator(my_place.getX() - 1, my_place.getY());
+        pred = new Predator(my_place.getX() - 1, my_place.getY(), this->field);
     }
     }
 
     units_struct->predators.push_back(pred);
     unsigned int vec_size = units_struct->predators.size();
-    units_struct->predators[vec_size]->setPtrs(this->units_struct, this->field);
+    units_struct->predators[vec_size]->setPtrs(this->units_struct);
 
     chooseRandomDirection();
     this->energy = 0;
 
 }
 
-Predator::Predator(const int a, const int b)
+Predator::Predator(const int a, const int b, Field *ptrF)
 {
     my_place.setX(a);
     my_place.setY(b);
-    field->setPosition(a, b, 'X');
     target.setX(-1);
     target.setY(-1);
     life_time = 0;
     energy = 0;
+    field = ptrF;
+    field->setPosition(this->my_place.getX(), this->my_place.getY(), 'X');
 
     chooseRandomDirection();
 
 }
 
-void Predator::setPtrs(Units* ptrU, Field* ptrF)
+void Predator::setPtrs(Units* ptrU)
 {
     this->units_struct = ptrU;
-    this->field = ptrF;
 }
 
 void Predator::movePredator()
@@ -134,4 +134,3 @@ void Predator::movePredator()
     this->field->setPosition(this->my_place.getX(), this->my_place.getY(), 'X');
 
 }
-

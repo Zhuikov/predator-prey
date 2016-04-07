@@ -17,8 +17,8 @@ protected:
     void createPredator();
 
 public:
-    Predator(const int a, const int b);
-    void setPtrs(Units* ptrU, Field* ptrF);
+    Predator(const int a, const int b, Field* ptrF);
+    void setPtrs(Units* ptrU);
     void movePredator();
 
 };

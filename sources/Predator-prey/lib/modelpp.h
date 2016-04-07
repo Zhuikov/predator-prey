@@ -7,9 +7,13 @@ class ModelPP: public ModelAPI
 {
     int model_time;
     int day;
+    Field field;
+    Units units;
+    Settings *sett;
 
 public:
-    void initializeModel(const Settings &sett, Units &units);
+    ModelPP(Settings *set);
+    void initializeModel();
     void saveModel();
     void loadModel();
     void changeTime(int time);

@@ -12,11 +12,15 @@ class Field
     int height;
 
 public:
+    Field();
     Field(int n, int m);
     int isEmpty(int a, int b);
     void setPosition(const int a, const int b, char ch);
     char whatIsEmpty(int a, int b);
     char getChar(const int x, const int y) const;
+    int getNumOfCols();
+    int getNumOfRows();
+    Field& operator=(Field &field1);
 
     ~Field();
 };

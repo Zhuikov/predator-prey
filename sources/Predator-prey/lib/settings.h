@@ -9,7 +9,7 @@ class Settings
     int num_of_predators;
     int num_of_preys;
 
-    friend class ModelAPI;
+    friend class ModelPP;
     friend class Field;
     friend class ConsoleDialog;
 

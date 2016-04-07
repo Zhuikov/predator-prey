@@ -15,8 +15,8 @@ protected:
     void isChase();
 
 public:
-    Prey(const int a, const int b);
-    void setPtrs(Units* ptrU, Field* ptrF);
+    Prey(const int a, const int b, Field* ptrF);
+    void setPtrs(Units* ptrU);
 };
 
 #endif // PREY_H
