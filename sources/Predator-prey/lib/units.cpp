@@ -8,11 +8,11 @@ Units::Units()
 
 Units::~Units()
 {
-    for (unsigned int i = 0; i < predators.size(); i++) {
-       delete predators[i];
-    }
+//    for (std::vector<Predator*>::const_iterator i = predators.begin(); i != predators.end(); i++) {
+//       delete *i;
+//    }
 
-    for (unsigned int i = 0; i < preys.size(); i++) {
-        delete preys[i];
-    }
+//    for (unsigned int i = 0; i < preys.size(); i++) {
+//        delete preys[i];
+//    }
 }

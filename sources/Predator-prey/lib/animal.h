@@ -11,10 +11,10 @@ protected:
     char direction;
     void chooseRandomDirection();
     virtual void directionfinding() = 0;
+    virtual void go(char ch);
     Field* field;
 
 public:
-    virtual void go(char ch);
     Point my_place;
 
     virtual ~Animal() {}

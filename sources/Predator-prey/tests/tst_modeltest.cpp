@@ -3,6 +3,7 @@
 #include <cmath>
 #include "field.h"
 #include "point.h"
+#include "predator.h"
 
 class ModelTest : public QObject
 {
@@ -16,6 +17,7 @@ private Q_SLOTS:
 
     void pointTest();
     void fieldTest();
+    void predatorTest();
 };
 
 ModelTest::ModelTest() {}
@@ -72,6 +74,30 @@ void ModelTest::fieldTest()
     QCOMPARE(field2.getChar(2, 5), 'X');
     QCOMPARE(field2.getChar(3, 4), 'O');
     QCOMPARE(field2.whatIsEmpty(2, 4), 'l');
+    QCOMPARE(field2.getNumOfRows(), 5);
+    QCOMPARE(field2.getNumOfCols(), 7);
+
+}
+
+void ModelTest::predatorTest()
+{
+    Field field(10, 10);
+    Units units;
+
+    Prey tst_prey(3, 3, &field);
+    tst_prey.setPtrs(&units);
+    Predator tst_predator(4, 4, &field);
+    tst_predator.setPtrs(&units);
+
+    units.predators.push_back(&tst_predator);
+    units.preys.push_back(&tst_prey);
+
+    tst_predator.movePredator();
+
+    QCOMPARE(tst_predator.my_place.getX(), 3);
+    QCOMPARE(tst_predator.my_place.getY(), 4);
+
+
 }
 
 QTEST_APPLESS_MAIN(ModelTest)
