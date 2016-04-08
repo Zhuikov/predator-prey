@@ -115,8 +115,7 @@ Predator::Predator(const int a, const int b, Field *ptrF)
     energy = 0;
     field = ptrF;
     field->setPosition(this->my_place.getX(), this->my_place.getY(), 'X');
-
-    chooseRandomDirection();
+    direction = 'u';
 
 }
 

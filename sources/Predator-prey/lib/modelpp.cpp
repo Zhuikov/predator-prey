@@ -28,7 +28,7 @@ void ModelPP::initializeModel()
         }
         pred = new Predator(i_pred, j_pred, &field);
         pred->setPtrs(&units);
-        units.predators[i] = pred; //todo Не работает
+        units.predators.push_back(pred);
     }
 
     for(int i = 0; i < sett->num_of_preys; i++) {

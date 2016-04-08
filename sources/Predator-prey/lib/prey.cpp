@@ -74,9 +74,9 @@ Prey::Prey(const int a, const int b, Field* ptrF)
     life_time = 0;
     field = ptrF;
     field->setPosition(this->my_place.getX(), this->my_place.getY(), 'O');
+    direction = 'u';
 
     isChase();
-    chooseRandomDirection();
 }
 
 void Prey::setPtrs(Units* ptrU)

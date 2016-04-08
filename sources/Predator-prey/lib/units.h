@@ -12,6 +12,7 @@ public:
     std::vector<Prey*> preys;
     std::vector<Predator*> predators;
 
+    Units();
     ~Units();
 };
 
