@@ -10,6 +10,7 @@ class Field
     char** field;
     int length;
     int height;
+    void resize(Field &field1);
 
 public:
     Field();

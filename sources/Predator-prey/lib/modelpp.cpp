@@ -6,7 +6,7 @@
 ModelPP::ModelPP(Settings *set)
 {
     this->sett = set;
-    Field created_field;
+    Field created_field(sett->field_height, sett->field_length);
     this->field = created_field;
 }
 
@@ -44,7 +44,7 @@ void ModelPP::initializeModel()
         }
         pr = new Prey(i_prey, j_prey, &field);
         pr->setPtrs(&units);
-        units.preys[i] = pr;
+        units.preys.push_back(pr);
     }
 }
 

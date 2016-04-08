@@ -29,6 +29,7 @@ Field::Field(int n, int m)
 Field& Field::operator=(Field &field2)
 {
     if (this != &field2) {
+        this->resize(field2);
         for (int i = 0; i < this->getNumOfRows(); i++)
             delete[] this->field[i];
         delete[] this->field;
@@ -55,6 +56,23 @@ int Field::isEmpty(int a, int b)
 void Field::setPosition(const int a, const int b, char ch)
 {
     this->field[a][b] = ch;
+}
+
+void Field::resize(Field &field1)
+{
+    for (int i = 0; i < this->height; i++)
+        delete[] field[i];
+    delete[] field;
+
+    height = field1.getNumOfRows();
+    length = field1.getNumOfCols();
+
+    field = new char*[height];
+    for (int i = 0; i < height; i++) {
+        field[i] = new char[length];
+        for (int j = 0; j < length; j++)
+            this->field[i][j] = '.';
+    }
 }
 
 char Field::whatIsEmpty(int a, int b)

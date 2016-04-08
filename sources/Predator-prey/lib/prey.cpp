@@ -75,11 +75,11 @@ Prey::Prey(const int a, const int b, Field* ptrF)
     field = ptrF;
     field->setPosition(this->my_place.getX(), this->my_place.getY(), 'O');
     direction = 'u';
-
-    isChase();
+    warning = 0;
 }
 
 void Prey::setPtrs(Units* ptrU)
 {
     this->units_struct = ptrU;
+    isChase();
 }
