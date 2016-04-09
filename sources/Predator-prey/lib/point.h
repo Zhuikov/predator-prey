@@ -15,6 +15,7 @@ public:
     int getY() const { return y; }
     double operator-(const Point& point2);
     bool operator==(Point a);
+    bool operator!=(Point a);
 
 };
 

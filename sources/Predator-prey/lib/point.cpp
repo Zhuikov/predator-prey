@@ -14,3 +14,9 @@ bool Point::operator==(Point a)
     if ((this->x == a.x) && (this->y == a.y)) return true;
     return false;
 }
+
+bool Point::operator!=(Point a)
+{
+    if ((this->x != a.x) || (this->y != a.y)) return true;
+    return false;
+}

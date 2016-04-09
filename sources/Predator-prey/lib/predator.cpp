@@ -53,8 +53,15 @@ void Predator::killPrey(Point targ)
     unsigned int vec_size = this->units_struct->preys.size();
     for (unsigned int i = 0; i < vec_size; i++) {
         if (this->units_struct->preys[i]->my_place == targ) {
-            this->units_struct->preys[i] = this->units_struct->preys[vec_size];
-            this->units_struct->preys.pop_back();
+            if (vec_size != 1) {
+                delete this->units_struct->preys[i];
+                this->units_struct->preys[i] = this->units_struct->preys[vec_size];
+                this->units_struct->preys.pop_back();
+            }
+            else {
+                delete this->units_struct->preys[0];
+                this->units_struct->preys.pop_back();
+            }
             break;
         }
     }
