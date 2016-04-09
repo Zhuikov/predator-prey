@@ -110,7 +110,8 @@ void ModelTest::predatorTest()
 
     QCOMPARE(tst_predator->my_place.getX(), 2);
     QCOMPARE(tst_predator->my_place.getY(), 3);
-    QCOMPARE(units.predators.size(), (unsigned int) 2);
+    int pred_size = units.predators.size();
+    QCOMPARE(pred_size, 2);
 
 }
 
