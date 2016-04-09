@@ -2,11 +2,8 @@
 #define FIELD_H
 #include "settings.h"
 
-class Settings;
-
 class Field
 {
-    Settings* sett;
     char** field;
     int length;
     int height;
