@@ -17,6 +17,7 @@ protected:
 public:
     Prey(const int a, const int b, Field* ptrF);
     void setPtrs(Units* ptrU);
+    void movePrey();
 };
 
 #endif // PREY_H

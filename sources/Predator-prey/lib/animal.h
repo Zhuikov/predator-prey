@@ -8,6 +8,7 @@ class Animal
 protected:
     int life_time;
     int energy;
+    int didMove;
     char direction;
     void chooseRandomDirection();
     virtual void directionfinding() = 0;

@@ -1,4 +1,5 @@
 #include "units.h"
+#include <iostream>
 
 Units::Units()
 {
@@ -8,11 +9,12 @@ Units::Units()
 
 Units::~Units()
 {
-//    for (std::vector<Predator*>::const_iterator i = predators.begin(); i != predators.end(); i++) {
-//       delete *i;
-//    }
+    for (std::vector<Predator*>::const_iterator i = predators.begin(); i != predators.end(); i++) {
+       delete *i;
+    }
 
-//    for (unsigned int i = 0; i < preys.size(); i++) {
-//        delete preys[i];
-//    }
+    for (unsigned int i = 0; i < preys.size(); i++) {
+        delete preys[i];
+    }
+
 }

@@ -84,19 +84,33 @@ void ModelTest::predatorTest()
     Field field(10, 10);
     Units units;
 
-    Prey tst_prey(3, 3, &field);
-    tst_prey.setPtrs(&units);
-    Predator tst_predator(4, 4, &field);
-    tst_predator.setPtrs(&units);
+    Prey* tst_prey = new Prey(3, 3, &field);
+    tst_prey->setPtrs(&units);
+    Predator* tst_predator = new Predator(4, 4, &field);
+    tst_predator->setPtrs(&units);
+    units.predators.push_back(tst_predator);
+    units.preys.push_back(tst_prey);
 
-    units.predators.push_back(&tst_predator);
-    units.preys.push_back(&tst_prey);
+    units.predators[0]->movePredator();
 
-    tst_predator.movePredator();
+    QCOMPARE(tst_predator->my_place.getX(), 3);
+    QCOMPARE(tst_predator->my_place.getY(), 4);
 
-    QCOMPARE(tst_predator.my_place.getX(), 3);
-    QCOMPARE(tst_predator.my_place.getY(), 4);
+    units.predators[0]->movePredator();
 
+    QCOMPARE(tst_predator->my_place.getX(), 3);
+    QCOMPARE(tst_predator->my_place.getY(), 3);
+    QCOMPARE(units.preys.empty(), true);
+
+    Prey* tst_prey2 = new Prey(2, 3, &field);
+    tst_prey2->setPtrs(&units);
+    units.preys.push_back(tst_prey2);
+
+    units.predators[0]->movePredator();
+
+    QCOMPARE(tst_predator->my_place.getX(), 2);
+    QCOMPARE(tst_predator->my_place.getY(), 3);
+    QCOMPARE(units.predators.size(), (unsigned int) 2);
 
 }
 

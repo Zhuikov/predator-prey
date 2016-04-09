@@ -26,28 +26,31 @@ void Prey::createPrey()
 {
     chooseRandomDirection();
 
-    Prey *prey;
     switch (direction) {
         case 'u': {
-            prey = new Prey(my_place.getX(), my_place.getY() - 1, this->field);
+            Prey *prey = new Prey(my_place.getX(), my_place.getY() - 1, this->field);
+            prey->setPtrs(this->units_struct);
+            units_struct->preys.push_back(prey);
             break;
         }
         case 'r': {
-            prey = new Prey(my_place.getX() + 1, my_place.getY(), this->field);
+            Prey *prey = new Prey(my_place.getX() + 1, my_place.getY(), this->field);
+            prey->setPtrs(this->units_struct);
+            units_struct->preys.push_back(prey);
             break;
         }
         case 'd': {
-            prey = new Prey(my_place.getX(), my_place.getY() + 1, this->field);
+            Prey *prey = new Prey(my_place.getX(), my_place.getY() + 1, this->field);
+            prey->setPtrs(this->units_struct);
+            units_struct->preys.push_back(prey);
             break;
         }
         case 'l': {
-            prey = new Prey(my_place.getX() - 1, my_place.getY(), this->field);
+            Prey *prey = new Prey(my_place.getX() - 1, my_place.getY(), this->field);
+            prey->setPtrs(this->units_struct);
+            units_struct->preys.push_back(prey);
         }
         }
-
-    units_struct->preys.push_back(prey);
-    unsigned int vec_size = units_struct->preys.size();
-    units_struct->preys[vec_size]->setPtrs(this->units_struct);
 
     chooseRandomDirection();
     this->energy = 0;
@@ -71,6 +74,7 @@ Prey::Prey(const int a, const int b, Field* ptrF)
     dangerous_pred.setX(-1);
     dangerous_pred.setY(-1);
     energy = 0;
+    didMove = 0;
     life_time = 0;
     field = ptrF;
     field->setPosition(this->my_place.getX(), this->my_place.getY(), 'O');
@@ -82,4 +86,15 @@ void Prey::setPtrs(Units* ptrU)
 {
     this->units_struct = ptrU;
     isChase();
+}
+
+void Prey::movePrey()
+{
+    this->field->setPosition(this->my_place.getX(), this->my_place.getY(), '.');
+    this->directionfinding();
+    if (!didMove) {
+        this->go(direction);
+        this->field->setPosition(this->my_place.getX(), this->my_place.getY(), 'O');
+    }
+    didMove = 0;
 }

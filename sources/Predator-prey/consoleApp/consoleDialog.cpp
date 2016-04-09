@@ -137,7 +137,7 @@ void ConsoleDialog::menuPresentation()
         std::cin >> choice;
         switch (choice)
         {
-            case 1: { std::cout << std::endl; this->model->initializeModel(); }
+            case 1: { std::cout << std::endl; this->model->initializeModel(); break;}
             case 3: { std::cout << std::endl; this->settingsPresentation(); good_choice = 1; break; }
             case 0: { std::cout << std::endl; good_choice = 1; break; }
             default: { std::cout << "Выбран неверный пункт меню" << std::endl; }
