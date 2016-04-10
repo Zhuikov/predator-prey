@@ -3,6 +3,11 @@
 #include "consoleDialog.h"
 #include "consoledrawer.h"
 
+/**
+ * @brief класс - консольное приложение
+ * создает модель, настройки и консольное взаимодействие с пользователем
+ */
+
 class ConsoleApp
 {
     ConsoleDialog *CD;
@@ -12,6 +17,10 @@ class ConsoleApp
 
 public:
     ConsoleApp();
+
+    /**
+     * @brief метод, создающий консольное приложение
+     */
     void createConsole();
 
     ~ConsoleApp();
