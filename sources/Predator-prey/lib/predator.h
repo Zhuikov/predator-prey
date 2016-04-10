@@ -48,7 +48,7 @@ public:
      * @brief метод, передвигающий хищника
      */
     void movePredator();
-
+    // todo добавить время жизни
 };
 
 #endif // PREDATOR_H
