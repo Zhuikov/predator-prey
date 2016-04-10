@@ -38,4 +38,5 @@ void Animal::go(const char)
         case 'l': { this->my_place.setX(this->my_place.getX() - 1); break; }
         case 'd': { this->my_place.setY(this->my_place.getY() + 1); break; }
     }
+    this->didMove = 1;
 }

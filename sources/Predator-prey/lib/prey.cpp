@@ -96,5 +96,5 @@ void Prey::movePrey()
         this->go(direction);
         this->field->setPosition(this->my_place.getX(), this->my_place.getY(), 'O');
     }
-    didMove = 0;
+    else didMove = 0;
 }
