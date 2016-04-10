@@ -40,6 +40,7 @@ public:
      * @brief метод, передвигающий хищников
      */
     virtual void movePredators() = 0;
+
     void saveModel();
     void loadModel();
 

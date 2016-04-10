@@ -68,12 +68,33 @@ bool ModelPP::isEnd()
 
 void ModelPP::movePreys()
 {
+    if (!this->has_changed) {
+        this->model_time = this->model_time + 2;
+        this->has_changed = true;
+    }
+    else has_changed = false;
+
+    if (this->model_time > 22) {
+        this->model_day++;
+        this->model_time = 0;
+    }
     for (unsigned int i = 0; i < this->units.preys.size(); i++)
             this->units.preys[i]->movePrey();
 }
 
 void ModelPP::movePredators()
 {
+    if (!this->has_changed) {
+        this->model_time = this->model_time + 2;
+        this->has_changed = true;
+    }
+    else has_changed = false;
+
+    if (this->model_time > 22) {
+        this->model_day++;
+        this->model_time = 0;
+    }
+
     for (unsigned int i = 0; i < this->units.predators.size(); i++)
             this->units.predators[i]->movePredator();
 }

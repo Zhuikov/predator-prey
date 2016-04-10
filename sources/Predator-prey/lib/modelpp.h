@@ -7,11 +7,13 @@ class ModelPP : public ModelAPI
 {
     int model_time;
     int model_day;
+    bool has_changed;
     Field field;
     Units units;
     Settings *sett;
 
 public:
+
     ModelPP(Settings *set);
     Field* getField();
     void initializeModel();

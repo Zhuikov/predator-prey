@@ -3,6 +3,7 @@
 #include <cmath>
 #include "field.h"
 #include "point.h"
+#include "modelpp.h"
 #include "predator.h"
 
 class ModelTest : public QObject
@@ -18,6 +19,7 @@ private Q_SLOTS:
     void pointTest();
     void fieldTest();
     void predatorTest();
+    void modelppTest();
 };
 
 ModelTest::ModelTest() {}
@@ -113,6 +115,27 @@ void ModelTest::predatorTest()
     int pred_size = units.predators.size();
     QCOMPARE(pred_size, 2);
 
+}
+
+void ModelTest::modelppTest()
+{
+    Settings sett;
+    ModelPP model(&sett);
+
+    model.initializeModel();
+    QCOMPARE(model.getDay(), 0);
+    QCOMPARE(model.getTime(), 0);
+
+    model.movePreys();
+    model.movePredators();
+    QCOMPARE(model.getDay(), 0);
+    QCOMPARE(model.getTime(), 2);
+
+    model.movePredators();
+    model.movePreys();
+    QCOMPARE(model.getTime(), 4);
+
+    QCOMPARE(model.isEnd(), false);
 }
 
 QTEST_APPLESS_MAIN(ModelTest)
