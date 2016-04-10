@@ -10,6 +10,7 @@ ModelPP::ModelPP(Settings *set)
     this->field = created_field;
     model_day = 0;
     model_time = 0;
+    has_changed = false;
 }
 
 Field *ModelPP::getField()
