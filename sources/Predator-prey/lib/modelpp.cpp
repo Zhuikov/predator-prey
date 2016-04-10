@@ -8,8 +8,13 @@ ModelPP::ModelPP(Settings *set)
     this->sett = set;
     Field created_field(sett->field_height, sett->field_length);
     this->field = created_field;
-    day = 0;
+    model_day = 0;
     model_time = 0;
+}
+
+Field *ModelPP::getField()
+{
+    return &field;
 }
 
 void ModelPP::initializeModel()
@@ -43,5 +48,33 @@ void ModelPP::initializeModel()
         pr->setPtrs(&units);
         units.preys.push_back(pr);
     }
+}
+
+int ModelPP::getTime()
+{
+    return this->model_time;
+}
+
+int ModelPP::getDay()
+{
+    return this->model_day;
+}
+
+bool ModelPP::isEnd()
+{
+    if ((units.predators.empty()) || (units.preys.empty())) return true;
+    return false;
+}
+
+void ModelPP::movePreys()
+{
+    for (unsigned int i = 0; i < this->units.preys.size(); i++)
+            this->units.preys[i]->movePrey();
+}
+
+void ModelPP::movePredators()
+{
+    for (unsigned int i = 0; i < this->units.predators.size(); i++)
+            this->units.predators[i]->movePredator();
 }
 

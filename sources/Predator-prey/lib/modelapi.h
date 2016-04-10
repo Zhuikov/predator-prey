@@ -12,13 +12,14 @@ class ModelAPI
 {
 public:
     virtual void initializeModel() = 0;
+    virtual int getTime() = 0;
+    virtual int getDay() = 0;
+    virtual bool isEnd() = 0;
+    virtual void movePreys() = 0;
+    virtual void movePredators() = 0;
     void saveModel();
     void loadModel();
-    void changeTime(int model_time);
-    void changeDay(int day);
-    int checkPredators(const std::vector< Predator > &predatorVector);
-    int checkPreys(const std::vector< Prey > &preyVector);
 
-    ~ModelAPI() {}
+    virtual ~ModelAPI() {}
 };
 #endif // MODELAPI_H

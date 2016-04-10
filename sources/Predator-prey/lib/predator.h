@@ -6,7 +6,7 @@
 class Units;
 class Field;
 
-class Predator: public Animal
+class Predator : public Animal
 {
 protected:
     Point target;

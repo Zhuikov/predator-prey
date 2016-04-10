@@ -3,23 +3,26 @@
 #include "modelapi.h"
 #include <vector>
 
-class ModelPP: public ModelAPI
+class ModelPP : public ModelAPI
 {
     int model_time;
-    int day;
+    int model_day;
     Field field;
     Units units;
     Settings *sett;
 
 public:
     ModelPP(Settings *set);
+    Field* getField();
     void initializeModel();
+    int getTime();
+    int getDay();
+    bool isEnd();
+    void movePreys();
+    void movePredators();
     void saveModel();
     void loadModel();
-    void changeTime(int time);
-    void changeDay(int day);
-    int checkPredators(const std::vector< Predator > &predatorVec);
-    int checkPreys(const std::vector< Prey > &preyVec);
+
 };
 
 #endif // MODELPP_H

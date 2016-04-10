@@ -4,10 +4,14 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    consoleDialog.cpp
+    consoleDialog.cpp \
+    consoledrawer.cpp \
+    consoleapp.cpp
 
 HEADERS += \
-    consoleDialog.h
+    consoleDialog.h \
+    consoledrawer.h \
+    consoleapp.h
 
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lib/release/ -llib

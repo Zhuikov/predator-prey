@@ -2,26 +2,29 @@
 #define CONSOLEDIALOG_H
 #include "settings.h"
 #include "modelpp.h"
+#include "consoledrawer.h"
 
 class ConsoleDialog
 {
-    Settings *sett;
-    ModelPP *model;
+    int new_length;
+    int new_height;
+    int new_number;
+    int new_time;
 
-    void settingsPresentation();
     void changeFieldSize();
     void changeDayWithoutMeal();
     void changeNumOfPredators();
     void changeNumOfPreys();
 
-    void setNewDayWithoutMeal(int);
-    void setNewFieldBoundary(int, int);
-    void setNumOfPreys(int);
-    void setNumOfPredators(int);
+    void setNewDayWithoutMeal(Settings *sett, const int);
+    void setNewFieldBoundary(Settings *sett, const int, const int);
+    void setNumOfPreys(Settings *sett, const int);
+    void setNumOfPredators(Settings *sett, const int);
 
 public:
-    ConsoleDialog(ModelPP *modelPP, Settings* settings);
-    void menuPresentation();
+    ConsoleDialog();
+    int menuPresentation();
+    void settingsPresentation(Settings *sett);
 
 };
 

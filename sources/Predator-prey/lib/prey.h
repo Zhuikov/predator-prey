@@ -4,7 +4,7 @@
 
 class Units;
 
-class Prey: public Animal
+class Prey : public Animal
 {
 protected:
     int warning;
