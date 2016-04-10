@@ -1,5 +1,7 @@
 #include "prey.h"
 #include "units.h"
+#include <ctime>
+#include <cstdlib>
 
 void Prey::directionfinding()
 {
@@ -7,16 +9,16 @@ void Prey::directionfinding()
 
     if (warning == 1) {
         if (my_place.getX() < dangerous_pred.getX()) {
-            if (field->isEmpty(my_place.getX() - 1, my_place.getY())) direction = 'l';
+            if (field->isEmpty(my_place.getX() - 1, my_place.getY())) direction = 'u';
                 else chooseRandomDirection(); }
         if (my_place.getX() > dangerous_pred.getX()) {
-            if (field->isEmpty(my_place.getX() + 1, my_place.getY())) direction = 'r';
+            if (field->isEmpty(my_place.getX() + 1, my_place.getY())) direction = 'd';
                 else chooseRandomDirection(); }
         if (my_place.getY() > dangerous_pred.getY()) {
-            if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) direction = 'd';
+            if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) direction = 'r';
                 else chooseRandomDirection(); }
         if (my_place.getY() < dangerous_pred.getY()) {
-            if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) direction = 'u';
+            if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) direction = 'l';
                 else chooseRandomDirection(); }
     }
     else chooseRandomDirection();
@@ -28,25 +30,25 @@ void Prey::createPrey()
 
     switch (direction) {
         case 'u': {
-            Prey *prey = new Prey(my_place.getX(), my_place.getY() - 1, this->field);
+            Prey *prey = new Prey(my_place.getX() - 1, my_place.getY(), this->field);
             prey->setPtrs(this->units_struct);
             units_struct->preys.push_back(prey);
             break;
         }
         case 'r': {
-            Prey *prey = new Prey(my_place.getX() + 1, my_place.getY(), this->field);
-            prey->setPtrs(this->units_struct);
-            units_struct->preys.push_back(prey);
-            break;
-        }
-        case 'd': {
             Prey *prey = new Prey(my_place.getX(), my_place.getY() + 1, this->field);
             prey->setPtrs(this->units_struct);
             units_struct->preys.push_back(prey);
             break;
         }
+        case 'd': {
+            Prey *prey = new Prey(my_place.getX() + 1, my_place.getY(), this->field);
+            prey->setPtrs(this->units_struct);
+            units_struct->preys.push_back(prey);
+            break;
+        }
         case 'l': {
-            Prey *prey = new Prey(my_place.getX() - 1, my_place.getY(), this->field);
+            Prey *prey = new Prey(my_place.getX(), my_place.getY() - 1, this->field);
             prey->setPtrs(this->units_struct);
             units_struct->preys.push_back(prey);
         }
@@ -59,11 +61,12 @@ void Prey::createPrey()
 void Prey::isChase()
 {
     warning = 0;
-    for (unsigned int i = 0; i < units_struct->predators.size(); i++) {
-        if (this->my_place - units_struct->predators[i]->my_place < 1.1) {
-            warning = 1;
-            this->dangerous_pred = units_struct->predators[i]->my_place;
-        }
+    for (std::vector<Predator*>::const_iterator i = this->units_struct->predators.begin();
+         i != this->units_struct->predators.end(); i++) {
+            if (this->my_place - (*i)->my_place < 1.1) {
+                warning = 1;
+                this->dangerous_pred = (*i)->my_place;
+            }
     }
 }
 
@@ -90,11 +93,10 @@ void Prey::setPtrs(Units* ptrU)
 
 void Prey::movePrey()
 {
+    srand(time(0));
     this->field->setPosition(this->my_place.getX(), this->my_place.getY(), '.');
     this->directionfinding();
-    if (!didMove) {
-        this->go(direction);
-        this->field->setPosition(this->my_place.getX(), this->my_place.getY(), 'O');
-    }
+    if (!didMove)this->go(direction);
     else didMove = 0;
+    this->field->setPosition(this->my_place.getX(), this->my_place.getY(), 'O');
 }

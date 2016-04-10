@@ -13,8 +13,8 @@ Units::~Units()
        delete *i;
     }
 
-    for (unsigned int i = 0; i < preys.size(); i++) {
-        delete preys[i];
+    for (std::vector<Prey*>::const_iterator i = preys.begin(); i != preys.end(); i++) {
+        delete *i;
     }
 
 }

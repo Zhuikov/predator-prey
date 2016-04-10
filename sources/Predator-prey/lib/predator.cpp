@@ -3,6 +3,8 @@
 #include "units.h"
 #include "constants.h"
 #include <vector>
+#include <ctime>
+#include <cstdlib>
 
 void Predator::directionfinding()
 {
@@ -14,22 +16,23 @@ void Predator::directionfinding()
         }
         else {
             if ((target.getX() < my_place.getX()) && (target.getY() < my_place.getY())) {
-                if (field->isEmpty(my_place.getX() - 1, my_place.getY())) this->direction = 'l';
-                else if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) this->direction = 'u';
+                if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) this->direction = 'l';
+                else if (field->isEmpty(my_place.getX() - 1, my_place.getY())) this->direction = 'u';
                 else chooseRandomDirection();
             }
             if ((target.getX() < my_place.getX()) && (target.getY() > my_place.getY())) {
-                if (field->isEmpty(my_place.getX() - 1, my_place.getY())) this->direction = 'l';
-                else if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) this->direction = 'd';
+                if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) this->direction = 'r';
+                else if (field->isEmpty(my_place.getX() - 1, my_place.getY())) this->direction = 'u';
                 else chooseRandomDirection();
             }
             if ((target.getX() > my_place.getX()) && (target.getY() < my_place.getY())) {
-                if (field->isEmpty(my_place.getX() + 1, my_place.getY())) this->direction = 'r';
-                else if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) this->direction = 'u';
+                if (field->isEmpty(my_place.getX(), my_place.getY() - 1)) this->direction = 'l';
+                else if (field->isEmpty(my_place.getX() + 1, my_place.getY())) this->direction = 'd';
+                else chooseRandomDirection();
             }
             if ((target.getX() > my_place.getX()) && (target.getY() > my_place.getY())) {
-                if (field->isEmpty(my_place.getX() + 1, my_place.getY())) this->direction = 'r';
-                else if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) this->direction = 'd';
+                if (field->isEmpty(my_place.getX() + 1, my_place.getY())) this->direction = 'd';
+                else if (field->isEmpty(my_place.getX(), my_place.getY() + 1)) this->direction = 'r';
                 else chooseRandomDirection();
             }
         }
@@ -41,9 +44,10 @@ void Predator::directionfinding()
 void Predator::findPrey()
 {
     double dist = 0;
-    for (unsigned int i = 0; i < this->units_struct->preys.size(); i++){
-        dist = this->my_place - this->units_struct->preys[i]->my_place;
-        if (dist < 1.5) this->target = this->units_struct->preys[i]->my_place;
+    for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
+         it != this->units_struct->preys.end(); it++) {
+         dist = this->my_place - (*it)->my_place;
+         if (dist < 1.5) this->target = (*it)->my_place;
     }
 
 }
@@ -51,25 +55,26 @@ void Predator::findPrey()
 void Predator::killPrey(Point targ)
 {
     unsigned int vec_size = this->units_struct->preys.size();
-    for (unsigned int i = 0; i < vec_size; i++) {
-        if (this->units_struct->preys[i]->my_place == targ) {
+    for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
+       i != this->units_struct->preys.end(); i++) {
+        if ((*i)->my_place == targ) {
             if (vec_size != 1) {
-                delete this->units_struct->preys[i];
-                this->units_struct->preys[i] = this->units_struct->preys[vec_size];
+                delete *i;
+                std::swap(*i, units_struct->preys[vec_size]);
                 this->units_struct->preys.pop_back();
             }
             else {
-                delete this->units_struct->preys[0];
+                delete *i;
                 this->units_struct->preys.pop_back();
             }
             break;
         }
     }
 
-    if (targ.getX() < my_place.getX()) direction = 'l';
-    else if (targ.getX() > my_place.getX()) direction = 'r';
-    else if (targ.getY() < my_place.getY()) direction = 'u';
-    else if (targ.getY() > my_place.getY()) direction = 'd';
+    if (targ.getX() < my_place.getX()) direction = 'u';
+    else if (targ.getX() > my_place.getX()) direction = 'd';
+    else if (targ.getY() < my_place.getY()) direction = 'l';
+    else if (targ.getY() > my_place.getY()) direction = 'r';
 
     this->go(direction);
     this->field->setPosition(my_place.getX(), my_place.getY(), 'X');
@@ -89,25 +94,25 @@ void Predator::createPredator()
     chooseRandomDirection();
     switch (direction) {
     case 'u': {
-        Predator *pred = new Predator(my_place.getX(), my_place.getY() - 1, this->field);
+        Predator *pred = new Predator(my_place.getX() - 1, my_place.getY(), this->field);
         pred->setPtrs(this->units_struct);
         units_struct->predators.push_back(pred);
         break;
     }
     case 'r': {
-        Predator *pred = new Predator(my_place.getX() + 1, my_place.getY(), this->field);
-        pred->setPtrs(this->units_struct);
-        units_struct->predators.push_back(pred);
-        break;
-    }
-    case 'd': {
         Predator *pred = new Predator(my_place.getX(), my_place.getY() + 1, this->field);
         pred->setPtrs(this->units_struct);
         units_struct->predators.push_back(pred);
         break;
     }
+    case 'd': {
+        Predator *pred = new Predator(my_place.getX() + 1, my_place.getY(), this->field);
+        pred->setPtrs(this->units_struct);
+        units_struct->predators.push_back(pred);
+        break;
+    }
     case 'l': {
-        Predator *pred = new Predator(my_place.getX() - 1, my_place.getY(), this->field);
+        Predator *pred = new Predator(my_place.getX(), my_place.getY() - 1, this->field);
         pred->setPtrs(this->units_struct);
         units_struct->predators.push_back(pred);
     }
@@ -140,6 +145,7 @@ void Predator::setPtrs(Units* ptrU)
 
 void Predator::movePredator()
 {
+    srand(time(0));
     this->findPrey();
     this->field->setPosition(this->my_place.getX(), this->my_place.getY(), '.');
     this->directionfinding();

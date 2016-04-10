@@ -95,8 +95,8 @@ void ModelTest::predatorTest()
 
     units.predators[0]->movePredator();
 
-    QCOMPARE(tst_predator->my_place.getX(), 3);
-    QCOMPARE(tst_predator->my_place.getY(), 4);
+    QCOMPARE(tst_predator->my_place.getX(), 4);
+    QCOMPARE(tst_predator->my_place.getY(), 3);
 
     units.predators[0]->movePredator();
 

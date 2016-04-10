@@ -12,8 +12,8 @@ void ConsoleDrawer::drawHead()
     int num_of_stars_left;
     int num_of_stars_right;
 
-    num_of_stars_left = (this->field->getNumOfCols() * 2 - 17) / 2;
-    num_of_stars_right = (this->field->getNumOfCols() * 2 - 17 - num_of_stars_left);
+    num_of_stars_left = (this->field->getNumOfCols() * 2 - 18) / 2;
+    num_of_stars_right = (this->field->getNumOfCols() * 2 - 18 - num_of_stars_left);
 
     for (int i = 0; i < num_of_stars_left; i++)
         std::cout << '*';
@@ -26,8 +26,8 @@ void ConsoleDrawer::drawHead()
 
     int time;
     time = this->model->getTime();
-    if (time < 10) std::cout << "Time0" << time;
-        else std::cout << "Time" << time;
+    if (time < 10) std::cout << "Time 0" << time;
+        else std::cout << "Time " << time;
     std::cout << ':' << "00";
 
     for (int i = 0; i < num_of_stars_right; i++)

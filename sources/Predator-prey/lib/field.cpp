@@ -49,7 +49,7 @@ Field& Field::operator=(Field &field2)
 int Field::isEmpty(int a, int b)
 {
     if ((a < 0) || (a >= height) || (b < 0) || (b >= length)) return 0;
-    if (this->field[a][b] == '.') return 1;
+    if ((this->field[a][b] == '.') && (a >= 0) && (a < height) && (b >= 0) && (b < length)) return 1;
     return 0;
 }
 
@@ -80,7 +80,8 @@ char Field::whatIsEmpty(int a, int b)
     if (isEmpty(a - 1, b)) return 'u';
     if (isEmpty(a, b + 1)) return 'r';
     if (isEmpty(a + 1, b)) return 'd';
-    return 'l';
+    if (isEmpty(a, b - 1)) return 'l';
+    return '0';
 }
 
 char Field::getChar(const int x, const int y) const

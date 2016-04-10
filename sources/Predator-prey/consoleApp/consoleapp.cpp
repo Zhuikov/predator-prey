@@ -1,5 +1,6 @@
 #include "consoleapp.h"
 #include "exceptions.h"
+#include <iostream>
 
 
 ConsoleApp::ConsoleApp()
@@ -14,6 +15,7 @@ void ConsoleApp::createConsole()
 {
     int flag;
     bool end = false;
+    int x = 0;
     while (!end) {
         flag = this->CD->menuPresentation();
         switch (flag) {
@@ -22,8 +24,10 @@ void ConsoleApp::createConsole()
                 while (!model->isEnd()) {
                     this->drawer->showField();
                     this->model->movePreys();
+                    this->drawer->showField();
                     this->model->movePredators();
-                    //todo sleep()
+                    std::cin >> x;
+                    if (x == 0) break;
                 }
                 break;
             }

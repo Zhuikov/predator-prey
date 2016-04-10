@@ -13,7 +13,7 @@ public:
     void setY(const int b) { this->y = b; }
     int getX() const { return x; }
     int getY() const { return y; }
-    double operator-(const Point& point2);
+    double operator-(const Point point2);
     bool operator==(Point a);
     bool operator!=(Point a);
 
