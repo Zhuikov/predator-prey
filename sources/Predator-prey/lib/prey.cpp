@@ -1,5 +1,6 @@
 #include "prey.h"
 #include "units.h"
+#include "constants.h"
 #include <ctime>
 #include <cstdlib>
 
@@ -77,9 +78,8 @@ Prey::Prey(const int a, const int b, Field* ptrF)
     dangerous_pred.setI(-1);
     dangerous_pred.setJ(-1);
     energy = 0;
-    have_direction = 0;
-    has_moved = 0;
     life_time = 0;
+    has_moved = 0;
     field = ptrF;
     field->setPosition(this->my_place.getI(), this->my_place.getJ(), 'O');
     direction = 'u';
@@ -94,10 +94,12 @@ void Prey::setPtrs(Units* ptrU)
 
 void Prey::movePrey()
 {
-   // srand(time(0));
-    this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.');
     this->directionfinding();
-    if (!have_direction)this->go(direction);
-    else have_direction = 0;
-    this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), 'O');
+    if (!has_moved) {
+        this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.');
+        this->go(direction);
+        this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), 'O');
+    }
+    else has_moved = 0;
+    if (this->energy == PREY_CREATE_ENERGY) this->createPrey();
 }

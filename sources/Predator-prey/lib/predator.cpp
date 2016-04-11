@@ -12,6 +12,10 @@ void Predator::directionfinding()
         double dist;
         dist = this->my_place - this->target;
         if ((dist > 0.9) && (dist < 1.1)) {
+            if (target.getI() < my_place.getI()) direction = 'u';
+            else if (target.getI() > my_place.getI()) direction = 'd';
+            else if (target.getJ() < my_place.getJ()) direction = 'l';
+            else if (target.getJ() > my_place.getJ()) direction = 'r';
             this->killPrey(target);
         }
         else {
@@ -41,7 +45,7 @@ void Predator::directionfinding()
 
 }
 
-void Predator::findPrey()
+void Predator::findPrey()    //todo научиться запоминать цель, не только координаты
 {
     double dist = 0;
     for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
@@ -71,12 +75,7 @@ void Predator::killPrey(Coordinates targ)
                 break;
             }
         }
-        if (targ.getI() < my_place.getI()) direction = 'u';
-        else if (targ.getI() > my_place.getI()) direction = 'd';
-        else if (targ.getJ() < my_place.getJ()) direction = 'l';
-        else if (targ.getJ() > my_place.getJ()) direction = 'r';
 
-        have_direction = 1;
         energy++;
     }
     else chooseRandomDirection();
@@ -115,7 +114,6 @@ void Predator::createPredator()
     }
     }
 
-    chooseRandomDirection();
     this->energy = 0;
 
 }
@@ -128,7 +126,6 @@ Predator::Predator(const int a, const int b, Field *ptrF)
     target.setJ(-1);
     life_time = 0;
     energy = 0;
-    have_direction = 0;
     has_moved = 0;
     field = ptrF;
     field->setPosition(this->my_place.getI(), this->my_place.getJ(), 'X');
@@ -143,22 +140,14 @@ void Predator::setPtrs(Units* ptrU)
 
 void Predator::movePredator()
 {
-    //srand(time(0));
     this->findPrey();
     this->directionfinding();
-    if (this->energy == PREDATOR_CREATE_ENERGY) {
-        this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.');
-        this->go(direction);
-        this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), 'X');
-        this->has_moved = 1;
-        this->createPredator();
-    }
-    if ((!have_direction) || (!has_moved)) {
+    if (!has_moved) {
         this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.');
         this->go(direction);
         this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), 'X');
     }
-    has_moved = 0;
-    have_direction = 0;
+    else has_moved = 0;
+    if (this->energy == PREDATOR_CREATE_ENERGY) this->createPredator();
 
 }

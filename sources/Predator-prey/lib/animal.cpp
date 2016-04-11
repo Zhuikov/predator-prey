@@ -4,7 +4,6 @@
 
 void Animal::chooseRandomDirection()
 {
-    //srand(time(0));
     char dir;
     int flag = rand() % 4;
     switch (flag) {
@@ -13,7 +12,7 @@ void Animal::chooseRandomDirection()
                 else {
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
-                    else have_direction = 1;
+                    else has_moved = 1;
             }
             break;
         }
@@ -22,7 +21,7 @@ void Animal::chooseRandomDirection()
                 else {
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
-                    else have_direction = 1;
+                    else has_moved = 1;
             }
             break;
         }
@@ -31,7 +30,7 @@ void Animal::chooseRandomDirection()
                 else {
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
-                    else have_direction = 1;
+                    else has_moved = 1;
             }
             break;
         }
@@ -40,7 +39,7 @@ void Animal::chooseRandomDirection()
                 else {
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
-                    else have_direction = 1;
+                    else has_moved = 1;
             }
             break;
         }
@@ -55,5 +54,4 @@ void Animal::go(const char)
         case 'l': { this->my_place.setJ(this->my_place.getJ() - 1); break; }
         case 'd': { this->my_place.setI(this->my_place.getI() + 1); break; }
     }
-    this->have_direction = 1;
 }

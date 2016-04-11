@@ -19,7 +19,7 @@ private Q_SLOTS:
     void coordinatesTest();
     void fieldTest();
     void predatorTest();
-    void modelppTest();
+    void modelppInitializeTest();
 };
 
 ModelTest::ModelTest() {}
@@ -129,7 +129,7 @@ void ModelTest::predatorTest()
 
 }
 
-void ModelTest::modelppTest()
+void ModelTest::modelppInitializeTest()
 {
     Settings sett;
     ModelPP model(&sett);

@@ -16,7 +16,6 @@ protected:
     int life_time;
 
     int energy;
-    int have_direction;
     int has_moved;
     char direction;
     Field* field;
