@@ -4,7 +4,7 @@
 
 void Animal::chooseRandomDirection()
 {
-    srand(time(0));
+    //srand(time(0));
     char dir;
     int flag = rand() % 4;
     switch (flag) {

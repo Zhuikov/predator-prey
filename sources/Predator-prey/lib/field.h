@@ -7,7 +7,12 @@ class Field
     char** field;
     int length;
     int height;
-    void resize(Field &field1);
+
+    /**
+     * @brief метод, изменяющий размер поля;
+     * новая высота поля - высота поля field1; новая длина поля - длина поля field1;
+     */
+    void resize(Field *field1);
 
 public:
     /**

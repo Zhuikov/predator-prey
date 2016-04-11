@@ -20,6 +20,9 @@ Field *ModelPP::getField()
 
 void ModelPP::initializeModel()
 {
+    this->model_day = 0;
+    this->model_time = 0;
+
     Field created_field(sett->field_height, sett->field_length);
     this->field = created_field;
     srand(time(0));

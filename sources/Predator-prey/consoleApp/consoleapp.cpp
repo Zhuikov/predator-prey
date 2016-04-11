@@ -24,13 +24,12 @@ void ConsoleApp::createConsole()
                 while (!model->isEnd()) {
                     this->drawer->showField();
                     this->model->movePreys();
-                //    this->drawer->showField();
                     this->model->movePredators();
                     std::cin >> x;
                     if (x == 0) break;
                 }
                 break;
-            } /// segmentation fault и время
+            }
 
             case 3: {
                 try {

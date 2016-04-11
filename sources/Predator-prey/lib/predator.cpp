@@ -143,7 +143,7 @@ void Predator::setPtrs(Units* ptrU)
 
 void Predator::movePredator()
 {
-    srand(time(0));
+    //srand(time(0));
     this->findPrey();
     this->directionfinding();
     if (this->energy == PREDATOR_CREATE_ENERGY) {

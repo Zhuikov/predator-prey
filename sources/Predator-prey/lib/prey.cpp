@@ -94,7 +94,7 @@ void Prey::setPtrs(Units* ptrU)
 
 void Prey::movePrey()
 {
-    srand(time(0));
+   // srand(time(0));
     this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.');
     this->directionfinding();
     if (!have_direction)this->go(direction);
