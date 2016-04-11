@@ -1,6 +1,6 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
-#include "point.h"
+#include "coordinates.h"
 #include "field.h"
 
 /**
@@ -16,7 +16,8 @@ protected:
     int life_time;
 
     int energy;
-    int didMove;
+    int have_direction;
+    int has_moved;
     char direction;
     Field* field;
 
@@ -39,7 +40,7 @@ protected:
     virtual void go(char ch);
 
 public:
-    Point my_place;
+    Coordinates my_place;
 
     virtual ~Animal() {}
 };

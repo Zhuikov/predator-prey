@@ -30,7 +30,8 @@ void ConsoleApp::createConsole()
                     if (x == 0) break;
                 }
                 break;
-            }
+            } /// segmentation fault и время
+
             case 3: {
                 try {
                     this->CD->settingsPresentation(this->sett);

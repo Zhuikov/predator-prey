@@ -8,7 +8,7 @@ class Prey : public Animal
 {
 protected:
     int warning;
-    Point dangerous_pred;
+    Coordinates dangerous_pred;
     Units* units_struct;
     void directionfinding();
 
@@ -41,6 +41,8 @@ public:
      * @brief метод, передвигающий жертву
      */
     void movePrey();
+
+    ~Prey() { this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.'); }
 };
 
 #endif // PREY_H

@@ -2,7 +2,7 @@
 #include <QtTest>
 #include <cmath>
 #include "field.h"
-#include "point.h"
+#include "coordinates.h"
 #include "modelpp.h"
 #include "predator.h"
 
@@ -16,7 +16,7 @@ public:
 private Q_SLOTS:
     int doubleCompare(double a, double b);
 
-    void pointTest();
+    void coordinatesTest();
     void fieldTest();
     void predatorTest();
     void modelppTest();
@@ -30,9 +30,9 @@ int ModelTest::doubleCompare(double a, double b)
     return 0;
 }
 
-void ModelTest::pointTest()
+void ModelTest::coordinatesTest()
 {
-    Point A(0, 0), B(3, 4), C(-10, 10);
+    Coordinates A(0, 0), B(3, 4), C(-10, 10);
     double dist1, dist2, dist3;
     dist1 = B - A;
     dist2 = C - A;
@@ -41,9 +41,9 @@ void ModelTest::pointTest()
     QVERIFY2(doubleCompare(dist2, 14.142), "wrong distance between points");
     QVERIFY2(doubleCompare(dist3, 14.318), "wrong distance between points");
 
-    QCOMPARE(A.getX(), 0);
-    A.setY(110000);
-    QCOMPARE(A.getY(), 110000);
+    QCOMPARE(A.getI(), 0);
+    A.setJ(110000);
+    QCOMPARE(A.getJ(), 110000);
 }
 
 void ModelTest::fieldTest()
@@ -95,13 +95,13 @@ void ModelTest::predatorTest()
 
     units.predators[0]->movePredator();
 
-    QCOMPARE(tst_predator->my_place.getX(), 4);
-    QCOMPARE(tst_predator->my_place.getY(), 3);
+    QCOMPARE(tst_predator->my_place.getI(), 4);
+    QCOMPARE(tst_predator->my_place.getJ(), 3);
 
     units.predators[0]->movePredator();
 
-    QCOMPARE(tst_predator->my_place.getX(), 3);
-    QCOMPARE(tst_predator->my_place.getY(), 3);
+    QCOMPARE(tst_predator->my_place.getI(), 3);
+    QCOMPARE(tst_predator->my_place.getJ(), 3);
     QCOMPARE(units.preys.empty(), true);
 
     Prey* tst_prey2 = new Prey(2, 3, &field);
@@ -110,10 +110,22 @@ void ModelTest::predatorTest()
 
     units.predators[0]->movePredator();
 
-    QCOMPARE(tst_predator->my_place.getX(), 2);
-    QCOMPARE(tst_predator->my_place.getY(), 3);
+    QCOMPARE(tst_predator->my_place.getI(), 2);
+    QCOMPARE(tst_predator->my_place.getJ(), 3);
     int pred_size = units.predators.size();
     QCOMPARE(pred_size, 2);
+
+    Prey *tst_prey3 = new Prey(1, 2, &field);
+    tst_prey3->setPtrs(&units);
+    units.preys.push_back(tst_prey3);
+
+    units.predators[0]->movePredator();
+    units.predators[0]->movePredator();
+
+    QCOMPARE(tst_predator->my_place.getI(), 1);
+    QCOMPARE(tst_predator->my_place.getJ(), 2);
+    int prey_size = units.preys.size();
+    QCOMPARE(prey_size, 0);
 
 }
 

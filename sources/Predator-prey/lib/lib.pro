@@ -16,15 +16,14 @@ SOURCES += \
     settings.cpp \
     modelapi.cpp \
     modelpp.cpp \
-    point.cpp \
     field.cpp \
     animal.cpp \
-    units.cpp
+    units.cpp \
+    coordinates.cpp
 
 HEADERS += \
     settings.h \
     predator.h \
-    point.h \
     prey.h \
     constants.h \
     exceptions.h \
@@ -32,7 +31,8 @@ HEADERS += \
     modelpp.h \
     units.h \
     field.h \
-    animal.h
+    animal.h \
+    coordinates.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
