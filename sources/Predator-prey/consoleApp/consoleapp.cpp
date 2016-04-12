@@ -13,39 +13,45 @@ ConsoleApp::ConsoleApp()
 
 void ConsoleApp::createConsole()
 {
-    int flag;
+    int flag = -1;
     bool end = false;
     int x = 0;
     while (!end) {
-        flag = this->CD->menuPresentation();
+        if (flag != 10) flag = this->CD->menuPresentation();
+                else flag = 3;
         switch (flag) {
             case 1: {
                 this->model->initializeModel();
                 while (!model->isEnd()) {
                     this->drawer->showField();
-                    this->model->movePreys();
                     this->model->movePredators();
+                    this->model->movePreys();
                     std::cin >> x;
                     if (x == 0) break;
                 }
+                this->drawer->showField();
                 break;
             }
 
             case 3: {
+                std::cout << std::endl;
                 try {
                     this->CD->settingsPresentation(this->sett);
                 }
                 catch (BadFieldBoundary& e)
                 {
                     e.showMessage();
+                    flag = 10;
                 }
                 catch (BadNumOfPredators& e)
                 {
                     e.showMessage();
+                    flag = 10;
                 }
                 catch (BadNumOfPreys& e)
                 {
                     e.showMessage();
+                    flag = 10;
                 }
 
                 break;

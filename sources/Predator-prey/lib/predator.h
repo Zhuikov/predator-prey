@@ -5,11 +5,12 @@
 
 class Units;
 class Field;
+class Prey;
 
 class Predator : public Animal
 {
 protected:
-    Coordinates target;
+    Prey* target;
     Units* units_struct;
     void directionfinding();
 
@@ -22,7 +23,7 @@ protected:
     /**
      * @brief метод, уничтожающий жертву с указанными координатами
      */
-    void killPrey(Coordinates targ);
+    void killPrey(Prey* targ);
 
     /**
      * @brief метод, создающий хищника на случайной соседней клетке; записывает его в вектор хищников

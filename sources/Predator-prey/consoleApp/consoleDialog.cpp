@@ -26,7 +26,7 @@ void ConsoleDialog::changeDayWithoutMeal()
 
 void ConsoleDialog::changeNumOfPredators()
 {
-    std::cout << "Введите новое число хищников ";
+    std::cout << "Введите новое число хищников: ";
     std::cin >> new_number;
 
     if ((new_number > MAX_PREDATORS_NUM) || (new_number < 1)) throw BadNumOfPredators(new_number);
@@ -35,7 +35,7 @@ void ConsoleDialog::changeNumOfPredators()
 
 void ConsoleDialog::changeNumOfPreys()
 {
-    std::cout << "Введите новое число жертв ";
+    std::cout << "Введите новое число жертв: ";
     std::cin >> new_number;
 
     if ((new_number > MAX_PREYS_NUM) || (new_number < 1) )throw BadNumOfPreys(new_number);

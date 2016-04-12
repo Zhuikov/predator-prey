@@ -8,33 +8,33 @@
 
 void Predator::directionfinding()
 {
-    if (this->target.getI() != -1) {
+    if (this->target != NULL) {
         double dist;
-        dist = this->my_place - this->target;
+        dist = this->my_place - this->target->my_place;
         if ((dist > 0.9) && (dist < 1.1)) {
-            if (target.getI() < my_place.getI()) direction = 'u';
-            else if (target.getI() > my_place.getI()) direction = 'd';
-            else if (target.getJ() < my_place.getJ()) direction = 'l';
-            else if (target.getJ() > my_place.getJ()) direction = 'r';
+            if (target->my_place.getI() < my_place.getI()) direction = 'u';
+            else if (target->my_place.getI() > my_place.getI()) direction = 'd';
+            else if (target->my_place.getJ() < my_place.getJ()) direction = 'l';
+            else if (target->my_place.getJ() > my_place.getJ()) direction = 'r';
             this->killPrey(target);
         }
         else {
-            if ((target.getI() < my_place.getI()) && (target.getJ() < my_place.getJ())) {
+            if ((target->my_place.getI() < my_place.getI()) && (target->my_place.getJ() < my_place.getJ())) {
                 if (field->isEmpty(my_place.getI(), my_place.getJ() - 1)) this->direction = 'l';
                 else if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) this->direction = 'u';
                 else chooseRandomDirection();
             }
-            if ((target.getI() < my_place.getI()) && (target.getJ() > my_place.getJ())) {
+            if ((target->my_place.getI() < my_place.getI()) && (target->my_place.getJ() > my_place.getJ())) {
                 if (field->isEmpty(my_place.getI(), my_place.getJ() + 1)) this->direction = 'r';
                 else if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) this->direction = 'u';
                 else chooseRandomDirection();
             }
-            if ((target.getI() > my_place.getI()) && (target.getJ() < my_place.getJ())) {
+            if ((target->my_place.getI() > my_place.getI()) && (target->my_place.getJ() < my_place.getJ())) {
                 if (field->isEmpty(my_place.getI(), my_place.getJ() - 1)) this->direction = 'l';
                 else if (field->isEmpty(my_place.getI() + 1, my_place.getJ())) this->direction = 'd';
                 else chooseRandomDirection();
             }
-            if ((target.getI() > my_place.getI()) && (target.getJ() > my_place.getJ())) {
+            if ((target->my_place.getI() > my_place.getI()) && (target->my_place.getJ() > my_place.getJ())) {
                 if (field->isEmpty(my_place.getI() + 1, my_place.getJ())) this->direction = 'd';
                 else if (field->isEmpty(my_place.getI(), my_place.getJ() + 1)) this->direction = 'r';
                 else chooseRandomDirection();
@@ -45,24 +45,27 @@ void Predator::directionfinding()
 
 }
 
-void Predator::findPrey()    //todo научиться запоминать цель, не только координаты
+void Predator::findPrey()
 {
     double dist = 0;
-    for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
-         it != this->units_struct->preys.end(); it++) {
-         dist = this->my_place - (*it)->my_place;
-         if (dist < 1.5) this->target = (*it)->my_place;
+    if (!this->units_struct->preys.empty()) {
+        for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
+            it != this->units_struct->preys.end(); it++) {
+            dist = this->my_place - (*it)->my_place;
+            if (dist < 1.5) this->target = (*it);
+        }
     }
+    else this->target = NULL;
 
 }
 
-void Predator::killPrey(Coordinates targ)
+void Predator::killPrey(Prey *targ)
 {
-    if (this->field->getChar(this->target.getI(), this->target.getJ()) == 'O') {
+    if (this->field->getChar(this->target->my_place.getI(), this->target->my_place.getJ()) == 'O') {
         unsigned int vec_size = this->units_struct->preys.size();
         for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
             i != this->units_struct->preys.end(); i++) {
-                if ((*i)->my_place == targ) {
+                if ((*i) == targ) {
                     if (vec_size != 1) {
                     delete *i;
                     std::swap(*i, units_struct->preys[vec_size - 1]);
@@ -80,8 +83,7 @@ void Predator::killPrey(Coordinates targ)
     }
     else chooseRandomDirection();
 
-    target.setI(-1);
-    target.setJ(-1);
+   target = NULL;
 
 }
 
@@ -122,8 +124,7 @@ Predator::Predator(const int a, const int b, Field *ptrF)
 {
     my_place.setI(a);
     my_place.setJ(b);
-    target.setI(-1);
-    target.setJ(-1);
+    target = NULL;
     life_time = 0;
     energy = 0;
     has_moved = 0;

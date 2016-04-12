@@ -93,6 +93,18 @@ void ModelTest::predatorTest()
     units.predators.push_back(tst_predator);
     units.preys.push_back(tst_prey);
 
+    field.setPosition(3, 4, 'S');
+    field.setPosition(4, 5, 'T');
+    field.setPosition(5, 4, 'O');
+    field.setPosition(4, 3, 'P');
+    units.predators[0]->movePredator();
+    QCOMPARE(tst_predator->my_place.getI(), 4);
+    QCOMPARE(tst_predator->my_place.getJ(), 4);
+    field.setPosition(3, 4, '.');
+    field.setPosition(4, 5, '.');
+    field.setPosition(5, 4, '.');
+    field.setPosition(4, 3, '.');
+
     units.predators[0]->movePredator();
 
     QCOMPARE(tst_predator->my_place.getI(), 4);
@@ -126,6 +138,7 @@ void ModelTest::predatorTest()
     QCOMPARE(tst_predator->my_place.getJ(), 2);
     int prey_size = units.preys.size();
     QCOMPARE(prey_size, 0);
+
 
 }
 

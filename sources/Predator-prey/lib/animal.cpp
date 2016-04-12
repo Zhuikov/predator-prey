@@ -13,7 +13,7 @@ void Animal::chooseRandomDirection()
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
                     else has_moved = 1;
-            }
+                }
             break;
         }
         case 1: {
@@ -22,7 +22,7 @@ void Animal::chooseRandomDirection()
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
                     else has_moved = 1;
-            }
+                }
             break;
         }
         case 2: {
@@ -31,7 +31,7 @@ void Animal::chooseRandomDirection()
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
                     else has_moved = 1;
-            }
+                }
             break;
         }
         case 3: {
@@ -40,7 +40,7 @@ void Animal::chooseRandomDirection()
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
                     else has_moved = 1;
-            }
+                }
             break;
         }
     }
