@@ -29,6 +29,10 @@ Field::Field(int n, int m)
 Field& Field::operator=(Field &field2)
 {
     if (this != &field2) {
+        for (int i = 0; i < this->height; i++)
+            delete[] field[i];
+        delete[] field;
+
         this->resize(&field2);
 
         this->field = new char*[height];
@@ -57,10 +61,6 @@ void Field::setPosition(const int a, const int b, char ch)
 
 void Field::resize(Field *field1)
 {
-    for (int i = 0; i < this->height; i++)
-        delete[] field[i];
-    delete[] field;
-
     height = field1->getNumOfRows();
     length = field1->getNumOfCols();
 
@@ -103,4 +103,3 @@ Field::~Field()
     }
     delete[] field;
 }
-
