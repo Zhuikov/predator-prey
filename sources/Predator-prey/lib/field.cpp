@@ -39,8 +39,8 @@ Field& Field::operator=(Field &field2)
         for (int i = 0; i < height; i++)
             field[i] = new char[length];
 
-        for (int i = 0; i < field2.getNumOfRows(); i++)
-            for (int j = 0; j < field2.getNumOfCols(); j++)
+        for (int i = 0; i < height; i++)
+            for (int j = 0; j < length; j++)
                 this->field[i][j] = field2.getChar(i, j);
     }
 
@@ -63,13 +63,6 @@ void Field::resize(Field *field1)
 {
     height = field1->getNumOfRows();
     length = field1->getNumOfCols();
-
-    field = new char*[height];
-    for (int i = 0; i < height; i++) {
-        field[i] = new char[length];
-        for (int j = 0; j < length; j++)
-            this->field[i][j] = '.';
-    }
 }
 
 char Field::whatIsEmpty(int a, int b)
