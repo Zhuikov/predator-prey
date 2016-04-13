@@ -47,14 +47,14 @@ Field& Field::operator=(Field &field2)
     return *this;
 }
 
-int Field::isEmpty(int a, int b)
+bool Field::isEmpty(int a, int b)
 {
-    if ((a < 0) || (a >= height) || (b < 0) || (b >= length)) return 0;
-    if ((this->field[a][b] == '.') && (a >= 0) && (a < height) && (b >= 0) && (b < length)) return 1;
-    return 0;
+    if (a < 0 || a >= height || b < 0 || b >= length) return false;
+    if (this->field[a][b] != '.') return false;
+    return true;
 }
 
-void Field::setPosition(const int a, const int b, char ch)
+void Field::setPosition(int a, int b, char ch)
 {
     this->field[a][b] = ch;
 }

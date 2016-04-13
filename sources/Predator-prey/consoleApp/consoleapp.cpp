@@ -15,7 +15,7 @@ void ConsoleApp::createConsole()
 {
     int flag = -1;
     bool end = false;
-    int x = 0;
+    int x = 1;
     while (!end) {
         if (flag != 10) flag = this->CD->menuPresentation();
                 else flag = 3;

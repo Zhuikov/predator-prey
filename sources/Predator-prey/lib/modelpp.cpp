@@ -96,7 +96,7 @@ void ModelPP::movePreys()
         this->model_day++;
         this->model_time = 0;
     }
-    for (std::vector<Prey*>::const_iterator i = this->units.preys.begin();
+    for (std::vector<Prey*>::iterator i = this->units.preys.begin();
          i != this->units.preys.end(); i++)
             (*i)->movePrey();
 }
@@ -114,8 +114,11 @@ void ModelPP::movePredators()
         this->model_time = 0;
     }
 
-    for (std::vector<Predator*>::const_iterator i = this->units.predators.begin();
-         i != this->units.predators.end(); i++)
+    int a = 0;
+    for (std::vector<Predator*>::iterator i = this->units.predators.begin();
+         i != this->units.predators.end(); i++) {
+            a++;
             (*i)->movePredator();
+    }
 }
 

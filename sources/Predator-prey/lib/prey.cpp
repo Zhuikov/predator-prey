@@ -6,8 +6,6 @@
 
 void Prey::directionfinding()
 {
-    isChase();
-
     if (warning == 1) {
         if (my_place.getI() < dangerous_pred.getI()) {
             if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) direction = 'u';
@@ -93,7 +91,8 @@ void Prey::setPtrs(Units* ptrU)
 }
 
 void Prey::movePrey()
-{
+{    
+    isChase();
     this->directionfinding();
     if (!has_moved) {
         this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.');

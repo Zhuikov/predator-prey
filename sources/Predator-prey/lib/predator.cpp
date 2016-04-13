@@ -8,7 +8,8 @@
 
 void Predator::directionfinding()
 {
-    if (this->target != NULL) {
+    if ((target != NULL) &&
+     (this->field->getChar(this->target->my_place.getI(), this->target->my_place.getJ()) == 'O')) {
         double dist;
         dist = this->my_place - this->target->my_place;
         if ((dist > 0.9) && (dist < 1.1)) {
@@ -16,7 +17,7 @@ void Predator::directionfinding()
             else if (target->my_place.getI() > my_place.getI()) direction = 'd';
             else if (target->my_place.getJ() < my_place.getJ()) direction = 'l';
             else if (target->my_place.getJ() > my_place.getJ()) direction = 'r';
-            this->killPrey(target);
+            this->killPrey();
         }
         else {
             if ((target->my_place.getI() < my_place.getI()) && (target->my_place.getJ() < my_place.getJ())) {
@@ -41,14 +42,17 @@ void Predator::directionfinding()
             }
         }
     }
-    else chooseRandomDirection();
+    else {
+        target = NULL;
+        chooseRandomDirection();
+    }
 
 }
 
 void Predator::findPrey()
 {
     double dist = 0;
-    if (!this->units_struct->preys.empty()) {
+    if (units_struct->preys.empty() == false) {
         for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
             it != this->units_struct->preys.end(); it++) {
             dist = this->my_place - (*it)->my_place;
@@ -59,13 +63,13 @@ void Predator::findPrey()
 
 }
 
-void Predator::killPrey(Prey *targ)
+void Predator::killPrey()
 {
     if (this->field->getChar(this->target->my_place.getI(), this->target->my_place.getJ()) == 'O') {
         unsigned int vec_size = this->units_struct->preys.size();
         for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
             i != this->units_struct->preys.end(); i++) {
-                if ((*i) == targ) {
+                if ((*i) == this->target) {
                     if (vec_size != 1) {
                     delete *i;
                     std::swap(*i, units_struct->preys[vec_size - 1]);
@@ -83,7 +87,7 @@ void Predator::killPrey(Prey *targ)
     }
     else chooseRandomDirection();
 
-   target = NULL;
+    target = NULL;
 
 }
 
