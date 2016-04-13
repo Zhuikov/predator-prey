@@ -8,7 +8,7 @@ void Animal::chooseRandomDirection()
     int flag = rand() % 4;
     switch (flag) {
         case 0: {
-            if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) direction = 'u';
+            if (field->isEmpty(my_place.getI() - 1, my_place.getJ()) == 1) direction = 'u';
                 else {
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
@@ -17,7 +17,7 @@ void Animal::chooseRandomDirection()
             break;
         }
         case 1: {
-            if (field->isEmpty(my_place.getI(), my_place.getJ() + 1)) direction = 'r';
+            if (field->isEmpty(my_place.getI(), my_place.getJ() + 1) == 1) direction = 'r';
                 else {
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
@@ -26,7 +26,7 @@ void Animal::chooseRandomDirection()
             break;
         }
         case 2: {
-            if (field->isEmpty(my_place.getI(), my_place.getJ() - 1)) direction = 'l';
+            if (field->isEmpty(my_place.getI(), my_place.getJ() - 1) == 1) direction = 'l';
                 else {
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
@@ -35,7 +35,7 @@ void Animal::chooseRandomDirection()
             break;
         }
         case 3: {
-            if (field->isEmpty(my_place.getI() + 1, my_place.getJ())) direction = 'd';
+            if (field->isEmpty(my_place.getI() + 1, my_place.getJ()) == 1) direction = 'd';
                 else {
                     dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
                     if (dir != '0') direction = dir;
