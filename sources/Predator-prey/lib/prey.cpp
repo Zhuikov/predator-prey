@@ -51,9 +51,8 @@ void Prey::createPrey()
             prey->setPtrs(this->units_struct);
             units_struct->preys.push_back(prey);
         }
-        }
+    }
 
-    chooseRandomDirection();
     this->energy = 0;
 }
 

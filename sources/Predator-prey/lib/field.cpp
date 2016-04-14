@@ -74,7 +74,7 @@ char Field::whatIsEmpty(int a, int b)
     return '0';
 }
 
-char Field::getChar(const int x, const int y) const
+char Field::getChar(int x, int y) const
 {
     return field[x][y];
 }

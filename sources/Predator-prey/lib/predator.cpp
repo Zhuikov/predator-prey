@@ -8,8 +8,11 @@
 
 void Predator::directionfinding()
 {
-    if ((target != NULL) &&
-     (this->field->getChar(this->target->my_place.getI(), this->target->my_place.getJ()) == 'O')) {
+    if (this->target == NULL || this->target->my_place - this->my_place > 2.1) {
+        chooseRandomDirection();
+        this->target = NULL;
+    }
+    else {
         double dist;
         dist = this->my_place - this->target->my_place;
         if ((dist > 0.9) && (dist < 1.1)) {
@@ -21,38 +24,44 @@ void Predator::directionfinding()
         }
         else {
             if ((target->my_place.getI() < my_place.getI()) && (target->my_place.getJ() < my_place.getJ())) {
-                if (field->isEmpty(my_place.getI(), my_place.getJ() - 1)) this->direction = 'l';
-                else if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) this->direction = 'u';
-                else chooseRandomDirection();
+                if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) this->direction = 'u';
+                else if (field->isEmpty(my_place.getI(), my_place.getJ() - 1)) this->direction = 'l';
+                     else chooseRandomDirection();
             }
             if ((target->my_place.getI() < my_place.getI()) && (target->my_place.getJ() > my_place.getJ())) {
                 if (field->isEmpty(my_place.getI(), my_place.getJ() + 1)) this->direction = 'r';
                 else if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) this->direction = 'u';
-                else chooseRandomDirection();
+                     else chooseRandomDirection();
             }
             if ((target->my_place.getI() > my_place.getI()) && (target->my_place.getJ() < my_place.getJ())) {
                 if (field->isEmpty(my_place.getI(), my_place.getJ() - 1)) this->direction = 'l';
                 else if (field->isEmpty(my_place.getI() + 1, my_place.getJ())) this->direction = 'd';
-                else chooseRandomDirection();
+                     else chooseRandomDirection();
             }
             if ((target->my_place.getI() > my_place.getI()) && (target->my_place.getJ() > my_place.getJ())) {
                 if (field->isEmpty(my_place.getI() + 1, my_place.getJ())) this->direction = 'd';
                 else if (field->isEmpty(my_place.getI(), my_place.getJ() + 1)) this->direction = 'r';
-                else chooseRandomDirection();
+                     else chooseRandomDirection();
             }
+            if (this->my_place.getI() - this->target->my_place.getI() == 2)
+                if (this->field->isEmpty(this->my_place.getI() - 1, this->my_place.getJ())) direction = 'u';
+
+            if (this->my_place.getI() - this->target->my_place.getI() == -2)
+                if (this->field->isEmpty(this->my_place.getI() + 1, this->my_place.getJ())) direction = 'd';
+
+            if (this->my_place.getJ() - this->target->my_place.getJ() == 2)
+                if (this->field->isEmpty(this->my_place.getI(), this->my_place.getJ() - 1)) direction = 'l';
+
+            if (this->my_place.getJ() - this->target->my_place.getJ() == -2)
+                if (this->field->isEmpty(this->my_place.getI(), this->my_place.getJ() + 1)) direction = 'r';
         }
     }
-    else {
-        target = NULL;
-        chooseRandomDirection();
-    }
-
 }
 
 void Predator::findPrey()
 {
     double dist = 0;
-    if (units_struct->preys.empty() == false) {
+    if (this->units_struct->preys.empty() == false) {
         for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
             it != this->units_struct->preys.end(); it++) {
             dist = this->my_place - (*it)->my_place;
@@ -71,17 +80,17 @@ void Predator::killPrey()
             i != this->units_struct->preys.end(); i++) {
                 if ((*i) == this->target) {
                     if (vec_size != 1) {
-                    delete *i;
-                    std::swap(*i, units_struct->preys[vec_size - 1]);
-                    this->units_struct->preys.pop_back();
+                        delete *i;
+                        std::swap(*i, units_struct->preys.back());
+                        this->units_struct->preys.pop_back();
+                    }
+                    else {
+                        delete *i;
+                        this->units_struct->preys.pop_back();
+                        }
+                    break;
                 }
-                else {
-                    delete *i;
-                    this->units_struct->preys.pop_back();
-                }
-                break;
             }
-        }
 
         energy++;
     }
@@ -124,7 +133,7 @@ void Predator::createPredator()
 
 }
 
-Predator::Predator(const int a, const int b, Field *ptrF)
+Predator::Predator(int a, int b, Field *ptrF)
 {
     my_place.setI(a);
     my_place.setJ(b);
