@@ -60,7 +60,7 @@ void Prey::isChase()
 {
     warning = 0;
     for (std::vector<Predator*>::const_iterator i = this->units_struct->predators.begin();
-         i != this->units_struct->predators.end(); i++) {
+         i != this->units_struct->predators.end(); ++i) {
             if (this->my_place - (*i)->my_place < 1.1) {
                 warning = 1;
                 this->dangerous_pred = (*i)->my_place;
