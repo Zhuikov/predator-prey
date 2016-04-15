@@ -125,7 +125,7 @@ void ModelPP::movePredators()
      */
 
     for (std::vector<Predator*>::iterator i = this->units.predators.begin();
-         i != this->units.predators.end(); i++) {
+         i != this->units.predators.end(); ++i) {
             (*i)->movePredator();
     }
 }
