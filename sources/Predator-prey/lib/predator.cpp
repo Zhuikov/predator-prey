@@ -63,7 +63,7 @@ void Predator::findPrey()
     double dist = 0;
     if (this->units_struct->preys.empty() == false) {
         for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
-            it != this->units_struct->preys.end(); it++) {
+            it != this->units_struct->preys.end(); ++it) {
             dist = this->my_place - (*it)->my_place;
             if (dist < 1.5) this->target = (*it);
         }
@@ -77,7 +77,7 @@ void Predator::killPrey()
     if (this->field->getChar(this->target->my_place.getI(), this->target->my_place.getJ()) == 'O') {
         unsigned int vec_size = this->units_struct->preys.size();
         for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
-            i != this->units_struct->preys.end(); i++) {
+            i != this->units_struct->preys.end(); ++i) {
                 if ((*i) == this->target) {
                     if (vec_size != 1) {
                         delete *i;
