@@ -144,9 +144,9 @@ int ConsoleDialog::menuPresentation()
         std::cin >> choice;
         switch (choice)
         {
-            case 1: { return 1; break; }
-            case 3: { return 3; break; }
-            case 0: { return 0; break; }
+            case 1: { return 1; }
+            case 3: { return 3; }
+            case 0: { return 0; }
             default: { std::cout << "Выбран неверный пункт меню" << std::endl; }
         }
     }
