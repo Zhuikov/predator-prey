@@ -43,17 +43,28 @@ void Predator::directionfinding()
                 else if (field->isEmpty(my_place.getI(), my_place.getJ() + 1)) this->direction = 'r';
                      else chooseRandomDirection();
             }
-            if (this->my_place.getI() - this->target->my_place.getI() == 2)
+
+            if (this->my_place.getI() - this->target->my_place.getI() == 2 &&
+                    this->my_place.getJ() == this->target->my_place.getJ()) {
                 if (this->field->isEmpty(this->my_place.getI() - 1, this->my_place.getJ())) direction = 'u';
-
-            if (this->my_place.getI() - this->target->my_place.getI() == -2)
+                    else chooseRandomDirection();
+            }
+            if (this->my_place.getI() - this->target->my_place.getI() == -2 &&
+                    this->my_place.getJ() == this->target->my_place.getJ()) {
                 if (this->field->isEmpty(this->my_place.getI() + 1, this->my_place.getJ())) direction = 'd';
-
-            if (this->my_place.getJ() - this->target->my_place.getJ() == 2)
+                    else chooseRandomDirection();
+            }
+            if (this->my_place.getJ() - this->target->my_place.getJ() == 2 &&
+                    this->my_place.getI() == this->target->my_place.getI()) {
                 if (this->field->isEmpty(this->my_place.getI(), this->my_place.getJ() - 1)) direction = 'l';
+                else chooseRandomDirection();
+            }
 
-            if (this->my_place.getJ() - this->target->my_place.getJ() == -2)
+            if (this->my_place.getJ() - this->target->my_place.getJ() == -2 &&
+                    this->my_place.getI() == this->target->my_place.getI()) {
                 if (this->field->isEmpty(this->my_place.getI(), this->my_place.getJ() + 1)) direction = 'r';
+                else chooseRandomDirection();
+            }
         }
     }
 }
@@ -61,7 +72,7 @@ void Predator::directionfinding()
 void Predator::findPrey()
 {
     double dist = 0;
-    if (this->units_struct->preys.empty() == false) {
+    if (!this->units_struct->preys.empty()) {
         for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
             it != this->units_struct->preys.end(); ++it) {
             dist = this->my_place - (*it)->my_place;
