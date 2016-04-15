@@ -30,13 +30,13 @@ void ModelPP::initializeModel()
 
     if (!units.predators.empty()) {
         for (std::vector<Predator*>::const_iterator i = units.predators.begin();
-             i != units.predators.end(); i++) delete *i;
+             i != units.predators.end(); ++i) delete *i;
         units.predators.clear();
     }
 
     if (!units.preys.empty()) {
         for (std::vector<Prey*>::const_iterator i = units.preys.begin();
-             i != units.preys.end(); i++) delete *i;
+             i != units.preys.end(); ++i) delete *i;
         units.preys.clear();
     }
 
@@ -97,7 +97,7 @@ void ModelPP::movePreys()
         this->model_time = 0;
     }
     for (std::vector<Prey*>::iterator i = this->units.preys.begin();
-         i != this->units.preys.end(); i++)
+         i != this->units.preys.end(); ++i)
             (*i)->movePrey();
 }
 
