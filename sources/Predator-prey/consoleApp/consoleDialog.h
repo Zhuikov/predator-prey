@@ -10,21 +10,22 @@ class ConsoleDialog
     int new_height;
     int new_number;
     int new_time;
+    Settings *sett;
 
     void changeFieldSize();
     void changeDayWithoutMeal();
     void changeNumOfPredators();
     void changeNumOfPreys();
 
-    void setNewDayWithoutMeal(Settings *sett, const int);
-    void setNewFieldBoundary(Settings *sett, const int, const int);
-    void setNumOfPreys(Settings *sett, const int);
-    void setNumOfPredators(Settings *sett, const int);
+    void setNewDayWithoutMeal(const int);
+    void setNewFieldBoundary(const int, const int);
+    void setNumOfPreys(const int);
+    void setNumOfPredators(const int);
 
 public:
-    ConsoleDialog();
+    ConsoleDialog(Settings *sett);
     int menuPresentation();
-    void settingsPresentation(Settings *sett);
+    void settingsPresentation();
 
 };
 

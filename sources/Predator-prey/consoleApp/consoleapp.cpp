@@ -5,8 +5,8 @@
 
 ConsoleApp::ConsoleApp()
 {
-    this->CD = new ConsoleDialog;
     this->sett = new Settings;
+    this->CD = new ConsoleDialog(this->sett);
     this->model = new ModelPP(this->sett);
     this->drawer = new ConsoleDrawer(this->model->getField(), this->model);
 }
@@ -30,14 +30,13 @@ void ConsoleApp::createConsole()
                     std::cin >> x;
                        if (x == 0) break;
                 }
-                this->drawer->showField();
                 break;
             }
 
             case 3: {
                 std::cout << std::endl;
                 try {
-                    this->CD->settingsPresentation(this->sett);
+                    this->CD->settingsPresentation();
                 }
                 catch (BadFieldBoundary& e)
                 {

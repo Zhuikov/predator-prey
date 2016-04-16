@@ -13,7 +13,7 @@ public:
     void showMessage() {
         std::cerr << "Невозможно создать поле с размерами " << length << "x" << height <<
         std::endl << "Минимальная длина и ширина поля: " << MIN_FIELD_SIZE <<
-        std::endl << "Максимальная длина и ширина поля: " << MAX_FIELD_SIZE << std::endl << std::endl;
+        std::endl << "Максимальная длина и ширина поля: " << MAX_FIELD_SIZE << std::endl;
     }
 };
 
@@ -25,19 +25,20 @@ public:
     BadDayWithoutMeal(int a): bad_value(a) {}
     void showMessage() {
         std::cerr << "Введенное значение недопустимо!" <<
-        std::endl << "Число должно быть в диапазоне от 1 до " << MAX_DAY_WITHOUT_MEAL << std::endl << std::endl;
+        std::endl << "Число должно быть в диапазоне от 1 до " << MAX_DAY_WITHOUT_MEAL << std::endl;
     }
 };
 
 class BadNumOfPredators
 {
     const int bad_value;
+    const int max_value;
 
 public:
-    BadNumOfPredators(int a): bad_value(a) {}
+    BadNumOfPredators(int a, int b): bad_value(a), max_value(b) {}
     void showMessage() {
         std::cerr << "Введенное значение недопустимо!" <<
-        std::endl << "Число хищников должно быть в диапазоне от 1 до " << MAX_PREDATORS_NUM << std::endl << std::endl;
+        std::endl << "Число хищников должно быть в диапазоне от 1 до " << max_value << std::endl;
     }
 
 };
@@ -45,12 +46,13 @@ public:
 class BadNumOfPreys
 {
     const int bad_value;
+    const int max_value;
 
 public:
-    BadNumOfPreys(int a): bad_value(a) {}
+    BadNumOfPreys(int a, int b): bad_value(a), max_value(b) {}
     void showMessage() {
         std::cerr << "Введенное значение недопустимо!" <<
-        std::endl << "Число жертв должно быть в диапазоне от 1 до " << MAX_PREYS_NUM << std::endl << std::endl;
+        std::endl << "Число жертв должно быть в диапазоне от 1 до " << max_value << std::endl;
     }
 };
 

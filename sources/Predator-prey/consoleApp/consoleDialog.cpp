@@ -29,7 +29,9 @@ void ConsoleDialog::changeNumOfPredators()
     std::cout << "Введите новое число хищников: ";
     std::cin >> new_number;
 
-    if ((new_number > MAX_PREDATORS_NUM) || (new_number < 1)) throw BadNumOfPredators(new_number);
+    int MAX_PREDATORS_NUM = std::max(sett->field_height, sett->field_length) * 2;
+
+    if ((new_number > MAX_PREDATORS_NUM) || (new_number < 1)) throw BadNumOfPredators(new_number, MAX_PREDATORS_NUM);
         else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
@@ -38,19 +40,21 @@ void ConsoleDialog::changeNumOfPreys()
     std::cout << "Введите новое число жертв: ";
     std::cin >> new_number;
 
-    if ((new_number > MAX_PREYS_NUM) || (new_number < 1) )throw BadNumOfPreys(new_number);
+    int MAX_PREYS_NUM = std::max(sett->field_height, sett->field_length) * 2;
+    if ((new_number > MAX_PREYS_NUM) || (new_number < 1)) throw BadNumOfPreys(new_number, MAX_PREYS_NUM);
         else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
-ConsoleDialog::ConsoleDialog()
+ConsoleDialog::ConsoleDialog(Settings *sett)
 {
     new_number = 3;
     new_height = 10;
     new_length = 10;
     new_time = 3;
+    this->sett = sett;
 }
 
-void ConsoleDialog::settingsPresentation(Settings *sett)
+void ConsoleDialog::settingsPresentation()
 {
 
     std::cout << "1. Именить размеры поля. Текущие размеры ";
@@ -72,28 +76,28 @@ void ConsoleDialog::settingsPresentation(Settings *sett)
             case 1: {
                 std::cout << std::endl;
                 this->changeFieldSize();
-                this->setNewFieldBoundary(sett, new_length, new_height);
+                this->setNewFieldBoundary(new_length, new_height);
                 good_choice = 1;
                 break;
             }
             case 2: {
                 std::cout << std::endl;
                 this->changeNumOfPredators();
-                this->setNumOfPredators(sett, new_number);
+                this->setNumOfPredators(new_number);
                 good_choice = 1;
                 break;
             }
             case 3: {
                 std::cout << std::endl;
                 this->changeNumOfPreys();
-                this->setNumOfPreys(sett, new_number);
+                this->setNumOfPreys(new_number);
                 good_choice = 1;
                 break;
             }
             case 4: {
                 std::cout << std::endl;
                 this->changeDayWithoutMeal();
-                this->setNewDayWithoutMeal(sett, new_time);
+                this->setNewDayWithoutMeal(new_time);
                 good_choice = 1;
                 break;
             }
@@ -107,23 +111,23 @@ void ConsoleDialog::settingsPresentation(Settings *sett)
     }
 }
 
-void ConsoleDialog::setNewFieldBoundary(Settings *sett, const int new_height, const int new_length)
+void ConsoleDialog::setNewFieldBoundary(const int new_height, const int new_length)
 {
     sett->field_length = new_length;
     sett->field_height = new_height;
 }
 
-void ConsoleDialog::setNumOfPreys(Settings *sett, const int new_num)
+void ConsoleDialog::setNumOfPreys(const int new_num)
 {
     sett->num_of_preys = new_num;
 }
 
-void ConsoleDialog::setNumOfPredators(Settings *sett, const int new_num)
+void ConsoleDialog::setNumOfPredators(const int new_num)
 {
     sett->num_of_predators = new_num;
 }
 
-void ConsoleDialog::setNewDayWithoutMeal(Settings *sett, const int new_val)
+void ConsoleDialog::setNewDayWithoutMeal(const int new_val)
 {
     sett->day_without_meal = new_val;
 }
