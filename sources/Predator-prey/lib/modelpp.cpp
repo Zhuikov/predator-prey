@@ -115,6 +115,7 @@ void ModelPP::moveBegin()
     while (num_deleted_NULLs < num_of_NULLs) {
         for (unsigned int i = 0; i < this->units.preys.size(); i++) {
             if (this->units.preys[i] == NULL) {
+                delete this->units.preys[i];
                 if (this->units.preys[i] != this->units.preys.back())
                     std::swap(this->units.preys[i], this->units.preys.back());
                 this->units.preys.pop_back();
