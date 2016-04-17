@@ -228,7 +228,8 @@ void ModelTest::debugTest()
     int a = 0;
     unsigned int vec_size = units.predators.size();
     while (a < 8) {
-        for (unsigned int it = 0; it < units.predators.size(); it++) units.predators[it]->did_move = false;
+        for (std::vector<Predator*>::iterator it = units.predators.begin(); it != units.predators.end(); ++it)
+            (*it)->did_move = false;
         while(!arePredatorsMoved(&units)) {
             for (unsigned int i = 0; i < vec_size; i++) {
                 vec_size = units.predators.size();
