@@ -90,7 +90,10 @@ void Predator::killPrey()
     if (this->field->getChar(this->target->my_place.getI(), this->target->my_place.getJ()) == 'O') {
         for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
             i != this->units_struct->preys.end(); ++i)
-                if ((*i) == this->target) (*i) = NULL;
+                if ((*i) == this->target) {
+                    delete *(i);
+                    (*i) = NULL;
+                }
         energy++;
         life_time = -1;
     }
