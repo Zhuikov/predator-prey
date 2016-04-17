@@ -75,8 +75,10 @@ void Predator::findPrey()
     if (!this->units_struct->preys.empty()) {
         for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
             it != this->units_struct->preys.end(); ++it) {
-            dist = this->my_place - (*it)->my_place;
-            if (dist < 1.5) this->target = (*it);
+            if((*it) != NULL) {
+                dist = this->my_place - (*it)->my_place;
+                if (dist < 1.5) this->target = (*it);
+            }
         }
     }
     else this->target = NULL;
@@ -86,26 +88,13 @@ void Predator::findPrey()
 void Predator::killPrey()
 {
     if (this->field->getChar(this->target->my_place.getI(), this->target->my_place.getJ()) == 'O') {
-        unsigned int vec_size = this->units_struct->preys.size();
         for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
-            i != this->units_struct->preys.end(); ++i) {
-                if ((*i) == this->target) {
-                    if (vec_size != 1) {
-                        delete *i;
-                        std::swap(*i, units_struct->preys.back());
-                        this->units_struct->preys.pop_back();
-                    }
-                    else {
-                        delete *i;
-                        this->units_struct->preys.pop_back();
-                        }
-                    break;
-                }
-            }
-
+            i != this->units_struct->preys.end(); ++i)
+                if ((*i) == this->target) (*i) = NULL;
         energy++;
         life_time = -1;
     }
+
     else chooseRandomDirection();
 
     target = NULL;
@@ -145,17 +134,17 @@ void Predator::createPredator()
 
 }
 
-void Predator::killHungryPredator()
+void Predator::killHungryPredator(Units* units)
 {
-    unsigned int vec_size = this->units_struct->predators.size();
-    for (std::vector<Predator*>::iterator it = this->units_struct->predators.begin();
-         it != this->units_struct->predators.end(); ++it)
-        if ((*it)->my_place == this->my_place) {
-            if (vec_size != 1) std::swap(*it, this->units_struct->predators.back());
-            this->units_struct->predators.pop_back();
-            delete this;
-            break;
-        }
+    unsigned int i = 0;
+    for (i = 0; i < this->units_struct->predators.size(); i++) {
+        if (this->units_struct->predators[i] != NULL &&
+            this->units_struct->predators[i]->my_place == this->my_place) {
+                delete this;
+                units->predators[i] = NULL;
+                break;
+            }
+    }
 }
 
 Predator::Predator(int a, int b, Field *ptrF, int time_of_life)
@@ -167,7 +156,6 @@ Predator::Predator(int a, int b, Field *ptrF, int time_of_life)
     life_time = 0;
     energy = 0;
     has_moved = 0;
-    did_move = false;
     field = ptrF;
     field->setPosition(this->my_place.getI(), this->my_place.getJ(), 'X');
     direction = 'u';
@@ -192,9 +180,8 @@ void Predator::movePredator()
     if (this->energy == PREDATOR_CREATE_ENERGY) this->createPredator();
 
     life_time++;
-    did_move = true;
     if (life_time == max_life_time) {
         this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.');
-        this->killHungryPredator();
+        this->killHungryPredator(this->units_struct);
     }
 }

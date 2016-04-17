@@ -26,7 +26,7 @@ public:
     BadMovesWithoutMeal(int a, int b): bad_value(a), max_value(b) {}
     void showMessage() {
         std::cerr << "Введенное значение недопустимо!" <<
-        std::endl << "Число должно быть в диапазоне от 1 до " << max_value << std::endl;
+        std::endl << "Число должно быть в диапазоне от 5 до " << max_value << std::endl;
     }
 };
 

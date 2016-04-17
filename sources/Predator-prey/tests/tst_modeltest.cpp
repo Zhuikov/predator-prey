@@ -15,7 +15,7 @@ public:
 
 private Q_SLOTS:
     int doubleCompare(double a, double b);
-    bool arePredatorsMoved(Units*);      // для теста хищника
+    void moveBegin(Units*);
 
     void coordinatesTest();
     void fieldTest();
@@ -32,13 +32,45 @@ int ModelTest::doubleCompare(double a, double b)
     return 0;
 }
 
-bool ModelTest::arePredatorsMoved(Units* units)
+void ModelTest::moveBegin(Units *units)
 {
-    for (std::vector<Predator*>::const_iterator it = units->predators.begin();
-         it != units->predators.end(); ++it) {
-        if (!(*it)->did_move) return false;
+    int num_of_NULLs = 0;
+    for (unsigned int i = 0; i < units->predators.size(); i++) {
+        if (units->predators[i] == NULL)
+            num_of_NULLs ++;
     }
-    return true;
+
+    int num_deleted_NULLs = 0;
+    while (num_deleted_NULLs < num_of_NULLs) {
+        for (unsigned int i = 0; i < units->predators.size(); i++) {
+            if (units->predators[i] == NULL) {
+                if (units->predators[i] != units->predators.back())
+                    std::swap(units->predators[i], units->predators.back());
+                units->predators.pop_back();
+                num_deleted_NULLs ++;
+                break;
+            }
+        }
+    }
+
+    num_of_NULLs = 0;
+    for (unsigned int i = 0; i < units->preys.size(); i++) {
+        if (units->preys[i] == NULL)
+            num_of_NULLs ++;
+    }
+
+    num_deleted_NULLs = 0;
+    while (num_deleted_NULLs < num_of_NULLs) {
+        for (unsigned int i = 0; i < units->preys.size(); i++) {
+            if (units->preys[i] == NULL) {
+                if (units->preys[i] != units->preys.back())
+                    std::swap(units->preys[i], units->preys.back());
+                units->preys.pop_back();
+                num_deleted_NULLs ++;
+                break;
+            }
+        }
+    }
 }
 
 void ModelTest::coordinatesTest()
@@ -120,6 +152,7 @@ void ModelTest::predatorTest()
     field.setPosition(4, 5, 'T');
     field.setPosition(5, 4, 'O');
     field.setPosition(4, 3, 'P');
+
     units.predators[0]->movePredator();
     QCOMPARE(tst_predator->my_place.getI(), 4);
     QCOMPARE(tst_predator->my_place.getJ(), 4);
@@ -137,6 +170,7 @@ void ModelTest::predatorTest()
 
     QCOMPARE(tst_predator->my_place.getI(), 3);
     QCOMPARE(tst_predator->my_place.getJ(), 3);
+    moveBegin(&units);
     QCOMPARE(units.preys.empty(), true);
 
     Prey* tst_prey2 = new Prey(2, 3, &field);
@@ -154,9 +188,11 @@ void ModelTest::predatorTest()
     tst_prey3->setPtrs(&units);
     units.preys.push_back(tst_prey3);
 
+    moveBegin(&units);
     units.predators[0]->movePredator();
     units.predators[0]->movePredator();
 
+    moveBegin(&units);
     QCOMPARE(tst_predator->my_place.getI(), 1);
     QCOMPARE(tst_predator->my_place.getJ(), 2);
     int prey_size = units.preys.size();
@@ -165,12 +201,15 @@ void ModelTest::predatorTest()
     for (int i = 0; i < 20; i++) {
         units.predators[0]->movePredator();
     }
+    std::swap(units.predators[0], units.predators[1]);
+    if (units.predators[1] == NULL) units.predators.pop_back();
     pred_size = units.predators.size();
     QCOMPARE(pred_size, 1);
 
     for (int i = 0; i < 20; i++) {
         units.predators[0]->movePredator();
     }
+    if (units.predators[0] == NULL) units.predators.pop_back();
     pred_size = units.predators.size();
     QCOMPARE(pred_size, 0);
 }
@@ -186,12 +225,14 @@ void ModelTest::modelppInitializeTest()
 
     model.moveBegin();
     model.movePreys();
+    model.moveBegin();
     model.movePredators();
     QCOMPARE(model.getDay(), 0);
     QCOMPARE(model.getTime(), 1);
 
     model.moveBegin();
     model.movePredators();
+    model.moveBegin();
     model.movePreys();
     QCOMPARE(model.getTime(), 2);
 
@@ -225,21 +266,17 @@ void ModelTest::debugTest()
     units.preys.push_back(tst_prey3);
     units.preys.push_back(tst_prey4);
 
-    int a = 0;
-    unsigned int vec_size = units.predators.size();
-    while (a < 8) {
-        for (std::vector<Predator*>::iterator it = units.predators.begin(); it != units.predators.end(); ++it)
-            (*it)->did_move = false;
-        while(!arePredatorsMoved(&units)) {
-            for (unsigned int i = 0; i < vec_size; i++) {
-                vec_size = units.predators.size();
-                if (!units.predators[i]->did_move) units.predators[i]->movePredator();
-            }
+    int a = 0; // кол-во ходов хищников
+    while (a < 5) {
+        moveBegin(&units);
+        for (unsigned int i = 0; i < units.predators.size(); i++) {
+            units.predators[i]->movePredator();
         }
-        a++;
+        a ++;
     }
-    int final_vec_size = vec_size;
-    QCOMPARE(final_vec_size, 1);
+    moveBegin(&units);
+    int final_vec_size = units.predators.size();
+    QCOMPARE(final_vec_size, 3);
 
 
     /*

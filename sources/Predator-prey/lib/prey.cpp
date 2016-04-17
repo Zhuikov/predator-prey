@@ -59,12 +59,14 @@ void Prey::createPrey()
 void Prey::isChase()
 {
     warning = 0;
-    for (std::vector<Predator*>::const_iterator i = this->units_struct->predators.begin();
-         i != this->units_struct->predators.end(); ++i) {
-            if (this->my_place - (*i)->my_place < 1.1) {
+    for (unsigned int i = 0; i < this->units_struct->predators.size(); ++i) {
+        if (this->units_struct->predators[i] != NULL) {
+            if (this->my_place - units_struct->predators[i]->my_place < 1.1) {
                 warning = 1;
-                this->dangerous_pred = (*i)->my_place;
+                this->dangerous_pred = units_struct->predators[i]->my_place;
+                break;
             }
+        }
     }
 }
 
@@ -77,7 +79,6 @@ Prey::Prey(const int a, const int b, Field* ptrF)
     energy = 0;
     life_time = 0;
     has_moved = 0;
-    did_move = false;
     field = ptrF;
     field->setPosition(this->my_place.getI(), this->my_place.getJ(), 'O');
     direction = 'u';

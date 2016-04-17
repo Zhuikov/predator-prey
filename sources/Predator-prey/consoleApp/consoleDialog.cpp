@@ -22,7 +22,7 @@ void ConsoleDialog::changeDayWithoutMeal()
 
     int MAX_MOVES_WITHOUT_MEAL = this->sett->max_moves_without_meal;
 
-    if ((new_time < 10) || (new_time > MAX_MOVES_WITHOUT_MEAL))
+    if ((new_time < 5) || (new_time > MAX_MOVES_WITHOUT_MEAL))
         throw BadMovesWithoutMeal(new_time, MAX_MOVES_WITHOUT_MEAL);
          else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }

@@ -23,7 +23,6 @@ public:
     void moveBegin();
     void movePreys();
     void movePredators();
-    bool arePredatorsMoved();
     void saveModel();
     void loadModel();
 

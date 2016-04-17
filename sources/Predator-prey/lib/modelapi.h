@@ -33,7 +33,7 @@ public:
 
     /**
      * @brief метод, подготавливающий хищников и жертв к началу хода:
-     * ставит в поле животных did_move значение false
+     * ставит в поле животных did_move значение false и удаляет исчезнувших
      */
     virtual void moveBegin() = 0;
 
@@ -46,12 +46,6 @@ public:
      * @brief метод, передвигающий хищников
      */
     virtual void movePredators() = 0;
-
-    /**
-     * @brief метод, проверяющий, все ли хищники сдвинулись
-     * @return true, если это так; fasle в другом случае
-     */
-    virtual bool arePredatorsMoved() = 0;
 
     void saveModel();
     void loadModel();

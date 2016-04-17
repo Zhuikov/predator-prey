@@ -80,19 +80,49 @@ int ModelPP::getDay()
 
 bool ModelPP::isEnd()
 {
-    if ((units.predators.empty()) || (units.preys.empty())) return true;
+    if (units.predators.empty() || units.preys.empty()) return true;
     return false;
 }
 
 void ModelPP::moveBegin()
 {
-    for (std::vector<Predator*>::iterator it = this->units.predators.begin();
-         it != this->units.predators.end(); ++it)
-        (*it)->did_move = false;
+    int num_of_NULLs = 0;
+    for (unsigned int i = 0; i < this->units.predators.size(); i++) {
+        if (this->units.predators[i] == NULL)
+            num_of_NULLs ++;
+    }
 
-    for (std::vector<Prey*>::iterator it = this->units.preys.begin();
-         it != this->units.preys.end(); ++it)
-        (*it)->did_move = false;
+    int num_deleted_NULLs = 0;
+    while (num_deleted_NULLs < num_of_NULLs) {
+        for (unsigned int i = 0; i < this->units.predators.size(); i++) {
+            if (this->units.predators[i] == NULL) {
+                if (this->units.predators[i] != this->units.predators.back())
+                    std::swap(this->units.predators[i], this->units.predators.back());
+                this->units.predators.pop_back();
+                num_deleted_NULLs ++;
+                break;
+            }
+        }
+    }
+
+    num_of_NULLs = 0;
+    for (unsigned int i = 0; i < this->units.preys.size(); i++) {
+        if (this->units.preys[i] == NULL)
+            num_of_NULLs ++;
+    }
+
+    num_deleted_NULLs = 0;
+    while (num_deleted_NULLs < num_of_NULLs) {
+        for (unsigned int i = 0; i < this->units.preys.size(); i++) {
+            if (this->units.preys[i] == NULL) {
+                if (this->units.preys[i] != this->units.preys.back())
+                    std::swap(this->units.preys[i], this->units.preys.back());
+                this->units.preys.pop_back();
+                num_deleted_NULLs ++;
+                break;
+            }
+        }
+    }
 }
 
 void ModelPP::movePreys()
@@ -107,9 +137,10 @@ void ModelPP::movePreys()
         this->model_day++;
         this->model_time = 0;
     }
-    for (std::vector<Prey*>::iterator i = this->units.preys.begin();
-         i != this->units.preys.end(); ++i)
-            (*i)->movePrey();
+
+    for (unsigned int i = 0; i < this->units.preys.size(); i++)
+        this->units.preys[i]->movePrey();
+
 }
 
 void ModelPP::movePredators()
@@ -141,19 +172,6 @@ void ModelPP::movePredators()
     }
     */
 
-    unsigned int vec_size = this->units.predators.size();
-    while (!arePredatorsMoved()) {
-        for (unsigned int i = 0; i < vec_size; i++)
-            if (!this->units.predators[i]->did_move) this->units.predators[i]->movePredator();
-        vec_size = this->units.predators.size();
-    }
-}
-
-bool ModelPP::arePredatorsMoved()
-{
-    for (std::vector<Predator*>::const_iterator it = this->units.predators.begin();
-         it != this->units.predators.end(); ++it) {
-        if (!(*it)->did_move) return false;
-    }
-    return true;
+    for (unsigned int i = 0; i < this->units.predators.size(); i++)
+        this->units.predators[i]->movePredator();
 }

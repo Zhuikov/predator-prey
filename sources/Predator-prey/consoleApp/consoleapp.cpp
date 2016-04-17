@@ -25,11 +25,12 @@ void ConsoleApp::createConsole()
                 this->drawer->showField();
                 while (!model->isEnd()) {
                     std::cin >> x;
-                    this->model->moveBegin();
                     this->model->movePredators();
+                    this->model->moveBegin();
                     this->model->movePreys();
+                    this->model->moveBegin();
                     this->drawer->showField();
-                       if (x == 0) break;
+                    if (x == 0) break;
                 }
                 break;
             }
