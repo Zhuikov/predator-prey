@@ -63,6 +63,7 @@ void ModelTest::moveBegin(Units *units)
     while (num_deleted_NULLs < num_of_NULLs) {
         for (unsigned int i = 0; i < units->preys.size(); i++) {
             if (units->preys[i] == NULL) {
+                delete units->preys[i];
                 if (units->preys[i] != units->preys.back())
                     std::swap(units->preys[i], units->preys.back());
                 units->preys.pop_back();
