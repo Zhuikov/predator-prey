@@ -11,9 +11,14 @@ class Animal
 {
 protected:
     /**
-     * @brief life_time - время нахождения животного на поле
+     * @brief life_time - счетчик ходов животного на поле
      */
     int life_time;
+
+    /**
+     * @brief max_life_time - максимальное время жизни животного без еды
+     */
+    int max_life_time;
 
     int energy;
     int has_moved;
@@ -40,6 +45,7 @@ protected:
 
 public:
     Coordinates my_place;
+    bool did_move;
 
     virtual ~Animal() {}
 };

@@ -17,10 +17,13 @@ void ConsoleDialog::changeFieldSize()
 
 void ConsoleDialog::changeDayWithoutMeal()
 {
-    std::cout << "Введите новое время жизни хищника (в днях): ";
+    std::cout << "Введите новое время жизни хищника (в ходах): ";
     std::cin >> new_time;
 
-    if ((new_time <= 0) || (new_time > MAX_DAY_WITHOUT_MEAL)) throw BadDayWithoutMeal(new_time);
+    int MAX_MOVES_WITHOUT_MEAL = this->sett->max_moves_without_meal;
+
+    if ((new_time < 10) || (new_time > MAX_MOVES_WITHOUT_MEAL))
+        throw BadMovesWithoutMeal(new_time, MAX_MOVES_WITHOUT_MEAL);
          else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
@@ -57,13 +60,14 @@ ConsoleDialog::ConsoleDialog(Settings *sett)
 void ConsoleDialog::settingsPresentation()
 {
 
-    std::cout << "1. Именить размеры поля. Текущие размеры ";
+    std::cout << "1. Именить размеры поля.                 Текущие размеры ";
     std::cout << sett->field_height << " x " << sett->field_length << std::endl;
-    std::cout << "2. Изменить количество хищников. Текущее число ";
+    std::cout << "2. Изменить количество хищников.         Текущее число ";
     std::cout << sett->num_of_predators << std::endl;
-    std::cout << "3. Изменить количество жертв. Текущее число ";
+    std::cout << "3. Изменить количество жертв.            Текущее число ";
     std::cout << sett->num_of_preys << std::endl;
-    std::cout << "4. Изменить время жизни хищника без еды" << std::endl;
+    std::cout << "4. Изменить время жизни хищника без еды. Текущее время ";
+    std::cout << sett->moves_without_meal << std::endl;
     std::cout << "0. Назад" << std::endl;
 
     int choice = 0;
@@ -129,7 +133,7 @@ void ConsoleDialog::setNumOfPredators(const int new_num)
 
 void ConsoleDialog::setNewDayWithoutMeal(const int new_val)
 {
-    sett->day_without_meal = new_val;
+    sett->moves_without_meal = new_val;
 }
 
 int ConsoleDialog::menuPresentation()

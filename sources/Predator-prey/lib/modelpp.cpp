@@ -49,7 +49,7 @@ void ModelPP::initializeModel()
             j_pred = rand() % sett->field_length;
             if (field.isEmpty(i_pred, j_pred)) flag = true;
         }
-        Predator *pred = new Predator(i_pred, j_pred, &field);
+        Predator *pred = new Predator(i_pred, j_pred, &field, sett->moves_without_meal);
         pred->setPtrs(&units);
         units.predators.push_back(pred);
     }
@@ -82,6 +82,17 @@ bool ModelPP::isEnd()
 {
     if ((units.predators.empty()) || (units.preys.empty())) return true;
     return false;
+}
+
+void ModelPP::moveBegin()
+{
+    for (std::vector<Predator*>::iterator it = this->units.predators.begin();
+         it != this->units.predators.end(); ++it)
+        (*it)->did_move = false;
+
+    for (std::vector<Prey*>::iterator it = this->units.preys.begin();
+         it != this->units.preys.end(); ++it)
+        (*it)->did_move = false;
 }
 
 void ModelPP::movePreys()
@@ -122,11 +133,27 @@ void ModelPP::movePredators()
      * Дебаг-тест (самый последний) это может продемонстрировать; там еще пояснения есть.
      *
      * Жертвы пока никого не порождают. Никто не умирает "от старости".
-     */
+
 
     for (std::vector<Predator*>::iterator i = this->units.predators.begin();
          i != this->units.predators.end(); ++i) {
             (*i)->movePredator();
     }
+    */
+
+    unsigned int vec_size = this->units.predators.size();
+    while (!arePredatorsMoved()) {
+        for (unsigned int i = 0; i < vec_size; i++)
+            if (!this->units.predators[i]->did_move) this->units.predators[i]->movePredator();
+        vec_size = this->units.predators.size();
+    }
 }
 
+bool ModelPP::arePredatorsMoved()
+{
+    for (std::vector<Predator*>::const_iterator it = this->units.predators.begin();
+         it != this->units.predators.end(); ++it) {
+        if (!(*it)->did_move) return false;
+    }
+    return true;
+}

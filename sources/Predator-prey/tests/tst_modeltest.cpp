@@ -15,6 +15,7 @@ public:
 
 private Q_SLOTS:
     int doubleCompare(double a, double b);
+    bool arePredatorsMoved(Units*);      // для теста хищника
 
     void coordinatesTest();
     void fieldTest();
@@ -29,6 +30,15 @@ int ModelTest::doubleCompare(double a, double b)
 {
     if (fabs(a - b) < 10e-3) return 1;
     return 0;
+}
+
+bool ModelTest::arePredatorsMoved(Units* units)
+{
+    for (std::vector<Predator*>::const_iterator it = units->predators.begin();
+         it != units->predators.end(); ++it) {
+        if (!(*it)->did_move) return false;
+    }
+    return true;
 }
 
 void ModelTest::coordinatesTest()
@@ -101,7 +111,7 @@ void ModelTest::predatorTest()
 
     Prey* tst_prey = new Prey(3, 3, &field);
     tst_prey->setPtrs(&units);
-    Predator* tst_predator = new Predator(4, 4, &field);
+    Predator* tst_predator = new Predator(4, 4, &field, 20);
     tst_predator->setPtrs(&units);
     units.predators.push_back(tst_predator);
     units.preys.push_back(tst_prey);
@@ -152,7 +162,17 @@ void ModelTest::predatorTest()
     int prey_size = units.preys.size();
     QCOMPARE(prey_size, 0);
 
+    for (int i = 0; i < 20; i++) {
+        units.predators[0]->movePredator();
+    }
+    pred_size = units.predators.size();
+    QCOMPARE(pred_size, 1);
 
+    for (int i = 0; i < 20; i++) {
+        units.predators[0]->movePredator();
+    }
+    pred_size = units.predators.size();
+    QCOMPARE(pred_size, 0);
 }
 
 void ModelTest::modelppInitializeTest()
@@ -164,11 +184,13 @@ void ModelTest::modelppInitializeTest()
     QCOMPARE(model.getDay(), 0);
     QCOMPARE(model.getTime(), 0);
 
+    model.moveBegin();
     model.movePreys();
     model.movePredators();
     QCOMPARE(model.getDay(), 0);
     QCOMPARE(model.getTime(), 1);
 
+    model.moveBegin();
     model.movePredators();
     model.movePreys();
     QCOMPARE(model.getTime(), 2);
@@ -180,11 +202,11 @@ void ModelTest::debugTest()
 {
     Field field(10, 10);
     Units units;
-    Predator *tst_pred1 = new Predator(8, 9, &field);
+    Predator *tst_pred1 = new Predator(8, 9, &field, 5);
     tst_pred1->setPtrs(&units);
-    Predator *tst_pred2 = new Predator(9, 9, &field);
+    Predator *tst_pred2 = new Predator(9, 9, &field, 5);
     tst_pred2->setPtrs(&units);
-    Predator *tst_pred3 = new Predator(0, 0, &field);
+    Predator *tst_pred3 = new Predator(0, 0, &field, 5);
     tst_pred3->setPtrs(&units);
     units.predators.push_back(tst_pred1);
     units.predators.push_back(tst_pred2);
@@ -194,18 +216,32 @@ void ModelTest::debugTest()
     tst_prey1->setPtrs(&units);
     Prey *tst_prey2 = new Prey(0, 3, &field);
     tst_prey2->setPtrs(&units);
-    Prey *tst_prey3 = new Prey(0, 9, &field);
+    Prey *tst_prey3 = new Prey(0, 2, &field);
     tst_prey3->setPtrs(&units);
-//    Prey *tst_prey4 = new Prey(0, 2, &field);
-//    tst_prey4->setPtrs(&units);
-//    Prey *tst_prey5 = new Prey(0, 4, &field);
-//    tst_prey5->setPtrs(&units);
+    Prey *tst_prey4 = new Prey(0, 4, &field);
+    tst_prey4->setPtrs(&units);
     units.preys.push_back(tst_prey1);
     units.preys.push_back(tst_prey2);
     units.preys.push_back(tst_prey3);
-//    units.preys.push_back(tst_prey4);
-//    units.preys.push_back(tst_prey5);
+    units.preys.push_back(tst_prey4);
 
+    int a = 0;
+    unsigned int vec_size = units.predators.size();
+    while (a < 8) {
+        for (unsigned int it = 0; it < units.predators.size(); it++) units.predators[it]->did_move = false;
+        while(!arePredatorsMoved(&units)) {
+            for (unsigned int i = 0; i < vec_size; i++) {
+                vec_size = units.predators.size();
+                if (!units.predators[i]->did_move) units.predators[i]->movePredator();
+            }
+        }
+        a++;
+    }
+    int final_vec_size = vec_size;
+    QCOMPARE(final_vec_size, 1);
+
+
+    /*
     int a = 0;           // количество ходов для хищников
     while (a < 30) {
     for (std::vector<Predator*>::iterator i = units.predators.begin();
@@ -215,7 +251,7 @@ void ModelTest::debugTest()
     a++;
     }
 
-    /* С закомментированными строчками (199 - 202, 206 - 207) все работает как надо.
+     * С закомментированными строчками (199 - 202, 206 - 207) все работает как надо.
      * В этих строках создается еще пара жертв, что позволяет хищнику их съесть
      * и породить еще одного, уже второго. Затем выскакивает segm. fault.
      * Причина - какой-то рандомный хищник, у которого ничего не инициализированно.

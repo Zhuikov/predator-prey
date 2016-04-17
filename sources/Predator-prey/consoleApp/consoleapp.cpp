@@ -24,10 +24,11 @@ void ConsoleApp::createConsole()
                 this->model->initializeModel();
                 this->drawer->showField();
                 while (!model->isEnd()) {
+                    std::cin >> x;
+                    this->model->moveBegin();
                     this->model->movePredators();
                     this->model->movePreys();
                     this->drawer->showField();
-                    std::cin >> x;
                        if (x == 0) break;
                 }
                 break;
@@ -49,6 +50,11 @@ void ConsoleApp::createConsole()
                     flag = 10;
                 }
                 catch (BadNumOfPreys& e)
+                {
+                    e.showMessage();
+                    flag = 10;
+                }
+                catch (BadMovesWithoutMeal& e)
                 {
                     e.showMessage();
                     flag = 10;

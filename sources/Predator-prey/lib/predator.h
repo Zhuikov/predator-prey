@@ -31,6 +31,11 @@ protected:
      */
     void createPredator();
 
+    /**
+     * @brief метод, уничтожающий хищника, оставшегося без еды на определенное время
+     */
+    void killHungryPredator();
+
 public:
 
     /**
@@ -38,8 +43,9 @@ public:
      * @param a - координата 1
      * @param b - координата 2
      * @param ptrF - указатель на поле
+     * @param time_of_life - время жизни хищника без еды
      */
-    Predator(const int a, const int b, Field* ptrF);
+    Predator(const int a, const int b, Field* ptrF, int time_of_life);
 
     /**
      * @brief метод, устанавливающий хищнику указатель на класс с векторами хищиков и жертв
@@ -50,7 +56,6 @@ public:
      * @brief метод, передвигающий хищника
      */
     void movePredator();
-    // todo добавить время жизни
 };
 
 #endif // PREDATOR_H

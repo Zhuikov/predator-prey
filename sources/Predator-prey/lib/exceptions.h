@@ -17,15 +17,16 @@ public:
     }
 };
 
-class BadDayWithoutMeal
+class BadMovesWithoutMeal
 {
     const int bad_value;
+    const int max_value;
 
 public:
-    BadDayWithoutMeal(int a): bad_value(a) {}
+    BadMovesWithoutMeal(int a, int b): bad_value(a), max_value(b) {}
     void showMessage() {
         std::cerr << "Введенное значение недопустимо!" <<
-        std::endl << "Число должно быть в диапазоне от 1 до " << MAX_DAY_WITHOUT_MEAL << std::endl;
+        std::endl << "Число должно быть в диапазоне от 1 до " << max_value << std::endl;
     }
 };
 
@@ -52,7 +53,7 @@ public:
     BadNumOfPreys(int a, int b): bad_value(a), max_value(b) {}
     void showMessage() {
         std::cerr << "Введенное значение недопустимо!" <<
-        std::endl << "Число жертв должно быть в диапазоне от 1 до " << max_value << std::endl;
+        std::endl << "Число жертв должно быть в диапазоне от 10 до " << max_value << std::endl;
     }
 };
 

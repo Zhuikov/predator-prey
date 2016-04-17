@@ -5,7 +5,8 @@ class Settings
 {
     int field_length;
     int field_height;
-    int day_without_meal;
+    int moves_without_meal;
+    int max_moves_without_meal;
     int num_of_predators;
     int num_of_preys;
 
