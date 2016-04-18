@@ -20,7 +20,9 @@ void Predator::directionfinding()
             else if (target->my_place.getI() > my_place.getI()) direction = 'd';
             else if (target->my_place.getJ() < my_place.getJ()) direction = 'l';
             else if (target->my_place.getJ() > my_place.getJ()) direction = 'r';
-            this->killPrey();
+            if (this->field->getChar(this->target->my_place.getI(), this->target->my_place.getJ()) == 'O')
+                this->killPrey();
+                    else chooseRandomDirection();
         }
         else {
             if ((target->my_place.getI() < my_place.getI()) && (target->my_place.getJ() < my_place.getJ())) {
@@ -72,33 +74,30 @@ void Predator::directionfinding()
 void Predator::findPrey()
 {
     double dist = 0;
-    if (!this->units_struct->preys.empty()) {
-        for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
-            it != this->units_struct->preys.end(); ++it) {
-            if((*it) != NULL) {
-                dist = this->my_place - (*it)->my_place;
-                if (dist < 1.5) this->target = (*it);
+    for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
+      it != this->units_struct->preys.end(); ++it) {
+        if ((*it) != NULL) {
+            dist = this->my_place - (*it)->my_place;
+            if (dist < 1.1) {
+                this->target = (*it);
+                break;
             }
+            else if (dist < 1.5) this->target = (*it);
         }
     }
-    else this->target = NULL;
 
 }
 
 void Predator::killPrey()
 {
-    if (this->field->getChar(this->target->my_place.getI(), this->target->my_place.getJ()) == 'O') {
-        for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
-            i != this->units_struct->preys.end(); ++i)
-                if ((*i) == this->target) {
-                    delete *(i);
-                    (*i) = NULL;
-                }
-        energy++;
-        life_time = -1;
-    }
-
-    else chooseRandomDirection();
+    for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
+        i != this->units_struct->preys.end(); ++i)
+            if ((*i) == this->target) {
+                delete *(i);
+                (*i) = NULL;
+            }
+    energy++;
+    life_time = -1;
 
     target = NULL;
 
@@ -172,7 +171,8 @@ void Predator::setPtrs(Units* ptrU)
 
 void Predator::movePredator()
 {
-    this->findPrey();
+    if (!this->units_struct->preys.empty()) this->findPrey();
+        else this->target = NULL;
     this->directionfinding();
     if (!has_moved) {
         this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.');

@@ -161,6 +161,9 @@ void ModelTest::predatorTest()
     units.predators.push_back(tst_predator);
     units.preys.push_back(tst_prey);
 
+    /*
+     * Невозможно двигаться, будучи окруженным
+     */
     field.setPosition(3, 4, 'S');
     field.setPosition(4, 5, 'T');
     field.setPosition(5, 4, 'O');
@@ -174,6 +177,9 @@ void ModelTest::predatorTest()
     field.setPosition(5, 4, '.');
     field.setPosition(4, 3, '.');
 
+    /*
+     * Преследование жертвы и уничтожение ее
+     */
     units.predators[0]->movePredator();
 
     QCOMPARE(tst_predator->my_place.getI(), 3);
@@ -186,6 +192,9 @@ void ModelTest::predatorTest()
     moveBegin(&units);
     QCOMPARE(units.preys.empty(), true);
 
+    /*
+     * Порождение хищника
+     */
     Prey* tst_prey2 = new Prey(2, 3, &field);
     tst_prey2->setPtrs(&units);
     units.preys.push_back(tst_prey2);
@@ -197,6 +206,9 @@ void ModelTest::predatorTest()
     int pred_size = units.predators.size();
     QCOMPARE(pred_size, 2);
 
+    /*
+     * Преследование жертвы и уничтожение ее
+     */
     Prey *tst_prey3 = new Prey(1, 2, &field);
     tst_prey3->setPtrs(&units);
     units.preys.push_back(tst_prey3);
@@ -211,6 +223,9 @@ void ModelTest::predatorTest()
     int prey_size = units.preys.size();
     QCOMPARE(prey_size, 0);
 
+    /*
+     * Время жизни без еды
+     */
     for (int i = 0; i < 20; i++) {
         units.predators[0]->movePredator();
     }
@@ -225,6 +240,27 @@ void ModelTest::predatorTest()
     if (units.predators[0] == NULL) units.predators.pop_back();
     pred_size = units.predators.size();
     QCOMPARE(pred_size, 0);
+
+    /*
+     * Два хищника и одна жертва
+     */
+    Predator* tst_predator1 = new Predator(4, 5, &field, 20);
+    tst_predator1->setPtrs(&units);
+    Predator* tst_predator2 = new Predator(2, 3, &field, 20);
+    tst_predator2->setPtrs(&units);
+    units.predators.push_back(tst_predator1);
+    units.predators.push_back(tst_predator2);
+    tst_prey = new Prey(3, 4, &field);
+    units.preys.push_back(tst_prey);
+
+    tst_predator1->movePredator();
+    tst_predator2->movePredator();
+    moveBegin(&units);
+    tst_predator1->movePredator();
+    tst_predator2->movePredator();
+    moveBegin(&units);
+    QCOMPARE(units.preys.empty(), true);
+
 }
 
 void ModelTest::modelppInitializeTest()

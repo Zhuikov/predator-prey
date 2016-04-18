@@ -59,58 +59,59 @@ ConsoleDialog::ConsoleDialog(Settings *sett)
 
 void ConsoleDialog::settingsPresentation()
 {
+    int choice = 1;
+    while (choice != 0) {
+        std::cout << "1. Именить размеры поля.                 Текущие размеры ";
+        std::cout << sett->field_height << " x " << sett->field_length << std::endl;
+        std::cout << "2. Изменить количество хищников.         Текущее число ";
+        std::cout << sett->num_of_predators << std::endl;
+        std::cout << "3. Изменить количество жертв.            Текущее число ";
+        std::cout << sett->num_of_preys << std::endl;
+        std::cout << "4. Изменить время жизни хищника без еды. Текущее время ";
+        std::cout << sett->moves_without_meal << std::endl;
+        std::cout << "0. Назад" << std::endl;
 
-    std::cout << "1. Именить размеры поля.                 Текущие размеры ";
-    std::cout << sett->field_height << " x " << sett->field_length << std::endl;
-    std::cout << "2. Изменить количество хищников.         Текущее число ";
-    std::cout << sett->num_of_predators << std::endl;
-    std::cout << "3. Изменить количество жертв.            Текущее число ";
-    std::cout << sett->num_of_preys << std::endl;
-    std::cout << "4. Изменить время жизни хищника без еды. Текущее время ";
-    std::cout << sett->moves_without_meal << std::endl;
-    std::cout << "0. Назад" << std::endl;
-
-    int choice = 0;
-    int good_choice = 0;
-    while (good_choice != 1) {
-        std::cout << "Выберите нужный пункт меню: ";
-        std::cin >> choice;
-        switch (choice)
-        {
-            case 1: {
-                std::cout << std::endl;
-                this->changeFieldSize();
-                this->setNewFieldBoundary(new_length, new_height);
-                good_choice = 1;
-                break;
+        bool good_choice = 0;
+        while (!good_choice) {
+            std::cout << "Выберите нужный пункт меню: ";
+            std::cin >> choice;
+            switch (choice)
+            {
+                case 1: {
+                    std::cout << std::endl;
+                    this->changeFieldSize();
+                    this->setNewFieldBoundary(new_length, new_height);
+                    good_choice = true;
+                    break;
+                }
+                case 2: {
+                    std::cout << std::endl;
+                    this->changeNumOfPredators();
+                    this->setNumOfPredators(new_number);
+                    good_choice = true;
+                    break;
+                }
+                case 3: {
+                    std::cout << std::endl;
+                    this->changeNumOfPreys();
+                    this->setNumOfPreys(new_number);
+                    good_choice = true;
+                    break;
+                }
+                case 4: {
+                    std::cout << std::endl;
+                    this->changeDayWithoutMeal();
+                    this->setNewDayWithoutMeal(new_time);
+                    good_choice = true;
+                    break;
+                }
+                case 0: {
+                    std::cout << std::endl;
+                    good_choice = true;
+                    break;
+                }
+                default: { std::cout << "Выбран неверный пункт меню." << std::endl; }
             }
-            case 2: {
-                std::cout << std::endl;
-                this->changeNumOfPredators();
-                this->setNumOfPredators(new_number);
-                good_choice = 1;
-                break;
-            }
-            case 3: {
-                std::cout << std::endl;
-                this->changeNumOfPreys();
-                this->setNumOfPreys(new_number);
-                good_choice = 1;
-                break;
-            }
-            case 4: {
-                std::cout << std::endl;
-                this->changeDayWithoutMeal();
-                this->setNewDayWithoutMeal(new_time);
-                good_choice = 1;
-                break;
-            }
-            case 0: {
-                std::cout << std::endl;
-                good_choice = 1;
-                break;
-            }
-            default: { std::cout << "Выбран неверный пункт меню." << std::endl; }
         }
     }
 }
