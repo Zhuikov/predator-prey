@@ -1,5 +1,4 @@
 #include "field.h"
-#include "iostream"
 
 Field::Field()
 {
@@ -96,5 +95,4 @@ Field::~Field()
         delete[] field[i];
     }
     delete[] field;
-    std::cout << "destructor" << std::endl;
 }
