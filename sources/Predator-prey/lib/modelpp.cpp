@@ -24,10 +24,6 @@ void ModelPP::initializeModel()
     this->model_time = 0;
     this->has_changed = false;
 
-    Field created_field(sett->field_height, sett->field_length);
-    this->field = created_field;
-    srand(time(0));
-
     if (!units.predators.empty()) {
         for (std::vector<Predator*>::const_iterator i = units.predators.begin();
              i != units.predators.end(); ++i) delete *i;
@@ -40,6 +36,9 @@ void ModelPP::initializeModel()
         units.preys.clear();
     }
 
+    Field created_field(sett->field_height, sett->field_length);
+    this->field = created_field;
+    srand(time(0));
 
     for(int i = 0; i < sett->num_of_predators; i++) {
         int i_pred, j_pred;

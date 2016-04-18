@@ -13,6 +13,10 @@ public:
     void setJ(int b) { this->j = b; }
     int getI() { return i; }
     int getJ() { return j; }
+
+    /**
+     * @brief Разность координат - расстояние между соответсвующими точками на плоскости
+     */
     double operator-(Coordinates point2);
     bool operator==(Coordinates a);
     bool operator!=(Coordinates a);

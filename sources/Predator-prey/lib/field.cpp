@@ -1,4 +1,5 @@
 #include "field.h"
+#include "iostream"
 
 Field::Field()
 {
@@ -61,8 +62,8 @@ void Field::setPosition(int a, int b, char ch)
 
 void Field::resize(Field *field1)
 {
-    height = field1->getNumOfRows();
-    length = field1->getNumOfCols();
+    this->height = field1->getNumOfRows();
+    this->length = field1->getNumOfCols();
 }
 
 char Field::whatIsEmpty(int a, int b)
@@ -95,4 +96,5 @@ Field::~Field()
         delete[] field[i];
     }
     delete[] field;
+    std::cout << "destructor" << std::endl;
 }

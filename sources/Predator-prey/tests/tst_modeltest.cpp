@@ -87,6 +87,19 @@ void ModelTest::coordinatesTest()
     QCOMPARE(A.getI(), 0);
     A.setJ(110000);
     QCOMPARE(A.getJ(), 110000);
+
+    A.setI(15); A.setJ(15);
+    B.setI(15); B.setJ(15);
+    QCOMPARE(A == B, true);
+    QCOMPARE(A != B, false);
+
+    B.setJ(16);
+    QCOMPARE(A != B, true);
+    QCOMPARE(A == B, false);
+
+    Coordinates D;
+    QCOMPARE(D.getI(), 0);
+    QCOMPARE(D.getJ(), 0);
 }
 
 void ModelTest::fieldTest()
@@ -266,13 +279,13 @@ void ModelTest::debugTest()
     units.preys.push_back(tst_prey3);
     units.preys.push_back(tst_prey4);
 
-    int a = 0; // кол-во ходов хищников
-    while (a < 5) {
+    int num_of_predators_moves = 0;
+    while (num_of_predators_moves < 5) {
         moveBegin(&units);
         for (unsigned int i = 0; i < units.predators.size(); i++) {
             units.predators[i]->movePredator();
         }
-        a ++;
+        num_of_predators_moves ++;
     }
     moveBegin(&units);
     int final_vec_size = units.predators.size();

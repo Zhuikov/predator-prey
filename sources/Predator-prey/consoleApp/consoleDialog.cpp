@@ -7,7 +7,7 @@ void ConsoleDialog::changeFieldSize()
 {
     std::cout << "Введите высоту поля: ";
     std::cin >> new_height;
-    std::cout << "Введите длину поля ";
+    std::cout << "Введите длину поля: ";
     std::cin >> new_length;
     if ((new_height < MIN_FIELD_SIZE) || (new_height > MAX_FIELD_SIZE) ||
             (new_length < MIN_FIELD_SIZE) || (new_length > MAX_FIELD_SIZE))
