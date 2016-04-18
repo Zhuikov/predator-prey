@@ -79,6 +79,7 @@ Prey::Prey(const int a, const int b, Field* ptrF)
     energy = 0;
     life_time = 0;
     has_moved = 0;
+    died = false;
     field = ptrF;
     field->setPosition(this->my_place.getI(), this->my_place.getJ(), 'O');
     direction = 'u';

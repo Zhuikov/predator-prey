@@ -26,9 +26,9 @@ void ConsoleApp::createConsole()
                 while (!model->isEnd()) {
                     std::cin >> x;
                     this->model->movePredators();
-                    this->model->moveBegin();
+                    this->model->moveEnd();
                     this->model->movePreys();
-                    this->model->moveBegin();
+                    this->model->moveEnd();
                     this->drawer->showField();
                     if (x == 0) break;
                 }

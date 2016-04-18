@@ -44,8 +44,9 @@ protected:
     virtual void go(char ch);
 
 public:
-    Coordinates my_place;\
-
+    Coordinates my_place;
+    bool died;
+    
     virtual ~Animal() {}
 };
 

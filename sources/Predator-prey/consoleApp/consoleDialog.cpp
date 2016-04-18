@@ -120,6 +120,12 @@ void ConsoleDialog::setNewFieldBoundary(const int new_height, const int new_leng
 {
     sett->field_length = new_length;
     sett->field_height = new_height;
+
+    if (sett->num_of_predators > std::max(new_height, new_length) * 2)
+            sett->num_of_predators = std::max(new_height, new_length) * 2;
+
+    if (sett->num_of_preys > std::max(new_height, new_length) * 2)
+            sett->num_of_preys = std::max(new_height, new_length) * 2;
 }
 
 void ConsoleDialog::setNumOfPreys(const int new_num)

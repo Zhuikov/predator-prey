@@ -20,7 +20,7 @@ public:
     int getTime();
     int getDay();
     bool isEnd();
-    void moveBegin();
+    void moveEnd();
     void movePreys();
     void movePredators();
     void saveModel();

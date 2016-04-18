@@ -42,7 +42,7 @@ public:
      */
     void movePrey();
 
-    ~Prey() { this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.'); }
+    ~Prey() {}
 };
 
 #endif // PREY_H
