@@ -93,7 +93,7 @@ void Predator::killPrey()
     for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
         i != this->units_struct->preys.end(); ++i)
             if ((*i) == this->target) {
-                delete *(i);
+                //delete *(i);
                 (*i) = NULL;
             }
     energy++;
@@ -142,7 +142,7 @@ void Predator::killHungryPredator(Units* units)
     for (i = 0; i < this->units_struct->predators.size(); i++) {
         if (this->units_struct->predators[i] != NULL &&
             this->units_struct->predators[i]->my_place == this->my_place) {
-                delete this;
+                //delete this;
                 units->predators[i] = NULL;
                 break;
             }

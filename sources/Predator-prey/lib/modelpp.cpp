@@ -95,6 +95,7 @@ void ModelPP::moveBegin()
     while (num_deleted_NULLs < num_of_NULLs) {
         for (unsigned int i = 0; i < this->units.predators.size(); i++) {
             if (this->units.predators[i] == NULL) {
+                delete this->units.predators[i];
                 if (this->units.predators[i] != this->units.predators.back())
                     std::swap(this->units.predators[i], this->units.predators.back());
                 this->units.predators.pop_back();
@@ -114,6 +115,7 @@ void ModelPP::moveBegin()
     while (num_deleted_NULLs < num_of_NULLs) {
         for (unsigned int i = 0; i < this->units.preys.size(); i++) {
             if (this->units.preys[i] == NULL) {
+                delete this->units.preys[i];
                 if (this->units.preys[i] != this->units.preys.back())
                     std::swap(this->units.preys[i], this->units.preys.back());
                 this->units.preys.pop_back();
@@ -138,7 +140,7 @@ void ModelPP::movePreys()
     }
 
     for (unsigned int i = 0; i < this->units.preys.size(); i++)
-        this->units.preys[i]->movePrey();
+        if (this->units.preys[i] != NULL) this->units.preys[i]->movePrey();
 
 }
 
@@ -172,5 +174,5 @@ void ModelPP::movePredators()
     */
 
     for (unsigned int i = 0; i < this->units.predators.size(); i++)
-        this->units.predators[i]->movePredator();
+        if (this->units.predators[i] != NULL) this->units.predators[i]->movePredator();
 }
