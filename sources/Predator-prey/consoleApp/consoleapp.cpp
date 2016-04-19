@@ -8,7 +8,7 @@ ConsoleApp::ConsoleApp()
     this->sett = new Settings;
     this->CD = new ConsoleDialog(this->sett);
     this->model = new ModelPP(this->sett);
-    this->drawer = new ConsoleDrawer(this->model->getField(), this->model);
+    this->drawer = new ConsoleDrawer(this->model);
 }
 
 void ConsoleApp::createConsole()

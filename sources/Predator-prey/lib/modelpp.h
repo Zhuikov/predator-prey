@@ -15,14 +15,16 @@ class ModelPP : public ModelAPI
 public:
 
     ModelPP(Settings *set);
-    Field* getField();
     void initializeModel();
-    int getTime();
-    int getDay();
-    bool isEnd();
-    void moveEnd();
+    Field* getField() { return &field; }
+    int getTime() { return model_time; }
+    int getDay()  { return model_day; }
+    unsigned int getPredatorsNum() { return this->units.predators.size(); }
+    unsigned int getPreysNum()     { return units.preys.size(); }
     void movePreys();
     void movePredators();
+    bool isEnd();
+    void moveEnd();
     void saveModel();
     void loadModel();
 

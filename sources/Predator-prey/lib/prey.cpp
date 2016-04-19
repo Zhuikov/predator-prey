@@ -6,21 +6,7 @@
 
 void Prey::directionfinding()
 {
-    if (warning == 1) {
-        if (my_place.getI() < dangerous_pred.getI()) {
-            if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) direction = 'u';
-                else chooseRandomDirection(); }
-        if (my_place.getI() > dangerous_pred.getI()) {
-            if (field->isEmpty(my_place.getI() + 1, my_place.getJ())) direction = 'd';
-                else chooseRandomDirection(); }
-        if (my_place.getJ() > dangerous_pred.getJ()) {
-            if (field->isEmpty(my_place.getI(), my_place.getJ() + 1)) direction = 'r';
-                else chooseRandomDirection(); }
-        if (my_place.getJ() < dangerous_pred.getJ()) {
-            if (field->isEmpty(my_place.getI(), my_place.getJ() - 1)) direction = 'l';
-                else chooseRandomDirection(); }
-    }
-    else chooseRandomDirection();
+    chooseRandomDirection();
 }
 
 void Prey::createPrey()

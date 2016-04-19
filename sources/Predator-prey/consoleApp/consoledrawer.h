@@ -8,9 +8,20 @@ class ConsoleDrawer
     ModelPP *model;
 
     /**
+     * @brief метод выводящий в консоль легенду
+     */
+    void drawLegend();
+
+    /**
      * @brief метод, выводящий в консоль текущие день и время модели
      */
     void drawHead();
+
+    /**
+     * @brief метод, выводящий в консоль статистику:
+     * количество хищников и жертв на поле
+     */
+    void drawStatistics();
 
     /**
      * @brief метод, рисующий текущее состояние поля
@@ -18,7 +29,7 @@ class ConsoleDrawer
     void drawField();
 
 public:
-    ConsoleDrawer(Field *field, ModelPP *model): field(field), model(model) {}
+    ConsoleDrawer(ModelPP *model): field(model->getField()), model(model) {}
 
     /**
      * @brief метод, выводящий в консоль всю текущую информацию о модели

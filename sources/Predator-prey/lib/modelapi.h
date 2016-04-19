@@ -17,6 +17,11 @@ public:
     virtual void initializeModel() = 0;
 
     /**
+     * @brief метод, возвращающий указатель на поле модели
+     */
+    virtual Field* getField() = 0;
+
+    /**
      * @brief метод, возвращающий текущее время
      */
     virtual int getTime() = 0;
@@ -25,6 +30,16 @@ public:
      * @brief метод, вовращающий текущий день
      */
     virtual int getDay() = 0;
+
+    /**
+     * @brief метод, возвращающий количество хищников на поле
+     */
+    virtual unsigned int getPredatorsNum() = 0;
+
+    /**
+     * @brief метод, возвращающий количество жертв на поле
+     */
+    virtual unsigned int getPreysNum() = 0;
 
     /**
      * @brief метод, проверяющий, не исчезли ли хищники или жертвы

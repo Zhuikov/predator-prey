@@ -261,6 +261,32 @@ void ModelTest::predatorTest()
     moveEnd(&units);
     QCOMPARE(units.preys.empty(), true);
 
+    field.setPosition(tst_predator1->my_place.getI(), tst_predator1->my_place.getJ(), '.');
+    field.setPosition(tst_predator2->my_place.getI(), tst_predator2->my_place.getJ(), '.');
+    tst_predator1->died = true;
+    tst_predator2->died = true;
+    moveEnd(&units);
+    QCOMPARE(units.predators.empty(), true);
+
+    /*
+     * Приоритет
+     */
+    tst_predator = new Predator(4, 4, &field, 20);
+    tst_predator->setPtrs(&units);
+    units.predators.push_back(tst_predator);
+    tst_prey  = new Prey(3, 3, &field);
+    tst_prey2 = new Prey(5, 4, &field);
+    tst_prey->setPtrs(&units);
+    tst_prey2->setPtrs(&units);
+    units.preys.push_back(tst_prey);
+    units.preys.push_back(tst_prey2);
+
+    tst_predator->movePredator();
+
+    QCOMPARE(tst_predator->my_place.getI(), 5);
+    QCOMPARE(tst_predator->my_place.getJ(), 4);
+
+
 }
 
 void ModelTest::modelppInitializeTest()

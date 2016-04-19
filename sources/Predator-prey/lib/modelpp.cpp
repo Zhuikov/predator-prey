@@ -13,11 +13,6 @@ ModelPP::ModelPP(Settings *set)
     has_changed = false;
 }
 
-Field *ModelPP::getField()
-{
-    return &field;
-}
-
 void ModelPP::initializeModel()
 {
     this->model_day = 0;
@@ -67,63 +62,10 @@ void ModelPP::initializeModel()
     }
 }
 
-int ModelPP::getTime()
-{
-    return this->model_time;
-}
-
-int ModelPP::getDay()
-{
-    return this->model_day;
-}
-
 bool ModelPP::isEnd()
 {
     if (units.predators.empty() || units.preys.empty()) return true;
     return false;
-}
-
-void ModelPP::moveEnd()
-{
-    int num_of_died = 0;
-    for (unsigned int i = 0; i < this->units.predators.size(); i++) {
-        if (this->units.predators[i]->died == true)
-            num_of_died ++;
-    }
-
-    int num_deleted_died = 0;
-    while (num_deleted_died < num_of_died) {
-        for (unsigned int i = 0; i < this->units.predators.size(); i++) {
-            if (this->units.predators[i]->died == true) {
-                delete this->units.predators[i];
-                if (this->units.predators[i] != this->units.predators.back())
-                    std::swap(this->units.predators[i], this->units.predators.back());
-                this->units.predators.pop_back();
-                num_deleted_died ++;
-                break;
-            }
-        }
-    }
-
-    num_of_died = 0;
-    for (unsigned int i = 0; i < this->units.preys.size(); i++) {
-        if (this->units.preys[i]->died == true)
-            num_of_died ++;
-    }
-
-    num_deleted_died = 0;
-    while (num_deleted_died < num_of_died) {
-        for (unsigned int i = 0; i < this->units.preys.size(); i++) {
-            if (this->units.preys[i]->died == true) {
-                delete this->units.preys[i];
-                if (this->units.preys[i] != this->units.preys.back())
-                    std::swap(this->units.preys[i], this->units.preys.back());
-                this->units.preys.pop_back();
-                num_deleted_died ++;
-                break;
-            }
-        }
-    }
 }
 
 void ModelPP::movePreys()
@@ -175,4 +117,47 @@ void ModelPP::movePredators()
 
     for (unsigned int i = 0; i < this->units.predators.size(); i++)
         if (this->units.predators[i]->died == false) this->units.predators[i]->movePredator();
+}
+
+void ModelPP::moveEnd()
+{
+    int num_of_died = 0;
+    for (unsigned int i = 0; i < this->units.predators.size(); i++) {
+        if (this->units.predators[i]->died == true)
+            num_of_died ++;
+    }
+
+    int num_deleted_died = 0;
+    while (num_deleted_died < num_of_died) {
+        for (unsigned int i = 0; i < this->units.predators.size(); i++) {
+            if (this->units.predators[i]->died == true) {
+                delete this->units.predators[i];
+                if (this->units.predators[i] != this->units.predators.back())
+                    std::swap(this->units.predators[i], this->units.predators.back());
+                this->units.predators.pop_back();
+                num_deleted_died ++;
+                break;
+            }
+        }
+    }
+
+    num_of_died = 0;
+    for (unsigned int i = 0; i < this->units.preys.size(); i++) {
+        if (this->units.preys[i]->died == true)
+            num_of_died ++;
+    }
+
+    num_deleted_died = 0;
+    while (num_deleted_died < num_of_died) {
+        for (unsigned int i = 0; i < this->units.preys.size(); i++) {
+            if (this->units.preys[i]->died == true) {
+                delete this->units.preys[i];
+                if (this->units.preys[i] != this->units.preys.back())
+                    std::swap(this->units.preys[i], this->units.preys.back());
+                this->units.preys.pop_back();
+                num_deleted_died ++;
+                break;
+            }
+        }
+    }
 }
