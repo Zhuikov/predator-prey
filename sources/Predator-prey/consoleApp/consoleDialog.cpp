@@ -59,8 +59,8 @@ ConsoleDialog::ConsoleDialog(Settings *sett)
 
 void ConsoleDialog::settingsPresentation()
 {
-    int choice = 1;
-    while (choice != 0) {
+    int choice = 0;
+    while (choice != 1) {
         std::cout << "1. Именить размеры поля.                 Текущие размеры ";
         std::cout << sett->field_height << " x " << sett->field_length << std::endl;
         std::cout << "2. Изменить количество хищников.         Текущее число ";
@@ -71,12 +71,15 @@ void ConsoleDialog::settingsPresentation()
         std::cout << sett->moves_without_meal << std::endl;
         std::cout << "0. Назад" << std::endl;
 
+        std::string command_line;
         bool good_choice = 0;
-        while (!good_choice) {
+        while (good_choice == false) {
             std::cout << "Выберите нужный пункт меню: ";
-            std::cin >> choice;
-            switch (choice)
-            {
+            std::getline(std::cin, command_line);
+            try {
+                int command = consoleCommands.at(command_line);
+                switch (command)
+                {
                 case 1: {
                     std::cout << std::endl;
                     this->changeFieldSize();
@@ -108,9 +111,14 @@ void ConsoleDialog::settingsPresentation()
                 case 0: {
                     std::cout << std::endl;
                     good_choice = true;
+                    choice = 1;
                     break;
                 }
-                default: { std::cout << "Выбран неверный пункт меню." << std::endl; }
+                }
+            }
+            catch (std::exception &)
+            {
+                std::cout <<"Выбран неверный пункт меню" << std::endl;
             }
         }
     }
@@ -148,22 +156,28 @@ int ConsoleDialog::menuPresentation()
 
     std::cout << "Модель \"Хищник-Жертва\"" << std::endl;
     std::cout << "1. Создать новую модель." << std::endl;
-    std::cout << "2. Загрузить модель." << std::endl;
-    std::cout << "3. Настройки." << std::endl;
+    std::cout << "2. Настройки." << std::endl;
     std::cout << "0. Выход." << std::endl;
 
-    int choice = 0;
-    int good_choice = 0;
-    while (good_choice != 1) {
+    std::string choice;
+    bool good_choice = false;
+    while (good_choice == false) {
         std::cout << "Выберите нужный пункт меню: ";
-        std::cin >> choice;
-        switch (choice)
-        {
-            case 1: { return 1; }
-            case 3: { return 3; }
-            case 0: { return 0; }
-            default: { std::cout << "Выбран неверный пункт меню" << std::endl; }
+        std::getline(std::cin, choice);
+        try {
+            int command = consoleCommands.at(choice);
+            switch (command)
+            {
+                case 1: { return 1; }
+                case 2: { return 2; }
+                case 0: { return 0; }
+                default: { std::cout << "Выбран неверный пункт меню" << std::endl; }
+            }
+        }
+        catch (std::exception &) {
+            std::cout << "Выбран неверный пункт меню" << std::endl;
         }
     }
+
     return 0;
 }

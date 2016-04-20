@@ -15,28 +15,29 @@ void ConsoleApp::createConsole()
 {
     int flag = -1;
     bool end = false;
-    int x = 1;
+    std::string x;
     while (!end) {
         if (flag != 10) flag = this->CD->menuPresentation();
-                else flag = 3;
+                else flag = 2;
+
         switch (flag) {
+
             case 1: {
                 this->model->initializeModel();
                 this->drawer->showModel();
                 while (model->isEnd() == false) {
-                    std::cin >> x;
+                    std::getline(std::cin, x);
                     this->model->movePredators();
-                    this->model->moveEnd();
                     this->model->movePreys();
                     this->model->moveEnd();
                     this->drawer->showModel();
-                    if (x == 0) break;
+                    if (x == "0") break;
                 }
                 this->drawer->showResult();
                 break;
             }
 
-            case 3: {
+            case 2: {
                 std::cout << std::endl;
                 try {
                     this->CD->settingsPresentation();
@@ -64,6 +65,7 @@ void ConsoleApp::createConsole()
 
                 break;
             }
+
             case 0: {
                 end = true;
             }

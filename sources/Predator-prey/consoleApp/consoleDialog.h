@@ -3,6 +3,8 @@
 #include "settings.h"
 #include "modelpp.h"
 #include "consoledrawer.h"
+#include <map>
+#include <string>
 
 class ConsoleDialog
 {
@@ -21,6 +23,15 @@ class ConsoleDialog
     void setNewFieldBoundary(const int, const int);
     void setNumOfPreys(const int);
     void setNumOfPredators(const int);
+
+    const std::map< std::string, int > consoleCommands =
+    {
+        {"1", 1},
+        {"2", 2},
+        {"3", 3},
+        {"4", 4},
+        {"0", 0},
+    };
 
 public:
     ConsoleDialog(Settings *sett);
