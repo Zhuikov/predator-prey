@@ -34,7 +34,12 @@ public:
     /**
      * @brief метод, выводящий в консоль всю текущую информацию о модели
      */
-    void showField();
+    void showModel();
+
+    /**
+     * @brief метод, выводящий в консоль результат (победителей)
+     */
+    void showResult();
 };
 
 #endif // CONSOLEDRAWER_H

@@ -1,13 +1,26 @@
 #include "consoledrawer.h"
 #include <iostream>
 
-void ConsoleDrawer::showField()
+void ConsoleDrawer::showModel()
 {
     std::cout << std::endl;
     this->drawLegend();
     this->drawHead();
     this->drawStatistics();
     this->drawField();
+}
+
+void ConsoleDrawer::showResult()
+{
+    int num_of_predators = this->model->getPredatorsNum();
+    int num_of_preys = this->model->getPreysNum();
+
+    if (num_of_predators == 0 && num_of_preys > 0) std::cout << "Жертвы победили!";
+    else if (num_of_predators > 0 && num_of_preys == 0) std::cout << "Хищники победили!";
+    else if (num_of_predators == 0 && num_of_preys == 0) std::cout << "Ничья!";
+
+    std::cout << std::endl << std::endl;
+
 }
 
 void ConsoleDrawer::drawHead()

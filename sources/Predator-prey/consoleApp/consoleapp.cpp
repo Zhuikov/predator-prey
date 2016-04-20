@@ -22,16 +22,17 @@ void ConsoleApp::createConsole()
         switch (flag) {
             case 1: {
                 this->model->initializeModel();
-                this->drawer->showField();
-                while (!model->isEnd()) {
+                this->drawer->showModel();
+                while (model->isEnd() == false) {
                     std::cin >> x;
                     this->model->movePredators();
                     this->model->moveEnd();
                     this->model->movePreys();
                     this->model->moveEnd();
-                    this->drawer->showField();
+                    this->drawer->showModel();
                     if (x == 0) break;
                 }
+                this->drawer->showResult();
                 break;
             }
 
