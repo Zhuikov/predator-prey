@@ -76,11 +76,7 @@ void Predator::findPrey()
       it != this->units_struct->preys.end(); ++it) {
         if ((*it)->died == false) {
             dist = this->my_place - (*it)->my_place;
-            if (dist < 1.1) {
-                this->target = (*it);
-                break;
-            }
-            else if (dist < 1.5) this->target = (*it);
+            if (dist < 1.5) this->target = (*it);
         }
     }
 }
@@ -131,17 +127,6 @@ void Predator::createPredator()
 
 }
 
-void Predator::killHungryPredator()
-{
-    unsigned int i = 0;
-    for (i = 0; i < this->units_struct->predators.size(); i++) {
-        if (this->units_struct->predators[i]->my_place == this->my_place) {
-                this->died = true;
-                break;
-            }
-    }
-}
-
 Predator::Predator(int a, int b, Field *ptrF, int time_of_life)
 {
     my_place.setI(a);
@@ -178,6 +163,6 @@ void Predator::movePredator()
     life_time++;
     if (life_time == max_life_time) {
         this->field->setPosition(this->my_place.getI(), this->my_place.getJ(), '.');
-        this->killHungryPredator();
+        this->died = true;
     }
 }

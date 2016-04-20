@@ -8,12 +8,6 @@ class Field
     int length;
     int height;
 
-    /**
-     * @brief метод, изменяющий размер поля;
-     * новая высота поля - высота поля field1; новая длина поля - длина поля field1;
-     */
-    void resize(Field *field1);
-
 public:
     /**
      * @brief конструктор без параметров, создает поле 10 х 10
@@ -57,19 +51,19 @@ public:
      * @param y - координата 2
      * @return символ - значение
      */
-    char getChar(const int x, const int y) const;
+    char getChar(const int x, const int y) const { return field[x][y]; }
 
     /**
      * @brief метод, возвращающий длину поля в клетках
      * @return длина поля
      */
-    int getNumOfCols();
+    int getNumOfCols() { return this->length; }
 
     /**
      * @brief метод, возвращающий высоту поля в клетках
      * @return высота поля
      */
-    int getNumOfRows();
+    int getNumOfRows() { return this->height; }
 
     /**
      * @brief перегруженный оператор присваивания; при необходимости, изменяет развер поля

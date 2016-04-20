@@ -6,7 +6,7 @@
 ModelPP::ModelPP(Settings *set)
 {
     this->sett = set;
-    Field created_field(sett->field_height, sett->field_length);
+    Field created_field;
     this->field = created_field;
     model_day = 0;
     model_time = 0;
@@ -36,7 +36,8 @@ void ModelPP::initializeModel()
     srand(time(0));
 
     for(int i = 0; i < sett->num_of_predators; i++) {
-        int i_pred, j_pred;
+        int i_pred = 0;
+        int j_pred = 0;
         bool flag = false;
         while (!flag) {
             i_pred = rand() % sett->field_height;
@@ -49,7 +50,8 @@ void ModelPP::initializeModel()
     }
 
     for(int i = 0; i < sett->num_of_preys; i++) {
-        int i_prey, j_prey;
+        int i_prey = 0;
+        int j_prey = 0;
         bool flag = false;
         while (!flag) {
             i_prey = rand() % sett->field_height;
@@ -81,8 +83,9 @@ void ModelPP::movePreys()
         this->model_time = 0;
     }
 
-    for (unsigned int i = 0; i < this->units.preys.size(); i++)
-        if (this->units.preys[i]->died == false) this->units.preys[i]->movePrey();
+    std::vector<Prey*>::iterator last = units.preys.end();
+    for (std::vector<Prey*>::iterator i = units.preys.begin(); i != last; ++i)
+        if ((*i)->died == false) (*i)->movePrey();
 
 }
 
@@ -114,22 +117,22 @@ void ModelPP::movePredators()
             (*i)->movePredator();
     }
     */
-
-    for (unsigned int i = 0; i < this->units.predators.size(); i++)
-        if (this->units.predators[i]->died == false) this->units.predators[i]->movePredator();
+    std::vector<Predator*>::iterator last = units.predators.end();
+    for (std::vector<Predator*>::iterator i = units.predators.begin(); i !=last; ++i)
+        if ((*i)->died == false) (*i)->movePredator();
 }
 
 void ModelPP::moveEnd()
 {
+    unsigned int vec_size = units.predators.size();
+
     int num_of_died = 0;
-    for (unsigned int i = 0; i < this->units.predators.size(); i++) {
-        if (this->units.predators[i]->died == true)
-            num_of_died ++;
-    }
+    for (std::vector<Predator*>::const_iterator it = units.predators.begin(); it != units.predators.end(); ++it)
+        if ((*it)->died == true) num_of_died++;
 
     int num_deleted_died = 0;
     while (num_deleted_died < num_of_died) {
-        for (unsigned int i = 0; i < this->units.predators.size(); i++) {
+        for (unsigned int i = 0; i < vec_size; i++) {
             if (this->units.predators[i]->died == true) {
                 delete this->units.predators[i];
                 if (this->units.predators[i] != this->units.predators.back())
@@ -142,10 +145,8 @@ void ModelPP::moveEnd()
     }
 
     num_of_died = 0;
-    for (unsigned int i = 0; i < this->units.preys.size(); i++) {
-        if (this->units.preys[i]->died == true)
-            num_of_died ++;
-    }
+    for (std::vector<Prey*>::const_iterator it = units.preys.begin(); it != units.preys.end(); ++it)
+        if ((*it)->died == true) num_of_died++;
 
     num_deleted_died = 0;
     while (num_deleted_died < num_of_died) {

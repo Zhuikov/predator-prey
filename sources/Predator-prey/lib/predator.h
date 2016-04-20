@@ -31,11 +31,6 @@ protected:
      */
     void createPredator();
 
-    /**
-     * @brief метод, уничтожающий хищника, оставшегося без еды на определенное время
-     */
-    void killHungryPredator();
-
 public:
 
     /**
