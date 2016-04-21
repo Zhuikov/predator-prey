@@ -5,15 +5,12 @@
 
 class BadFieldBoundary
 {
-    const int length;
-    const int height;
 
 public:
-    BadFieldBoundary(int a, int b): length(a), height(b) {}
     void showMessage() {
-        std::cerr << "Невозможно создать поле с размерами " << length << "x" << height <<
+        std::cerr << "Невозможно создать поле с введенными размерами " <<
         std::endl << "Минимальная длина и ширина поля: " << MIN_FIELD_SIZE <<
-        std::endl << "Максимальная длина и ширина поля: " << MAX_FIELD_SIZE << std::endl;
+        std::endl << "Максимальная длина и ширина поля: " << MAX_FIELD_SIZE << std::endl << std::endl;
     }
 };
 
@@ -54,6 +51,14 @@ public:
     void showMessage() {
         std::cerr << "Введенное значение недопустимо!" <<
         std::endl << "Число жертв должно быть в диапазоне от 10 до " << max_value << std::endl;
+    }
+};
+
+class InputError
+{
+public:
+    void showMessage() {
+        std::cerr << "Ошибка ввода" << std::endl << std::endl;
     }
 };
 

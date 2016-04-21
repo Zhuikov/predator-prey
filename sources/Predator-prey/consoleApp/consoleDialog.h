@@ -12,15 +12,16 @@ class ConsoleDialog
     int new_height;
     int new_number;
     int new_time;
+    std::string input_number;
     Settings *sett;
 
     void changeFieldSize();
-    void changeDayWithoutMeal();
+    void changeMovesWithoutMeal();
     void changeNumOfPredators();
     void changeNumOfPreys();
     int settingsPresentation();
 
-    void setNewDayWithoutMeal(const int);
+    void setNewMovesWithoutMeal(const int);
     void setNewFieldBoundary(const int, const int);
     void setNumOfPreys(const int);
     void setNumOfPredators(const int);

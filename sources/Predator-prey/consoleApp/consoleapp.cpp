@@ -29,7 +29,7 @@ ConsoleApp::ConsoleApp()
 
 void ConsoleApp::createConsole()
 {
-    int menuChoice = -1;
+    int menuChoice = 0;
     bool end = false;
     while (!end) {
         menuChoice = this->CD->mainMenuPresentation();

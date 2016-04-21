@@ -5,46 +5,63 @@
 
 void ConsoleDialog::changeFieldSize()
 {
+    char *first_after_num;
     std::cout << "Введите высоту поля: ";
-    std::cin >> new_height;
+    std::getline(std::cin, this->input_number);
+    new_height = strtol(input_number.c_str(), &first_after_num, 10);
+    if ((new_height == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
+
     std::cout << "Введите длину поля: ";
-    std::cin >> new_length;
-    if ((new_height < MIN_FIELD_SIZE) || (new_height > MAX_FIELD_SIZE) ||
-            (new_length < MIN_FIELD_SIZE) || (new_length > MAX_FIELD_SIZE))
-                throw BadFieldBoundary(new_height, new_length);
+    std::getline(std::cin, this->input_number);
+    new_length = strtol(input_number.c_str(), &first_after_num, 10);
+    if ((new_length == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
+
+    if (new_height < MIN_FIELD_SIZE || new_height > MAX_FIELD_SIZE ||
+            new_length < MIN_FIELD_SIZE || new_length > MAX_FIELD_SIZE)
+                throw BadFieldBoundary();
         else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
-void ConsoleDialog::changeDayWithoutMeal()
+void ConsoleDialog::changeMovesWithoutMeal()
 {
+    char *first_after_num;
     std::cout << "Введите новое время жизни хищника (в ходах): ";
-    std::cin >> new_time;
+    std::getline(std::cin, this->input_number);
+    new_time = strtol(input_number.c_str(), &first_after_num, 10);
 
     int MAX_MOVES_WITHOUT_MEAL = this->sett->max_moves_without_meal;
 
-    if ((new_time < 5) || (new_time > MAX_MOVES_WITHOUT_MEAL))
+    if ((new_time == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
+    if (new_time < 5 || new_time > MAX_MOVES_WITHOUT_MEAL)
         throw BadMovesWithoutMeal(new_time, MAX_MOVES_WITHOUT_MEAL);
          else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
 void ConsoleDialog::changeNumOfPredators()
 {
+    char *first_after_num;
     std::cout << "Введите новое число хищников: ";
-    std::cin >> new_number;
+    std::getline(std::cin, this->input_number);
+    new_number = strtol(input_number.c_str(), &first_after_num, 10);
 
     int MAX_PREDATORS_NUM = std::max(sett->field_height, sett->field_length) * 2;
 
-    if ((new_number > MAX_PREDATORS_NUM) || (new_number < 1)) throw BadNumOfPredators(new_number, MAX_PREDATORS_NUM);
+    if ((new_number == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
+    if (new_number > MAX_PREDATORS_NUM || new_number < 1) throw BadNumOfPredators(new_number, MAX_PREDATORS_NUM);
         else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
 void ConsoleDialog::changeNumOfPreys()
 {
+    char *first_after_num;
     std::cout << "Введите новое число жертв: ";
-    std::cin >> new_number;
+    std::getline(std::cin, this->input_number);
+    new_number = strtol(input_number.c_str(), &first_after_num, 10);
 
     int MAX_PREYS_NUM = std::max(sett->field_height, sett->field_length) * 2;
-    if ((new_number > MAX_PREYS_NUM) || (new_number < 1)) throw BadNumOfPreys(new_number, MAX_PREYS_NUM);
+
+    if ((new_number == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
+    if (new_number > MAX_PREYS_NUM || new_number < 1) throw BadNumOfPreys(new_number, MAX_PREYS_NUM);
     else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
@@ -84,8 +101,8 @@ void ConsoleDialog::settingsMenuPresentation()
             }
             case 4: {
                 std::cout << std::endl;
-                this->changeDayWithoutMeal();
-                this->setNewDayWithoutMeal(new_time);
+                this->changeMovesWithoutMeal();
+                this->setNewMovesWithoutMeal(new_time);
                 break;
             }
             case 0: {
@@ -94,7 +111,11 @@ void ConsoleDialog::settingsMenuPresentation()
             }
         }
         }
-
+        catch (InputError &e)
+        {
+            e.showMessage();;
+            choice = -1;
+        }
         catch (BadFieldBoundary& e)
         {
             e.showMessage();
@@ -140,7 +161,7 @@ void ConsoleDialog::setNumOfPredators(const int new_num)
     sett->num_of_predators = new_num;
 }
 
-void ConsoleDialog::setNewDayWithoutMeal(const int new_val)
+void ConsoleDialog::setNewMovesWithoutMeal(const int new_val)
 {
     sett->moves_without_meal = new_val;
 }
