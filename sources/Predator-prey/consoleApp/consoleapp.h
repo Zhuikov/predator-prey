@@ -15,6 +15,8 @@ class ConsoleApp
     Settings *sett;
     ModelPP *model;
 
+    void startModel();
+
 public:
     ConsoleApp();
 

@@ -18,6 +18,7 @@ class ConsoleDialog
     void changeDayWithoutMeal();
     void changeNumOfPredators();
     void changeNumOfPreys();
+    int settingsPresentation();
 
     void setNewDayWithoutMeal(const int);
     void setNewFieldBoundary(const int, const int);
@@ -35,8 +36,8 @@ class ConsoleDialog
 
 public:
     ConsoleDialog(Settings *sett);
-    int menuPresentation();
-    void settingsPresentation();
+    int mainMenuPresentation();
+    void settingsMenuPresentation();
 
 };
 
