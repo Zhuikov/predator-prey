@@ -36,22 +36,16 @@ protected:
      * @brief метод, выбирающий наилучшее направление,
      * в зависимости от положение на доске
      */
-    //todo лучше придерживать одного стиля при названии методов
-    // directionFinding
-    virtual void directionfinding() = 0;
+    virtual void directionFinding() = 0;
 
     /**
      * @brief метод, перемещающий хищника
      * @param ch - направление перемещения
      */
-    //todo что такое go? а ch? все переименовать
-    // мб move и direction
-    virtual void go(char ch); // (Direction direction)
+    virtual void go();
 
 public:
-    //todo возможно, приствака my не нужна
-    // это поле класса и так понятно к чему оно относится
-    Coordinates my_place;
+    Coordinates place;
     bool died;
     
     virtual ~Animal() {}

@@ -28,8 +28,8 @@ void ConsoleDrawer::drawHead()
     int num_of_stars_left;
     int num_of_stars_right;
 
-    num_of_stars_left = (this->field->getNumOfCols() * 2 - 20) / 2;
-    num_of_stars_right = (this->field->getNumOfCols() * 2 - 20 - num_of_stars_left);
+    num_of_stars_left = (this->field->getLength() * 2 - 20) / 2;
+    num_of_stars_right = (this->field->getLength() * 2 - 20 - num_of_stars_left);
 
     for (int i = 0; i < num_of_stars_left; i++)
         std::cout << '*';
@@ -56,8 +56,8 @@ void ConsoleDrawer::drawStatistics()
     int num_of_stars_left;
     int num_of_stars_right;
 
-    num_of_stars_left = (this->field->getNumOfCols() * 2 - 20) / 2;
-    num_of_stars_right = (this->field->getNumOfCols() * 2 - 20 - num_of_stars_left);
+    num_of_stars_left = (this->field->getLength() * 2 - 20) / 2;
+    num_of_stars_right = (this->field->getLength() * 2 - 20 - num_of_stars_left);
 
     for (int i = 0; i < num_of_stars_left; i++)
         std::cout << '*';
@@ -86,8 +86,8 @@ void ConsoleDrawer::drawLegend()
 
 void ConsoleDrawer::drawField()
 {
-    for (int i = 0; i < this->field->getNumOfRows(); i++) {
-        for (int j = 0; j < this->field->getNumOfCols(); j++)
+    for (int i = 0; i < this->field->getHeight(); i++) {
+        for (int j = 0; j < this->field->getLength(); j++)
             std::cout << this->field->getChar(i, j) << ' ';
         std::cout << std::endl;
     }

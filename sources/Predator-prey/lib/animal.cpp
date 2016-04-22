@@ -17,36 +17,36 @@ void Animal::chooseRandomDirection()
     switch (flag) {
         //todo выделить в отдельный метод
         case 0: {
-            if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) direction = 'u'; //direction = UP;
+            if (field->isEmpty(place.getI() - 1, place.getJ())) direction = 'u'; //direction = UP;
                 else {
-                    dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
+                    dir = this->field->whatIsEmpty(place.getI(), place.getJ());
                     if (dir != '0') direction = dir;
                     else has_moved = 1;
                 }
             break;
         }
         case 1: {
-            if (field->isEmpty(my_place.getI(), my_place.getJ() + 1)) direction = 'r'; //direction = RIGHT;
+            if (field->isEmpty(place.getI(), place.getJ() + 1)) direction = 'r'; //direction = RIGHT;
                 else {
-                    dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
+                    dir = this->field->whatIsEmpty(place.getI(), place.getJ());
                     if (dir != '0') direction = dir;
                     else has_moved = 1;
                 }
             break;
         }
         case 2: {
-            if (field->isEmpty(my_place.getI(), my_place.getJ() - 1)) direction = 'l';
+            if (field->isEmpty(place.getI(), place.getJ() - 1)) direction = 'l';
                 else {
-                    dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
+                    dir = this->field->whatIsEmpty(place.getI(), place.getJ());
                     if (dir != '0') direction = dir;
                     else has_moved = 1;
                 }
             break;
         }
         case 3: {
-            if (field->isEmpty(my_place.getI() + 1, my_place.getJ())) direction = 'd';
+            if (field->isEmpty(place.getI() + 1, place.getJ())) direction = 'd';
                 else {
-                    dir = this->field->whatIsEmpty(my_place.getI(), my_place.getJ());
+                    dir = this->field->whatIsEmpty(place.getI(), place.getJ());
                     if (dir != '0') direction = dir;
                     else has_moved = 1;
                 }
@@ -55,13 +55,13 @@ void Animal::chooseRandomDirection()
     }
 }
 
-void Animal::go(const char) //const Direction
+void Animal::go()
 {
     switch (this->direction) {
       //case UP:
-        case 'u': { this->my_place.setI(this->my_place.getI() - 1); break; }
-        case 'r': { this->my_place.setJ(this->my_place.getJ() + 1); break; }
-        case 'l': { this->my_place.setJ(this->my_place.getJ() - 1); break; }
-        case 'd': { this->my_place.setI(this->my_place.getI() + 1); break; }
+        case 'u': { this->place.setI(this->place.getI() - 1); break; }
+        case 'r': { this->place.setJ(this->place.getJ() + 1); break; }
+        case 'l': { this->place.setJ(this->place.getJ() - 1); break; }
+        case 'd': { this->place.setI(this->place.getI() + 1); break; }
     }
 }

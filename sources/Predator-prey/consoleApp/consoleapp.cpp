@@ -3,17 +3,15 @@
 #include <iostream>
 #include "unistd.h"
 
-
 void ConsoleApp::startModel()
 {
     this->model->initializeModel();
     this->drawer->showModel();
-    //todo isEnd и так bool
     while (model->isEnd() == false) {
         usleep(500000);
         this->model->movePredators();
         this->model->movePreys();
-        this->model->moveEnd();
+        this->model->remove();
         this->drawer->showModel();
     }
     this->drawer->showResult();
@@ -22,8 +20,8 @@ void ConsoleApp::startModel()
 ConsoleApp::ConsoleApp()
 {
     this->sett = new Settings;
-    this->CD = new ConsoleDialog(this->sett);
-    this->model = new ModelPP(this->sett);
+    this->dialog = new ConsoleDialog(this->sett);
+    this->model = new Model(this->sett);
     this->drawer = new ConsoleDrawer(this->model);
 }
 
@@ -32,7 +30,7 @@ void ConsoleApp::createConsole()
     int menuChoice = 0;
     bool end = false;
     while (!end) {
-        menuChoice = this->CD->mainMenuPresentation();
+        menuChoice = this->dialog->mainMenuPresentation();
         switch (menuChoice) {
             case 1: {
                 this->startModel();
@@ -41,7 +39,7 @@ void ConsoleApp::createConsole()
 
             case 2: {
                 std::cout << std::endl;
-                CD->settingsMenuPresentation();
+                dialog->settingsMenuPresentation();
                 break;
             }
 
@@ -56,7 +54,7 @@ ConsoleApp::~ConsoleApp()
 {
     delete this->sett;
     delete this->drawer;
-    delete this->CD;
+    delete this->dialog;
     delete this->model;
 }
 

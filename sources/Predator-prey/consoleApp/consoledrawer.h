@@ -1,11 +1,11 @@
 #ifndef CONSOLEDRAWER_H
 #define CONSOLEDRAWER_H
-#include "modelpp.h"
+#include "model.h"
 
 class ConsoleDrawer
 {
     Field *field;
-    ModelPP *model;
+    Model *model;
 
     /**
      * @brief метод выводящий в консоль легенду
@@ -29,7 +29,7 @@ class ConsoleDrawer
     void drawField();
 
 public:
-    ConsoleDrawer(ModelPP *model): field(model->getField()), model(model) {}
+    ConsoleDrawer(Model *model): field(model->getField()), model(model) {}
 
     /**
      * @brief метод, выводящий в консоль всю текущую информацию о модели

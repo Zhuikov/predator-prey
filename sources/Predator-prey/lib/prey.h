@@ -7,10 +7,11 @@ class Units;
 class Prey : public Animal
 {
 protected:
+    static const int PREY_CREATE_ENERGY = 2;
     int warning;
     Coordinates dangerous_pred;
     Units* units_struct;
-    void directionfinding();
+    void directionFinding();
 
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор
@@ -35,9 +36,7 @@ public:
     /**
      * @brief метод, устанавливающий указатель на класс с хищниками и жертвами
      */
-    //todo ptrU?
-    //todo что такое Ptrs? переименовать
-    void setPtrs(Units* ptrU);
+    void setUnitsPointer(Units* units_pointer);
 
     /**
      * @brief метод, передвигающий жертву

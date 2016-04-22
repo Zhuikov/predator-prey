@@ -1,5 +1,4 @@
-#include "consoleDialog.h"
-#include "constants.h"
+#include "consoledialog.h"
 #include "exceptions.h"
 #include <iostream>
 
@@ -181,14 +180,9 @@ int ConsoleDialog::mainMenuPresentation()
         std::getline(std::cin, choice);
         try {
             int command = consoleCommands.at(choice);
-            //todo можно все упростить используя if
-            switch (command)
-            {
-                case 1: { return 1; }
-                case 2: { return 2; }
-                case 0: { return 0; }
-                default: { std::cout << "Выбран неверный пункт меню" << std::endl; }
-            }
+            if (command < 3) return command;
+                else std::cout << "Выбран неверный пункт меню" << std::endl;
+
         }
         catch (std::exception &) {
             std::cout << "Выбран неверный пункт меню" << std::endl;
@@ -216,20 +210,11 @@ int ConsoleDialog::settingsPresentation()
         std::cout << "Выберите нужный пункт меню: ";
         std::getline(std::cin, choice);
         try {
-        int command = consoleCommands.at(choice);
-        //todo можно все упростить используя if
-        switch (command)
-        {
-            case 1: { return 1; }
-            case 2: { return 2; }
-            case 3: { return 3; }
-            case 4: { return 4; }
-            case 0: { return 0; }
-            default: { std::cout << "Выбран неверный пункт меню" << std::endl; }
+            int command = consoleCommands.at(choice);
+            if (command < 3) return command;
+                else std::cout << "Выбран неверный пункт меню" << std::endl;
         }
-        }
-        catch (std::exception &)
-        {
+        catch (std::exception &) {
             std::cout << "Выбран неверный пункт меню!" << std::endl;
         }
     }

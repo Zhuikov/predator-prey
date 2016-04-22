@@ -14,12 +14,11 @@ SOURCES += \
     predator.cpp \
     prey.cpp \
     settings.cpp \
-    modelapi.cpp \
-    modelpp.cpp \
     field.cpp \
     animal.cpp \
     units.cpp \
-    coordinates.cpp
+    coordinates.cpp \
+    model.cpp
 
 HEADERS += \
     settings.h \
@@ -28,11 +27,11 @@ HEADERS += \
     constants.h \
     exceptions.h \
     modelapi.h \
-    modelpp.h \
     units.h \
     field.h \
     animal.h \
-    coordinates.h
+    coordinates.h \
+    model.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

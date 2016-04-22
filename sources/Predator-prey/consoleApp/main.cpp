@@ -1,5 +1,5 @@
 #include <iostream>
-#include "modelpp.h"
+#include "model.h"
 #include "consoleapp.h"
 
 int main()

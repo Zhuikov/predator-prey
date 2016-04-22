@@ -1,12 +1,10 @@
 #ifndef CONSOLEDIALOG_H
 #define CONSOLEDIALOG_H
 #include "settings.h"
-#include "modelpp.h"
+#include "model.h"
 #include "consoledrawer.h"
 #include <map>
 #include <string>
-
-//todo придерживайтесь одного стиля именования файлов
 
 class ConsoleDialog
 {

@@ -10,9 +10,10 @@ class Prey;
 class Predator : public Animal
 {
 protected:
+    static const int PREDATOR_CREATE_ENERGY = 2;
     Prey* target;
     Units* units_struct;
-    void directionfinding();
+    void directionFinding();
 
     /**
      * @brief метод поиска жертвы на соседних 8 клетках;
@@ -40,16 +41,12 @@ public:
      * @param ptrF - указатель на поле
      * @param time_of_life - время жизни хищника без еды
      */
-    //todo ptrF? что-то не очень.
-    Predator(const int a, const int b, Field* ptrF, int time_of_life);
+    Predator(const int a, const int b, Field* field_pointer, int time_of_life);
 
     /**
      * @brief метод, устанавливающий хищнику указатель на класс с векторами хищиков и жертв
      */
-    //todo ptrU?
-    //todo что такое Ptrs? переименовать
-    //Pointers хотя бы, и то не понятно на кого
-    void setPtrs(Units* ptrU);
+    void setUnitsPointer(Units* units_pointer);
 
     /**
      * @brief метод, передвигающий хищника

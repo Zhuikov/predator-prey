@@ -34,7 +34,7 @@ class Settings
      */
     int num_of_preys;
 
-    friend class ModelPP;
+    friend class Model;
     friend class Field;
     friend class ConsoleDialog;
 

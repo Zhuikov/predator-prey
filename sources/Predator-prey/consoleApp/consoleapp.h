@@ -1,6 +1,6 @@
 #ifndef CONSOLEAPP_H
 #define CONSOLEAPP_H
-#include "consoleDialog.h"
+#include "consoledialog.h"
 #include "consoledrawer.h"
 
 /**
@@ -10,11 +10,10 @@
 
 class ConsoleApp
 {
-    //todo не экономте буковоки
-    ConsoleDialog *CD;
+    ConsoleDialog *dialog;
     ConsoleDrawer *drawer;
     Settings *sett;
-    ModelPP *model;
+    Model *model;
 
     void startModel();
 

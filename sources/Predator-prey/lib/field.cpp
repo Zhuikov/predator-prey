@@ -15,11 +15,11 @@ Field::Field()
     }
 }
 
-Field::Field(int n, int m)
+Field::Field(int height, int length)
 {
-    if (n < 0 || m < 0) throw BadFieldCreate();
-    this->height = n;
-    this->length = m;
+    if (height < 0 || length < 0) throw BadFieldCreate();
+    this->height = height;
+    this->length = length;
 
     field = new char*[height];
     for (int i = 0; i < height; i++) {
@@ -29,17 +29,15 @@ Field::Field(int n, int m)
     }
 }
 
-Field& Field::operator=(Field &field2)
+Field& Field::operator=(const Field &field2)
 {
-    //todo проверить на присваивание объекта самому себе
-    //а то тут сигментейшн фолт может быть
     if (this != &field2) {
         for (int i = 0; i < this->height; i++)
             delete[] field[i];
         delete[] field;
 
-        this->height = field2.getNumOfRows();
-        this->length = field2.getNumOfCols();
+        this->height = field2.getHeight();
+        this->length = field2.getLength();
 
         this->field = new char*[height];
         for (int i = 0; i < height; i++)
@@ -53,22 +51,26 @@ Field& Field::operator=(Field &field2)
     return *this;
 }
 
-bool Field::isEmpty(int a, int b)
+bool Field::isEmpty(int a, int b) const
 {
-    //todo может, лучше сделать выбрасывание исключения о выходе за границы?
-    // как в строке 65
     if (a < 0 || a >= height || b < 0 || b >= length) return false;
     if (this->field[a][b] != '.') return false;
     return true;
 }
 
-void Field::setPosition(int a, int b, char ch)
+void Field::setChar(int a, int b, char ch)
 {
     if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
     this->field[a][b] = ch;
 }
 
-char Field::whatIsEmpty(int a, int b)
+char Field::getChar(const int a, const int b) const
+{
+    if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
+    return this->field[a][b];
+}
+
+char Field::whatIsEmpty(int a, int b) const
 {
     //todo enum был бы лучше
     if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
