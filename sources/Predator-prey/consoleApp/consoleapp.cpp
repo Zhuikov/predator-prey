@@ -8,6 +8,7 @@ void ConsoleApp::startModel()
 {
     this->model->initializeModel();
     this->drawer->showModel();
+    //todo isEnd и так bool
     while (model->isEnd() == false) {
         usleep(500000);
         this->model->movePredators();

@@ -12,7 +12,7 @@ void Prey::directionfinding()
 void Prey::createPrey()
 {
     chooseRandomDirection();
-
+    //todo выделить метод и вызывать его в кейсах
     switch (direction) {
         case 'u': {
             Prey *prey = new Prey(my_place.getI() - 1, my_place.getJ(), this->field);

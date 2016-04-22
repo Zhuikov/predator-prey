@@ -20,6 +20,7 @@ void Predator::directionfinding()
             this->killPrey();
         }
         else {
+            //todo выделить метод, которому можно передовать направления, и вызывать его с ранзынми парметрами
             if ((target->my_place.getI() < my_place.getI()) && (target->my_place.getJ() < my_place.getJ())) {
                 if (field->isEmpty(my_place.getI() - 1, my_place.getJ())) this->direction = 'u';
                 else if (field->isEmpty(my_place.getI(), my_place.getJ() - 1)) this->direction = 'l';
@@ -40,7 +41,8 @@ void Predator::directionfinding()
                 else if (field->isEmpty(my_place.getI(), my_place.getJ() + 1)) this->direction = 'r';
                      else chooseRandomDirection();
             }
-
+            //todo выделить метод
+            //Простыня какая-то! Простите, эмоции...
             if (this->my_place.getI() - this->target->my_place.getI() == 2 &&
                     this->my_place.getJ() == this->target->my_place.getJ()) {
                 if (this->field->isEmpty(this->my_place.getI() - 1, this->my_place.getJ())) direction = 'u';
@@ -67,13 +69,14 @@ void Predator::directionfinding()
 }
 
 void Predator::findPrey()
-{
+{   //todo убрать сравнение, тут и так bool
     if (this->target != NULL && (this->target->died == true ||
            this->target->my_place - this->my_place > 2.1)) this->target = NULL;
     
     double dist = 0;
     for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
       it != this->units_struct->preys.end(); ++it) {
+        //todo убрать сравнение, тут и так bool
         if ((*it)->died == false) {
             dist = this->my_place - (*it)->my_place;
             if (dist < 1.5) this->target = (*it);
@@ -97,6 +100,7 @@ void Predator::killPrey()
 void Predator::createPredator()
 {
     chooseRandomDirection();
+    //todo выделить метод и вызывать его в кейсах
     switch (direction) {
     case 'u': {
         Predator *pred = new Predator(my_place.getI() - 1, my_place.getJ(), this->field, this->max_life_time);
@@ -148,6 +152,7 @@ void Predator::setPtrs(Units* ptrU)
     units_struct = ptrU;
 }
 
+//todo вместо обозначений символоами можно тоже попробовать enum
 void Predator::movePredator()
 {
     this->findPrey();

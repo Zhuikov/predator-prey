@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cstdlib>
 
+//todo использовать лист инициализации
 ModelPP::ModelPP(Settings *set)
 {
     this->sett = set;
@@ -19,6 +20,8 @@ void ModelPP::initializeModel()
     this->model_time = 0;
     this->has_changed = false;
 
+    //todo выделеить в отдельные методы
+    //deletePreys() deletePredators()
     if (!units.predators.empty()) {
         for (std::vector<Predator*>::const_iterator i = units.predators.begin();
              i != units.predators.end(); ++i) delete *i;
@@ -35,14 +38,18 @@ void ModelPP::initializeModel()
     this->field = created_field;
     srand(time(0));
 
+    //todo выделеить в отдельные методы
+    //createPreys() createPredators()
     for(int i = 0; i < sett->num_of_predators; i++) {
         int i_pred = 0;
         int j_pred = 0;
+        //todo флаг можно заменить на break
         bool flag = false;
         while (!flag) {
             i_pred = rand() % sett->field_height;
             j_pred = rand() % sett->field_length;
             if (field.isEmpty(i_pred, j_pred)) flag = true;
+            //if (field.isEmpty(i_pred, j_pred)) break;
         }
         Predator *pred = new Predator(i_pred, j_pred, &field, sett->moves_without_meal);
         pred->setPtrs(&units);
@@ -53,6 +60,7 @@ void ModelPP::initializeModel()
         int i_prey = 0;
         int j_prey = 0;
         bool flag = false;
+        //todo флаг можно заменить на break
         while (!flag) {
             i_prey = rand() % sett->field_height;
             j_prey = rand() % sett->field_length;
@@ -85,6 +93,7 @@ void ModelPP::movePreys()
 
     std::vector<Prey*>::iterator last = units.preys.end();
     for (std::vector<Prey*>::iterator i = units.preys.begin(); i != last; ++i)
+        //todo убрать сравнение, тут и так bool
         if ((*i)->died == false) (*i)->movePrey();
 
 }
@@ -119,6 +128,7 @@ void ModelPP::movePredators()
     */
     std::vector<Predator*>::iterator last = units.predators.end();
     for (std::vector<Predator*>::iterator i = units.predators.begin(); i !=last; ++i)
+        //todo убрать сравнение, тут и так bool
         if ((*i)->died == false) (*i)->movePredator();
 }
 
@@ -126,13 +136,17 @@ void ModelPP::moveEnd()
 {
     unsigned int vec_size = units.predators.size();
 
+    //todo выделить в отдельные методы
+    //тут похоже даже одним може обойтись, ему просто передавать разные вектора
     int num_of_died = 0;
     for (std::vector<Predator*>::const_iterator it = units.predators.begin(); it != units.predators.end(); ++it)
+        //todo убрать сравнение, тут и так bool
         if ((*it)->died == true) num_of_died++;
 
     int num_deleted_died = 0;
     while (num_deleted_died < num_of_died) {
         for (unsigned int i = 0; i < vec_size; i++) {
+            //todo убрать сравнение, тут и так bool
             if (this->units.predators[i]->died == true) {
                 delete this->units.predators[i];
                 if (this->units.predators[i] != this->units.predators.back())
@@ -146,11 +160,13 @@ void ModelPP::moveEnd()
 
     num_of_died = 0;
     for (std::vector<Prey*>::const_iterator it = units.preys.begin(); it != units.preys.end(); ++it)
+        //todo убрать сравнение, тут и так bool
         if ((*it)->died == true) num_of_died++;
 
     num_deleted_died = 0;
     while (num_deleted_died < num_of_died) {
         for (unsigned int i = 0; i < this->units.preys.size(); i++) {
+            //todo убрать сравнение, тут и так bool
             if (this->units.preys[i]->died == true) {
                 delete this->units.preys[i];
                 if (this->units.preys[i] != this->units.preys.back())

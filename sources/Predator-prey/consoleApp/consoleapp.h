@@ -10,6 +10,7 @@
 
 class ConsoleApp
 {
+    //todo не экономте буковоки
     ConsoleDialog *CD;
     ConsoleDrawer *drawer;
     Settings *sett;

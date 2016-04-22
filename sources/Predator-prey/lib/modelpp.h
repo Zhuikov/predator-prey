@@ -9,11 +9,15 @@ class ModelPP : public ModelAPI
     int model_day;
     bool has_changed;
     Field field;
+    //todo переименоват, не понятно что за юниты такие
     Units units;
     Settings *sett;
 
 public:
 
+    //todo PP? что такое PP? лучше переименовать
+    //todo добавить модификатор explicit
+    //если конечно вы не хотите чтобы у вас настройки сами преобразововались в модель
     ModelPP(Settings *set);
     void initializeModel();
     Field* getField() { return &field; }
