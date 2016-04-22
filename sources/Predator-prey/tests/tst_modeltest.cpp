@@ -7,6 +7,7 @@
 #include "modelpp.h"
 #include "predator.h"
 
+//todo тест больше похож на модульный, а хотелось бы еще и функциональный увидеть
 class ModelTest : public QObject
 {
     Q_OBJECT
@@ -37,6 +38,8 @@ void ModelTest::moveEnd(Units *units)
 {
     int num_of_died = 0;
     for (unsigned int i = 0; i < units->predators.size(); i++) {
+        //todo та же история про bool
+        //больше не буду про это писать, надеюсь вы поняли
         if (units->predators[i]->died == true)
             num_of_died ++;
     }
@@ -158,6 +161,7 @@ void ModelTest::fieldTest()
 
 void ModelTest::predatorTest()
 {
+    //todo стоит разедлить на отдельные тесты
     Field field(10, 10);
     Units units;
 

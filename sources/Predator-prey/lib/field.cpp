@@ -6,6 +6,7 @@ Field::Field()
     this->height = 10;
     this->length = 10;
 
+    //todo сишные массивы - не очень круто
     field = new char*[height];
     for (int i = 0; i < height; i++) {
         field[i] = new char[length];
@@ -30,6 +31,8 @@ Field::Field(int n, int m)
 
 Field& Field::operator=(Field &field2)
 {
+    //todo проверить на присваивание объекта самому себе
+    //а то тут сигментейшн фолт может быть
     if (this != &field2) {
         for (int i = 0; i < this->height; i++)
             delete[] field[i];
@@ -52,6 +55,8 @@ Field& Field::operator=(Field &field2)
 
 bool Field::isEmpty(int a, int b)
 {
+    //todo может, лучше сделать выбрасывание исключения о выходе за границы?
+    // как в строке 65
     if (a < 0 || a >= height || b < 0 || b >= length) return false;
     if (this->field[a][b] != '.') return false;
     return true;
@@ -65,6 +70,7 @@ void Field::setPosition(int a, int b, char ch)
 
 char Field::whatIsEmpty(int a, int b)
 {
+    //todo enum был бы лучше
     if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
     if (isEmpty(a - 1, b)) return 'u';
     if (isEmpty(a, b + 1)) return 'r';

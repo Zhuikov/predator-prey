@@ -3,9 +3,14 @@
 #include <iostream>
 #include "constants.h"
 
+//todo может быть. лучше расскидать все по разным классам
+//как никак библиотеку пишем
+
+//todo все исключения наследовать от std::exception
+//todo перегрузить метод const char *what() у std::exception
+//а не писать свои методы для вывода ошибок.
 class BadFieldCreate
 {
-
 public:
     void showMessage() {
         std::cerr << "Невозможно создать поле с введенными размерами " <<

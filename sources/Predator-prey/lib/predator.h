@@ -40,11 +40,15 @@ public:
      * @param ptrF - указатель на поле
      * @param time_of_life - время жизни хищника без еды
      */
+    //todo ptrF? что-то не очень.
     Predator(const int a, const int b, Field* ptrF, int time_of_life);
 
     /**
      * @brief метод, устанавливающий хищнику указатель на класс с векторами хищиков и жертв
      */
+    //todo ptrU?
+    //todo что такое Ptrs? переименовать
+    //Pointers хотя бы, и то не понятно на кого
     void setPtrs(Units* ptrU);
 
     /**

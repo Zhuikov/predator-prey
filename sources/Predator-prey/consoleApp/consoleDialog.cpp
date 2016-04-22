@@ -181,6 +181,7 @@ int ConsoleDialog::mainMenuPresentation()
         std::getline(std::cin, choice);
         try {
             int command = consoleCommands.at(choice);
+            //todo можно все упростить используя if
             switch (command)
             {
                 case 1: { return 1; }
@@ -216,6 +217,7 @@ int ConsoleDialog::settingsPresentation()
         std::getline(std::cin, choice);
         try {
         int command = consoleCommands.at(choice);
+        //todo можно все упростить используя if
         switch (command)
         {
             case 1: { return 1; }

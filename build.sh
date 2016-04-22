@@ -9,10 +9,12 @@ build_release_version() {
 	if [ -e "Makefile" ]; then
 		make --version
 		make
+		#todo вынести cd из ветви условия
 		cd ../..
 	else
 		echo "Makefile does not exist"
 		echo "Build release version failure!"
+		#todo использоватть return 1
 		exit 1
 	fi	
 }
@@ -35,11 +37,12 @@ build_debug_version() {
 		valgrind --version
 		valgrind --leak-check=full --xml=yes --xml-file=/opt/tomcat/.jenkins/jobs/Predator-prey/workspace/tst_modeltest.%p.result /opt/tomcat/.jenkins/jobs/Predator-prey/workspace/sources/Predator-prey/tests/tst_modeltest || true
 		
-
+        #todo вынести cd из ветви условия
 		cd ../..
 	else
 		echo "Makefile does not exist"
 		echo "Build debug version failure!"
+		#todo использоватть return 1
 		exit 1
 	fi
 }
@@ -57,11 +60,14 @@ make_report() {
 	if [ -e "Makefile" ]; then
 		make --version
 		make
+		#todo вынести cd из ветви условия
 		cd ../..
 	else
 		echo "Makefile does not exist"
 		echo "Report failure!"
+		#todo вынести cd из ветви условия
 		cd ../..
+		#todo использоватть return 1
 		exit 1
 	fi
 }
@@ -89,6 +95,7 @@ zip_files() {
 	else
 		echo "ConsoleApp does not exist"
 		echo "Zip failure!"
+		#todo использоватть return 1
 		exit 1
 	fi
 

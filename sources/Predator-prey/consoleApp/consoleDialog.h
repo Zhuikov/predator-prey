@@ -6,6 +6,8 @@
 #include <map>
 #include <string>
 
+//todo придерживайтесь одного стиля именования файлов
+
 class ConsoleDialog
 {
     int new_length;
