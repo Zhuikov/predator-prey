@@ -1,20 +1,19 @@
 #include "consoleapp.h"
 #include "exceptions.h"
 #include <iostream>
+#include "unistd.h"
 
 
 void ConsoleApp::startModel()
 {
     this->model->initializeModel();
     this->drawer->showModel();
-    std::string x;
     while (model->isEnd() == false) {
-        std::getline(std::cin, x);
+        usleep(500000);
         this->model->movePredators();
         this->model->movePreys();
         this->model->moveEnd();
         this->drawer->showModel();
-        if (x == "0") break;
     }
     this->drawer->showResult();
 }

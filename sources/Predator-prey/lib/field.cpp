@@ -1,4 +1,5 @@
 #include "field.h"
+#include "exceptions.h"
 
 Field::Field()
 {
@@ -15,6 +16,7 @@ Field::Field()
 
 Field::Field(int n, int m)
 {
+    if (n < 0 || m < 0) throw BadFieldCreate();
     this->height = n;
     this->length = m;
 
@@ -57,11 +59,13 @@ bool Field::isEmpty(int a, int b)
 
 void Field::setPosition(int a, int b, char ch)
 {
+    if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
     this->field[a][b] = ch;
 }
 
 char Field::whatIsEmpty(int a, int b)
 {
+    if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
     if (isEmpty(a - 1, b)) return 'u';
     if (isEmpty(a, b + 1)) return 'r';
     if (isEmpty(a + 1, b)) return 'd';

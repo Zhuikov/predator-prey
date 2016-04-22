@@ -3,6 +3,7 @@
 #include <cmath>
 #include "field.h"
 #include "coordinates.h"
+#include "exceptions.h"
 #include "modelpp.h"
 #include "predator.h"
 
@@ -108,6 +109,7 @@ void ModelTest::fieldTest()
 {
     Field field(5, 7);
 
+    QVERIFY_EXCEPTION_THROWN(Field field1(-13, 9), BadFieldCreate);
     QCOMPARE(field.getNumOfCols(), 7);
     QCOMPARE(field.getNumOfRows(), 5);
     QCOMPARE(field.isEmpty(0, 0), true);
@@ -130,6 +132,7 @@ void ModelTest::fieldTest()
     QCOMPARE(field.whatIsEmpty(1, 4), 'u');
     QCOMPARE(field.whatIsEmpty(2, 4), 'r');
     QCOMPARE(field.whatIsEmpty(0, 6), 'd');
+    QVERIFY_EXCEPTION_THROWN(field.whatIsEmpty(5, 3), BadFieldBoundary);
 
     field.setPosition(0, 1, 'X');
     field.setPosition(1, 0, 'O');
@@ -138,6 +141,8 @@ void ModelTest::fieldTest()
 
     field.setPosition(2, 5, 'X');
     field.setPosition(3, 4, 'O');
+    QVERIFY_EXCEPTION_THROWN(field.setPosition(-1, 0, 'X'), BadFieldBoundary);
+    QVERIFY_EXCEPTION_THROWN(field.setPosition(5, 7, 'O'), BadFieldBoundary);
     QCOMPARE(field.whatIsEmpty(2, 4), 'l');
 
     Field field2(10, 10);

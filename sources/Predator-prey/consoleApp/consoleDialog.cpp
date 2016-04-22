@@ -18,7 +18,7 @@ void ConsoleDialog::changeFieldSize()
 
     if (new_height < MIN_FIELD_SIZE || new_height > MAX_FIELD_SIZE ||
             new_length < MIN_FIELD_SIZE || new_length > MAX_FIELD_SIZE)
-                throw BadFieldBoundary();
+                throw BadFieldCreate();
         else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
@@ -116,7 +116,7 @@ void ConsoleDialog::settingsMenuPresentation()
             e.showMessage();;
             choice = -1;
         }
-        catch (BadFieldBoundary& e)
+        catch (BadFieldCreate& e)
         {
             e.showMessage();
             choice = -1;
@@ -223,7 +223,7 @@ int ConsoleDialog::settingsPresentation()
             case 3: { return 3; }
             case 4: { return 4; }
             case 0: { return 0; }
-            default: { std::cout << "Выбран неверный пункт меню!" << std::endl; }
+            default: { std::cout << "Выбран неверный пункт меню" << std::endl; }
         }
         }
         catch (std::exception &)
