@@ -20,6 +20,7 @@ void Predator::directionFinding()
         }
         else {
             //todo выделить метод, которому можно передовать направления, и вызывать его с ранзынми парметрами
+            /// здесь только вот так перебирать все возможные варианты.
             if ((target->place.getI() < place.getI()) && (target->place.getJ() < place.getJ())) {
                 if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = UP;
                 else if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = LEFT;

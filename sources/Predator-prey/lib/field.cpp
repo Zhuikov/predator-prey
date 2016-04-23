@@ -8,6 +8,7 @@ Field::Field()
     this->length = 10;
 
     //todo сишные массивы - не очень круто
+    /// да нормально же! или все-таки нет..?
     field = new Position*[height];
     for (int i = 0; i < height; i++) {
         field[i] = new Position[length];

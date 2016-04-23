@@ -10,6 +10,7 @@ class Model : public ModelAPI
     bool has_changed;
     Field field;
     //todo переименоват, не понятно что за юниты такие
+    /// по-моему, нормальное название
     Units units;
     Settings *sett;
 
