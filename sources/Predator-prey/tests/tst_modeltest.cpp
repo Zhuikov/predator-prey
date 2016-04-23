@@ -3,7 +3,8 @@
 #include <cmath>
 #include "field.h"
 #include "coordinates.h"
-#include "exceptions.h"
+#include "badfield.h"
+#include "badboundary.h"
 #include "model.h"
 #include "predator.h"
 
@@ -129,9 +130,9 @@ void ModelTest::fieldTest()
     QCOMPARE(field.isEmpty(0, -2), false);
     QCOMPARE(field.isEmpty(-1, 1), false);
     QCOMPARE(field.isEmpty(10, 9), false);
-    QCOMPARE(field.getChar(2, 5), '.');
+    QCOMPARE(field.getPosition(2, 5), EMPTY);
 
-    field.setChar(1, 4, 'X');
+    field.setPosition(1, 4, PREDATOR);
     QCOMPARE(field.isEmpty(1, 4), false);
     QCOMPARE(field.whatIsEmpty(4, 0), 0);
     QCOMPARE(field.whatIsEmpty(0, 0), 1);
@@ -140,21 +141,21 @@ void ModelTest::fieldTest()
     QCOMPARE(field.whatIsEmpty(0, 6), 2);
     QVERIFY_EXCEPTION_THROWN(field.whatIsEmpty(5, 3), BadFieldBoundary);
 
-    field.setChar(0, 1, 'X');
-    field.setChar(1, 0, 'O');
+    field.setPosition(0, 1, PREDATOR);
+    field.setPosition(1, 0, PREY);
     QCOMPARE(field.isEmpty(0, 0), true);
     QCOMPARE(field.whatIsEmpty(0, 0), -1);
 
-    field.setChar(2, 5, 'X');
-    field.setChar(3, 4, 'O');
-    QVERIFY_EXCEPTION_THROWN(field.setChar(-1, 0, 'X'), BadFieldBoundary);
-    QVERIFY_EXCEPTION_THROWN(field.setChar(5, 7, 'O'), BadFieldBoundary);
+    field.setPosition(2, 5, PREDATOR);
+    field.setPosition(3, 4, PREY);
+    QVERIFY_EXCEPTION_THROWN(field.setPosition(-1, 0, PREDATOR), BadFieldBoundary);
+    QVERIFY_EXCEPTION_THROWN(field.setPosition(5, 7, PREY), BadFieldBoundary);
     QCOMPARE(field.whatIsEmpty(2, 4), 3);
 
     Field field2(10, 10);
     field2 = field;
-    QCOMPARE(field2.getChar(2, 5), 'X');
-    QCOMPARE(field2.getChar(3, 4), 'O');
+    QCOMPARE(field2.getPosition(2, 5), PREDATOR);
+    QCOMPARE(field2.getPosition(3, 4), PREY);
     QCOMPARE(field2.isEmpty(-1, 0), false);
     QCOMPARE(field2.whatIsEmpty(2, 4), 3);
     QCOMPARE(field2.getHeight(), 5);
@@ -171,10 +172,10 @@ void ModelTest::predatorMoveTest()
     tst_predator->setUnitsPointer(&units);
     units.predators.push_back(tst_predator);
 
-    field.setChar(3, 4, 'S');
-    field.setChar(4, 5, 'T');
-    field.setChar(5, 4, 'O');
-    field.setChar(4, 3, 'P');
+    field.setPosition(3, 4, PREDATOR);
+    field.setPosition(4, 5, PREDATOR);
+    field.setPosition(5, 4, PREDATOR);
+    field.setPosition(4, 3, PREDATOR);
 
     tst_predator->movePredator();
     QCOMPARE(tst_predator->place.getI(), 4);
@@ -273,8 +274,8 @@ void ModelTest::twoPredatorsTest()
     moveEnd(&units);
     QCOMPARE(units.preys.empty(), true);
 
-    field.setChar(tst_predator1->place.getI(), tst_predator1->place.getJ(), '.');
-    field.setChar(tst_predator2->place.getI(), tst_predator2->place.getJ(), '.');
+    field.setPosition(tst_predator1->place.getI(), tst_predator1->place.getJ(), EMPTY);
+    field.setPosition(tst_predator2->place.getI(), tst_predator2->place.getJ(), EMPTY);
     tst_predator1->died = true;
     tst_predator2->died = true;
     moveEnd(&units);

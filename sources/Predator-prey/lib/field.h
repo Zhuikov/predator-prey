@@ -2,9 +2,16 @@
 #define FIELD_H
 #include "settings.h"
 
+enum Position
+{
+    EMPTY,
+    PREDATOR,
+    PREY
+};
+
 class Field
 {
-    char** field;
+    Position** field;
     int length;
     int height;
 
@@ -35,9 +42,9 @@ public:
      * @brief метод, позволяющий установить на клетку с данными координатами заданный символ
      * @param a - координата 1
      * @param b - координата 2
-     * @param ch - символ, который нужно установить
+     * @param Position - позиция, которую надо установить
      */
-    void setChar(const int a, const int b, char ch);
+    void setPosition(const int a, const int b, Position);
 
     /**
      * @brief метод, возвращающий свободное направление хода для заданной клетки
@@ -53,7 +60,7 @@ public:
      * @param y - координата 2
      * @return символ - значение
      */
-    char getChar(const int a, const int b) const;
+    Position getPosition(const int a, const int b) const;
 
     /**
      * @brief метод, возвращающий длину поля в клетках
@@ -70,7 +77,6 @@ public:
     /**
      * @brief перегруженный оператор присваивания; при необходимости, изменяет развер поля
      */
-    //todo const ссылка была бы все же лучше
     Field& operator=(const Field &field1);
 
     ~Field();

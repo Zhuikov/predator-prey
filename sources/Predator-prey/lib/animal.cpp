@@ -7,10 +7,10 @@ void Animal::chooseEmptyDirection()
     int dir;
     dir = this->field->whatIsEmpty(place.getI(), place.getJ());
     switch (dir) {
-        case 0: { direction = UP; break; }
+        case 0: { direction = UP;    break; }
         case 1: { direction = RIGHT; break; }
-        case 2: { direction = DOWN; break; }
-        case 3: { direction = LEFT; break; }
+        case 2: { direction = DOWN;  break; }
+        case 3: { direction = LEFT;  break; }
         default: { has_moved = true; }
     }
 

@@ -141,7 +141,7 @@ Predator::Predator(int a, int b, Field *field_pointer, int time_of_life)
     has_moved = false;
     died = false;
     field = field_pointer;
-    field->setChar(this->place.getI(), this->place.getJ(), 'X');
+    field->setPosition(this->place.getI(), this->place.getJ(), PREDATOR);
     direction = UP;
 
 }
@@ -156,16 +156,16 @@ void Predator::movePredator()
     this->findPrey();
     this->directionFinding();
     if (has_moved == false) {
-        this->field->setChar(this->place.getI(), this->place.getJ(), '.');
+        this->field->setPosition(this->place.getI(), this->place.getJ(), EMPTY);
         this->go();
-        this->field->setChar(this->place.getI(), this->place.getJ(), 'X');
+        this->field->setPosition(this->place.getI(), this->place.getJ(), PREDATOR);
     }
     else has_moved = false;
     if (this->energy == PREDATOR_CREATE_ENERGY) this->createPredator();
 
     life_time++;
     if (life_time == max_life_time) {
-        this->field->setChar(this->place.getI(), this->place.getJ(), '.');
+        this->field->setPosition(this->place.getI(), this->place.getJ(), EMPTY);
         this->died = true;
     }
 }

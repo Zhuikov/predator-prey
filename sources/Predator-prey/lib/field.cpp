@@ -1,5 +1,6 @@
 #include "field.h"
-#include "exceptions.h"
+#include "badfield.h"
+#include "badboundary.h"
 
 Field::Field()
 {
@@ -7,11 +8,11 @@ Field::Field()
     this->length = 10;
 
     //todo сишные массивы - не очень круто
-    field = new char*[height];
+    field = new Position*[height];
     for (int i = 0; i < height; i++) {
-        field[i] = new char[length];
+        field[i] = new Position[length];
         for (int j = 0; j < length; j++)
-            field[i][j] = '.';
+            field[i][j] = EMPTY;
     }
 }
 
@@ -21,11 +22,11 @@ Field::Field(int height, int length)
     this->height = height;
     this->length = length;
 
-    field = new char*[height];
+    field = new Position*[height];
     for (int i = 0; i < height; i++) {
-        field[i] = new char[length];
+        field[i] = new Position[length];
         for (int j = 0; j < length; j++)
-            field[i][j] = '.';
+            field[i][j] = EMPTY;
     }
 }
 
@@ -39,13 +40,13 @@ Field& Field::operator=(const Field &field2)
         this->height = field2.getHeight();
         this->length = field2.getLength();
 
-        this->field = new char*[height];
+        this->field = new Position*[height];
         for (int i = 0; i < height; i++)
-            field[i] = new char[length];
+            field[i] = new Position[length];
 
         for (int i = 0; i < height; i++)
             for (int j = 0; j < length; j++)
-                this->field[i][j] = field2.getChar(i, j);
+                this->field[i][j] = field2.getPosition(i, j);
     }
 
     return *this;
@@ -54,17 +55,17 @@ Field& Field::operator=(const Field &field2)
 bool Field::isEmpty(int a, int b) const
 {
     if (a < 0 || a >= height || b < 0 || b >= length) return false;
-    if (this->field[a][b] != '.') return false;
+    if (this->field[a][b] != EMPTY) return false;
     return true;
 }
 
-void Field::setChar(int a, int b, char ch)
+void Field::setPosition(int a, int b, Position pos)
 {
     if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
-    this->field[a][b] = ch;
+    this->field[a][b] = pos;
 }
 
-char Field::getChar(const int a, const int b) const
+Position Field::getPosition(const int a, const int b) const
 {
     if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
     return this->field[a][b];

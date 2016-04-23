@@ -86,10 +86,16 @@ void ConsoleDrawer::drawLegend()
 
 void ConsoleDrawer::drawField()
 {
+    Position position;
     for (int i = 0; i < this->field->getHeight(); i++) {
-        for (int j = 0; j < this->field->getLength(); j++)
-            std::cout << this->field->getChar(i, j) << ' ';
+        for (int j = 0; j < this->field->getLength(); j++) {
+            position = this->field->getPosition(i, j);
+            switch (position) {
+                case EMPTY:    { std::cout << ". "; break; }
+                case PREDATOR: { std::cout << "X "; break; }
+                case PREY:     { std::cout << "O "; break; }
+            }
+        }
         std::cout << std::endl;
     }
 }
-

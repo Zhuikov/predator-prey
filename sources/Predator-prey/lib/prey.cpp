@@ -69,7 +69,7 @@ Prey::Prey(const int a, const int b, Field* ptrF)
     has_moved = false;
     died = false;
     field = ptrF;
-    field->setChar(this->place.getI(), this->place.getJ(), 'O');
+    field->setPosition(this->place.getI(), this->place.getJ(), PREY);
     direction = UP;
     warning = 0;
 }
@@ -85,9 +85,9 @@ void Prey::movePrey()
     isChase();
     this->directionFinding();
     if (has_moved == false) {
-        this->field->setChar(this->place.getI(), this->place.getJ(), '.');
+        this->field->setPosition(this->place.getI(), this->place.getJ(), EMPTY);
         this->go();
-        this->field->setChar(this->place.getI(), this->place.getJ(), 'O');
+        this->field->setPosition(this->place.getI(), this->place.getJ(), PREY);
     }
     else has_moved = false;
     if (this->energy == PREY_CREATE_ENERGY) this->createPrey();

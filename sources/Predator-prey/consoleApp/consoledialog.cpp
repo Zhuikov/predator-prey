@@ -1,9 +1,13 @@
 #include "consoledialog.h"
-#include "exceptions.h"
+#include "badfield.h"
+#include "badnum.h"
+#include "badinput.h"
 #include <iostream>
 
 void ConsoleDialog::changeFieldSize()
 {
+    std::cout << "Максимальная длина и высота поля: 30" << std::endl;
+    std::cout << "Минимальная длина и высота поля: 10" << std::endl;
     char *first_after_num;
     std::cout << "Введите высоту поля: ";
     std::getline(std::cin, this->input_number);
@@ -24,6 +28,7 @@ void ConsoleDialog::changeFieldSize()
 void ConsoleDialog::changeMovesWithoutMeal()
 {
     char *first_after_num;
+    std::cout << "Значение должно быть в пределах от 5 до 1000" << std::endl;
     std::cout << "Введите новое время жизни хищника (в ходах): ";
     std::getline(std::cin, this->input_number);
     new_time = strtol(input_number.c_str(), &first_after_num, 10);
@@ -32,35 +37,37 @@ void ConsoleDialog::changeMovesWithoutMeal()
 
     if ((new_time == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
     if (new_time < 5 || new_time > MAX_MOVES_WITHOUT_MEAL)
-        throw BadMovesWithoutMeal(new_time, MAX_MOVES_WITHOUT_MEAL);
+        throw BadNum();
          else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
 void ConsoleDialog::changeNumOfPredators()
 {
+    int MAX_NUM = std::max(sett->field_height, sett->field_length) * 2;
+
     char *first_after_num;
+    std::cout << "Значение должно быть в пределах от 1 до " << MAX_NUM << std::endl;
     std::cout << "Введите новое число хищников: ";
     std::getline(std::cin, this->input_number);
     new_number = strtol(input_number.c_str(), &first_after_num, 10);
 
-    int MAX_PREDATORS_NUM = std::max(sett->field_height, sett->field_length) * 2;
-
     if ((new_number == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
-    if (new_number > MAX_PREDATORS_NUM || new_number < 1) throw BadNumOfPredators(new_number, MAX_PREDATORS_NUM);
+    if (new_number > MAX_NUM || new_number < 1) throw BadNum();
         else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
 void ConsoleDialog::changeNumOfPreys()
 {
+    int MAX_NUM = std::max(sett->field_height, sett->field_length) * 2;
+
     char *first_after_num;
+    std::cout << "Значение должно быть в пределах от 1 до " << MAX_NUM << std::endl;
     std::cout << "Введите новое число жертв: ";
     std::getline(std::cin, this->input_number);
     new_number = strtol(input_number.c_str(), &first_after_num, 10);
 
-    int MAX_PREYS_NUM = std::max(sett->field_height, sett->field_length) * 2;
-
     if ((new_number == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
-    if (new_number > MAX_PREYS_NUM || new_number < 1) throw BadNumOfPreys(new_number, MAX_PREYS_NUM);
+    if (new_number > MAX_NUM || new_number < 1) throw BadNum();
     else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
@@ -110,30 +117,9 @@ void ConsoleDialog::settingsMenuPresentation()
             }
         }
         }
-        catch (InputError &e)
+        catch (std::exception &e)
         {
-            e.showMessage();;
-            choice = -1;
-        }
-        catch (BadFieldCreate& e)
-        {
-            e.showMessage();
-            choice = -1;
-        }
-        catch (BadNumOfPredators& e)
-        {
-            e.showMessage();
-            choice = -1;
-        }
-        catch (BadNumOfPreys& e)
-        {
-            e.showMessage();
-            choice = -1;
-        }
-        catch (BadMovesWithoutMeal& e)
-        {
-            e.showMessage();
-            choice = -1;
+            std::cout << e.what() << std::endl << std::endl;
         }
     }
 }
@@ -177,7 +163,7 @@ int ConsoleDialog::mainMenuPresentation()
     while (good_choice == false) {
         std::cout << "Выберите нужный пункт меню: ";
         std::getline(std::cin, choice);
-        std::cout << choice << std::endl;
+        //std::cout << choice << std::endl;
         try {
             int command = consoleCommands.at(choice);
             if (command < 3) return command;

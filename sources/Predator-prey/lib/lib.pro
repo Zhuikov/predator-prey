@@ -24,13 +24,16 @@ HEADERS += \
     settings.h \
     predator.h \
     prey.h \
-    exceptions.h \
     modelapi.h \
     units.h \
     field.h \
     animal.h \
     coordinates.h \
-    model.h
+    model.h \
+    badinput.h \
+    badfield.h \
+    badboundary.h \
+    badnum.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
