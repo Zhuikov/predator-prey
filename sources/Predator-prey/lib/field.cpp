@@ -70,15 +70,14 @@ char Field::getChar(const int a, const int b) const
     return this->field[a][b];
 }
 
-char Field::whatIsEmpty(int a, int b) const
+int Field::whatIsEmpty(int a, int b) const
 {
-    //todo enum был бы лучше
     if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
-    if (isEmpty(a - 1, b)) return 'u';
-    if (isEmpty(a, b + 1)) return 'r';
-    if (isEmpty(a + 1, b)) return 'd';
-    if (isEmpty(a, b - 1)) return 'l';
-    return '0';
+    if (isEmpty(a - 1, b)) return 0;
+    if (isEmpty(a, b + 1)) return 1;
+    if (isEmpty(a + 1, b)) return 2;
+    if (isEmpty(a, b - 1)) return 3;
+    return -1;
 }
 
 Field::~Field()

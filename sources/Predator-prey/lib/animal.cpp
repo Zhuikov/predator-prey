@@ -2,20 +2,17 @@
 #include <ctime>
 #include <cstdlib>
 
-//todo char - не очень, лучше enum
-/*
-enum Direction
- {
-    UP, DOWN, LEFT, RIGHT
- }
- */
-
 void Animal::chooseEmptyDirection()
 {
-    char dir;
+    int dir;
     dir = this->field->whatIsEmpty(place.getI(), place.getJ());
-    if (dir != '0') direction = dir;
-    else has_moved = 1;
+    switch (dir) {
+        case 0: { direction = UP; break; }
+        case 1: { direction = RIGHT; break; }
+        case 2: { direction = DOWN; break; }
+        case 3: { direction = LEFT; break; }
+        default: { has_moved = true; }
+    }
 
 }
 
@@ -24,22 +21,22 @@ void Animal::chooseRandomDirection()
     int flag = rand() % 4;
     switch (flag) {
         case 0: {
-            if (field->isEmpty(place.getI() - 1, place.getJ())) direction = 'u'; //direction = UP;
+            if (field->isEmpty(place.getI() - 1, place.getJ())) direction = UP;
                 else chooseEmptyDirection();
             break;
         }
         case 1: {
-            if (field->isEmpty(place.getI(), place.getJ() + 1)) direction = 'r'; //direction = RIGHT;
+            if (field->isEmpty(place.getI(), place.getJ() + 1)) direction = RIGHT;
                 else chooseEmptyDirection();
             break;
         }
         case 2: {
-            if (field->isEmpty(place.getI(), place.getJ() - 1)) direction = 'l';
+            if (field->isEmpty(place.getI(), place.getJ() - 1)) direction = LEFT;
                 else chooseEmptyDirection();
             break;
         }
         case 3: {
-            if (field->isEmpty(place.getI() + 1, place.getJ())) direction = 'd';
+            if (field->isEmpty(place.getI() + 1, place.getJ())) direction = DOWN;
                 else chooseEmptyDirection();
             break;
         }
@@ -49,10 +46,9 @@ void Animal::chooseRandomDirection()
 void Animal::go()
 {
     switch (this->direction) {
-      //case UP:
-        case 'u': { this->place.setI(this->place.getI() - 1); break; }
-        case 'r': { this->place.setJ(this->place.getJ() + 1); break; }
-        case 'l': { this->place.setJ(this->place.getJ() - 1); break; }
-        case 'd': { this->place.setI(this->place.getI() + 1); break; }
+        case UP:    { this->place.setI(this->place.getI() - 1); break; }
+        case RIGHT: { this->place.setJ(this->place.getJ() + 1); break; }
+        case LEFT:  { this->place.setJ(this->place.getJ() - 1); break; }
+        case DOWN:  { this->place.setI(this->place.getI() + 1); break; }
     }
 }

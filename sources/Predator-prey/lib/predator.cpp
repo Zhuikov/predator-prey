@@ -12,32 +12,32 @@ void Predator::directionFinding()
         double dist;
         dist = this->place - this->target->place;
         if ((dist > 0.9) && (dist < 1.1)) {
-            if (target->place.getI() < place.getI()) direction = 'u';
-            else if (target->place.getI() > place.getI()) direction = 'd';
-            else if (target->place.getJ() < place.getJ()) direction = 'l';
-            else if (target->place.getJ() > place.getJ()) direction = 'r';
+            if (target->place.getI() < place.getI()) direction = UP;
+            else if (target->place.getI() > place.getI()) direction = DOWN;
+            else if (target->place.getJ() < place.getJ()) direction = LEFT;
+            else if (target->place.getJ() > place.getJ()) direction = RIGHT;
             this->killPrey();
         }
         else {
             //todo выделить метод, которому можно передовать направления, и вызывать его с ранзынми парметрами
             if ((target->place.getI() < place.getI()) && (target->place.getJ() < place.getJ())) {
-                if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = 'u';
-                else if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = 'l';
+                if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = UP;
+                else if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = LEFT;
                      else chooseRandomDirection();
             }
             if ((target->place.getI() < place.getI()) && (target->place.getJ() > place.getJ())) {
-                if (field->isEmpty(place.getI(), place.getJ() + 1)) this->direction = 'r';
-                else if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = 'u';
+                if (field->isEmpty(place.getI(), place.getJ() + 1)) this->direction = RIGHT;
+                else if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = UP;
                      else chooseRandomDirection();
             }
             if ((target->place.getI() > place.getI()) && (target->place.getJ() < place.getJ())) {
-                if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = 'l';
-                else if (field->isEmpty(place.getI() + 1, place.getJ())) this->direction = 'd';
+                if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = LEFT;
+                else if (field->isEmpty(place.getI() + 1, place.getJ())) this->direction = DOWN;
                      else chooseRandomDirection();
             }
             if ((target->place.getI() > place.getI()) && (target->place.getJ() > place.getJ())) {
-                if (field->isEmpty(place.getI() + 1, place.getJ())) this->direction = 'd';
-                else if (field->isEmpty(place.getI(), place.getJ() + 1)) this->direction = 'r';
+                if (field->isEmpty(place.getI() + 1, place.getJ())) this->direction = DOWN;
+                else if (field->isEmpty(place.getI(), place.getJ() + 1)) this->direction = RIGHT;
                      else chooseRandomDirection();
             }
 
@@ -49,19 +49,19 @@ void Predator::directionFinding()
 void Predator::chooseFarDirection()
 {
     if (this->place.getI() - this->target->place.getI() == 2) {
-        if (this->field->isEmpty(this->place.getI() - 1, this->place.getJ())) direction = 'u';
+        if (this->field->isEmpty(this->place.getI() - 1, this->place.getJ())) direction = UP;
             else chooseRandomDirection();
     }
     if (this->place.getI() - this->target->place.getI() == -2) {
-        if (this->field->isEmpty(this->place.getI() + 1, this->place.getJ())) direction = 'd';
+        if (this->field->isEmpty(this->place.getI() + 1, this->place.getJ())) direction = DOWN;
             else chooseRandomDirection();
     }
     if (this->place.getJ() - this->target->place.getJ() == 2) {
-        if (this->field->isEmpty(this->place.getI(), this->place.getJ() - 1)) direction = 'l';
+        if (this->field->isEmpty(this->place.getI(), this->place.getJ() - 1)) direction = LEFT;
             else chooseRandomDirection();
     }
     if (this->place.getJ() - this->target->place.getJ() == -2) {
-        if (this->field->isEmpty(this->place.getI(), this->place.getJ() + 1)) direction = 'r';
+        if (this->field->isEmpty(this->place.getI(), this->place.getJ() + 1)) direction = RIGHT;
             else chooseRandomDirection();
     }
 }
@@ -102,19 +102,19 @@ void Predator::createPredator()
 {
     chooseRandomDirection();
     switch (direction) {
-    case 'u': {
+    case UP:    {
         spawnPredator(place.getI() - 1, place.getJ());
         break;
     }
-    case 'r': {
+    case RIGHT: {
         spawnPredator(place.getI(), place.getJ() + 1);
         break;
     }
-    case 'd': {
+    case DOWN:  {
         spawnPredator(place.getI() + 1, place.getJ());
         break;
     }
-    case 'l': {
+    case LEFT:  {
         spawnPredator(place.getI() + 1, place.getJ());
     }
     }
@@ -138,11 +138,11 @@ Predator::Predator(int a, int b, Field *field_pointer, int time_of_life)
     max_life_time = time_of_life;
     life_time = 0;
     energy = 0;
-    has_moved = 0;
+    has_moved = false;
     died = false;
     field = field_pointer;
     field->setChar(this->place.getI(), this->place.getJ(), 'X');
-    direction = 'u';
+    direction = UP;
 
 }
 
@@ -151,17 +151,16 @@ void Predator::setUnitsPointer(Units* units_pointer)
     units_struct = units_pointer;
 }
 
-//todo вместо обозначений символоами можно тоже попробовать enum
 void Predator::movePredator()
 {
     this->findPrey();
     this->directionFinding();
-    if (!has_moved) {
+    if (has_moved == false) {
         this->field->setChar(this->place.getI(), this->place.getJ(), '.');
         this->go();
         this->field->setChar(this->place.getI(), this->place.getJ(), 'X');
     }
-    else has_moved = 0;
+    else has_moved = false;
     if (this->energy == PREDATOR_CREATE_ENERGY) this->createPredator();
 
     life_time++;

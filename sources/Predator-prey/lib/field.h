@@ -45,7 +45,7 @@ public:
      * @param b - координата клетки 2
      * @return символ - направление
      */
-    char whatIsEmpty(int a, int b) const;
+    int whatIsEmpty(int a, int b) const;
 
     /**
      * @brief метод, возвращающий значение клетки с заданными координатами

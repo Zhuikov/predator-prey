@@ -27,9 +27,16 @@ protected:
     int max_life_time;
 
     int energy;
-    int has_moved;
-  //Direction direction
-    char direction;
+    bool has_moved;
+    enum Direction
+    {
+        UP,
+        RIGHT,
+        DOWN,
+        LEFT
+    };
+
+    Direction direction;
     Field* field;
 
     /**

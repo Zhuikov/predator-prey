@@ -133,30 +133,30 @@ void ModelTest::fieldTest()
 
     field.setChar(1, 4, 'X');
     QCOMPARE(field.isEmpty(1, 4), false);
-    QCOMPARE(field.whatIsEmpty(4, 0), 'u');
-    QCOMPARE(field.whatIsEmpty(0, 0), 'r');
-    QCOMPARE(field.whatIsEmpty(1, 4), 'u');
-    QCOMPARE(field.whatIsEmpty(2, 4), 'r');
-    QCOMPARE(field.whatIsEmpty(0, 6), 'd');
+    QCOMPARE(field.whatIsEmpty(4, 0), 0);
+    QCOMPARE(field.whatIsEmpty(0, 0), 1);
+    QCOMPARE(field.whatIsEmpty(1, 4), 0);
+    QCOMPARE(field.whatIsEmpty(2, 4), 1);
+    QCOMPARE(field.whatIsEmpty(0, 6), 2);
     QVERIFY_EXCEPTION_THROWN(field.whatIsEmpty(5, 3), BadFieldBoundary);
 
     field.setChar(0, 1, 'X');
     field.setChar(1, 0, 'O');
     QCOMPARE(field.isEmpty(0, 0), true);
-    QCOMPARE(field.whatIsEmpty(0, 0), '0');
+    QCOMPARE(field.whatIsEmpty(0, 0), -1);
 
     field.setChar(2, 5, 'X');
     field.setChar(3, 4, 'O');
     QVERIFY_EXCEPTION_THROWN(field.setChar(-1, 0, 'X'), BadFieldBoundary);
     QVERIFY_EXCEPTION_THROWN(field.setChar(5, 7, 'O'), BadFieldBoundary);
-    QCOMPARE(field.whatIsEmpty(2, 4), 'l');
+    QCOMPARE(field.whatIsEmpty(2, 4), 3);
 
     Field field2(10, 10);
     field2 = field;
     QCOMPARE(field2.getChar(2, 5), 'X');
     QCOMPARE(field2.getChar(3, 4), 'O');
     QCOMPARE(field2.isEmpty(-1, 0), false);
-    QCOMPARE(field2.whatIsEmpty(2, 4), 'l');
+    QCOMPARE(field2.whatIsEmpty(2, 4), 3);
     QCOMPARE(field2.getHeight(), 5);
     QCOMPARE(field2.getLength(), 7);
 

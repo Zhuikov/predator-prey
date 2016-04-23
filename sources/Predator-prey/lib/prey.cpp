@@ -10,26 +10,26 @@ void Prey::directionFinding()
 
 void Prey::chooseFarDirection()
 {
-    direction = 'u'; // пока нет травки
+    direction = UP; // пока нет травки
 }
 
 void Prey::createPrey()
 {
     chooseRandomDirection();
     switch (direction) {
-        case 'u': {
+        case UP: {
             spawnPrey(place.getI() - 1, place.getJ());
             break;
         }
-        case 'r': {
+        case RIGHT: {
             spawnPrey(place.getI() - 1, place.getJ());
             break;
         }
-        case 'd': {
+        case DOWN: {
             spawnPrey(place.getI() - 1, place.getJ());
             break;
         }
-        case 'l': {
+        case LEFT: {
             spawnPrey(place.getI(), place.getJ() - 1);
         }
     }
@@ -66,11 +66,11 @@ Prey::Prey(const int a, const int b, Field* ptrF)
     dangerous_pred.setJ(-1);
     energy = 0;
     life_time = 0;
-    has_moved = 0;
+    has_moved = false;
     died = false;
     field = ptrF;
     field->setChar(this->place.getI(), this->place.getJ(), 'O');
-    direction = 'u';
+    direction = UP;
     warning = 0;
 }
 
@@ -84,11 +84,11 @@ void Prey::movePrey()
 {    
     isChase();
     this->directionFinding();
-    if (!has_moved) {
+    if (has_moved == false) {
         this->field->setChar(this->place.getI(), this->place.getJ(), '.');
         this->go();
         this->field->setChar(this->place.getI(), this->place.getJ(), 'O');
     }
-    else has_moved = 0;
+    else has_moved = false;
     if (this->energy == PREY_CREATE_ENERGY) this->createPrey();
 }
