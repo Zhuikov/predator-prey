@@ -9,6 +9,8 @@ class Field
     int height;
 
 public:
+    static const int MAX_FIELD_SIZE = 30;
+    static const int MIN_FIELD_SIZE = 10;
     /**
      * @brief конструктор без параметров, создает поле 10 х 10
      */

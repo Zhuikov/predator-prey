@@ -29,6 +29,8 @@ public:
     void deletePredators();
     void createPreys();
     void deletePreys();
+    void removePredators();
+    void removePreys();
     void remove();
     void saveModel();
     void loadModel();

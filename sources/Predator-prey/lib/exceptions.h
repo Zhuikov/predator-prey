@@ -1,7 +1,7 @@
 #ifndef EXCEPTIONS_H
 #define EXCEPTIONS_H
 #include <iostream>
-#include "constants.h"
+#include "field.h"
 
 //todo может быть. лучше расскидать все по разным классам
 //как никак библиотеку пишем
@@ -14,8 +14,8 @@ class BadFieldCreate
 public:
     void showMessage() {
         std::cerr << "Невозможно создать поле с введенными размерами " <<
-        std::endl << "Минимальная длина и ширина поля: " << MIN_FIELD_SIZE <<
-        std::endl << "Максимальная длина и ширина поля: " << MAX_FIELD_SIZE << std::endl << std::endl;
+        std::endl << "Минимальная длина и ширина поля: " << Field::MIN_FIELD_SIZE <<
+        std::endl << "Максимальная длина и ширина поля: " << Field::MAX_FIELD_SIZE << std::endl << std::endl;
     }
 };
 

@@ -1,5 +1,4 @@
 #include "model.h"
-#include "constants.h"
 #include <ctime>
 #include <cstdlib>
 
@@ -123,45 +122,50 @@ void Model::movePredators()
         if ((*i)->died == false) (*i)->movePredator();
 }
 
-void Model::remove()
+void Model::removePredators()
 {
-    unsigned int vec_size = units.predators.size();
-
-    //todo выделить в отдельные методы
-    //тут похоже даже одним може обойтись, ему просто передавать разные вектора
     int num_of_died = 0;
-    for (std::vector<Predator*>::const_iterator it = units.predators.begin(); it != units.predators.end(); ++it)
+    for (std::vector<Predator*>::const_iterator it = units.predators.begin();
+         it != units.predators.end(); ++it)
         if ((*it)->died == true) num_of_died++;
 
     int num_deleted_died = 0;
     while (num_deleted_died < num_of_died) {
-        for (unsigned int i = 0; i < vec_size; i++) {
-            if (this->units.predators[i]->died == true) {
-                delete this->units.predators[i];
-                if (this->units.predators[i] != this->units.predators.back())
-                    std::swap(this->units.predators[i], this->units.predators.back());
-                this->units.predators.pop_back();
+        for (std::vector<Predator*>::iterator it = units.predators.begin();
+             it != units.predators.end(); ++it) {
+            if ((*it)->died == true) {
+                delete (*it);
+                if ((*it) != units.predators.back()) std::swap((*it), units.predators.back());
+                units.predators.pop_back();
                 num_deleted_died ++;
                 break;
             }
         }
     }
+}
 
-    num_of_died = 0;
+void Model::removePreys()
+{
+    int num_of_died = 0;
     for (std::vector<Prey*>::const_iterator it = units.preys.begin(); it != units.preys.end(); ++it)
         if ((*it)->died == true) num_of_died++;
 
-    num_deleted_died = 0;
+    int num_deleted_died = 0;
     while (num_deleted_died < num_of_died) {
-        for (unsigned int i = 0; i < this->units.preys.size(); i++) {
-            if (this->units.preys[i]->died == true) {
-                delete this->units.preys[i];
-                if (this->units.preys[i] != this->units.preys.back())
-                    std::swap(this->units.preys[i], this->units.preys.back());
-                this->units.preys.pop_back();
+        for (std::vector<Prey*>::iterator it = units.preys.begin(); it != units.preys.end(); ++it) {
+            if ((*it)->died == true) {
+                delete (*it);
+                if ((*it) != units.preys.back()) std::swap((*it), units.preys.back());
+                units.preys.pop_back();
                 num_deleted_died ++;
                 break;
             }
         }
     }
+}
+
+void Model::remove()
+{
+    removePredators();
+    removePreys();
 }

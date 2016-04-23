@@ -1,6 +1,5 @@
 #include "prey.h"
 #include "units.h"
-#include "constants.h"
 #include <ctime>
 #include <cstdlib>
 
@@ -9,37 +8,40 @@ void Prey::directionFinding()
     chooseRandomDirection();
 }
 
+void Prey::chooseFarDirection()
+{
+    direction = 'u'; // пока нет травки
+}
+
 void Prey::createPrey()
 {
     chooseRandomDirection();
-    //todo выделить метод и вызывать его в кейсах
     switch (direction) {
         case 'u': {
-            Prey *prey = new Prey(place.getI() - 1, place.getJ(), this->field);
-            prey->setUnitsPointer(this->units_struct);
-            units_struct->preys.push_back(prey);
+            spawnPrey(place.getI() - 1, place.getJ());
             break;
         }
         case 'r': {
-            Prey *prey = new Prey(place.getI(), place.getJ() + 1, this->field);
-            prey->setUnitsPointer(this->units_struct);
-            units_struct->preys.push_back(prey);
+            spawnPrey(place.getI() - 1, place.getJ());
             break;
         }
         case 'd': {
-            Prey *prey = new Prey(place.getI() + 1, place.getJ(), this->field);
-            prey->setUnitsPointer(this->units_struct);
-            units_struct->preys.push_back(prey);
+            spawnPrey(place.getI() - 1, place.getJ());
             break;
         }
         case 'l': {
-            Prey *prey = new Prey(place.getI(), place.getJ() - 1, this->field);
-            prey->setUnitsPointer(this->units_struct);
-            units_struct->preys.push_back(prey);
+            spawnPrey(place.getI(), place.getJ() - 1);
         }
     }
 
     this->energy = 0;
+}
+
+void Prey::spawnPrey(int a, int b)
+{
+    Prey *prey = new Prey(a, b, this->field);
+    prey->setUnitsPointer(this->units_struct);
+    units_struct->preys.push_back(prey);
 }
 
 void Prey::isChase()

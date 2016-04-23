@@ -1,7 +1,6 @@
 #include "predator.h"
 #include "coordinates.h"
 #include "units.h"
-#include "constants.h"
 #include <vector>
 #include <ctime>
 #include <cstdlib>
@@ -41,44 +40,46 @@ void Predator::directionFinding()
                 else if (field->isEmpty(place.getI(), place.getJ() + 1)) this->direction = 'r';
                      else chooseRandomDirection();
             }
-            //todo выделить метод
-            //Простыня какая-то! Простите, эмоции...
-            if (this->place.getI() - this->target->place.getI() == 2 &&
-                    this->place.getJ() == this->target->place.getJ()) {
-                if (this->field->isEmpty(this->place.getI() - 1, this->place.getJ())) direction = 'u';
-                    else chooseRandomDirection();
-            }
-            if (this->place.getI() - this->target->place.getI() == -2 &&
-                    this->place.getJ() == this->target->place.getJ()) {
-                if (this->field->isEmpty(this->place.getI() + 1, this->place.getJ())) direction = 'd';
-                    else chooseRandomDirection();
-            }
-            if (this->place.getJ() - this->target->place.getJ() == 2 &&
-                    this->place.getI() == this->target->place.getI()) {
-                if (this->field->isEmpty(this->place.getI(), this->place.getJ() - 1)) direction = 'l';
-                else chooseRandomDirection();
-            }
 
-            if (this->place.getJ() - this->target->place.getJ() == -2 &&
-                    this->place.getI() == this->target->place.getI()) {
-                if (this->field->isEmpty(this->place.getI(), this->place.getJ() + 1)) direction = 'r';
-                else chooseRandomDirection();
-            }
+            if (dist > 1.99 && dist < 2.01) chooseFarDirection();
         }
     }
 }
 
+void Predator::chooseFarDirection()
+{
+    if (this->place.getI() - this->target->place.getI() == 2) {
+        if (this->field->isEmpty(this->place.getI() - 1, this->place.getJ())) direction = 'u';
+            else chooseRandomDirection();
+    }
+    if (this->place.getI() - this->target->place.getI() == -2) {
+        if (this->field->isEmpty(this->place.getI() + 1, this->place.getJ())) direction = 'd';
+            else chooseRandomDirection();
+    }
+    if (this->place.getJ() - this->target->place.getJ() == 2) {
+        if (this->field->isEmpty(this->place.getI(), this->place.getJ() - 1)) direction = 'l';
+            else chooseRandomDirection();
+    }
+    if (this->place.getJ() - this->target->place.getJ() == -2) {
+        if (this->field->isEmpty(this->place.getI(), this->place.getJ() + 1)) direction = 'r';
+            else chooseRandomDirection();
+    }
+}
+
 void Predator::findPrey()
-{   //todo убрать сравнение, тут и так bool
+{
     if (this->target != NULL && (this->target->died == true ||
            this->target->place - this->place > 2.1)) this->target = NULL;
     
     double dist = 0;
     for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
       it != this->units_struct->preys.end(); ++it) {
-        //todo убрать сравнение, тут и так bool
         if ((*it)->died == false) {
             dist = this->place - (*it)->place;
+            if (dist < 1.1) {
+                this->target = (*it);
+                break;
+            }
             if (dist < 1.5) this->target = (*it);
         }
     }
@@ -100,35 +101,33 @@ void Predator::killPrey()
 void Predator::createPredator()
 {
     chooseRandomDirection();
-    //todo выделить метод и вызывать его в кейсах
     switch (direction) {
     case 'u': {
-        Predator *pred = new Predator(place.getI() - 1, place.getJ(), this->field, this->max_life_time);
-        pred->setUnitsPointer(this->units_struct);
-        units_struct->predators.push_back(pred);
+        spawnPredator(place.getI() - 1, place.getJ());
         break;
     }
     case 'r': {
-        Predator *pred = new Predator(place.getI(), place.getJ() + 1, this->field, this->max_life_time);
-        pred->setUnitsPointer(this->units_struct);
-        units_struct->predators.push_back(pred);
+        spawnPredator(place.getI(), place.getJ() + 1);
         break;
     }
     case 'd': {
-        Predator *pred = new Predator(place.getI() + 1, place.getJ(), this->field, this->max_life_time);
-        pred->setUnitsPointer(this->units_struct);
-        units_struct->predators.push_back(pred);
+        spawnPredator(place.getI() + 1, place.getJ());
         break;
     }
     case 'l': {
-        Predator *pred = new Predator(place.getI(), place.getJ() - 1, this->field, this->max_life_time);
-        pred->setUnitsPointer(this->units_struct);
-        units_struct->predators.push_back(pred);
+        spawnPredator(place.getI() + 1, place.getJ());
     }
     }
 
     this->energy = 0;
 
+}
+
+void Predator::spawnPredator(int a, int b)
+{
+    Predator *pred = new Predator(a, b, this->field, this->max_life_time);
+    pred->setUnitsPointer(this->units_struct);
+    units_struct->predators.push_back(pred);
 }
 
 Predator::Predator(int a, int b, Field *field_pointer, int time_of_life)

@@ -21,7 +21,12 @@ private Q_SLOTS:
 
     void coordinatesTest();
     void fieldTest();
-    void predatorTest();
+    void predatorMoveTest();
+    void predatorCreateTest();
+    void predatorMoveKillTest();
+    void predatorPriorityTest();
+    void predatorHungryTest();
+    void twoPredatorsTest();
     void modelppInitializeTest();
     void debugTest();
 };
@@ -157,9 +162,28 @@ void ModelTest::fieldTest()
 
 }
 
-void ModelTest::predatorTest()
+void ModelTest::predatorMoveTest()
 {
-    //todo стоит разедлить на отдельные тесты
+    Field field;
+    Units units;
+
+    Predator* tst_predator = new Predator(4, 4, &field, 20);
+    tst_predator->setUnitsPointer(&units);
+    units.predators.push_back(tst_predator);
+
+    field.setChar(3, 4, 'S');
+    field.setChar(4, 5, 'T');
+    field.setChar(5, 4, 'O');
+    field.setChar(4, 3, 'P');
+
+    tst_predator->movePredator();
+    QCOMPARE(tst_predator->place.getI(), 4);
+    QCOMPARE(tst_predator->place.getJ(), 4);
+
+}
+
+void ModelTest::predatorMoveKillTest()
+{
     Field field(10, 10);
     Units units;
 
@@ -170,25 +194,6 @@ void ModelTest::predatorTest()
     units.predators.push_back(tst_predator);
     units.preys.push_back(tst_prey);
 
-    /*
-     * Невозможно двигаться, будучи окруженным
-     */
-    field.setChar(3, 4, 'S');
-    field.setChar(4, 5, 'T');
-    field.setChar(5, 4, 'O');
-    field.setChar(4, 3, 'P');
-
-    units.predators[0]->movePredator();
-    QCOMPARE(tst_predator->place.getI(), 4);
-    QCOMPARE(tst_predator->place.getJ(), 4);
-    field.setChar(3, 4, '.');
-    field.setChar(4, 5, '.');
-    field.setChar(5, 4, '.');
-    field.setChar(4, 3, '.');
-
-    /*
-     * Преследование жертвы и уничтожение ее
-     */
     units.predators[0]->movePredator();
 
     QCOMPARE(tst_predator->place.getI(), 3);
@@ -200,14 +205,25 @@ void ModelTest::predatorTest()
     QCOMPARE(tst_predator->place.getJ(), 3);
     moveEnd(&units);
     QCOMPARE(units.preys.empty(), true);
+}
 
-    /*
-     * Порождение хищника
-     */
+void ModelTest::predatorCreateTest()
+{
+    Field field(10, 10);
+    Units units;
+
+    Prey* tst_prey = new Prey(3, 3, &field);
+    tst_prey->setUnitsPointer(&units);
     Prey* tst_prey2 = new Prey(2, 3, &field);
     tst_prey2->setUnitsPointer(&units);
+    Predator* tst_predator = new Predator(4, 4, &field, 20);
+    tst_predator->setUnitsPointer(&units);
+    units.predators.push_back(tst_predator);
+    units.preys.push_back(tst_prey);
     units.preys.push_back(tst_prey2);
 
+    units.predators[0]->movePredator();
+    units.predators[0]->movePredator();
     units.predators[0]->movePredator();
 
     QCOMPARE(tst_predator->place.getI(), 2);
@@ -215,49 +231,38 @@ void ModelTest::predatorTest()
     int pred_size = units.predators.size();
     QCOMPARE(pred_size, 2);
 
-    /*
-     * Преследование жертвы и уничтожение ее
-     */
-    Prey *tst_prey3 = new Prey(1, 2, &field);
-    tst_prey3->setUnitsPointer(&units);
-    units.preys.push_back(tst_prey3);
+}
 
-    units.predators[0]->movePredator();
-    units.predators[0]->movePredator();
-    moveEnd(&units);
+void ModelTest::predatorHungryTest()
+{
+    Field field;
+    Units units;
 
-    QCOMPARE(tst_predator->place.getI(), 1);
-    QCOMPARE(tst_predator->place.getJ(), 2);
-    moveEnd(&units);
-    QCOMPARE(units.preys.empty(), true);
-
-    /*
-     * Время жизни без еды
-     */
-    for (int i = 0; i < 20; i++) {
-        units.predators[0]->movePredator();
-    }
-    moveEnd(&units);
-    pred_size = units.predators.size();
-    QCOMPARE(pred_size, 1);
+    Predator* tst_predator = new Predator(4, 4, &field, 20);
+    tst_predator->setUnitsPointer(&units);
+    units.predators.push_back(tst_predator);
 
     for (int i = 0; i < 20; i++) {
         units.predators[0]->movePredator();
     }
     moveEnd(&units);
-    pred_size = units.predators.size();
+    int pred_size = units.predators.size();
     QCOMPARE(pred_size, 0);
 
-    /*
-     * Два хищника и одна жертва
-     */
+}
+
+void ModelTest::twoPredatorsTest()
+{
+    Field field;
+    Units units;
+
     Predator* tst_predator1 = new Predator(4, 5, &field, 20);
     tst_predator1->setUnitsPointer(&units);
     Predator* tst_predator2 = new Predator(2, 3, &field, 20);
     tst_predator2->setUnitsPointer(&units);
     units.predators.push_back(tst_predator1);
     units.predators.push_back(tst_predator2);
-    tst_prey = new Prey(3, 4, &field);
+    Prey* tst_prey = new Prey(3, 4, &field);
     units.preys.push_back(tst_prey);
 
     tst_predator1->movePredator();
@@ -275,14 +280,18 @@ void ModelTest::predatorTest()
     moveEnd(&units);
     QCOMPARE(units.predators.empty(), true);
 
-    /*
-     * Приоритет
-     */
-    tst_predator = new Predator(4, 4, &field, 20);
+}
+
+void ModelTest::predatorPriorityTest()
+{
+    Field field(10, 10);
+    Units units;
+
+    Predator* tst_predator = new Predator(4, 4, &field, 20);
     tst_predator->setUnitsPointer(&units);
     units.predators.push_back(tst_predator);
-    tst_prey  = new Prey(3, 3, &field);
-    tst_prey2 = new Prey(5, 4, &field);
+    Prey* tst_prey  = new Prey(3, 3, &field);
+    Prey* tst_prey2 = new Prey(5, 4, &field);
     tst_prey->setUnitsPointer(&units);
     tst_prey2->setUnitsPointer(&units);
     units.preys.push_back(tst_prey);
@@ -292,8 +301,6 @@ void ModelTest::predatorTest()
 
     QCOMPARE(tst_predator->place.getI(), 5);
     QCOMPARE(tst_predator->place.getJ(), 4);
-
-
 }
 
 void ModelTest::modelppInitializeTest()

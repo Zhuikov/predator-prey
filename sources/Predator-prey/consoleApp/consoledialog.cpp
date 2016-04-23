@@ -15,8 +15,8 @@ void ConsoleDialog::changeFieldSize()
     new_length = strtol(input_number.c_str(), &first_after_num, 10);
     if ((new_length == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
 
-    if (new_height < MIN_FIELD_SIZE || new_height > MAX_FIELD_SIZE ||
-            new_length < MIN_FIELD_SIZE || new_length > MAX_FIELD_SIZE)
+    if (new_height < Field::MIN_FIELD_SIZE || new_height > Field::MAX_FIELD_SIZE ||
+            new_length < Field::MIN_FIELD_SIZE || new_length > Field::MAX_FIELD_SIZE)
                 throw BadFieldCreate();
         else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
@@ -167,7 +167,6 @@ void ConsoleDialog::setNewMovesWithoutMeal(const int new_val)
 
 int ConsoleDialog::mainMenuPresentation()
 {
-
     std::cout << "Модель \"Хищник-Жертва\"" << std::endl;
     std::cout << "1. Создать новую модель." << std::endl;
     std::cout << "2. Настройки." << std::endl;
@@ -178,6 +177,7 @@ int ConsoleDialog::mainMenuPresentation()
     while (good_choice == false) {
         std::cout << "Выберите нужный пункт меню: ";
         std::getline(std::cin, choice);
+        std::cout << choice << std::endl;
         try {
             int command = consoleCommands.at(choice);
             if (command < 3) return command;
@@ -211,7 +211,7 @@ int ConsoleDialog::settingsPresentation()
         std::getline(std::cin, choice);
         try {
             int command = consoleCommands.at(choice);
-            if (command < 3) return command;
+            if (command < 5) return command;
                 else std::cout << "Выбран неверный пункт меню" << std::endl;
         }
         catch (std::exception &) {

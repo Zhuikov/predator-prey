@@ -14,6 +14,7 @@ protected:
     Prey* target;
     Units* units_struct;
     void directionFinding();
+    void chooseFarDirection();
 
     /**
      * @brief метод поиска жертвы на соседних 8 клетках;
@@ -28,9 +29,13 @@ protected:
 
     /**
      * @brief метод, создающий хищника на случайной соседней клетке; записывает его в вектор хищников
-     * @param координаты точки, вокруг которой создается хищник
      */
     void createPredator();
+
+    /**
+     * @brief метод, создающий хищника на клетке с данными координатами
+     */
+    void spawnPredator(int, int);
 
 public:
 
@@ -38,7 +43,7 @@ public:
      * @brief конструктор с параметрами; создает хищника на поле с указанными координатами
      * @param a - координата 1
      * @param b - координата 2
-     * @param ptrF - указатель на поле
+     * @param field_pointer - указатель на поле
      * @param time_of_life - время жизни хищника без еды
      */
     Predator(const int a, const int b, Field* field_pointer, int time_of_life);

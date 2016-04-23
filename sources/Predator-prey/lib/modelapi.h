@@ -47,14 +47,34 @@ public:
     virtual bool isEnd() const = 0;
 
     /**
-     * @brief метод, удаляющий умерших хищников и жертв после хода
+     * @brief метод, создающий хищников
      */
-    virtual void remove() = 0;
-    
     virtual void createPredators() = 0;
+
+    /**
+     * @brief метод, полностью очищающий вектор хищников
+     */
     virtual void deletePredators() = 0;
+
+    /**
+     * @brief метод, создающий жертв
+     */
     virtual void createPreys() = 0;
+
+    /**
+     * @brief dметод, полностью очищающий вектор жертв
+     */
     virtual void deletePreys() = 0;
+
+    /**
+     * @brief метод, удаляющий умерших хищников после хода
+     */
+    virtual void removePredators() = 0;
+
+    /**
+     * @brief метод, удаляющий умерших жертв после хода
+     */
+    virtual void removePreys() = 0;
 
     /**
      * @brief метод, передвигающий жертв

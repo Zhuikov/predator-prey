@@ -64,12 +64,12 @@ void ConsoleDrawer::drawStatistics()
 
     int predators = this->model->getPredatorsNum();
     std::cout << "Хищники ";
-    if (predators > 10) std::cout << predators;
+    if (predators >= 10) std::cout << predators;
         else std::cout << '0' << predators;
 
     int preys = this->model->getPreysNum();
     std::cout << " Жертвы ";
-    if (preys > 10) std::cout << preys;
+    if (preys >= 10) std::cout << preys;
         else std::cout << '0' << preys;
 
     for (int i = 0; i < num_of_stars_right; i++)

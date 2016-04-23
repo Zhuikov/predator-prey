@@ -24,7 +24,6 @@ HEADERS += \
     settings.h \
     predator.h \
     prey.h \
-    constants.h \
     exceptions.h \
     modelapi.h \
     units.h \
