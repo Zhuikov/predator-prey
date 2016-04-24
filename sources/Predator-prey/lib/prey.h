@@ -12,6 +12,7 @@ protected:
     Coordinates dangerous_pred;
     Units* units_struct;
     void directionFinding();
+    void chooseToTargetDirection() {} //пока нет травки
 
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор

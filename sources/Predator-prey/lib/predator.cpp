@@ -18,30 +18,27 @@ void Predator::directionFinding()
             else if (target->place.getJ() > place.getJ()) direction = RIGHT;
             this->killPrey();
         }
-        else {
-            //todo выделить метод, которому можно передовать направления, и вызывать его с ранзынми парметрами
-            /// здесь только вот так перебирать все возможные варианты.
-            if ((place.getI() <= target->place.getI()) && (place.getJ() < target->place.getJ())) {
-                if (field->isEmpty(place.getI(), place.getJ() + 1)) this->direction = RIGHT;
-                else if (field->isEmpty(place.getI() + 1, place.getJ())) this->direction = DOWN;
-                     else chooseRandomDirection();
-            }
-            if ((place.getI() < target->place.getI()) && (place.getJ() >= target->place.getJ())) {
-                if (field->isEmpty(place.getI() + 1, place.getJ())) this->direction = DOWN;
-                else if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = LEFT;
-                     else chooseRandomDirection();
-            }
-            if ((place.getI() > target->place.getI()) && (place.getJ() <= target->place.getJ())) {
-                if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = UP;
-                else if (field->isEmpty(place.getI(), place.getJ() + 1)) this->direction = RIGHT;
-                     else chooseRandomDirection();
-            }
-            if ((place.getI() >= target->place.getI()) && (place.getJ() > target->place.getJ())) {
-                if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = LEFT;
-                else if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = UP;
-                     else chooseRandomDirection();
-            }
-        }
+        else chooseToTargetDirection();
+    }
+}
+
+void Predator::chooseToTargetDirection()
+{
+    if ((place.getI() <= target->place.getI()) && (place.getJ() < target->place.getJ())) {
+        if (setRIGHTdirection() == false)
+            if (setDOWNdirection() == false) chooseRandomDirection();
+    }
+    if ((place.getI() < target->place.getI()) && (place.getJ() >= target->place.getJ())) {
+        if (setDOWNdirection() == false)
+            if (setLEFTdirection() == false) chooseRandomDirection();
+    }
+    if ((place.getI() > target->place.getI()) && (place.getJ() <= target->place.getJ())) {
+        if (setUPdirection() == false)
+            if (setRIGHTdirection() == false) chooseRandomDirection();
+    }
+    if ((place.getI() >= target->place.getI()) && (place.getJ() > target->place.getJ())) {
+        if (setLEFTdirection() == false)
+            if (setUPdirection() == false) chooseRandomDirection();
     }
 }
 
@@ -94,7 +91,7 @@ void Predator::createPredator()
         break;
     }
     case LEFT:  {
-        spawnPredator(place.getI() + 1, place.getJ());
+        spawnPredator(place.getI(), place.getJ() - 1);
     }
     }
 

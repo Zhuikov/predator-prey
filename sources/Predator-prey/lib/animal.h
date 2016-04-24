@@ -26,8 +26,20 @@ protected:
      */
     int max_life_time;
 
+    /**
+     * @brief energy - текущая энергия животного
+     */
     int energy;
+
+    /**
+     * @brief has_moved - флаг; используется в случае, когда все четыре
+     * направления заблокированы
+     */
     bool has_moved;
+
+    /**
+     * @brief возможные значения направлений
+     */
     enum Direction
     {
         UP,
@@ -36,19 +48,41 @@ protected:
         LEFT
     };
 
+    /**
+     * @brief direction - текущее направление животного
+     */
     Direction direction;
+
+    /**
+     * @brief field - указатель на поле, где стоит животное
+     */
     Field* field;
 
     /**
-     * @brief метод, выбирающий случайное направление и
-     * записывающий его в direction
+     * @brief методы устанавливающие направление, если соответствующая клетка свободна
+     * @return true, если направление установлено, false - в обратном случае
+     */
+    bool setRIGHTdirection();
+    bool setLEFTdirection();
+    bool setUPdirection();
+    bool setDOWNdirection();
+
+    /**
+     * @brief метод, выбирающий случайное направление,
+     * записывает его в direction
      */
     void chooseRandomDirection();
 
     /**
-     * @brief метод, выбирающий наилучшее направление
+     * @brief метод, выбирающий направление для следующего хода,
+     * записывает его в directon
      */
     virtual void directionFinding() = 0;
+
+    /**
+     * @brief метод, выбирающий направление, в зависимости от положения цели
+     */
+    virtual void chooseToTargetDirection() = 0;
 
     /**
      * @brief метод, перемещающий хищника
@@ -57,7 +91,16 @@ protected:
     virtual void go();
 
 public:
+
+    /**
+     * @brief place - координаты животного на поле
+     */
     Coordinates place;
+
+    /**
+     * @brief died - флаг; died = true, если животное умерло,
+     * died = false если животное живое
+     */
     bool died;
     
     virtual ~Animal() {}

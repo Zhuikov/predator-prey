@@ -13,7 +13,42 @@ void Animal::chooseEmptyDirection()
         case 3: { direction = LEFT;  break; }
         default: { has_moved = true; }
     }
+}
 
+bool Animal::setRIGHTdirection()
+{
+    if (field->isEmpty(place.getI(), place.getJ() + 1)) {
+        this->direction = RIGHT;
+        return true;
+    }
+    return false;
+}
+
+bool Animal::setUPdirection()
+{
+    if (field->isEmpty(place.getI() - 1, place.getJ())) {
+        this->direction = UP;
+        return true;
+    }
+    return false;
+}
+
+bool Animal::setDOWNdirection()
+{
+    if (field->isEmpty(place.getI() + 1, place.getJ())) {
+        this->direction = DOWN;
+        return true;
+    }
+    return false;
+}
+
+bool Animal::setLEFTdirection()
+{
+    if (field->isEmpty(place.getI(), place.getJ() - 1)) {
+        this->direction = LEFT;
+        return true;
+    }
+    return false;
 }
 
 void Animal::chooseRandomDirection()
@@ -21,23 +56,19 @@ void Animal::chooseRandomDirection()
     int flag = rand() % 4;
     switch (flag) {
         case 0: {
-            if (field->isEmpty(place.getI() - 1, place.getJ())) direction = UP;
-                else chooseEmptyDirection();
+            if (setUPdirection() == false) chooseEmptyDirection();
             break;
         }
         case 1: {
-            if (field->isEmpty(place.getI(), place.getJ() + 1)) direction = RIGHT;
-                else chooseEmptyDirection();
+            if (setRIGHTdirection() == false) chooseEmptyDirection();
             break;
         }
         case 2: {
-            if (field->isEmpty(place.getI(), place.getJ() - 1)) direction = LEFT;
-                else chooseEmptyDirection();
+            if (setLEFTdirection() == false) chooseEmptyDirection();
             break;
         }
         case 3: {
-            if (field->isEmpty(place.getI() + 1, place.getJ())) direction = DOWN;
-                else chooseEmptyDirection();
+            if (setDOWNdirection() == false) chooseEmptyDirection();
             break;
         }
     }
