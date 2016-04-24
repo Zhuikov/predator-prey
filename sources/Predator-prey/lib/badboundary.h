@@ -12,5 +12,5 @@ public:
     }
 };
 
-#endif // BADBOUNDARYE_H
+#endif // BADBOUNDARY_H
 

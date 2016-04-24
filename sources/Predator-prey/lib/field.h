@@ -1,6 +1,7 @@
 #ifndef FIELD_H
 #define FIELD_H
 #include "settings.h"
+#include <vector>
 
 enum Position
 {
@@ -11,7 +12,7 @@ enum Position
 
 class Field
 {
-    Position** field;
+    std::vector< std::vector<Position> > field;
     int length;
     int height;
 
@@ -44,7 +45,7 @@ public:
      * @param b - координата 2
      * @param Position - позиция, которую надо установить
      */
-    void setPosition(const int a, const int b, Position);
+    void setPosition(int a, int b, Position);
 
     /**
      * @brief метод, возвращающий свободное направление хода для заданной клетки
@@ -60,7 +61,7 @@ public:
      * @param y - координата 2
      * @return символ - значение
      */
-    Position getPosition(const int a, const int b) const;
+    Position getPosition(int a, int b) const;
 
     /**
      * @brief метод, возвращающий длину поля в клетках

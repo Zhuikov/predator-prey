@@ -7,14 +7,16 @@ Field::Field()
     this->height = 10;
     this->length = 10;
 
-    //todo сишные массивы - не очень круто
-    /// да нормально же! или все-таки нет..?
-    field = new Position*[height];
-    for (int i = 0; i < height; i++) {
-        field[i] = new Position[length];
-        for (int j = 0; j < length; j++)
-            field[i][j] = EMPTY;
-    }
+//    for (int i = 0; i < 10; i++) {
+//        std::vector<Position> temp;
+//        for (int j = 0; j < 10; j++)
+//            temp.push_back(EMPTY);
+//        field.push_back(temp);
+//    }
+    field.resize(10);
+    for (std::vector<std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
+        (*it).resize(10, EMPTY);
+
 }
 
 Field::Field(int height, int length)
@@ -23,27 +25,24 @@ Field::Field(int height, int length)
     this->height = height;
     this->length = length;
 
-    field = new Position*[height];
-    for (int i = 0; i < height; i++) {
-        field[i] = new Position[length];
-        for (int j = 0; j < length; j++)
-            field[i][j] = EMPTY;
-    }
+    field.resize(height);
+    for (std::vector< std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
+         (*it).resize(length, EMPTY);
 }
 
 Field& Field::operator=(const Field &field2)
 {
     if (this != &field2) {
-        for (int i = 0; i < this->height; i++)
-            delete[] field[i];
-        delete[] field;
+        for (std::vector< std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
+            (*it).clear();
+        field.clear();
 
         this->height = field2.getHeight();
         this->length = field2.getLength();
 
-        this->field = new Position*[height];
-        for (int i = 0; i < height; i++)
-            field[i] = new Position[length];
+        field.resize(field2.getHeight());
+        for (std::vector< std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
+            (*it).resize(field2.getLength());
 
         for (int i = 0; i < height; i++)
             for (int j = 0; j < length; j++)
@@ -55,6 +54,7 @@ Field& Field::operator=(const Field &field2)
 
 bool Field::isEmpty(int a, int b) const
 {
+    /// здесь не нужно бросать исключение
     if (a < 0 || a >= height || b < 0 || b >= length) return false;
     if (this->field[a][b] != EMPTY) return false;
     return true;
@@ -66,7 +66,7 @@ void Field::setPosition(int a, int b, Position pos)
     this->field[a][b] = pos;
 }
 
-Position Field::getPosition(const int a, const int b) const
+Position Field::getPosition(int a, int b) const
 {
     if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
     return this->field[a][b];
@@ -75,17 +75,15 @@ Position Field::getPosition(const int a, const int b) const
 int Field::whatIsEmpty(int a, int b) const
 {
     if (a < 0 || a >= height || b < 0 || b >= length) throw BadFieldBoundary();
-    if (isEmpty(a - 1, b)) return 0;
-    if (isEmpty(a, b + 1)) return 1;
-    if (isEmpty(a + 1, b)) return 2;
-    if (isEmpty(a, b - 1)) return 3;
+    if (isEmpty(a - 1, b) == true) return 0;
+    if (isEmpty(a, b + 1) == true) return 1;
+    if (isEmpty(a + 1, b) == true) return 2;
+    if (isEmpty(a, b - 1) == true) return 3;
     return -1;
 }
 
 Field::~Field()
 {
-    for (int i = 0; i < height; i++) {
-        delete[] field[i];
-    }
-    delete[] field;
+    for (std::vector<std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
+        (*it).clear();
 }
