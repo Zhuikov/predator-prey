@@ -21,49 +21,27 @@ void Predator::directionFinding()
         else {
             //todo выделить метод, которому можно передовать направления, и вызывать его с ранзынми парметрами
             /// здесь только вот так перебирать все возможные варианты.
-            if ((target->place.getI() < place.getI()) && (target->place.getJ() < place.getJ())) {
-                if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = UP;
-                else if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = LEFT;
-                     else chooseRandomDirection();
-            }
-            if ((target->place.getI() < place.getI()) && (target->place.getJ() > place.getJ())) {
+            if ((place.getI() <= target->place.getI()) && (place.getJ() < target->place.getJ())) {
                 if (field->isEmpty(place.getI(), place.getJ() + 1)) this->direction = RIGHT;
-                else if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = UP;
-                     else chooseRandomDirection();
-            }
-            if ((target->place.getI() > place.getI()) && (target->place.getJ() < place.getJ())) {
-                if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = LEFT;
                 else if (field->isEmpty(place.getI() + 1, place.getJ())) this->direction = DOWN;
                      else chooseRandomDirection();
             }
-            if ((target->place.getI() > place.getI()) && (target->place.getJ() > place.getJ())) {
+            if ((place.getI() < target->place.getI()) && (place.getJ() >= target->place.getJ())) {
                 if (field->isEmpty(place.getI() + 1, place.getJ())) this->direction = DOWN;
+                else if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = LEFT;
+                     else chooseRandomDirection();
+            }
+            if ((place.getI() > target->place.getI()) && (place.getJ() <= target->place.getJ())) {
+                if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = UP;
                 else if (field->isEmpty(place.getI(), place.getJ() + 1)) this->direction = RIGHT;
                      else chooseRandomDirection();
             }
-
-            if (dist > 1.99 && dist < 2.01) chooseFarDirection();
+            if ((place.getI() >= target->place.getI()) && (place.getJ() > target->place.getJ())) {
+                if (field->isEmpty(place.getI(), place.getJ() - 1)) this->direction = LEFT;
+                else if (field->isEmpty(place.getI() - 1, place.getJ())) this->direction = UP;
+                     else chooseRandomDirection();
+            }
         }
-    }
-}
-
-void Predator::chooseFarDirection()
-{
-    if (this->place.getI() - this->target->place.getI() == 2) {
-        if (this->field->isEmpty(this->place.getI() - 1, this->place.getJ())) direction = UP;
-            else chooseRandomDirection();
-    }
-    if (this->place.getI() - this->target->place.getI() == -2) {
-        if (this->field->isEmpty(this->place.getI() + 1, this->place.getJ())) direction = DOWN;
-            else chooseRandomDirection();
-    }
-    if (this->place.getJ() - this->target->place.getJ() == 2) {
-        if (this->field->isEmpty(this->place.getI(), this->place.getJ() - 1)) direction = LEFT;
-            else chooseRandomDirection();
-    }
-    if (this->place.getJ() - this->target->place.getJ() == -2) {
-        if (this->field->isEmpty(this->place.getI(), this->place.getJ() + 1)) direction = RIGHT;
-            else chooseRandomDirection();
     }
 }
 

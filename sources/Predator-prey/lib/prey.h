@@ -12,7 +12,6 @@ protected:
     Coordinates dangerous_pred;
     Units* units_struct;
     void directionFinding();
-    void chooseFarDirection();
 
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор

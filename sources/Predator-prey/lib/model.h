@@ -9,8 +9,9 @@ class Model : public ModelAPI
     int model_day;
     bool has_changed;
     Field field;
-    //todo переименоват, не понятно что за юниты такие
-    /// по-моему, нормальное название
+    /**
+     * @brief Units - класс, в котором содержатся векторы юнитов: хищников и жертв
+     */
     Units units;
     Settings *sett;
 

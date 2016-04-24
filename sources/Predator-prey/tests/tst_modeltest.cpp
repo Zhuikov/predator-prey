@@ -199,8 +199,8 @@ void ModelTest::predatorMoveKillTest()
 
     units.predators[0]->movePredator();
 
-    QCOMPARE(tst_predator->place.getI(), 3);
-    QCOMPARE(tst_predator->place.getJ(), 4);
+    QCOMPARE(tst_predator->place.getI(), 4);
+    QCOMPARE(tst_predator->place.getJ(), 3);
 
     units.predators[0]->movePredator();
 

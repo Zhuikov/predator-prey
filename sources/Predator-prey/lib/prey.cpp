@@ -8,11 +8,6 @@ void Prey::directionFinding()
     chooseRandomDirection();
 }
 
-void Prey::chooseFarDirection()
-{
-    direction = UP; // пока нет травки
-}
-
 void Prey::createPrey()
 {
     chooseRandomDirection();

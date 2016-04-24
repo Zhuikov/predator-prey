@@ -14,7 +14,7 @@ protected:
     Prey* target;
     Units* units_struct;
     void directionFinding();
-    void chooseFarDirection();
+    void chooseOneLineDirection();
 
     /**
      * @brief метод поиска жертвы на соседних 8 клетках;
