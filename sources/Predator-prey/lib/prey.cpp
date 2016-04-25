@@ -17,11 +17,11 @@ void Prey::createPrey()
             break;
         }
         case RIGHT: {
-            spawnPrey(place.getI() - 1, place.getJ());
+            spawnPrey(place.getI(), place.getJ() + 1);
             break;
         }
         case DOWN: {
-            spawnPrey(place.getI() - 1, place.getJ());
+            spawnPrey(place.getI() + 1, place.getJ());
             break;
         }
         case LEFT: {
