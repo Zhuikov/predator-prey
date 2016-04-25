@@ -15,38 +15,34 @@ void Animal::chooseEmptyDirection()
     }
 }
 
-bool Animal::setRIGHTdirection()
+bool Animal::setDirection(Direction direction)
 {
-    if (field->isEmpty(place.getI(), place.getJ() + 1)) {
-        this->direction = RIGHT;
-        return true;
-    }
-    return false;
-}
-
-bool Animal::setUPdirection()
-{
-    if (field->isEmpty(place.getI() - 1, place.getJ())) {
-        this->direction = UP;
-        return true;
-    }
-    return false;
-}
-
-bool Animal::setDOWNdirection()
-{
-    if (field->isEmpty(place.getI() + 1, place.getJ())) {
-        this->direction = DOWN;
-        return true;
-    }
-    return false;
-}
-
-bool Animal::setLEFTdirection()
-{
-    if (field->isEmpty(place.getI(), place.getJ() - 1)) {
-        this->direction = LEFT;
-        return true;
+    switch (direction)
+    {
+        case UP: {
+            if (field->isEmpty(place.getI() - 1, place.getJ())) {
+                this->direction = UP;
+                return true;
+            }
+        }
+        case DOWN: {
+            if (field->isEmpty(place.getI() + 1, place.getJ())) {
+                this->direction = DOWN;
+                return true;
+            }
+        }
+        case LEFT: {
+            if (field->isEmpty(place.getI(), place.getJ() - 1)) {
+                this->direction = LEFT;
+                return true;
+            }
+        }
+        case RIGHT: {
+            if (field->isEmpty(place.getI(), place.getJ() + 1)) {
+                this->direction = RIGHT;
+                return true;
+            }
+        }
     }
     return false;
 }
@@ -56,19 +52,19 @@ void Animal::chooseRandomDirection()
     int flag = rand() % 4;
     switch (flag) {
         case 0: {
-            if (setUPdirection() == false) chooseEmptyDirection();
+            if (setDirection(UP) == false) chooseEmptyDirection();
             break;
         }
         case 1: {
-            if (setRIGHTdirection() == false) chooseEmptyDirection();
+            if (setDirection(RIGHT) == false) chooseEmptyDirection();
             break;
         }
         case 2: {
-            if (setLEFTdirection() == false) chooseEmptyDirection();
+            if (setDirection(LEFT) == false) chooseEmptyDirection();
             break;
         }
         case 3: {
-            if (setDOWNdirection() == false) chooseEmptyDirection();
+            if (setDirection(DOWN) == false) chooseEmptyDirection();
             break;
         }
     }

@@ -7,12 +7,6 @@ Field::Field()
     this->height = 10;
     this->length = 10;
 
-//    for (int i = 0; i < 10; i++) {
-//        std::vector<Position> temp;
-//        for (int j = 0; j < 10; j++)
-//            temp.push_back(EMPTY);
-//        field.push_back(temp);
-//    }
     field.resize(10);
     for (std::vector<std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
         (*it).resize(10, EMPTY);

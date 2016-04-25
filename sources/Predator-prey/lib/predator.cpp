@@ -25,20 +25,20 @@ void Predator::directionFinding()
 void Predator::chooseToTargetDirection()
 {
     if ((place.getI() <= target->place.getI()) && (place.getJ() < target->place.getJ())) {
-        if (setRIGHTdirection() == false)
-            if (setDOWNdirection() == false) chooseRandomDirection();
+            if (setDirection(RIGHT) == false)
+                if (setDirection(DOWN) == false) chooseRandomDirection();
     }
     if ((place.getI() < target->place.getI()) && (place.getJ() >= target->place.getJ())) {
-        if (setDOWNdirection() == false)
-            if (setLEFTdirection() == false) chooseRandomDirection();
+            if (setDirection(DOWN) == false)
+                if (setDirection(LEFT) == false) chooseRandomDirection();
     }
     if ((place.getI() > target->place.getI()) && (place.getJ() <= target->place.getJ())) {
-        if (setUPdirection() == false)
-            if (setRIGHTdirection() == false) chooseRandomDirection();
+            if (setDirection(UP) == false)
+                if (setDirection(RIGHT) == false) chooseRandomDirection();
     }
     if ((place.getI() >= target->place.getI()) && (place.getJ() > target->place.getJ())) {
-        if (setLEFTdirection() == false)
-            if (setUPdirection() == false) chooseRandomDirection();
+            if (setDirection(LEFT) == false)
+                if (setDirection(UP) == false) chooseRandomDirection();
     }
 }
 

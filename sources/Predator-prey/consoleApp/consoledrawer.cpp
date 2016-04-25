@@ -56,8 +56,8 @@ void ConsoleDrawer::drawStatistics()
     int num_of_stars_left;
     int num_of_stars_right;
 
-    num_of_stars_left = (this->field->getLength() * 2 - 20) / 2;
-    num_of_stars_right = (this->field->getLength() * 2 - 20 - num_of_stars_left);
+    num_of_stars_left = (this->field->getLength() * 2 - 21) / 2;
+    num_of_stars_right = (this->field->getLength() * 2 - 21 - num_of_stars_left);
 
     for (int i = 0; i < num_of_stars_left; i++)
         std::cout << '*';

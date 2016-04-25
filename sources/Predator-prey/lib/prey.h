@@ -7,9 +7,24 @@ class Units;
 class Prey : public Animal
 {
 protected:
+    /**
+     * @brief PREY_CREATE_ENERGY - необходимая энергия для создания жертвы
+     */
     static const int PREY_CREATE_ENERGY = 2;
-    int warning;
+
+    /**
+     * @brief warning - флаг, преследуется ли данная жертва
+     */
+    bool warning;
+
+    /**
+     * @brief dangerous_pred - координаты преследующего хищника
+     */
     Coordinates dangerous_pred;
+
+    /**
+     * @brief units_struct - указатель на класс с векторами хищников и жертв
+     */
     Units* units_struct;
     void directionFinding();
     void chooseToTargetDirection() {} //пока нет травки

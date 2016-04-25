@@ -10,9 +10,22 @@ class Prey;
 class Predator : public Animal
 {
 protected:
+    /**
+     * @brief PREDATOR_CREATE_ENERGY - энергия, необходимая для создания хищника
+     * энергия пополняется при съедении жертвы
+     */
     static const int PREDATOR_CREATE_ENERGY = 2;
+
+    /**
+     * @brief target - указатель на текущую цель
+     */
     Prey* target;
+
+    /**
+     * @brief units_struct - указатель на класс с векторами хищников и жертв
+     */
     Units* units_struct;
+
     void directionFinding();
     void chooseToTargetDirection();
 

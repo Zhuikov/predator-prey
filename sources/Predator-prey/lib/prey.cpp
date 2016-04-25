@@ -41,11 +41,11 @@ void Prey::spawnPrey(int a, int b)
 
 void Prey::isChase()
 {
-    warning = 0;
+    warning = false;
     for (unsigned int i = 0; i < this->units_struct->predators.size(); ++i) {
         if (this->units_struct->predators[i] != NULL) {
             if (this->place - units_struct->predators[i]->place < 1.1) {
-                warning = 1;
+                warning = true;
                 this->dangerous_pred = units_struct->predators[i]->place;
                 break;
             }
@@ -66,7 +66,7 @@ Prey::Prey(const int a, const int b, Field* ptrF)
     field = ptrF;
     field->setPosition(this->place.getI(), this->place.getJ(), PREY);
     direction = UP;
-    warning = 0;
+    warning = false;
 }
 
 void Prey::setUnitsPointer(Units* units_pointer)

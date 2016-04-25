@@ -3,6 +3,9 @@
 #include "settings.h"
 #include <vector>
 
+/**
+ * @brief Position - перечисление всех возможных состояний клетки поля
+ */
 enum Position
 {
     EMPTY,
@@ -10,15 +13,34 @@ enum Position
     PREY
 };
 
+/**
+ * @brief класс для представления поля в программе
+ */
 class Field
 {
     std::vector< std::vector<Position> > field;
+
+    /**
+     * @brief length - текущая длина поля
+     */
     int length;
+
+    /**
+     * @brief height - текущая длина поля
+     */
     int height;
 
 public:
+    /**
+     * @brief MAX_FIELD_SIZE - максимальная длина и высота поля
+     */
     static const int MAX_FIELD_SIZE = 30;
+
+    /**
+     * @brief MIN_FIELD_SIZE - минимальная длина и высота поля
+     */
     static const int MIN_FIELD_SIZE = 10;
+
     /**
      * @brief конструктор без параметров, создает поле 10 х 10
      */
@@ -32,7 +54,7 @@ public:
     Field(int height, int length);
 
     /**
-     * @brief метод, полволяющий узнать, является ли клетка с данными координатами пустым
+     * @brief метод, позволяющий узнать, является ли клетка с данными координатами пустым
      * @param a - координата 1
      * @param b - координата 2
      * @return возвращает false, если клетка свободна и true, если клетка занята

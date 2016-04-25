@@ -38,7 +38,7 @@ protected:
     bool has_moved;
 
     /**
-     * @brief возможные значения направлений
+     * @brief Direction - возможные значения направлений
      */
     enum Direction
     {
@@ -59,13 +59,11 @@ protected:
     Field* field;
 
     /**
-     * @brief методы устанавливающие направление, если соответствующая клетка свободна
-     * @return true, если направление установлено, false - в обратном случае
+     * @brief метод устанавливает направление, если соответствующая клетка свободна
+     * @return
      */
-    bool setRIGHTdirection();
-    bool setLEFTdirection();
-    bool setUPdirection();
-    bool setDOWNdirection();
+
+    bool setDirection(Direction);
 
     /**
      * @brief метод, выбирающий случайное направление,
