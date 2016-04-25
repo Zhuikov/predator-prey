@@ -163,13 +163,13 @@ int ConsoleDialog::mainMenuPresentation()
     while (good_choice == false) {
         std::cout << "Выберите нужный пункт меню: ";
         std::getline(std::cin, choice);
-        //std::cout << choice << std::endl;
         try {
             int command = consoleCommands.at(choice);
             if (command < 3) return command;
                 else std::cout << "Выбран неверный пункт меню" << std::endl;
 
         }
+
         catch (std::exception &) {
             std::cout << "Выбран неверный пункт меню" << std::endl;
         }
@@ -180,6 +180,7 @@ int ConsoleDialog::mainMenuPresentation()
 
 int ConsoleDialog::settingsPresentation()
 {
+    std::cout << std::endl;
     std::cout << "1. Именить размеры поля.                 Текущие размеры ";
     std::cout << sett->field_height << " x " << sett->field_length << std::endl;
     std::cout << "2. Изменить количество хищников.         Текущее число ";
@@ -201,7 +202,7 @@ int ConsoleDialog::settingsPresentation()
                 else std::cout << "Выбран неверный пункт меню" << std::endl;
         }
         catch (std::exception &) {
-            std::cout << "Выбран неверный пункт меню!" << std::endl;
+            std::cout << "Выбран неверный пункт меню" << std::endl;
         }
     }
     return 0;

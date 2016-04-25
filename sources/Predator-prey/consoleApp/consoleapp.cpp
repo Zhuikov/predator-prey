@@ -1,7 +1,7 @@
 #include "consoleapp.h"
 #include "badfield.h"
-#include <iostream>
 #include "unistd.h"
+//#include <iostream>
 
 void ConsoleApp::startModel()
 {
@@ -15,6 +15,7 @@ void ConsoleApp::startModel()
         this->drawer->showModel();
     }
     this->drawer->showResult();
+    //std::cin.ignore(100, '\n');
 }
 
 ConsoleApp::ConsoleApp()
@@ -38,7 +39,6 @@ void ConsoleApp::createConsole()
             }
 
             case 2: {
-                std::cout << std::endl;
                 dialog->settingsMenuPresentation();
                 break;
             }

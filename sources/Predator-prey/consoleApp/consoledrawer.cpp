@@ -15,8 +15,8 @@ void ConsoleDrawer::showResult()
     int num_of_predators = this->model->getPredatorsNum();
     int num_of_preys = this->model->getPreysNum();
 
-    if (num_of_predators == 0 && num_of_preys > 0) std::cout << "Жертвы победили!";
-    else if (num_of_predators > 0 && num_of_preys == 0) std::cout << "Хищники победили!";
+    if (num_of_predators == 0 && num_of_preys > 0) std::cout << "Жертвы убежали от хищников!";
+    else if (num_of_predators > 0 && num_of_preys == 0) std::cout << "Хищники съели всех жертв!";
     else if (num_of_predators == 0 && num_of_preys == 0) std::cout << "Ничья!";
 
     std::cout << std::endl << std::endl;
