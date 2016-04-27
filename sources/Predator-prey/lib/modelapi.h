@@ -4,10 +4,13 @@
 #include "field.h"
 #include <vector>
 
-class Predator;
-class Units;
-class Prey;
 
+//TODO я в точности не знаю, зачем здесь эти объявления, ведь и без них все ок вроде
+//class Predator;
+//class Units;
+//class Prey;
+
+//TODO расставить модификаторы noexcept для методов, которые не возбуждают исключений
 class ModelAPI
 {
 public:

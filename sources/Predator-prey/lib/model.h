@@ -3,6 +3,8 @@
 #include "modelapi.h"
 #include <vector>
 
+//TODO расставить модификаторы noexcept для методов, которые не возбуждают исключений
+//TODO указывать слово override для перекрывающих функций
 class Model : public ModelAPI
 {
     int model_time;
@@ -13,10 +15,11 @@ class Model : public ModelAPI
      * @brief Units - класс, в котором содержатся векторы юнитов: хищников и жертв
      */
     Units units;
+    //TODO sett -- settings, почему нет?
     Settings *sett;
 
 public:
-
+    //TODO set в смысле множество?
     explicit Model(Settings *set);
     void initializeModel();
     Field* getField() { return &field; }

@@ -2,11 +2,12 @@
 #include <ctime>
 #include <cstdlib>
 
-Model::Model(Settings *set)
+Model::Model(Settings *set): field(set->field_height, set->field_length)
 {
     this->sett = set;
-    Field created_field;
-    this->field = created_field;
+    //TODO: разве бывают
+    //Field created_field(10, 10);
+    //this->field = created_field;
     model_day = 0;
     model_time = 0;
     has_changed = false;
@@ -18,8 +19,8 @@ void Model::initializeModel()
     this->model_time = 0;
     this->has_changed = false;
     
-    Field created_field(sett->field_height, sett->field_length);
-    this->field = created_field;
+    //Field created_field(sett->field_height, sett->field_length);
+    //this->field = created_field;
     srand(time(0));  
     
     deletePredators();
