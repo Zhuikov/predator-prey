@@ -8,6 +8,7 @@ void ConsoleApp::startModel()
     this->model->initializeModel();
     this->drawer->showModel();
     while (model->isEnd() == false) {
+        //Вынести числовую константу в класс
         usleep(500000);
         this->model->movePredators();
         this->model->movePreys();
@@ -20,6 +21,7 @@ void ConsoleApp::startModel()
 
 ConsoleApp::ConsoleApp()
 {
+    //TODO: sett --> settings
     this->sett = new Settings;
     this->dialog = new ConsoleDialog(this->sett);
     this->model = new Model(this->sett);

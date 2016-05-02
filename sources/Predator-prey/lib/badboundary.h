@@ -2,6 +2,7 @@
 #define BADBOUNDARY_H
 #include <exception>
 
+//TODO: можно добавить поля, в которых хранить, какие именно позиции оказались плохими
 class BadFieldBoundary : public std::exception
 {
 public:

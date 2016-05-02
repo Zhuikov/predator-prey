@@ -36,6 +36,7 @@ class Settings
 
     friend class Model;
     friend class Field;
+    //TODO: Это что такое?? Библиотека зависит от консоли?
     friend class ConsoleDialog;
 
 public:

@@ -4,25 +4,40 @@
 #include "badinput.h"
 #include <iostream>
 
+
+//TODO в этом классе надо не забывать про форматирование строк, добавлять пробельные строки для разделения на блоки зрительно и т.п.
 void ConsoleDialog::changeFieldSize()
 {
+    //TODO: использовать при формировании этих строк константы из класса, а не 30, 10
     std::cout << "Максимальная длина и высота поля: 30" << std::endl;
     std::cout << "Минимальная длина и высота поля: 10" << std::endl;
+
     char *first_after_num;
+
     std::cout << "Введите высоту поля: ";
     std::getline(std::cin, this->input_number);
+
     new_height = strtol(input_number.c_str(), &first_after_num, 10);
-    if ((new_height == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
+
+    if ((new_height == 0 && input_number.size() > 1)
+            || *first_after_num != '\0')
+    {
+                        throw InputError();
+    }
 
     std::cout << "Введите длину поля: ";
     std::getline(std::cin, this->input_number);
     new_length = strtol(input_number.c_str(), &first_after_num, 10);
+
+    //TODO: дублирует проверку высоты, вынести
     if ((new_length == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
 
     if (new_height < Field::MIN_FIELD_SIZE || new_height > Field::MAX_FIELD_SIZE ||
             new_length < Field::MIN_FIELD_SIZE || new_length > Field::MAX_FIELD_SIZE)
+    {
                 throw BadFieldCreate();
-        else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
+    }
+    else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
 void ConsoleDialog::changeMovesWithoutMeal()
@@ -35,10 +50,13 @@ void ConsoleDialog::changeMovesWithoutMeal()
 
     int MAX_MOVES_WITHOUT_MEAL = this->sett->max_moves_without_meal;
 
+    //TODO: дублирует проверку высоты поля -- вынести
     if ((new_time == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
     if (new_time < 5 || new_time > MAX_MOVES_WITHOUT_MEAL)
+    {
         throw BadNum();
-         else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
+    }
+    else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
 void ConsoleDialog::changeNumOfPredators()
@@ -51,6 +69,7 @@ void ConsoleDialog::changeNumOfPredators()
     std::getline(std::cin, this->input_number);
     new_number = strtol(input_number.c_str(), &first_after_num, 10);
 
+    //TODO: дублирует проверку высоты поля -- вынести
     if ((new_number == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
     if (new_number > MAX_NUM || new_number < 1) throw BadNum();
         else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
@@ -66,13 +85,17 @@ void ConsoleDialog::changeNumOfPreys()
     std::getline(std::cin, this->input_number);
     new_number = strtol(input_number.c_str(), &first_after_num, 10);
 
+    //TODO: дублирует проверку высоты поля -- вынести
     if ((new_number == 0 && input_number.size() > 1) || *first_after_num != '\0') throw InputError();
+
     if (new_number > MAX_NUM || new_number < 1) throw BadNum();
     else std::cout << "Настройки успешно изменены!" << std::endl << std::endl;
 }
 
 ConsoleDialog::ConsoleDialog(Settings *sett)
 {
+    //TODO: вынести в символьные константы значения по умолчанию
+    //TODO: не уверена, что new -- хорошо для имени переменной
     new_number = 3;
     new_height = 10;
     new_length = 10;
