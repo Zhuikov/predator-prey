@@ -8,7 +8,7 @@ QT       -= core gui
 
 TARGET = lib
 TEMPLATE = lib
-CONFIG += staticlib
+CONFIG += staticlib c++11
 
 SOURCES += \
     predator.cpp \

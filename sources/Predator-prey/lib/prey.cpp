@@ -8,6 +8,7 @@ void Prey::directionFinding()
     chooseRandomDirection();
 }
 
+//TODO: дублирует метод из predator, можно попытаться вынести общее  в animal
 void Prey::createPrey()
 {
     chooseRandomDirection();

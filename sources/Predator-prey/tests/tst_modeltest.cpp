@@ -8,9 +8,7 @@
 #include "model.h"
 #include "predator.h"
 
-//todo тест больше похож на модульный, а хотелось бы еще и функциональный увидеть
-/// и все же: чем отличается функциональный от модульного?
-/// хочется сделать по разным файлам, но, кажется, так нельзя
+//TODO: сделать отдельный проект с функциональными тестами и добавить их
 class ModelTest : public QObject
 {
     Q_OBJECT
@@ -42,6 +40,7 @@ int ModelTest::doubleCompare(double a, double b)
     return 0;
 }
 
+//TODO: думаю, этот тест нереально понять никому, кроме автора
 void ModelTest::moveEnd(Units *units)
 {
     int num_of_died = 0;
@@ -114,6 +113,7 @@ void ModelTest::coordinatesTest()
     QCOMPARE(D.getJ(), 0);
 }
 
+//TODO: очень длинный тест, надо разбить на несколько поменьше, на каждую тестируемую функциональность
 void ModelTest::fieldTest()
 {
     Field field(5, 7);
@@ -155,13 +155,14 @@ void ModelTest::fieldTest()
     QCOMPARE(field.whatIsEmpty(2, 4), 3);
 
     Field field2(10, 10);
-    field2 = field;
-    QCOMPARE(field2.getPosition(2, 5), PREDATOR);
-    QCOMPARE(field2.getPosition(3, 4), PREY);
-    QCOMPARE(field2.isEmpty(-1, 0), false);
-    QCOMPARE(field2.whatIsEmpty(2, 4), 3);
-    QCOMPARE(field2.getHeight(), 5);
-    QCOMPARE(field2.getLength(), 7);
+    //TODO: я не понимаю, зачем тут филд2, исправьте, пожалуйста, сами
+    //field2 = field;
+ //   QCOMPARE(field2.getPosition(2, 5), PREDATOR);
+ //   QCOMPARE(field2.getPosition(3, 4), PREY);
+ //   QCOMPARE(field2.isEmpty(-1, 0), false);
+ //   QCOMPARE(field2.whatIsEmpty(2, 4), 3);
+ //   QCOMPARE(field2.getHeight(), 5);
+ //   QCOMPARE(field2.getLength(), 7);
 
 }
 
@@ -329,6 +330,7 @@ void ModelTest::modelppInitializeTest()
     QCOMPARE(model.isEnd(), false);
 }
 
+//TODO: слишком общее название для такого длинного теста
 void ModelTest::debugTest()
 {
     Field field(10, 10);
