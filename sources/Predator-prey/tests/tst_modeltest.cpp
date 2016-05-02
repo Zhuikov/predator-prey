@@ -8,9 +8,7 @@
 #include "model.h"
 #include "predator.h"
 
-//todo тест больше похож на модульный, а хотелось бы еще и функциональный увидеть
-/// и все же: чем отличается функциональный от модульного?
-/// хочется сделать по разным файлам, но, кажется, так нельзя
+//TODO: сделать отдельный проект с функциональными тестами и добавить их
 class ModelTest : public QObject
 {
     Q_OBJECT
@@ -42,6 +40,7 @@ int ModelTest::doubleCompare(double a, double b)
     return 0;
 }
 
+//TODO: думаю, этот тест нереально понять никому, кроме автора
 void ModelTest::moveEnd(Units *units)
 {
     int num_of_died = 0;
@@ -114,6 +113,7 @@ void ModelTest::coordinatesTest()
     QCOMPARE(D.getJ(), 0);
 }
 
+//TODO: очень длинный тест, надо разбить на несколько поменьше, на каждую тестируемую функциональность
 void ModelTest::fieldTest()
 {
     Field field(5, 7);
@@ -330,6 +330,7 @@ void ModelTest::modelppInitializeTest()
     QCOMPARE(model.isEnd(), false);
 }
 
+//TODO: слишком общее название для такого длинного теста
 void ModelTest::debugTest()
 {
     Field field(10, 10);

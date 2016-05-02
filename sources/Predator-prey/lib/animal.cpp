@@ -4,7 +4,9 @@
 
 void Animal::chooseEmptyDirection()
 {
+    //TODO: dir --> direction
     int dir;
+    //TODO: когда этот вызов будет возвращать enum direction, весь switch можно будет удалить
     dir = this->field->whatIsEmpty(place.getI(), place.getJ());
     switch (dir) {
         case 0: { direction = UP;    break; }
@@ -49,7 +51,9 @@ bool Animal::setDirection(Direction direction)
 
 void Animal::chooseRandomDirection()
 {
+    //TODO: srand
     int flag = rand() % 4;
+    //TODO: будет понятнее, если в case тоже использовать enum
     switch (flag) {
         case 0: {
             if (setDirection(UP) == false) chooseEmptyDirection();

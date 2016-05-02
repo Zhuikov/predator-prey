@@ -2,6 +2,9 @@
 #include "badfield.h"
 #include "badboundary.h"
 
+//TODO: везде тут a и b не понятны, уж лучше h и v, чем это, надо только проверить, что я их местами не перепутала
+
+
 //TODO: убрать дублирование конструкторов, сделать один конструктор с параметрами по умолчанию
 //TODO: и параметр по умолчанию не 10, а MIN_FIELD_SIZE
 Field::Field()
@@ -60,54 +63,56 @@ Field::Field(int height, int length)
 //}
 
 //TODO: надо осознать, что я вынесла одинаковое условие
-bool Field::checkBoundary(int vertical_position, int horizontal_position){
-    if (vertical_position < 0 ||
-            vertical_position >= height ||
-            horizontal_position < 0 ||
-            horizontal_position >= length){
+bool Field::checkBoundary(int v, int h) const{
+    if (v < 0 ||
+            v >= height ||
+            h < 0 ||
+            h >= length){
         return false;
     }
     return true;
 }
 
-bool Field::isEmpty(int a, int b) const
+bool Field::isEmpty(int v, int h) const
 {
-    if(checkBoundary(a, b)){
+    if(checkBoundary(v, h) == false){
         return false;
     }
 
-    if (this->field[a][b] != EMPTY){
+    if (this->field[v][h] != EMPTY){
         return false;
     }
 
     return true;
 }
 
-void Field::setPosition(int a, int b, Position pos)
+void Field::setPosition(int v, int h, Position pos)
 {
-    if (checkBoundary(a, b)){
+    if (checkBoundary(v, h) == false){
         throw BadFieldBoundary();
     }
-    this->field[a][b] = pos;
+    this->field[v][h] = pos;
 }
 
-Position Field::getPosition(int a, int b) const
+Position Field::getPosition(int v, int h) const
 {
-    if (checkBoundary(a, b)){
+    if (checkBoundary(v, h) == false){
         throw BadFieldBoundary();
     }
-    return this->field[a][b];
+    return this->field[v][h];
 }
 
-int Field::whatIsEmpty(int a, int b) const
+int Field::whatIsEmpty(int v, int h) const
 {
-    if (checkBoundary(a, b)){
+    if (checkBoundary(v, h) == false){
         throw BadFieldBoundary();
     }
-    if (isEmpty(a - 1, b) == true) return 0;
-    if (isEmpty(a, b + 1) == true) return 1;
-    if (isEmpty(a + 1, b) == true) return 2;
-    if (isEmpty(a, b - 1) == true) return 3;
+
+    //TODO: из animal нужно вынести direction и использовать его и здесь тоже
+    if (isEmpty(v - 1, h) == true) return 0;
+    if (isEmpty(v, h + 1) == true) return 1;
+    if (isEmpty(v + 1, h) == true) return 2;
+    if (isEmpty(v, h - 1) == true) return 3;
     return -1;
 }
 

@@ -40,7 +40,7 @@ class Field
      * @param horizontal_position по горизонтали
      * @return
      */
-    bool checkBoundary(int vertical_position, int horizontal_position);
+    bool checkBoundary(int vertical_position, int horizontal_position) const;
 
 public:
     /**

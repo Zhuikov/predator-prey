@@ -7,6 +7,7 @@ Units::Units()
     preys.reserve(1);
 }
 
+//TODO: foreach syntax
 Units::~Units()
 {
     for (std::vector<Predator*>::const_iterator i = predators.begin(); i != predators.end(); ++i) {

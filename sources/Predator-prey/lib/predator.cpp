@@ -7,10 +7,15 @@
 
 void Predator::directionFinding()
 {
-    if (this->target == NULL) chooseRandomDirection();
+    if (this->target == NULL){
+        chooseRandomDirection();
+    }
     else {
-        double dist;
-        dist = this->place - this->target->place;
+        double dist = (this->place) - (this->target->place);
+        //TODO: числовые константы это плохо
+        //вынести в класс const double DISTANTION = 1.0 (лучше еще уточнить название)
+        // const double DELTA = 0.1
+        // dist > DISTANTION - DELTA
         if ((dist > 0.9) && (dist < 1.1)) {
             if (target->place.getI() < place.getI()) direction = UP;
             else if (target->place.getI() > place.getI()) direction = DOWN;
@@ -42,6 +47,7 @@ void Predator::chooseToTargetDirection()
     }
 }
 
+//TODO: использовать символьные константы вместо числовых, foreach синтаксис
 void Predator::findPrey()
 {
     if (this->target != NULL && (this->target->died == true ||
@@ -61,6 +67,7 @@ void Predator::findPrey()
     }
 }
 
+//TODO: foreach синтаксис
 void Predator::killPrey()
 {
     for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
@@ -99,8 +106,10 @@ void Predator::createPredator()
 
 }
 
+//TODO: h v
 void Predator::spawnPredator(int a, int b)
 {
+    //TODO: pred --> predator
     Predator *pred = new Predator(a, b, this->field, this->max_life_time);
     pred->setUnitsPointer(this->units_struct);
     units_struct->predators.push_back(pred);

@@ -1,6 +1,7 @@
 #include "consoledrawer.h"
 #include <iostream>
 
+//TODO в этом классе надо не забывать про форматирование строк, добавлять пробельные строки для разделения на блоки зрительно и т.п.
 void ConsoleDrawer::showModel()
 {
     std::cout << std::endl;
@@ -28,6 +29,7 @@ void ConsoleDrawer::drawHead()
     int num_of_stars_left;
     int num_of_stars_right;
 
+    //TODO: что значит 20
     num_of_stars_left = (this->field->getLength() * 2 - 20) / 2;
     num_of_stars_right = (this->field->getLength() * 2 - 20 - num_of_stars_left);
 
@@ -56,6 +58,7 @@ void ConsoleDrawer::drawStatistics()
     int num_of_stars_left;
     int num_of_stars_right;
 
+    //TODO: что значит 21? можно поменять тут на 31, а 20 в предыдущем методе не менять?
     num_of_stars_left = (this->field->getLength() * 2 - 21) / 2;
     num_of_stars_right = (this->field->getLength() * 2 - 21 - num_of_stars_left);
 
