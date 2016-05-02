@@ -15,7 +15,7 @@ void ConsoleApp::startModel()
         this->drawer->showModel();
     }
     this->drawer->showResult();
-    //std::cin.ignore(100, '\n');
+    //std::cin.ignore(0, '\n');
 }
 
 ConsoleApp::ConsoleApp()
