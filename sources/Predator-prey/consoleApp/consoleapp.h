@@ -15,7 +15,7 @@ class ConsoleApp
     Settings *settings;
     Model *model;
 
-    const int time_for_sleep = 500000;
+    const int TIME_FOR_SLEEP = 500000;
     void startModel();
 
 public:

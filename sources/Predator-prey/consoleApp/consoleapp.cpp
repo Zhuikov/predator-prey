@@ -7,7 +7,7 @@ void ConsoleApp::startModel()
     this->model->initializeModel();
     this->drawer->showModel();
     while (model->isEnd() == false) {
-        usleep(time_for_sleep);
+        usleep(TIME_FOR_SLEEP);
         this->model->movePredators();
         this->model->movePreys();
         this->model->remove();

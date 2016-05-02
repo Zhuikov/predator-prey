@@ -11,12 +11,15 @@ void Predator::directionFinding()
         chooseRandomDirection();
     }
     else {
-        double dist = (this->place) - (this->target->place);
+        double distance = (this->place) - (this->target->place);
         //TODO: числовые константы это плохо
         //вынести в класс const double DISTANTION = 1.0 (лучше еще уточнить название)
         // const double DELTA = 0.1
         // dist > DISTANTION - DELTA
-        if ((dist > 0.9) && (dist < 1.1)) {
+        if (abs(DISTANCE_FOR_KILL - distance) < DELTA) {
+        /// тут магия: если закомментировать предыдущую строчку и раскомментировать следующую, то тесты проходят;
+        /// а так, как сейчас - все падает. Хотя написано то же самое
+        //if (distance > 0.9 && distance < 1.1) {
             if (target->place.getI() < place.getI()) direction = UP;
             else if (target->place.getI() > place.getI()) direction = DOWN;
             else if (target->place.getJ() < place.getJ()) direction = LEFT;
@@ -47,22 +50,22 @@ void Predator::chooseToTargetDirection()
     }
 }
 
-//TODO: использовать символьные константы вместо числовых, foreach синтаксис
+//TODO: foreach синтаксис
 void Predator::findPrey()
 {
     if (this->target != NULL && (this->target->died == true ||
-           this->target->place - this->place > 2.1)) this->target = NULL;
+           this->target->place - this->place > DISTANCE_FOR_RESET_TARGET + DELTA)) this->target = NULL;
     
-    double dist = 0;
+    double distance = 0;
     for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
       it != this->units_struct->preys.end(); ++it) {
         if ((*it)->died == false) {
-            dist = this->place - (*it)->place;
-            if (dist < 1.1) {
+            distance = this->place - (*it)->place;
+            if (distance < DISTANCE_FOR_KILL + DELTA) {
                 this->target = (*it);
                 break;
             }
-            if (dist < 1.5) this->target = (*it);
+            if (distance < DISTANCE_FOR_TARGET + DELTA) this->target = (*it);
         }
     }
 }
@@ -107,18 +110,17 @@ void Predator::createPredator()
 }
 
 //TODO: h v
-void Predator::spawnPredator(int a, int b)
+void Predator::spawnPredator(int i, int j)
 {
-    //TODO: pred --> predator
-    Predator *pred = new Predator(a, b, this->field, this->max_life_time);
-    pred->setUnitsPointer(this->units_struct);
-    units_struct->predators.push_back(pred);
+    Predator *predator = new Predator(i, j, this->field, this->max_life_time);
+    predator->setUnitsPointer(this->units_struct);
+    units_struct->predators.push_back(predator);
 }
 
-Predator::Predator(int a, int b, Field *field_pointer, int time_of_life)
+Predator::Predator(int i, int j, Field *field_pointer, int time_of_life)
 {
-    place.setI(a);
-    place.setJ(b);
+    place.setI(i);
+    place.setJ(j);
     target = NULL;
     max_life_time = time_of_life;
     life_time = 0;

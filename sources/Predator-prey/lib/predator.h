@@ -9,6 +9,11 @@ class Prey;
 
 class Predator : public Animal
 {
+    const double DISTANCE_FOR_KILL = 1.0;
+    const double DISTANCE_FOR_TARGET = 1.4;
+    const double DISTANCE_FOR_RESET_TARGET = 2.1;
+    const double DELTA = 0.1;
+
 protected:
     /**
      * @brief PREDATOR_CREATE_ENERGY - энергия, необходимая для создания хищника
