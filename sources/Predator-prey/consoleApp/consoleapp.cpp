@@ -1,30 +1,26 @@
 #include "consoleapp.h"
 #include "badfield.h"
 #include "unistd.h"
-//#include <iostream>
 
 void ConsoleApp::startModel()
 {
     this->model->initializeModel();
     this->drawer->showModel();
     while (model->isEnd() == false) {
-        //Вынести числовую константу в класс
-        usleep(500000);
+        usleep(time_for_sleep);
         this->model->movePredators();
         this->model->movePreys();
         this->model->remove();
         this->drawer->showModel();
     }
     this->drawer->showResult();
-    //std::cin.ignore(0, '\n');
 }
 
 ConsoleApp::ConsoleApp()
 {
-    //TODO: sett --> settings
-    this->sett = new Settings;
-    this->dialog = new ConsoleDialog(this->sett);
-    this->model = new Model(this->sett);
+    this->settings = new Settings;
+    this->dialog = new ConsoleDialog(this->settings);
+    this->model = new Model(this->settings);
     this->drawer = new ConsoleDrawer(this->model);
 }
 
@@ -54,7 +50,7 @@ void ConsoleApp::createConsole()
 
 ConsoleApp::~ConsoleApp()
 {
-    delete this->sett;
+    delete this->settings;
     delete this->drawer;
     delete this->dialog;
     delete this->model;

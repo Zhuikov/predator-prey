@@ -3,9 +3,9 @@
 #include <cstdlib>
 
 //TODO: использовать список инициализации
-Model::Model(Settings *set): field(set->field_height, set->field_length)
+Model::Model(Settings *settings): field(settings->field_height, settings->field_length)
 {
-    this->sett = set;
+    this->settings = settings;
     //Field created_field(10, 10);
     //this->field = created_field;
     model_day = 0;
@@ -45,7 +45,7 @@ bool Model::isEnd() const
 
 void Model::createPredators()
 {
-    for(int i = 0; i < sett->num_of_predators; i++) {
+    for(int i = 0; i < settings->num_of_predators; i++) {
         int v = 0;
         int h = 0;
 //        while (1 == 1) {
@@ -57,13 +57,13 @@ void Model::createPredators()
 //        }
 
         do{
-            v = rand() % sett->field_height;
-            h = rand() % sett->field_length;
+            v = rand() % settings->field_height;
+            h = rand() % settings->field_length;
         }
         while(field.isEmpty(v, h) == false);
 
         //TODO: pred --> predator
-        Predator *pred = new Predator(v, h, &field, sett->moves_without_meal);
+        Predator *pred = new Predator(v, h, &field, settings->moves_without_meal);
         pred->setUnitsPointer(&units);
         units.predators.push_back(pred);
     }
@@ -81,13 +81,13 @@ void Model::deletePredators()
 
 void Model::createPreys()
 {
-    for(int i = 0; i < sett->num_of_preys; i++) {
+    for(int i = 0; i < settings->num_of_preys; i++) {
         int v = 0;
         int h = 0;
         //TODO: оформить do-while цикл
         while (1 == 1) {
-            v = rand() % sett->field_height;
-            h = rand() % sett->field_length;
+            v = rand() % settings->field_height;
+            h = rand() % settings->field_length;
             if (field.isEmpty(v, h)) break;
         }
         //TODO: pr --> prey

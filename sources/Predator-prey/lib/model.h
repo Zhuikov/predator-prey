@@ -15,12 +15,10 @@ class Model : public ModelAPI
      * @brief Units - класс, в котором содержатся векторы юнитов: хищников и жертв
      */
     Units units;
-    //TODO sett -- settings, почему нет?
-    Settings *sett;
+    Settings *settings;
 
 public:
-    //TODO set в смысле множество?
-    explicit Model(Settings *set);
+    explicit Model(Settings *settings);
     void initializeModel();
     Field* getField() { return &field; }
     int getTime() const { return model_time; }

@@ -12,9 +12,10 @@ class ConsoleApp
 {
     ConsoleDialog *dialog;
     ConsoleDrawer *drawer;
-    Settings *sett;
+    Settings *settings;
     Model *model;
 
+    const int time_for_sleep = 500000;
     void startModel();
 
 public:

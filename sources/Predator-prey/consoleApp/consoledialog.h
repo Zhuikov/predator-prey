@@ -8,18 +8,16 @@
 
 class ConsoleDialog
 {
-    int new_length;
-    int new_height;
-    int new_number;
-    int new_time;
     std::string input_number;
-    Settings *sett;
+    Settings *settings;
 
     void changeFieldSize();
     void changeMovesWithoutMeal();
     void changeNumOfPredators();
     void changeNumOfPreys();
     int settingsPresentation();
+
+    int readInt();
 
     void setNewMovesWithoutMeal(const int);
     void setNewFieldBoundary(const int, const int);
@@ -36,7 +34,7 @@ class ConsoleDialog
     };
 
 public:
-    ConsoleDialog(Settings *sett);
+    ConsoleDialog(Settings *settings);
     int mainMenuPresentation();
     void settingsMenuPresentation();
 
