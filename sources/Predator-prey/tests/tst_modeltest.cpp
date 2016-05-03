@@ -312,7 +312,7 @@ void ModelTest::modelppInitializeTest()
     Settings sett;
     Model model(&sett);
 
-    model.initializeModel();
+    //model.initializeModel();
     QCOMPARE(model.getDay(), 0);
     QCOMPARE(model.getTime(), 0);
 

@@ -4,7 +4,9 @@
 
 void ConsoleApp::startModel()
 {
-    this->model->initializeModel();
+    this->model = new Model(this->settings);
+    this->drawer = new ConsoleDrawer(this->model);
+
     this->drawer->showModel();
     while (model->isEnd() == false) {
         usleep(TIME_FOR_SLEEP);
@@ -14,14 +16,16 @@ void ConsoleApp::startModel()
         this->drawer->showModel();
     }
     this->drawer->showResult();
+    delete this->drawer;
+    delete this->model; // ???
 }
 
 ConsoleApp::ConsoleApp()
 {
     this->settings = new Settings;
     this->dialog = new ConsoleDialog(this->settings);
-    this->model = new Model(this->settings);
-    this->drawer = new ConsoleDrawer(this->model);
+    this->model = nullptr;
+    this->drawer = nullptr;
 }
 
 void ConsoleApp::createConsole()
@@ -33,6 +37,7 @@ void ConsoleApp::createConsole()
         switch (menuChoice) {
             case 1: {
                 this->startModel();
+
                 break;
             }
 
@@ -51,8 +56,8 @@ void ConsoleApp::createConsole()
 ConsoleApp::~ConsoleApp()
 {
     delete this->settings;
-    delete this->drawer;
+   // delete this->drawer;
     delete this->dialog;
-    delete this->model;
+    //delete this->model;
 }
 

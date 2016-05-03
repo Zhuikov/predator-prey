@@ -69,35 +69,35 @@ public:
 
     /**
      * @brief метод, позволяющий узнать, является ли клетка с данными координатами пустым
-     * @param a - координата 1
-     * @param b - координата 2
-     * @return возвращает false, если клетка свободна и true, если клетка занята
+     * @param i - координата 1
+     * @param j - координата 2
+     * @return возвращает true, если клетка свободна и false, если клетка занята
      */
-    bool isEmpty(int a, int b) const;
+    bool isEmpty(int i, int j) const;
 
     /**
      * @brief метод, позволяющий установить на клетку с данными координатами заданный символ
-     * @param a - координата 1
-     * @param b - координата 2
+     * @param i - координата 1
+     * @param j - координата 2
      * @param Position - позиция, которую надо установить
      */
-    void setPosition(int a, int b, Position);
+    void setPosition(int i, int j, Position);
 
     /**
      * @brief метод, возвращающий свободное направление хода для заданной клетки
-     * @param a - координата клетки 1
-     * @param b - координата клетки 2
+     * @param i - координата клетки 1
+     * @param j - координата клетки 2
      * @return символ - направление
      */
-    int whatIsEmpty(int a, int b) const;
+    int whatIsEmpty(int i, int j) const;
 
     /**
      * @brief метод, возвращающий значение клетки с заданными координатами
-     * @param x - координата 1
-     * @param y - координата 2
+     * @param i - координата 1
+     * @param j - координата 2
      * @return символ - значение
      */
-    Position getPosition(int a, int b) const;
+    Position getPosition(int i, int j) const;
 
     /**
      * @brief метод, возвращающий длину поля в клетках

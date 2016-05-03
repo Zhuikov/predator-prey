@@ -2,38 +2,16 @@
 #include <ctime>
 #include <cstdlib>
 
-//TODO: использовать список инициализации
-Model::Model(Settings *settings): field(settings->field_height, settings->field_length)
+Model::Model(Settings *settings): settings(settings),
+                                  model_time(0),
+                                  model_day(0),
+                                  has_changed(false),
+                                  field(settings->field_height, settings->field_length)
 {
-    this->settings = settings;
-    //Field created_field(10, 10);
-    //this->field = created_field;
-    model_day = 0;
-    model_time = 0;
-    has_changed = false;
-}
-
-
-//TODO: не понятно, зачем этот метод, почему нельзя все это сделать в конструкторе
-//а если захочется пересоздать живность, вызвать деструктор для старой модели,
-//и конструктором сделать новую
-void Model::initializeModel()
-{
-    this->model_day = 0;
-    this->model_time = 0;
-    this->has_changed = false;
-    
-    //Field created_field(sett->field_height, sett->field_length);
-    //this->field = created_field;
-    srand(time(0));  
-    
-    deletePredators();
-    deletePreys();
-    
-    //TODO: если это вынести в конструктор, то метод не нужен
     createPredators();
     createPreys();
 }
+
 
 bool Model::isEnd() const
 {
@@ -48,24 +26,32 @@ void Model::createPredators()
     for(int i = 0; i < settings->num_of_predators; i++) {
         int v = 0;
         int h = 0;
-//        while (1 == 1) {
-//            i_pred = rand() % sett->field_height;
-//            j_pred = rand() % sett->field_length;
-//            if (field.isEmpty(i_pred, j_pred)){
-//                    break;
-//            }
-//        }
-
-        do{
+        do {
             v = rand() % settings->field_height;
             h = rand() % settings->field_length;
         }
         while(field.isEmpty(v, h) == false);
 
-        //TODO: pred --> predator
-        Predator *pred = new Predator(v, h, &field, settings->moves_without_meal);
-        pred->setUnitsPointer(&units);
-        units.predators.push_back(pred);
+        Predator *predator = new Predator(v, h, &field, settings->moves_without_meal);
+        predator->setUnitsPointer(&units);
+        units.predators.push_back(predator);
+    }
+}
+
+void Model::createPreys()
+{
+    for(int i = 0; i < settings->num_of_preys; i++) {
+        int v = 0;
+        int h = 0;
+        do {
+            v = rand() % settings->field_height;
+            h = rand() % settings->field_length;
+        }
+        while (field.isEmpty(v, h) == false);
+
+        Prey *prey = new Prey(v, h, &field);
+        prey->setUnitsPointer(&units);
+        units.preys.push_back(prey);
     }
 }
 
@@ -76,24 +62,6 @@ void Model::deletePredators()
         for (std::vector<Predator*>::const_iterator i = units.predators.begin();
              i != units.predators.end(); ++i) delete *i;
         units.predators.clear();
-    }
-}
-
-void Model::createPreys()
-{
-    for(int i = 0; i < settings->num_of_preys; i++) {
-        int v = 0;
-        int h = 0;
-        //TODO: оформить do-while цикл
-        while (1 == 1) {
-            v = rand() % settings->field_height;
-            h = rand() % settings->field_length;
-            if (field.isEmpty(v, h)) break;
-        }
-        //TODO: pr --> prey
-        Prey *pr = new Prey(v, h, &field);
-        pr->setUnitsPointer(&units);
-        units.preys.push_back(pr);
     }
 }
 
@@ -109,18 +77,7 @@ void Model::deletePreys()
 
 void Model::movePreys()
 {
-
-    //TODO: этот кусок дублирует такой же в movePredators, лучше вынести в отдельный метод инкрементирования времени модели
-    if (!this->has_changed) {
-        this->model_time = this->model_time + 1;
-        this->has_changed = true;
-    }
-    else has_changed = false;
-
-    if (this->model_time > 23) {
-        this->model_day++;
-        this->model_time = 0;
-    }
+    incModelTime();
 
     for(Prey* prey: units.preys){
         if(prey->died == false){
@@ -135,16 +92,7 @@ void Model::movePreys()
 
 void Model::movePredators()
 {
-    if (!this->has_changed) {
-        this->model_time = this->model_time + 1;
-        this->has_changed = true;
-    }
-    else has_changed = false;
-
-    if (this->model_time > 23) {
-        this->model_day++;
-        this->model_time = 0;
-    }
+    incModelTime();
 
     for(Predator* predator: units.predators){
         if(predator->died == false){
@@ -155,6 +103,20 @@ void Model::movePredators()
 //    std::vector<Predator*>::iterator last = units.predators.end();
 //    for (std::vector<Predator*>::iterator i = units.predators.begin(); i !=last; ++i)
 //        if ((*i)->died == false) (*i)->movePredator();
+}
+
+void Model::incModelTime()
+{
+    if (this->has_changed == false) {
+        this->model_time ++;
+        this->has_changed = true;
+    }
+    else has_changed = false;
+
+    if (this->model_time > 23) {
+        this->model_day++;
+        this->model_time = 0;
+    }
 }
 
 //TODO: не говоря о прочем, этот метод и removePreys очень похожи, уверена, что используя наследование от animal, можно попытаться объединить в один полиморфный метод,
@@ -201,9 +163,14 @@ void Model::removePreys()
     }
 }
 
-//TODO: здесь просится деструктор
 void Model::remove()
 {
     removePredators();
     removePreys();
+}
+
+Model::~Model()
+{
+    deletePredators();
+    deletePreys();
 }

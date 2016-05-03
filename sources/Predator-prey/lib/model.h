@@ -7,6 +7,7 @@
 //TODO указывать слово override для перекрывающих функций
 class Model : public ModelAPI
 {
+    Settings *settings;
     int model_time;
     int model_day;
     bool has_changed;
@@ -15,11 +16,11 @@ class Model : public ModelAPI
      * @brief Units - класс, в котором содержатся векторы юнитов: хищников и жертв
      */
     Units units;
-    Settings *settings;
+
+    void incModelTime();
 
 public:
     explicit Model(Settings *settings);
-    void initializeModel();
     Field* getField() { return &field; }
     int getTime() const { return model_time; }
     int getDay() const  { return model_day; }
@@ -35,6 +36,8 @@ public:
     void removePredators();
     void removePreys();
     void remove();
+
+    ~Model();
     void saveModel();
     void loadModel();
 
