@@ -52,18 +52,18 @@ protected:
     /**
      * @brief метод, создающий хищника на клетке с данными координатами
      */
-    void spawnPredator(int, int);
+    void spawnPredator(int, int );
 
 public:
 
     /**
      * @brief конструктор с параметрами; создает хищника на поле с указанными координатами
-     * @param a - координата 1
-     * @param b - координата 2
+     * @param v - координата по вертикали
+     * @param h - координата по горизонтали
      * @param field_pointer - указатель на поле
      * @param time_of_life - время жизни хищника без еды
      */
-    Predator(const int a, const int b, Field* field_pointer, int time_of_life);
+    Predator(const int v, const int h, Field* field_pointer, int time_of_life);
 
     /**
      * @brief метод, устанавливающий хищнику указатель на класс с векторами хищиков и жертв

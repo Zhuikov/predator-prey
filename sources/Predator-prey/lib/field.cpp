@@ -21,9 +21,6 @@
 //}
 Field::Field(int height, int length)
 {
-    if (height < MIN_FIELD_SIZE || length < MIN_FIELD_SIZE
-            || height > MAX_FIELD_SIZE || length > MAX_FIELD_SIZE) throw BadFieldCreate();
-
     this->height = height;
     this->length = length;
 
@@ -34,28 +31,6 @@ Field::Field(int height, int length)
 //    for (std::vector< std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
 //         (*it).resize(length, EMPTY);
 }
-
-//Field& Field::operator=(const Field &field2)
-//{
-//    if (this != &field2) {
-//        for (std::vector< std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
-//            (*it).clear();
-//        field.clear();
-
-//        this->height = field2.getHeight();
-//        this->length = field2.getLength();
-
-//        field.resize(field2.getHeight());
-//        for (std::vector< std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
-//            (*it).resize(field2.getLength());
-
-//        for (int i = 0; i < height; i++)
-//            for (int j = 0; j < length; j++)
-//                this->field[i][j] = field2.getPosition(i, j);
-//    }
-
-//    return *this;
-//}
 
 //TODO: надо осознать, что я вынесла одинаковое условие
 bool Field::checkBoundary(int v, int h) const{

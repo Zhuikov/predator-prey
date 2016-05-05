@@ -3,6 +3,7 @@
 #include "units.h"
 #include <vector>
 #include <ctime>
+#include <cmath>
 #include <cstdlib>
 
 void Predator::directionFinding()
@@ -12,14 +13,7 @@ void Predator::directionFinding()
     }
     else {
         double distance = (this->place) - (this->target->place);
-        //TODO: числовые константы это плохо
-        //вынести в класс const double DISTANTION = 1.0 (лучше еще уточнить название)
-        // const double DELTA = 0.1
-        // dist > DISTANTION - DELTA
-        if (abs(DISTANCE_FOR_KILL - distance) < DELTA) {
-        /// тут магия: если закомментировать предыдущую строчку и раскомментировать следующую, то тесты проходят;
-        /// а так, как сейчас - все падает. Хотя написано то же самое
-        //if (distance > 0.9 && distance < 1.1) {
+        if (fabs(distance - DISTANCE_FOR_KILL) < DELTA) {
             if (target->place.getV() < place.getV()) direction = UP;
             else if (target->place.getV() > place.getV()) direction = DOWN;
             else if (target->place.getH() < place.getH()) direction = LEFT;
@@ -54,7 +48,7 @@ void Predator::chooseToTargetDirection()
 void Predator::findPrey()
 {
     if (this->target != NULL && (this->target->died == true ||
-           this->target->place - this->place > DISTANCE_FOR_RESET_TARGET + DELTA)) this->target = NULL;
+           this->target->place - this->place > DISTANCE_FOR_RESET_TARGET)) this->target = NULL;
     
     double distance = 0;
     for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
@@ -109,18 +103,17 @@ void Predator::createPredator()
 
 }
 
-//TODO: h v
-void Predator::spawnPredator(int i, int j)
+void Predator::spawnPredator(int v, int h)
 {
-    Predator *predator = new Predator(i, j, this->field, this->max_life_time);
+    Predator *predator = new Predator(v, h, this->field, this->max_life_time);
     predator->setUnitsPointer(this->units_struct);
     units_struct->predators.push_back(predator);
 }
 
-Predator::Predator(int i, int j, Field *field_pointer, int time_of_life)
+Predator::Predator(int v, int h, Field *field_pointer, int time_of_life)
 {
-    place.setV(i);
-    place.setH(j);
+    place.setV(v);
+    place.setH(h);
     target = NULL;
     max_life_time = time_of_life;
     life_time = 0;

@@ -118,7 +118,6 @@ void ModelTest::fieldTest()
 {
     Field field;
 
-    QVERIFY_EXCEPTION_THROWN(Field field1(-13, 9), BadFieldCreate);
     QCOMPARE(field.getLength(), 10);
     QCOMPARE(field.getHeight(), 10);
     QCOMPARE(field.isEmpty(0, 0), true);
@@ -149,16 +148,6 @@ void ModelTest::fieldTest()
     QVERIFY_EXCEPTION_THROWN(field.setPosition(-1, 0, PREDATOR), BadFieldBoundary);
     QVERIFY_EXCEPTION_THROWN(field.setPosition(10, 10, PREY), BadFieldBoundary);
     QCOMPARE(field.whatIsEmpty(2, 4), 3);
-
-    Field field2(10, 10);
-    //TODO: я не понимаю, зачем тут филд2, исправьте, пожалуйста, сами
-    //field2 = field;
- //   QCOMPARE(field2.getPosition(2, 5), PREDATOR);
- //   QCOMPARE(field2.getPosition(3, 4), PREY);
- //   QCOMPARE(field2.isEmpty(-1, 0), false);
- //   QCOMPARE(field2.whatIsEmpty(2, 4), 3);
- //   QCOMPARE(field2.getHeight(), 5);
- //   QCOMPARE(field2.getLength(), 7);
 
 }
 

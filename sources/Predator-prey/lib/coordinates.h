@@ -18,17 +18,12 @@ class Coordinates
     int horizontal;
 
 public:
-    /**
-     * @brief Coordinates - конструктор без параметров; создает объект координат (0, 0)
-     */
-    //TODO: использовать для этого параметры по умолчанию в следующем конструкторе
-    Coordinates(): vertical(0), horizontal(0) {}
 
     /**
      * @brief Coordinates - конструктор с параметрами; создает объект
      * с заданными координатами
      */
-    Coordinates(int vertical, int horizontal): vertical(vertical), horizontal(horizontal) {}
+    Coordinates(int vertical = 0, int horizontal = 0): vertical(vertical), horizontal(horizontal) {}
 
     /**
      * @brief метод, устанавливающий координату по вертикали
