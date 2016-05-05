@@ -19,10 +19,13 @@
     //    (*it).resize(10, EMPTY);
 
 //}
-Field::Field(int height, int length): height(height), length(length)
+Field::Field(int height, int length)
 {
     if (height < MIN_FIELD_SIZE || length < MIN_FIELD_SIZE
             || height > MAX_FIELD_SIZE || length > MAX_FIELD_SIZE) throw BadFieldCreate();
+
+    this->height = height;
+    this->length = length;
 
     for(int i = 0; i < height; i++){
         field.push_back(std::vector<Position>(length, EMPTY));

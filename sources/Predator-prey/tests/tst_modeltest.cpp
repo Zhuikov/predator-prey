@@ -116,19 +116,15 @@ void ModelTest::coordinatesTest()
 //TODO: очень длинный тест, надо разбить на несколько поменьше, на каждую тестируемую функциональность
 void ModelTest::fieldTest()
 {
-    Field field(5, 7);
+    Field field;
 
     QVERIFY_EXCEPTION_THROWN(Field field1(-13, 9), BadFieldCreate);
-    QCOMPARE(field.getLength(), 7);
-    QCOMPARE(field.getHeight(), 5);
+    QCOMPARE(field.getLength(), 10);
+    QCOMPARE(field.getHeight(), 10);
     QCOMPARE(field.isEmpty(0, 0), true);
     QCOMPARE(field.isEmpty(4, 2), true);
-    QCOMPARE(field.isEmpty(2, 5), true);
-    QCOMPARE(field.isEmpty(4, 6), true);
-    QCOMPARE(field.isEmpty(5, 7), false);
-    QCOMPARE(field.isEmpty(9, 9), false);
+    QCOMPARE(field.isEmpty(10, 10), false);
     QCOMPARE(field.isEmpty(-1, 0), false);
-    QCOMPARE(field.isEmpty(5, -1), false);
     QCOMPARE(field.isEmpty(0, -2), false);
     QCOMPARE(field.isEmpty(-1, 1), false);
     QCOMPARE(field.isEmpty(10, 9), false);
@@ -140,8 +136,8 @@ void ModelTest::fieldTest()
     QCOMPARE(field.whatIsEmpty(0, 0), 1);
     QCOMPARE(field.whatIsEmpty(1, 4), 0);
     QCOMPARE(field.whatIsEmpty(2, 4), 1);
-    QCOMPARE(field.whatIsEmpty(0, 6), 2);
-    QVERIFY_EXCEPTION_THROWN(field.whatIsEmpty(5, 3), BadFieldBoundary);
+    QCOMPARE(field.whatIsEmpty(0, 9), 2);
+    QVERIFY_EXCEPTION_THROWN(field.whatIsEmpty(10, 3), BadFieldBoundary);
 
     field.setPosition(0, 1, PREDATOR);
     field.setPosition(1, 0, PREY);
@@ -151,7 +147,7 @@ void ModelTest::fieldTest()
     field.setPosition(2, 5, PREDATOR);
     field.setPosition(3, 4, PREY);
     QVERIFY_EXCEPTION_THROWN(field.setPosition(-1, 0, PREDATOR), BadFieldBoundary);
-    QVERIFY_EXCEPTION_THROWN(field.setPosition(5, 7, PREY), BadFieldBoundary);
+    QVERIFY_EXCEPTION_THROWN(field.setPosition(10, 10, PREY), BadFieldBoundary);
     QCOMPARE(field.whatIsEmpty(2, 4), 3);
 
     Field field2(10, 10);
