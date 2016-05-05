@@ -11,7 +11,8 @@ SOURCES += main.cpp \
 HEADERS += \
     consoledrawer.h \
     consoleapp.h \
-    consoledialog.h
+    consoledialog.h \
+    badinput.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lib/release/ -llib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../lib/debug/ -llib

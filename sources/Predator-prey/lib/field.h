@@ -25,14 +25,14 @@ class Field
     std::vector< std::vector<Position> > field;
 
     /**
-     * @brief length - текущая длина поля
-     */
-    int length;
-
-    /**
      * @brief height - текущая длина поля
      */
     int height;
+
+    /**
+     * @brief length - текущая длина поля
+     */
+    int length;
 
     /**
      * @brief проверить, не находится ли позиция за границами поля
@@ -56,48 +56,42 @@ public:
     static const int MIN_FIELD_SIZE = 10;
 
     /**
-     * @brief конструктор без параметров, создает поле 10 х 10
-     */
-    Field();
-
-    /**
      * @brief конструктор с параметрами, создает поле указанных размеров
      * @param height - высота поля
      * @param length - длина поля
      */
-    Field(int height, int length);
+    Field(int height = 10, int length = 10);
 
     /**
      * @brief метод, позволяющий узнать, является ли клетка с данными координатами пустым
-     * @param i - координата 1
-     * @param j - координата 2
+     * @param v - координата  по вертикали
+     * @param h - координата по горизонтали
      * @return возвращает true, если клетка свободна и false, если клетка занята
      */
-    bool isEmpty(int i, int j) const;
+    bool isEmpty(int v, int h) const;
 
     /**
      * @brief метод, позволяющий установить на клетку с данными координатами заданный символ
-     * @param i - координата 1
-     * @param j - координата 2
+     * @param v - координата по вертикали
+     * @param h - координата по горизонтали
      * @param Position - позиция, которую надо установить
      */
-    void setPosition(int i, int j, Position);
+    void setPosition(int v, int h, Position);
 
     /**
      * @brief метод, возвращающий свободное направление хода для заданной клетки
-     * @param i - координата клетки 1
-     * @param j - координата клетки 2
-     * @return символ - направление
+     * @param v - координата клетки по вертикали
+     * @param h - координата клетки по горизонтали
      */
-    int whatIsEmpty(int i, int j) const;
+    int whatIsEmpty(int v, int h) const;
 
     /**
      * @brief метод, возвращающий значение клетки с заданными координатами
-     * @param i - координата 1
-     * @param j - координата 2
+     * @param v - координата по вертикали
+     * @param h - координата по горизонтали
      * @return символ - значение
      */
-    Position getPosition(int i, int j) const;
+    Position getPosition(int v, int h) const;
 
     /**
      * @brief метод, возвращающий длину поля в клетках

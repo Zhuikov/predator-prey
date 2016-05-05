@@ -95,22 +95,22 @@ void ModelTest::coordinatesTest()
     QVERIFY2(doubleCompare(dist2, 14.142), "wrong distance between points");
     QVERIFY2(doubleCompare(dist3, 14.318), "wrong distance between points");
 
-    QCOMPARE(A.getI(), 0);
-    A.setJ(110000);
-    QCOMPARE(A.getJ(), 110000);
+    QCOMPARE(A.getV(), 0);
+    A.setH(110000);
+    QCOMPARE(A.getH(), 110000);
 
-    A.setI(15); A.setJ(15);
-    B.setI(15); B.setJ(15);
+    A.setV(15); A.setH(15);
+    B.setV(15); B.setH(15);
     QCOMPARE(A == B, true);
     QCOMPARE(A != B, false);
 
-    B.setJ(16);
+    B.setH(16);
     QCOMPARE(A != B, true);
     QCOMPARE(A == B, false);
 
     Coordinates D;
-    QCOMPARE(D.getI(), 0);
-    QCOMPARE(D.getJ(), 0);
+    QCOMPARE(D.getV(), 0);
+    QCOMPARE(D.getH(), 0);
 }
 
 //TODO: очень длинный тест, надо разбить на несколько поменьше, на каждую тестируемую функциональность
@@ -181,8 +181,8 @@ void ModelTest::predatorMoveTest()
     field.setPosition(4, 3, PREDATOR);
 
     tst_predator->movePredator();
-    QCOMPARE(tst_predator->place.getI(), 4);
-    QCOMPARE(tst_predator->place.getJ(), 4);
+    QCOMPARE(tst_predator->place.getV(), 4);
+    QCOMPARE(tst_predator->place.getH(), 4);
 
 }
 
@@ -200,13 +200,13 @@ void ModelTest::predatorMoveKillTest()
 
     units.predators[0]->movePredator();
 
-    QCOMPARE(tst_predator->place.getI(), 4);
-    QCOMPARE(tst_predator->place.getJ(), 3);
+    QCOMPARE(tst_predator->place.getV(), 4);
+    QCOMPARE(tst_predator->place.getH(), 3);
 
     units.predators[0]->movePredator();
 
-    QCOMPARE(tst_predator->place.getI(), 3);
-    QCOMPARE(tst_predator->place.getJ(), 3);
+    QCOMPARE(tst_predator->place.getV(), 3);
+    QCOMPARE(tst_predator->place.getH(), 3);
     moveEnd(&units);
     QCOMPARE(units.preys.empty(), true);
 }
@@ -230,8 +230,8 @@ void ModelTest::predatorCreateTest()
     units.predators[0]->movePredator();
     units.predators[0]->movePredator();
 
-    QCOMPARE(tst_predator->place.getI(), 2);
-    QCOMPARE(tst_predator->place.getJ(), 3);
+    QCOMPARE(tst_predator->place.getV(), 2);
+    QCOMPARE(tst_predator->place.getH(), 3);
     int pred_size = units.predators.size();
     QCOMPARE(pred_size, 2);
 
@@ -277,8 +277,8 @@ void ModelTest::twoPredatorsTest()
     moveEnd(&units);
     QCOMPARE(units.preys.empty(), true);
 
-    field.setPosition(tst_predator1->place.getI(), tst_predator1->place.getJ(), EMPTY);
-    field.setPosition(tst_predator2->place.getI(), tst_predator2->place.getJ(), EMPTY);
+    field.setPosition(tst_predator1->place.getV(), tst_predator1->place.getH(), EMPTY);
+    field.setPosition(tst_predator2->place.getV(), tst_predator2->place.getH(), EMPTY);
     tst_predator1->died = true;
     tst_predator2->died = true;
     moveEnd(&units);
@@ -303,8 +303,8 @@ void ModelTest::predatorPriorityTest()
 
     tst_predator->movePredator();
 
-    QCOMPARE(tst_predator->place.getI(), 5);
-    QCOMPARE(tst_predator->place.getJ(), 4);
+    QCOMPARE(tst_predator->place.getV(), 5);
+    QCOMPARE(tst_predator->place.getH(), 4);
 }
 
 void ModelTest::modelppInitializeTest()

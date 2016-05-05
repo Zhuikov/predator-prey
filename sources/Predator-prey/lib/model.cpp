@@ -6,7 +6,7 @@ Model::Model(Settings *settings): settings(settings),
                                   model_time(0),
                                   model_day(0),
                                   has_changed(false),
-                                  field(settings->field_height, settings->field_length)
+                                  field(settings->getFieldHeight(), settings->getFieldLength())
 {
     createPredators();
     createPreys();
@@ -23,16 +23,16 @@ bool Model::isEnd() const
 
 void Model::createPredators()
 {
-    for(int i = 0; i < settings->num_of_predators; i++) {
+    for(int i = 0; i < settings->getNumOfPredators(); i++) {
         int v = 0;
         int h = 0;
         do {
-            v = rand() % settings->field_height;
-            h = rand() % settings->field_length;
+            v = rand() % settings->getFieldHeight();
+            h = rand() % settings->getFieldLength();
         }
         while(field.isEmpty(v, h) == false);
 
-        Predator *predator = new Predator(v, h, &field, settings->moves_without_meal);
+        Predator *predator = new Predator(v, h, &field, settings->getMovesWithoutMeal());
         predator->setUnitsPointer(&units);
         units.predators.push_back(predator);
     }
@@ -40,12 +40,12 @@ void Model::createPredators()
 
 void Model::createPreys()
 {
-    for(int i = 0; i < settings->num_of_preys; i++) {
+    for(int i = 0; i < settings->getNumOfPreys(); i++) {
         int v = 0;
         int h = 0;
         do {
-            v = rand() % settings->field_height;
-            h = rand() % settings->field_length;
+            v = rand() % settings->getFieldHeight();
+            h = rand() % settings->getFieldLength();
         }
         while (field.isEmpty(v, h) == false);
 

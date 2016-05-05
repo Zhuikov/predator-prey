@@ -2,35 +2,27 @@
 #include "badfield.h"
 #include "badboundary.h"
 
-//TODO: везде тут a и b не понятны, уж лучше h и v, чем это, надо только проверить, что я их местами не перепутала
-
-
-//TODO: убрать дублирование конструкторов, сделать один конструктор с параметрами по умолчанию
-//TODO: и параметр по умолчанию не 10, а MIN_FIELD_SIZE
-Field::Field()
-{
-    this->height = 10;
-    this->length = 10;
+//Field::Field()
+//{
+//    this->height = 10;
+//    this->length = 10;
 
 //TODO: что это за бред с resize???
 //    field.resize(10);
-    for(int i = 0; i < 10; i++){
-        field.push_back(std::vector<Position>(10, EMPTY));
-    }
+//    for(int i = 0; i < 10; i++){
+//        field.push_back(std::vector<Position>(10, EMPTY));
+//    }
 
     //TODO: даже если у вас цикл с одной строчкой в теле, лучше явно ставить фигурные скобки
     //потому что иначе очень легко дописать вторую строку, и забыть поставить скобки
     //for (std::vector<std::vector<Position> >::iterator it = field.begin(); it != field.end(); ++it)
     //    (*it).resize(10, EMPTY);
 
-}
-
-//TODO: использовать списки инициализации
-Field::Field(int height, int length)
+//}
+Field::Field(int height, int length): height(height), length(length)
 {
-    if (height < 0 || length < 0) throw BadFieldCreate();
-    this->height = height;
-    this->length = length;
+    if (height < MIN_FIELD_SIZE || length < MIN_FIELD_SIZE
+            || height > MAX_FIELD_SIZE || length > MAX_FIELD_SIZE) throw BadFieldCreate();
 
     for(int i = 0; i < height; i++){
         field.push_back(std::vector<Position>(length, EMPTY));

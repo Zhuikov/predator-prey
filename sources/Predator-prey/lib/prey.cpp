@@ -14,19 +14,19 @@ void Prey::createPrey()
     chooseRandomDirection();
     switch (direction) {
         case UP: {
-            spawnPrey(place.getI() - 1, place.getJ());
+            spawnPrey(place.getV() - 1, place.getH());
             break;
         }
         case RIGHT: {
-            spawnPrey(place.getI(), place.getJ() + 1);
+            spawnPrey(place.getV(), place.getH() + 1);
             break;
         }
         case DOWN: {
-            spawnPrey(place.getI() + 1, place.getJ());
+            spawnPrey(place.getV() + 1, place.getH());
             break;
         }
         case LEFT: {
-            spawnPrey(place.getI(), place.getJ() - 1);
+            spawnPrey(place.getV(), place.getH() - 1);
         }
     }
 
@@ -54,18 +54,18 @@ void Prey::isChase()
     }
 }
 
-Prey::Prey(const int a, const int b, Field* ptrF)
+Prey::Prey(const int v, const int h, Field* ptrF)
 {
-    place.setI(a);
-    place.setJ(b);
-    dangerous_pred.setI(-1);
-    dangerous_pred.setJ(-1);
+    place.setV(v);
+    place.setH(h);
+    dangerous_pred.setV(-1);
+    dangerous_pred.setH(-1);
     energy = 0;
     life_time = 0;
     has_moved = false;
     died = false;
     field = ptrF;
-    field->setPosition(this->place.getI(), this->place.getJ(), PREY);
+    field->setPosition(this->place.getV(), this->place.getH(), PREY);
     direction = UP;
     warning = false;
 }
@@ -81,9 +81,9 @@ void Prey::movePrey()
     isChase();
     this->directionFinding();
     if (has_moved == false) {
-        this->field->setPosition(this->place.getI(), this->place.getJ(), EMPTY);
+        this->field->setPosition(this->place.getV(), this->place.getH(), EMPTY);
         this->go();
-        this->field->setPosition(this->place.getI(), this->place.getJ(), PREY);
+        this->field->setPosition(this->place.getV(), this->place.getH(), PREY);
     }
     else has_moved = false;
     if (this->energy == PREY_CREATE_ENERGY) this->createPrey();

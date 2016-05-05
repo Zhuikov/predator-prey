@@ -20,10 +20,10 @@ void Predator::directionFinding()
         /// тут магия: если закомментировать предыдущую строчку и раскомментировать следующую, то тесты проходят;
         /// а так, как сейчас - все падает. Хотя написано то же самое
         //if (distance > 0.9 && distance < 1.1) {
-            if (target->place.getI() < place.getI()) direction = UP;
-            else if (target->place.getI() > place.getI()) direction = DOWN;
-            else if (target->place.getJ() < place.getJ()) direction = LEFT;
-            else if (target->place.getJ() > place.getJ()) direction = RIGHT;
+            if (target->place.getV() < place.getV()) direction = UP;
+            else if (target->place.getV() > place.getV()) direction = DOWN;
+            else if (target->place.getH() < place.getH()) direction = LEFT;
+            else if (target->place.getH() > place.getH()) direction = RIGHT;
             this->killPrey();
         }
         else chooseToTargetDirection();
@@ -32,19 +32,19 @@ void Predator::directionFinding()
 
 void Predator::chooseToTargetDirection()
 {
-    if ((place.getI() <= target->place.getI()) && (place.getJ() < target->place.getJ())) {
+    if ((place.getV() <= target->place.getV()) && (place.getH() < target->place.getH())) {
             if (setDirection(RIGHT) == false)
                 if (setDirection(DOWN) == false) chooseRandomDirection();
     }
-    if ((place.getI() < target->place.getI()) && (place.getJ() >= target->place.getJ())) {
+    if ((place.getV() < target->place.getV()) && (place.getH() >= target->place.getH())) {
             if (setDirection(DOWN) == false)
                 if (setDirection(LEFT) == false) chooseRandomDirection();
     }
-    if ((place.getI() > target->place.getI()) && (place.getJ() <= target->place.getJ())) {
+    if ((place.getV() > target->place.getV()) && (place.getH() <= target->place.getH())) {
             if (setDirection(UP) == false)
                 if (setDirection(RIGHT) == false) chooseRandomDirection();
     }
-    if ((place.getI() >= target->place.getI()) && (place.getJ() > target->place.getJ())) {
+    if ((place.getV() >= target->place.getV()) && (place.getH() > target->place.getH())) {
             if (setDirection(LEFT) == false)
                 if (setDirection(UP) == false) chooseRandomDirection();
     }
@@ -89,19 +89,19 @@ void Predator::createPredator()
     chooseRandomDirection();
     switch (direction) {
     case UP:    {
-        spawnPredator(place.getI() - 1, place.getJ());
+        spawnPredator(place.getV() - 1, place.getH());
         break;
     }
     case RIGHT: {
-        spawnPredator(place.getI(), place.getJ() + 1);
+        spawnPredator(place.getV(), place.getH() + 1);
         break;
     }
     case DOWN:  {
-        spawnPredator(place.getI() + 1, place.getJ());
+        spawnPredator(place.getV() + 1, place.getH());
         break;
     }
     case LEFT:  {
-        spawnPredator(place.getI(), place.getJ() - 1);
+        spawnPredator(place.getV(), place.getH() - 1);
     }
     }
 
@@ -119,8 +119,8 @@ void Predator::spawnPredator(int i, int j)
 
 Predator::Predator(int i, int j, Field *field_pointer, int time_of_life)
 {
-    place.setI(i);
-    place.setJ(j);
+    place.setV(i);
+    place.setH(j);
     target = NULL;
     max_life_time = time_of_life;
     life_time = 0;
@@ -128,7 +128,7 @@ Predator::Predator(int i, int j, Field *field_pointer, int time_of_life)
     has_moved = false;
     died = false;
     field = field_pointer;
-    field->setPosition(this->place.getI(), this->place.getJ(), PREDATOR);
+    field->setPosition(this->place.getV(), this->place.getH(), PREDATOR);
     direction = UP;
 
 }
@@ -143,16 +143,16 @@ void Predator::movePredator()
     this->findPrey();
     this->directionFinding();
     if (has_moved == false) {
-        this->field->setPosition(this->place.getI(), this->place.getJ(), EMPTY);
+        this->field->setPosition(this->place.getV(), this->place.getH(), EMPTY);
         this->go();
-        this->field->setPosition(this->place.getI(), this->place.getJ(), PREDATOR);
+        this->field->setPosition(this->place.getV(), this->place.getH(), PREDATOR);
     }
     else has_moved = false;
     if (this->energy == PREDATOR_CREATE_ENERGY) this->createPredator();
 
     life_time++;
     if (life_time == max_life_time) {
-        this->field->setPosition(this->place.getI(), this->place.getJ(), EMPTY);
+        this->field->setPosition(this->place.getV(), this->place.getH(), EMPTY);
         this->died = true;
     }
 }

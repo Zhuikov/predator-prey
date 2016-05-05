@@ -19,11 +19,6 @@ class ConsoleDialog
 
     int readInt();
 
-    void setNewMovesWithoutMeal(const int);
-    void setNewFieldBoundary(const int, const int);
-    void setNumOfPreys(const int);
-    void setNumOfPredators(const int);
-
     const std::map< std::string, int > consoleCommands =
     {
         {"1", 1},
@@ -34,7 +29,7 @@ class ConsoleDialog
     };
 
 public:
-    ConsoleDialog(Settings *settings);
+    ConsoleDialog(Settings *settings): settings(settings) {}
     int mainMenuPresentation();
     void settingsMenuPresentation();
 

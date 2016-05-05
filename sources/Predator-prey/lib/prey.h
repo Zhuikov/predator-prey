@@ -48,11 +48,11 @@ public:
 
     /**
      * @brief конструктор с параметрами
-     * @param a - координата 1
-     * @param b - координата 2
+     * @param v - координата по вертикали
+     * @param h - координата по горизонтали
      * @param ptrF - указатель на поле, где создается жертва
      */
-    Prey(const int a, const int b, Field* ptrF);
+    Prey(const int v, const int h, Field* ptrF);
 
     /**
      * @brief метод, устанавливающий указатель на класс с хищниками и жертвами

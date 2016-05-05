@@ -4,55 +4,52 @@
 /**
  * @brief класс для представления координат объектов на поле
  */
-//TODO: пусть везде будут только h и v, никаких i, j, a, b
 //TODO: думаю вам лучше иметь enum Direction ближе к этому классу, и в нем скрыть все подробности определения направления на основе координат
 class Coordinates
 {
-    //TODO: Если вы настаиваете на одной букве, пусть это будет v
     /**
-     * @brief i - координата по вертикали
+     * @brief vertical - координата по вертикали
      */
-    int i;
+    int vertical;
 
-    //TODO: Если вы настаиваете на одной букве, пусть это будет h
     /**
-     * @brief j - координата по горизонтали
+     * @brief horizontal - координата по горизонтали
      */
-    int j;
+    int horizontal;
 
 public:
     /**
      * @brief Coordinates - конструктор без параметров; создает объект координат (0, 0)
      */
     //TODO: использовать для этого параметры по умолчанию в следующем конструкторе
-    Coordinates(): i(0), j(0) {}
+    Coordinates(): vertical(0), horizontal(0) {}
 
     /**
      * @brief Coordinates - конструктор с параметрами; создает объект
      * с заданными координатами
      */
-    Coordinates(int a, int b): i(a), j(b) {}
+    Coordinates(int vertical, int horizontal): vertical(vertical), horizontal(horizontal) {}
 
     /**
      * @brief метод, устанавливающий координату по вертикали
      */
     //TODO: setI --> setV --> setVertical
-    void setI(int a) { this->i = a; }
+    void setV(int vertical) { this->vertical = vertical; }
 
     /**
      * @brief метод, устанавливающий координату по горизонтали
      */
-    void setJ(int b) { this->j = b; }
+    void setH(int horizontal) { this->horizontal = horizontal; }
 
     /**
      * @brief метод, возвращающий координату по вертикали
      */
-    int getI() const { return i; }
+    int getV() const { return vertical; }
 
     /**
      * @brief метод, возвращающий координату по горизонтали
      */
-    int getJ() const { return j; }
+    int getH() const { return horizontal; }
 
     /**
      * @brief Разность координат - расстояние между соответсвующими точками на плоскости

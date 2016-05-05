@@ -19,8 +19,12 @@ class Settings
     int moves_without_meal;
 
     /**
-     * @brief max_moves_without_meal - максимальное время
-     * жизни животного без еды
+     * @brief min_moves_without_meal - минимальное время жизни животного без еды
+     */
+    int min_moves_without_meal;
+
+    /**
+     * @brief max_moves_without_meal - максимальное время жизни животного без еды
      */
     int max_moves_without_meal;
 
@@ -34,13 +38,23 @@ class Settings
      */
     int num_of_preys;
 
-    friend class Model;
-    friend class Field;
-    //TODO: Это что такое?? Библиотека зависит от консоли?
-    friend class ConsoleDialog;
-
 public:
+
     Settings();
+    int getFieldLength() const { return field_length; }
+    int getFieldHeight() const { return field_height; }
+    int getNumOfPreys()  const { return num_of_preys; }
+    int getNumOfPredators()   const { return num_of_predators; }
+    int getMovesWithoutMeal() const { return moves_without_meal; }
+    int getMinMovesWithoutMeal() const { return min_moves_without_meal; }
+    int getMaxMovesWithoutMeal() const { return max_moves_without_meal; }
+
+    void setFieldLength(const int);
+    void setFieldHeight(const int);
+    void setNumOfPredators(const int);
+    void setNumOfPreys(const int);
+    void setMovesWithoutMeal(const int);
+
 };
 
 #endif // SETTINGS_H
