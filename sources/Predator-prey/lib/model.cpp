@@ -1,12 +1,14 @@
 #include "model.h"
+#include <algorithm>
 #include <ctime>
 #include <cstdlib>
 
-Model::Model(Settings *settings): settings(settings),
-                                  model_time(0),
-                                  model_day(0),
-                                  has_changed(false),
-                                  field(settings->getFieldHeight(), settings->getFieldLength())
+Model::Model(Settings *settings):
+    settings(settings),
+    model_time(0),
+    model_day(0),
+    has_changed(false),
+    field(settings->getFieldHeight(), settings->getFieldLength())
 {
     createPredators();
     createPreys();
@@ -32,9 +34,7 @@ void Model::createPredators()
         }
         while(field.isEmpty(v, h) == false);
 
-        Predator *predator = new Predator(v, h, &field, settings->getMovesWithoutMeal());
-        predator->setUnitsPointer(&units);
-        units.predators.push_back(predator);
+        Predator *predator = new Predator(v, h, &field, &units, settings->getMovesWithoutMeal());
     }
 }
 
@@ -49,29 +49,7 @@ void Model::createPreys()
         }
         while (field.isEmpty(v, h) == false);
 
-        Prey *prey = new Prey(v, h, &field);
-        prey->setUnitsPointer(&units);
-        units.preys.push_back(prey);
-    }
-}
-
-//TODO: это ненужное удалить, но в любом случае можно было использовать foreach синтаксис
-void Model::deletePredators()
-{
-    if (!units.predators.empty()) {
-        for (std::vector<Predator*>::const_iterator i = units.predators.begin();
-             i != units.predators.end(); ++i) delete *i;
-        units.predators.clear();
-    }
-}
-
-//TODO: это ненужное удалить, но в любом случае можно было использовать foreach синтаксис
-void Model::deletePreys()
-{
-    if (!units.preys.empty()) {
-        for (std::vector<Prey*>::const_iterator i = units.preys.begin();
-             i != units.preys.end(); ++i) delete *i;
-        units.preys.clear();
+        Prey *prey = new Prey(v, h, &field, &units);
     }
 }
 
@@ -79,14 +57,10 @@ void Model::movePreys()
 {
     incModelTime();
 
-    for(Prey* prey: units.preys){
-        if(prey->died == false){
-            prey->movePrey();
-        }
+    std::vector< Prey* >::iterator last = units.preys.end();
+    for (std::vector< Prey* >::iterator i = units.preys.begin(); i != last; ++i) {
+        if ((*i)->died == false) (*i)->movePrey();
     }
-    //std::vector<Prey*>::iterator last = units.preys.end();
-    //for (std::vector<Prey*>::iterator i = units.preys.begin(); i != last; ++i)
-    //    if ((*i)->died == false) (*i)->movePrey();
 
 }
 
@@ -94,15 +68,10 @@ void Model::movePredators()
 {
     incModelTime();
 
-    for(Predator* predator: units.predators){
-        if(predator->died == false){
-            predator->movePredator();
-        }
+    std::vector< Predator* >::iterator last = units.predators.end();
+    for (std::vector< Predator* >::iterator i = units.predators.begin(); i !=last; ++i) {
+        if ((*i)->died == false) (*i)->movePredator();
     }
-
-//    std::vector<Predator*>::iterator last = units.predators.end();
-//    for (std::vector<Predator*>::iterator i = units.predators.begin(); i !=last; ++i)
-//        if ((*i)->died == false) (*i)->movePredator();
 }
 
 void Model::incModelTime()
@@ -114,7 +83,7 @@ void Model::incModelTime()
     else has_changed = false;
 
     if (this->model_time > 23) {
-        this->model_day++;
+        this->model_day ++;
         this->model_time = 0;
     }
 }
@@ -123,14 +92,16 @@ void Model::incModelTime()
 //это можно обсудить отдельно после основного и очевидного рефакторинга
 void Model::removePredators()
 {
+//    std::vector< Predator* >::iterator begin = units.predators.begin();
+//    std::vector< Predator* >::iterator end = units.predators.end();
+//    std::remove_if(begin, end, died == true);
     int num_of_died = 0;
-    for (std::vector<Predator*>::const_iterator it = units.predators.begin();
+    for (std::vector< Predator* >::const_iterator it = units.predators.begin();
          it != units.predators.end(); ++it)
         if ((*it)->died == true) num_of_died++;
-
     int num_deleted_died = 0;
     while (num_deleted_died < num_of_died) {
-        for (std::vector<Predator*>::iterator it = units.predators.begin();
+        for (std::vector< Predator* >::iterator it = units.predators.begin();
              it != units.predators.end(); ++it) {
             if ((*it)->died == true) {
                 delete (*it);
@@ -146,12 +117,12 @@ void Model::removePredators()
 void Model::removePreys()
 {
     int num_of_died = 0;
-    for (std::vector<Prey*>::const_iterator it = units.preys.begin(); it != units.preys.end(); ++it)
+    for (std::vector< Prey* >::const_iterator it = units.preys.begin(); it != units.preys.end(); ++it)
         if ((*it)->died == true) num_of_died++;
 
     int num_deleted_died = 0;
     while (num_deleted_died < num_of_died) {
-        for (std::vector<Prey*>::iterator it = units.preys.begin(); it != units.preys.end(); ++it) {
+        for (std::vector< Prey* >::iterator it = units.preys.begin(); it != units.preys.end(); ++it) {
             if ((*it)->died == true) {
                 delete (*it);
                 if ((*it) != units.preys.back()) std::swap((*it), units.preys.back());
@@ -167,10 +138,4 @@ void Model::remove()
 {
     removePredators();
     removePreys();
-}
-
-Model::~Model()
-{
-    deletePredators();
-    deletePreys();
 }

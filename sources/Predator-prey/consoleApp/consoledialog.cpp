@@ -4,8 +4,6 @@
 #include "badinput.h"
 #include <iostream>
 
-//TODO в этом классе надо не забывать про форматирование строк, добавлять пробельные строки для разделения на блоки зрительно и т.п.
-
 int ConsoleDialog::readInt()
 {
     std::getline(std::cin, this->input_number);

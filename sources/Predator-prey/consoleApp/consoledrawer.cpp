@@ -1,7 +1,7 @@
 #include "consoledrawer.h"
 #include <iostream>
+#include <cstring>
 
-//TODO в этом классе надо не забывать про форматирование строк, добавлять пробельные строки для разделения на блоки зрительно и т.п.
 void ConsoleDrawer::showModel()
 {
     std::cout << std::endl;
@@ -13,12 +13,9 @@ void ConsoleDrawer::showModel()
 
 void ConsoleDrawer::showResult()
 {
-    int num_of_predators = this->model->getPredatorsNum();
-    int num_of_preys = this->model->getPreysNum();
-
-    if (num_of_predators == 0 && num_of_preys > 0) std::cout << "Жертвы убежали от хищников!";
-    else if (num_of_predators > 0 && num_of_preys == 0) std::cout << "Хищники съели всех жертв!";
-    else if (num_of_predators == 0 && num_of_preys == 0) std::cout << "Ничья!";
+    if (model->getPredatorsNum() == 0 && model->getPreysNum() > 0) std::cout << "Жертвы убежали от хищников!";
+    else if (model->getPredatorsNum() > 0 && model->getPreysNum() == 0) std::cout << "Хищники съели всех жертв!";
+    else if (model->getPredatorsNum() == 0 && model->getPreysNum() == 0) std::cout << "Ничья!";
 
     std::cout << std::endl << std::endl;
 
@@ -26,15 +23,13 @@ void ConsoleDrawer::showResult()
 
 void ConsoleDrawer::drawHead()
 {
-    int num_of_stars_left;
-    int num_of_stars_right;
+    int lenght_of_string = std::strlen("День ХХ Время HH:MM");
+    int num_of_stars_left = (this->field->getLength() * 2 - lenght_of_string) / 2;
+    int num_of_stars_right = this->field->getLength() * 2 - lenght_of_string - num_of_stars_left;
 
-    //TODO: что значит 20
-    num_of_stars_left = (this->field->getLength() * 2 - 20) / 2;
-    num_of_stars_right = (this->field->getLength() * 2 - 20 - num_of_stars_left);
-
-    for (int i = 0; i < num_of_stars_left; i++)
+    for (int i = 0; i < num_of_stars_left; i++) {
         std::cout << '*';
+    }
 
     int day = this->model->getDay();
     std::cout << "День ";
@@ -47,20 +42,18 @@ void ConsoleDrawer::drawHead()
         else std::cout << time;
     std::cout << ':' << "00";
 
-    for (int i = 0; i < num_of_stars_right; i++)
+    for (int i = 0; i < num_of_stars_right; i++) {
         std::cout << '*';
+    }
 
     std::cout << std::endl;
 }
 
 void ConsoleDrawer::drawStatistics()
 {
-    int num_of_stars_left;
-    int num_of_stars_right;
-
-    //TODO: что значит 21? можно поменять тут на 31, а 20 в предыдущем методе не менять?
-    num_of_stars_left = (this->field->getLength() * 2 - 21) / 2;
-    num_of_stars_right = (this->field->getLength() * 2 - 21 - num_of_stars_left);
+    int length_of_string = std::strlen("Хищники XX Жертвы XX");
+    int num_of_stars_left = (this->field->getLength() * 2 - length_of_string) / 2;
+    int num_of_stars_right = this->field->getLength() * 2 - length_of_string - num_of_stars_left;
 
     for (int i = 0; i < num_of_stars_left; i++)
         std::cout << '*';
@@ -75,8 +68,9 @@ void ConsoleDrawer::drawStatistics()
     if (preys >= 10) std::cout << preys;
         else std::cout << '0' << preys;
 
-    for (int i = 0; i < num_of_stars_right; i++)
+    for (int i = 0; i < num_of_stars_right; i++) {
         std::cout << '*';
+    }
 
     std::cout << std::endl;
 }
@@ -94,9 +88,9 @@ void ConsoleDrawer::drawField()
         for (int j = 0; j < this->field->getLength(); j++) {
             position = this->field->getPosition(i, j);
             switch (position) {
-                case EMPTY:    { std::cout << ". "; break; }
-                case PREDATOR: { std::cout << "X "; break; }
-                case PREY:     { std::cout << "O "; break; }
+                case Position::EMPTY:    { std::cout << ". "; break; }
+                case Position::PREDATOR: { std::cout << "X "; break; }
+                case Position::PREY:     { std::cout << "O "; break; }
             }
         }
         std::cout << std::endl;

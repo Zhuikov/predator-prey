@@ -2,6 +2,18 @@
 #define COORDINATES_H
 
 /**
+ * @brief Direction - возможные значения направлений
+ */
+enum class Direction
+{
+    UP,
+    RIGHT,
+    DOWN,
+    LEFT,
+    NO_DIRECTION
+};
+
+/**
  * @brief класс для представления координат объектов на поле
  */
 //TODO: думаю вам лучше иметь enum Direction ближе к этому классу, и в нем скрыть все подробности определения направления на основе координат
@@ -28,7 +40,6 @@ public:
     /**
      * @brief метод, устанавливающий координату по вертикали
      */
-    //TODO: setI --> setV --> setVertical
     void setV(int vertical) { this->vertical = vertical; }
 
     /**

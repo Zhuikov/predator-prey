@@ -30,14 +30,11 @@ public:
     void movePredators();
     bool isEnd() const;
     void createPredators();
-    void deletePredators();
     void createPreys();
-    void deletePreys();
     void removePredators();
     void removePreys();
     void remove();
 
-    ~Model();
     void saveModel();
     void loadModel();
 

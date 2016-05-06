@@ -127,27 +127,27 @@ void ModelTest::fieldTest()
     QCOMPARE(field.isEmpty(0, -2), false);
     QCOMPARE(field.isEmpty(-1, 1), false);
     QCOMPARE(field.isEmpty(10, 9), false);
-    QCOMPARE(field.getPosition(2, 5), EMPTY);
+    QCOMPARE(field.getPosition(2, 5), Position::EMPTY);
 
-    field.setPosition(1, 4, PREDATOR);
+    field.setPosition(1, 4, Position::PREDATOR);
     QCOMPARE(field.isEmpty(1, 4), false);
-    QCOMPARE(field.whatIsEmpty(4, 0), 0);
-    QCOMPARE(field.whatIsEmpty(0, 0), 1);
-    QCOMPARE(field.whatIsEmpty(1, 4), 0);
-    QCOMPARE(field.whatIsEmpty(2, 4), 1);
-    QCOMPARE(field.whatIsEmpty(0, 9), 2);
+    QCOMPARE(field.whatIsEmpty(4, 0), Direction::UP);
+    QCOMPARE(field.whatIsEmpty(0, 0), Direction::RIGHT);
+    QCOMPARE(field.whatIsEmpty(1, 4), Direction::UP);
+    QCOMPARE(field.whatIsEmpty(2, 4), Direction::RIGHT);
+    QCOMPARE(field.whatIsEmpty(0, 9), Direction::DOWN);
     QVERIFY_EXCEPTION_THROWN(field.whatIsEmpty(10, 3), BadFieldBoundary);
 
-    field.setPosition(0, 1, PREDATOR);
-    field.setPosition(1, 0, PREY);
+    field.setPosition(0, 1, Position::PREDATOR);
+    field.setPosition(1, 0, Position::PREY);
     QCOMPARE(field.isEmpty(0, 0), true);
-    QCOMPARE(field.whatIsEmpty(0, 0), -1);
+    QCOMPARE(field.whatIsEmpty(0, 0), Direction::NO_DIRECTION);
 
-    field.setPosition(2, 5, PREDATOR);
-    field.setPosition(3, 4, PREY);
-    QVERIFY_EXCEPTION_THROWN(field.setPosition(-1, 0, PREDATOR), BadFieldBoundary);
-    QVERIFY_EXCEPTION_THROWN(field.setPosition(10, 10, PREY), BadFieldBoundary);
-    QCOMPARE(field.whatIsEmpty(2, 4), 3);
+    field.setPosition(2, 5, Position::PREDATOR);
+    field.setPosition(3, 4, Position::PREY);
+    QVERIFY_EXCEPTION_THROWN(field.setPosition(-1, 0, Position::PREDATOR), BadFieldBoundary);
+    QVERIFY_EXCEPTION_THROWN(field.setPosition(10, 10, Position::PREY), BadFieldBoundary);
+    QCOMPARE(field.whatIsEmpty(2, 4), Direction::LEFT);
 
 }
 
@@ -156,14 +156,12 @@ void ModelTest::predatorMoveTest()
     Field field;
     Units units;
 
-    Predator* tst_predator = new Predator(4, 4, &field, 20);
-    tst_predator->setUnitsPointer(&units);
-    units.predators.push_back(tst_predator);
+    Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
-    field.setPosition(3, 4, PREDATOR);
-    field.setPosition(4, 5, PREDATOR);
-    field.setPosition(5, 4, PREDATOR);
-    field.setPosition(4, 3, PREDATOR);
+    field.setPosition(3, 4, Position::PREDATOR);
+    field.setPosition(4, 5, Position::PREDATOR);
+    field.setPosition(5, 4, Position::PREDATOR);
+    field.setPosition(4, 3, Position::PREDATOR);
 
     tst_predator->movePredator();
     QCOMPARE(tst_predator->place.getV(), 4);
@@ -176,12 +174,8 @@ void ModelTest::predatorMoveKillTest()
     Field field(10, 10);
     Units units;
 
-    Prey* tst_prey = new Prey(3, 3, &field);
-    tst_prey->setUnitsPointer(&units);
-    Predator* tst_predator = new Predator(4, 4, &field, 20);
-    tst_predator->setUnitsPointer(&units);
-    units.predators.push_back(tst_predator);
-    units.preys.push_back(tst_prey);
+    Prey* tst_prey = new Prey(3, 3, &field, &units);
+    Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     units.predators[0]->movePredator();
 
@@ -201,19 +195,13 @@ void ModelTest::predatorCreateTest()
     Field field(10, 10);
     Units units;
 
-    Prey* tst_prey = new Prey(3, 3, &field);
-    tst_prey->setUnitsPointer(&units);
-    Prey* tst_prey2 = new Prey(2, 3, &field);
-    tst_prey2->setUnitsPointer(&units);
-    Predator* tst_predator = new Predator(4, 4, &field, 20);
-    tst_predator->setUnitsPointer(&units);
-    units.predators.push_back(tst_predator);
-    units.preys.push_back(tst_prey);
-    units.preys.push_back(tst_prey2);
+    Prey* tst_prey = new Prey(3, 3, &field, &units);
+    Prey* tst_prey2 = new Prey(2, 3, &field, &units);
+    Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
-    units.predators[0]->movePredator();
-    units.predators[0]->movePredator();
-    units.predators[0]->movePredator();
+    tst_predator->movePredator();
+    tst_predator->movePredator();
+    tst_predator->movePredator();
 
     QCOMPARE(tst_predator->place.getV(), 2);
     QCOMPARE(tst_predator->place.getH(), 3);
@@ -227,12 +215,10 @@ void ModelTest::predatorHungryTest()
     Field field;
     Units units;
 
-    Predator* tst_predator = new Predator(4, 4, &field, 20);
-    tst_predator->setUnitsPointer(&units);
-    units.predators.push_back(tst_predator);
+    Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     for (int i = 0; i < 20; i++) {
-        units.predators[0]->movePredator();
+        tst_predator->movePredator();
     }
     moveEnd(&units);
     int pred_size = units.predators.size();
@@ -245,14 +231,9 @@ void ModelTest::twoPredatorsTest()
     Field field;
     Units units;
 
-    Predator* tst_predator1 = new Predator(4, 5, &field, 20);
-    tst_predator1->setUnitsPointer(&units);
-    Predator* tst_predator2 = new Predator(2, 3, &field, 20);
-    tst_predator2->setUnitsPointer(&units);
-    units.predators.push_back(tst_predator1);
-    units.predators.push_back(tst_predator2);
-    Prey* tst_prey = new Prey(3, 4, &field);
-    units.preys.push_back(tst_prey);
+    Predator* tst_predator1 = new Predator(4, 5, &field, &units, 20);
+    Predator* tst_predator2 = new Predator(2, 3, &field, &units, 20);
+    Prey* tst_prey = new Prey(3, 4, &field, &units);
 
     tst_predator1->movePredator();
     tst_predator2->movePredator();
@@ -262,8 +243,8 @@ void ModelTest::twoPredatorsTest()
     moveEnd(&units);
     QCOMPARE(units.preys.empty(), true);
 
-    field.setPosition(tst_predator1->place.getV(), tst_predator1->place.getH(), EMPTY);
-    field.setPosition(tst_predator2->place.getV(), tst_predator2->place.getH(), EMPTY);
+    field.setPosition(tst_predator1->place.getV(), tst_predator1->place.getH(), Position::EMPTY);
+    field.setPosition(tst_predator2->place.getV(), tst_predator2->place.getH(), Position::EMPTY);
     tst_predator1->died = true;
     tst_predator2->died = true;
     moveEnd(&units);
@@ -276,15 +257,9 @@ void ModelTest::predatorPriorityTest()
     Field field(10, 10);
     Units units;
 
-    Predator* tst_predator = new Predator(4, 4, &field, 20);
-    tst_predator->setUnitsPointer(&units);
-    units.predators.push_back(tst_predator);
-    Prey* tst_prey  = new Prey(3, 3, &field);
-    Prey* tst_prey2 = new Prey(5, 4, &field);
-    tst_prey->setUnitsPointer(&units);
-    tst_prey2->setUnitsPointer(&units);
-    units.preys.push_back(tst_prey);
-    units.preys.push_back(tst_prey2);
+    Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
+    Prey* tst_prey  = new Prey(3, 3, &field, &units);
+    Prey* tst_prey2 = new Prey(5, 4, &field, &units);
 
     tst_predator->movePredator();
 
@@ -297,7 +272,6 @@ void ModelTest::modelppInitializeTest()
     Settings sett;
     Model model(&sett);
 
-    //model.initializeModel();
     QCOMPARE(model.getDay(), 0);
     QCOMPARE(model.getTime(), 0);
 
@@ -320,28 +294,14 @@ void ModelTest::debugTest()
 {
     Field field(10, 10);
     Units units;
-    Predator *tst_pred1 = new Predator(8, 9, &field, 5);
-    tst_pred1->setUnitsPointer(&units);
-    Predator *tst_pred2 = new Predator(9, 9, &field, 5);
-    tst_pred2->setUnitsPointer(&units);
-    Predator *tst_pred3 = new Predator(0, 0, &field, 5);
-    tst_pred3->setUnitsPointer(&units);
-    units.predators.push_back(tst_pred1);
-    units.predators.push_back(tst_pred2);
-    units.predators.push_back(tst_pred3);
+    Predator *tst_pred1 = new Predator(8, 9, &field, &units, 5);
+    Predator *tst_pred2 = new Predator(9, 9, &field, &units, 5);
+    Predator *tst_pred3 = new Predator(0, 0, &field, &units, 5);
 
-    Prey *tst_prey1 = new Prey(0, 1, &field);
-    tst_prey1->setUnitsPointer(&units);
-    Prey *tst_prey2 = new Prey(0, 3, &field);
-    tst_prey2->setUnitsPointer(&units);
-    Prey *tst_prey3 = new Prey(0, 2, &field);
-    tst_prey3->setUnitsPointer(&units);
-    Prey *tst_prey4 = new Prey(0, 4, &field);
-    tst_prey4->setUnitsPointer(&units);
-    units.preys.push_back(tst_prey1);
-    units.preys.push_back(tst_prey2);
-    units.preys.push_back(tst_prey3);
-    units.preys.push_back(tst_prey4);
+    Prey *tst_prey1 = new Prey(0, 1, &field, &units);
+    Prey *tst_prey2 = new Prey(0, 3, &field, &units);
+    Prey *tst_prey3 = new Prey(0, 2, &field, &units);
+    Prey *tst_prey4 = new Prey(0, 4, &field, &units);
 
     int num_of_predators_moves = 0;
     while (num_of_predators_moves < 5) {

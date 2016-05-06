@@ -9,10 +9,10 @@ class Prey;
 
 class Predator : public Animal
 {
-    const double DISTANCE_FOR_KILL = 1;
-    const double DISTANCE_FOR_TARGET = 1.4;
-    const double DISTANCE_FOR_RESET_TARGET = 2.1;
-    const double DELTA = 0.1;
+    static constexpr double DISTANCE_FOR_KILL = 1;
+    static constexpr double DISTANCE_FOR_TARGET = 1.4;
+    static constexpr double DISTANCE_FOR_RESET_TARGET = 2.1;
+    static constexpr double DELTA = 0.1;
 
 protected:
     /**
@@ -49,11 +49,6 @@ protected:
      */
     void createPredator();
 
-    /**
-     * @brief метод, создающий хищника на клетке с данными координатами
-     */
-    void spawnPredator(int, int );
-
 public:
 
     /**
@@ -61,14 +56,10 @@ public:
      * @param v - координата по вертикали
      * @param h - координата по горизонтали
      * @param field_pointer - указатель на поле
+     * @param units_pointer - указатель на класс с векторами хищников и жертв
      * @param time_of_life - время жизни хищника без еды
      */
-    Predator(const int v, const int h, Field* field_pointer, int time_of_life);
-
-    /**
-     * @brief метод, устанавливающий хищнику указатель на класс с векторами хищиков и жертв
-     */
-    void setUnitsPointer(Units* units_pointer);
+    Predator(const int v, const int h, Field* field_pointer, Units* units_pointer, int time_of_life);
 
     /**
      * @brief метод, передвигающий хищника

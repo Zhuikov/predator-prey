@@ -13,48 +13,44 @@ void Prey::createPrey()
 {
     chooseRandomDirection();
     switch (direction) {
-        case UP: {
-            spawnPrey(place.getV() - 1, place.getH());
+        case Direction::UP: {
+            Prey *prey = new Prey(this->place.getV() - 1, this->place.getH(), this->field, this->units_struct);
             break;
         }
-        case RIGHT: {
-            spawnPrey(place.getV(), place.getH() + 1);
+        case Direction::RIGHT: {
+            Prey *prey = new Prey(this->place.getV(), this->place.getH() + 1, this->field, this->units_struct);
             break;
         }
-        case DOWN: {
-            spawnPrey(place.getV() + 1, place.getH());
+        case Direction::DOWN: {
+            Prey *prey = new Prey(this->place.getV() + 1, this->place.getH(), this->field, this->units_struct);
             break;
         }
-        case LEFT: {
-            spawnPrey(place.getV(), place.getH() - 1);
+        case Direction::LEFT: {
+            Prey *prey = new Prey(this->place.getV(), this->place.getH() - 1, this->field, this->units_struct);
         }
+        default: {}
     }
 
     this->energy = 0;
 }
 
-void Prey::spawnPrey(int a, int b)
-{
-    Prey *prey = new Prey(a, b, this->field);
-    prey->setUnitsPointer(this->units_struct);
-    units_struct->preys.push_back(prey);
-}
-
 void Prey::isChase()
 {
     warning = false;
-    for (unsigned int i = 0; i < this->units_struct->predators.size(); ++i) {
-        if (this->units_struct->predators[i] != NULL) {
-            if (this->place - units_struct->predators[i]->place < 1.1) {
+    for (unsigned int i = 0; i < units_struct->predators.size(); ++i) {
+        if (units_struct->predators[i] != nullptr) {
+            if (place - units_struct->predators[i]->place < 1.1) {
                 warning = true;
-                this->dangerous_pred = units_struct->predators[i]->place;
+                dangerous_pred = units_struct->predators[i]->place;
                 break;
             }
         }
     }
 }
 
-Prey::Prey(const int v, const int h, Field* ptrF)
+Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer):
+    warning(false),
+    units_struct(units_pointer)
 {
     place.setV(v);
     place.setH(h);
@@ -64,27 +60,23 @@ Prey::Prey(const int v, const int h, Field* ptrF)
     life_time = 0;
     has_moved = false;
     died = false;
-    field = ptrF;
-    field->setPosition(this->place.getV(), this->place.getH(), PREY);
-    direction = UP;
-    warning = false;
-}
-
-void Prey::setUnitsPointer(Units* units_pointer)
-{
-    this->units_struct = units_pointer;
-    isChase();
+    field = field_pointer;
+    field->setPosition(this->place.getV(), this->place.getH(), Position::PREY);
+    direction = Direction::UP;
+    units_struct->preys.push_back(this);
 }
 
 void Prey::movePrey()
 {    
     isChase();
-    this->directionFinding();
+    directionFinding();
     if (has_moved == false) {
-        this->field->setPosition(this->place.getV(), this->place.getH(), EMPTY);
-        this->go();
-        this->field->setPosition(this->place.getV(), this->place.getH(), PREY);
+        field->setPosition(place.getV(), place.getH(), Position::EMPTY);
+        go();
+        field->setPosition(place.getV(), place.getH(), Position::PREY);
     }
     else has_moved = false;
-    if (this->energy == PREY_CREATE_ENERGY) this->createPrey();
+    if (energy == PREY_CREATE_ENERGY) {
+        createPrey();
+    }
 }

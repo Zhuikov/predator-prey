@@ -1,16 +1,13 @@
 #ifndef FIELD_H
 #define FIELD_H
 #include "settings.h"
+#include "coordinates.h"
 #include <vector>
 
 /**
  * @brief Position - перечисление всех возможных состояний клетки поля
  */
-//TODO: следует использовать перечисления с областью видимости
-//enum class Position
-
-//TODO: почему называется Position, ведь, вроде бы, это unit
-enum Position
+enum class Position
 {
     EMPTY,
     PREDATOR,
@@ -83,7 +80,7 @@ public:
      * @param v - координата клетки по вертикали
      * @param h - координата клетки по горизонтали
      */
-    int whatIsEmpty(int v, int h) const;
+    Direction whatIsEmpty(int v, int h) const;
 
     /**
      * @brief метод, возвращающий значение клетки с заданными координатами
@@ -108,13 +105,6 @@ public:
     /**
      * @brief перегруженный оператор присваивания; при необходимости, изменяет развер поля
      */
-
-    //TODO: Вы используете оператор присваивания везде по коду вместо нормального конструктора,
-    //позвольте, я просто удалю его
-    //Field& operator=(const Field &field1) = delete;
-    //TODO: И удалите еще конструктор копирования, похоже, он вам не понадобится
-
-    ~Field();
 };
 
 #endif // FIELD_H

@@ -35,11 +35,6 @@ protected:
     void createPrey();
 
     /**
-     * @brief метод, создающий жертву на клетке с данными координатами
-     */
-    void spawnPrey(int, int);
-
-    /**
      * @brief метод, проверяющий, не преследуется ли жертва
      */
     void isChase();
@@ -50,14 +45,10 @@ public:
      * @brief конструктор с параметрами
      * @param v - координата по вертикали
      * @param h - координата по горизонтали
-     * @param ptrF - указатель на поле, где создается жертва
+     * @param field_pointer - указатель на поле, где создается жертва
+     * @param units_pointer - указатель на класс с векторами хищников и жертв
      */
-    Prey(const int v, const int h, Field* ptrF);
-
-    /**
-     * @brief метод, устанавливающий указатель на класс с хищниками и жертвами
-     */
-    void setUnitsPointer(Units* units_pointer);
+    Prey(const int v, const int h, Field* field_pointer, Units* units_pointer);
 
     /**
      * @brief метод, передвигающий жертву

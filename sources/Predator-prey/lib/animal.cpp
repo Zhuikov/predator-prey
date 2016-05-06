@@ -4,15 +4,10 @@
 
 void Animal::chooseEmptyDirection()
 {
-    int new_direction;
-    //TODO: когда этот вызов будет возвращать enum direction, весь switch можно будет удалить
-    new_direction = this->field->whatIsEmpty(place.getV(), place.getH());
-    switch (new_direction) {
-        case 0: { direction = UP;    break; }
-        case 1: { direction = RIGHT; break; }
-        case 2: { direction = DOWN;  break; }
-        case 3: { direction = LEFT;  break; }
-        default: { has_moved = true; }
+    direction = field->whatIsEmpty(place.getV(), place.getH());
+    if (direction == Direction::NO_DIRECTION) {
+        has_moved = true;
+        direction = Direction::UP;
     }
 }
 
@@ -20,54 +15,59 @@ bool Animal::setDirection(Direction direction)
 {
     switch (direction)
     {
-        case UP: {
+        case Direction::UP: {
             if (field->isEmpty(place.getV() - 1, place.getH())) {
-                this->direction = UP;
+                this->direction = Direction::UP;
                 return true;
             }
         }
-        case DOWN: {
+        case Direction::DOWN: {
             if (field->isEmpty(place.getV() + 1, place.getH())) {
-                this->direction = DOWN;
+                this->direction = Direction::DOWN;
                 return true;
             }
         }
-        case LEFT: {
+        case Direction::LEFT: {
             if (field->isEmpty(place.getV(), place.getH() - 1)) {
-                this->direction = LEFT;
+                this->direction = Direction::LEFT;
                 return true;
             }
         }
-        case RIGHT: {
+        case Direction::RIGHT: {
             if (field->isEmpty(place.getV(), place.getH() + 1)) {
-                this->direction = RIGHT;
+                this->direction = Direction::RIGHT;
                 return true;
             }
         }
+        default: {}
     }
     return false;
 }
 
 void Animal::chooseRandomDirection()
 {
-    //TODO: srand
+    srand(time(0));
     int flag = rand() % 4;
     //TODO: будет понятнее, если в case тоже использовать enum
     switch (flag) {
         case 0: {
-            if (setDirection(UP) == false) chooseEmptyDirection();
+            if (setDirection(Direction::UP) == false)
+                chooseEmptyDirection();
             break;
         }
         case 1: {
-            if (setDirection(RIGHT) == false) chooseEmptyDirection();
+            if (setDirection(Direction::RIGHT) == false)
+                chooseEmptyDirection();
             break;
         }
         case 2: {
-            if (setDirection(LEFT) == false) chooseEmptyDirection();
+            if (setDirection(Direction::LEFT) == false)
+                chooseEmptyDirection();
             break;
         }
         case 3: {
-            if (setDirection(DOWN) == false) chooseEmptyDirection();
+            if (setDirection(Direction::DOWN) == false)
+                chooseEmptyDirection();
             break;
         }
     }
@@ -75,10 +75,11 @@ void Animal::chooseRandomDirection()
 
 void Animal::go()
 {
-    switch (this->direction) {
-        case UP:    { this->place.setV(this->place.getV() - 1); break; }
-        case RIGHT: { this->place.setH(this->place.getH() + 1); break; }
-        case LEFT:  { this->place.setH(this->place.getH() - 1); break; }
-        case DOWN:  { this->place.setV(this->place.getV() + 1); break; }
+    switch (direction) {
+        case Direction::UP:    { place.setV(place.getV() - 1); break; }
+        case Direction::RIGHT: { place.setH(place.getH() + 1); break; }
+        case Direction::LEFT:  { place.setH(place.getH() - 1); break; }
+        case Direction::DOWN:  { place.setV(place.getV() + 1); break; }
+        default: {}
     }
 }

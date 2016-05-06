@@ -8,17 +8,17 @@
 
 void Predator::directionFinding()
 {
-    if (this->target == NULL){
+    if (target == nullptr){
         chooseRandomDirection();
     }
     else {
-        double distance = (this->place) - (this->target->place);
+        double distance = (place) - (target->place);
         if (fabs(distance - DISTANCE_FOR_KILL) < DELTA) {
-            if (target->place.getV() < place.getV()) direction = UP;
-            else if (target->place.getV() > place.getV()) direction = DOWN;
-            else if (target->place.getH() < place.getH()) direction = LEFT;
-            else if (target->place.getH() > place.getH()) direction = RIGHT;
-            this->killPrey();
+            if (target->place.getV() < place.getV()) direction = Direction::UP;
+            else if (target->place.getV() > place.getV()) direction = Direction::DOWN;
+            else if (target->place.getH() < place.getH()) direction = Direction::LEFT;
+            else if (target->place.getH() > place.getH()) direction = Direction::RIGHT;
+            killPrey();
         }
         else chooseToTargetDirection();
     }
@@ -27,54 +27,54 @@ void Predator::directionFinding()
 void Predator::chooseToTargetDirection()
 {
     if ((place.getV() <= target->place.getV()) && (place.getH() < target->place.getH())) {
-            if (setDirection(RIGHT) == false)
-                if (setDirection(DOWN) == false) chooseRandomDirection();
+            if (setDirection(Direction::RIGHT) == false)
+                if (setDirection(Direction::DOWN) == false) chooseRandomDirection();
     }
     if ((place.getV() < target->place.getV()) && (place.getH() >= target->place.getH())) {
-            if (setDirection(DOWN) == false)
-                if (setDirection(LEFT) == false) chooseRandomDirection();
+            if (setDirection(Direction::DOWN) == false)
+                if (setDirection(Direction::LEFT) == false) chooseRandomDirection();
     }
     if ((place.getV() > target->place.getV()) && (place.getH() <= target->place.getH())) {
-            if (setDirection(UP) == false)
-                if (setDirection(RIGHT) == false) chooseRandomDirection();
+            if (setDirection(Direction::UP) == false)
+                if (setDirection(Direction::RIGHT) == false) chooseRandomDirection();
     }
     if ((place.getV() >= target->place.getV()) && (place.getH() > target->place.getH())) {
-            if (setDirection(LEFT) == false)
-                if (setDirection(UP) == false) chooseRandomDirection();
+            if (setDirection(Direction::LEFT) == false)
+                if (setDirection(Direction::UP) == false) chooseRandomDirection();
     }
 }
 
-//TODO: foreach синтаксис
 void Predator::findPrey()
 {
-    if (this->target != NULL && (this->target->died == true ||
-           this->target->place - this->place > DISTANCE_FOR_RESET_TARGET)) this->target = NULL;
+    if (target != nullptr && (target->died == true ||
+           target->place - place > DISTANCE_FOR_RESET_TARGET)) target = nullptr;
     
     double distance = 0;
-    for (std::vector<Prey*>::const_iterator it = this->units_struct->preys.begin();
-      it != this->units_struct->preys.end(); ++it) {
-        if ((*it)->died == false) {
-            distance = this->place - (*it)->place;
+    for (Prey* prey: units_struct->preys) {
+        if (prey->died == false) {
+            distance = place - prey->place;
             if (distance < DISTANCE_FOR_KILL + DELTA) {
-                this->target = (*it);
+                target = prey;
                 break;
             }
-            if (distance < DISTANCE_FOR_TARGET + DELTA) this->target = (*it);
+            if (distance < DISTANCE_FOR_TARGET + DELTA) {
+                target = prey;
+            }
         }
     }
 }
 
-//TODO: foreach синтаксис
 void Predator::killPrey()
 {
-    for (std::vector<Prey*>::iterator i = this->units_struct->preys.begin();
-        i != this->units_struct->preys.end(); ++i)
-            if (*i == this->target) (*i)->died = true;
+    for (Prey* prey: units_struct->preys)
+        if (prey == target) {
+            prey->died = true;
+        }
     
     energy++;
     life_time = -1;
 
-    target = NULL;
+    target = nullptr;
 
 }
 
@@ -82,70 +82,67 @@ void Predator::createPredator()
 {
     chooseRandomDirection();
     switch (direction) {
-    case UP:    {
-        spawnPredator(place.getV() - 1, place.getH());
+    case Direction::UP:    {
+        Predator *predator = new Predator(this->place.getV() - 1, this->place.getH(), this->field,
+                                          this->units_struct, this->max_life_time);
         break;
     }
-    case RIGHT: {
-        spawnPredator(place.getV(), place.getH() + 1);
+    case Direction::RIGHT: {
+        Predator *predator = new Predator(this->place.getV(), this->place.getH() + 1, this->field,
+                                          this->units_struct, this->max_life_time);
         break;
     }
-    case DOWN:  {
-        spawnPredator(place.getV() + 1, place.getH());
+    case Direction::DOWN:  {
+        Predator *predator = new Predator(this->place.getV() + 1, this->place.getH(), this->field,
+                                          this->units_struct, this->max_life_time);
         break;
     }
-    case LEFT:  {
-        spawnPredator(place.getV(), place.getH() - 1);
+    case Direction::LEFT:  {
+        Predator *predator = new Predator(this->place.getV(), this->place.getH() - 1, this->field,
+                                          this->units_struct, this->max_life_time);
     }
+    default: {}
     }
 
     this->energy = 0;
 
 }
 
-void Predator::spawnPredator(int v, int h)
-{
-    Predator *predator = new Predator(v, h, this->field, this->max_life_time);
-    predator->setUnitsPointer(this->units_struct);
-    units_struct->predators.push_back(predator);
-}
-
-Predator::Predator(int v, int h, Field *field_pointer, int time_of_life)
+Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int time_of_life):
+    target(nullptr),
+    units_struct(units_pointer)
 {
     place.setV(v);
     place.setH(h);
-    target = NULL;
-    max_life_time = time_of_life;
     life_time = 0;
+    max_life_time = time_of_life;
     energy = 0;
     has_moved = false;
     died = false;
     field = field_pointer;
-    field->setPosition(this->place.getV(), this->place.getH(), PREDATOR);
-    direction = UP;
-
-}
-
-void Predator::setUnitsPointer(Units* units_pointer)
-{
-    units_struct = units_pointer;
+    field->setPosition(place.getV(), place.getH(), Position::PREDATOR);
+    direction = Direction::UP;
+    units_pointer->predators.push_back(this);
 }
 
 void Predator::movePredator()
 {
-    this->findPrey();
-    this->directionFinding();
+    findPrey();
+    directionFinding();
     if (has_moved == false) {
-        this->field->setPosition(this->place.getV(), this->place.getH(), EMPTY);
-        this->go();
-        this->field->setPosition(this->place.getV(), this->place.getH(), PREDATOR);
+        field->setPosition(place.getV(), place.getH(), Position::EMPTY);
+        go();
+        field->setPosition(place.getV(), place.getH(), Position::PREDATOR);
     }
     else has_moved = false;
-    if (this->energy == PREDATOR_CREATE_ENERGY) this->createPredator();
+
+    if (energy == PREDATOR_CREATE_ENERGY) {
+        createPredator();
+    }
 
     life_time++;
     if (life_time == max_life_time) {
-        this->field->setPosition(this->place.getV(), this->place.getH(), EMPTY);
-        this->died = true;
+        field->setPosition(place.getV(), place.getH(), Position::EMPTY);
+        died = true;
     }
 }

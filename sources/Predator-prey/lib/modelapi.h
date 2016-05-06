@@ -45,19 +45,9 @@ public:
     virtual void createPredators() = 0;
 
     /**
-     * @brief метод, полностью очищающий вектор хищников
-     */
-    virtual void deletePredators() = 0;
-
-    /**
      * @brief метод, создающий жертв
      */
     virtual void createPreys() = 0;
-
-    /**
-     * @brief dметод, полностью очищающий вектор жертв
-     */
-    virtual void deletePreys() = 0;
 
     /**
      * @brief метод, удаляющий умерших хищников после хода

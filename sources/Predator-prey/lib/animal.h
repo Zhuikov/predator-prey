@@ -38,21 +38,6 @@ protected:
     bool has_moved;
 
     /**
-     * @brief Direction - возможные значения направлений
-     */
-
-    //TODO: следует использовать перечисления с областью видимости
-    //enum class Position
-    //TODO: направление не только у животного, оно еще используется в поле, т. о. лучше вынести из этого класса
-    enum Direction
-    {
-        UP,
-        RIGHT,
-        DOWN,
-        LEFT
-    };
-
-    /**
      * @brief direction - текущее направление животного
      */
     Direction direction;
