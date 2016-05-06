@@ -83,22 +83,22 @@ void Predator::createPredator()
     chooseRandomDirection();
     switch (direction) {
     case Direction::UP:    {
-        Predator *predator = new Predator(this->place.getV() - 1, this->place.getH(), this->field,
+        new Predator(this->place.getV() - 1, this->place.getH(), this->field,
                                           this->units_struct, this->max_life_time);
         break;
     }
     case Direction::RIGHT: {
-        Predator *predator = new Predator(this->place.getV(), this->place.getH() + 1, this->field,
+        new Predator(this->place.getV(), this->place.getH() + 1, this->field,
                                           this->units_struct, this->max_life_time);
         break;
     }
     case Direction::DOWN:  {
-        Predator *predator = new Predator(this->place.getV() + 1, this->place.getH(), this->field,
+        new Predator(this->place.getV() + 1, this->place.getH(), this->field,
                                           this->units_struct, this->max_life_time);
         break;
     }
     case Direction::LEFT:  {
-        Predator *predator = new Predator(this->place.getV(), this->place.getH() - 1, this->field,
+        new Predator(this->place.getV(), this->place.getH() - 1, this->field,
                                           this->units_struct, this->max_life_time);
     }
     default: {}

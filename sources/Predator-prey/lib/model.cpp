@@ -10,6 +10,7 @@ Model::Model(Settings *settings):
     has_changed(false),
     field(settings->getFieldHeight(), settings->getFieldLength())
 {
+    srand(time(0));
     createPredators();
     createPreys();
 }
@@ -34,7 +35,7 @@ void Model::createPredators()
         }
         while(field.isEmpty(v, h) == false);
 
-        Predator *predator = new Predator(v, h, &field, &units, settings->getMovesWithoutMeal());
+        new Predator(v, h, &field, &units, settings->getMovesWithoutMeal());
     }
 }
 
@@ -49,7 +50,7 @@ void Model::createPreys()
         }
         while (field.isEmpty(v, h) == false);
 
-        Prey *prey = new Prey(v, h, &field, &units);
+        new Prey(v, h, &field, &units);
     }
 }
 

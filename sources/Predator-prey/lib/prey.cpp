@@ -14,19 +14,19 @@ void Prey::createPrey()
     chooseRandomDirection();
     switch (direction) {
         case Direction::UP: {
-            Prey *prey = new Prey(this->place.getV() - 1, this->place.getH(), this->field, this->units_struct);
+            new Prey(this->place.getV() - 1, this->place.getH(), this->field, this->units_struct);
             break;
         }
         case Direction::RIGHT: {
-            Prey *prey = new Prey(this->place.getV(), this->place.getH() + 1, this->field, this->units_struct);
+            new Prey(this->place.getV(), this->place.getH() + 1, this->field, this->units_struct);
             break;
         }
         case Direction::DOWN: {
-            Prey *prey = new Prey(this->place.getV() + 1, this->place.getH(), this->field, this->units_struct);
+            new Prey(this->place.getV() + 1, this->place.getH(), this->field, this->units_struct);
             break;
         }
         case Direction::LEFT: {
-            Prey *prey = new Prey(this->place.getV(), this->place.getH() - 1, this->field, this->units_struct);
+            new Prey(this->place.getV(), this->place.getH() - 1, this->field, this->units_struct);
         }
         default: {}
     }

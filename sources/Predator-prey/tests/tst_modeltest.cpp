@@ -174,7 +174,7 @@ void ModelTest::predatorMoveKillTest()
     Field field(10, 10);
     Units units;
 
-    Prey* tst_prey = new Prey(3, 3, &field, &units);
+    new Prey(3, 3, &field, &units);
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     units.predators[0]->movePredator();
@@ -195,8 +195,8 @@ void ModelTest::predatorCreateTest()
     Field field(10, 10);
     Units units;
 
-    Prey* tst_prey = new Prey(3, 3, &field, &units);
-    Prey* tst_prey2 = new Prey(2, 3, &field, &units);
+    new Prey(3, 3, &field, &units);
+    new Prey(2, 3, &field, &units);
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     tst_predator->movePredator();
@@ -233,7 +233,7 @@ void ModelTest::twoPredatorsTest()
 
     Predator* tst_predator1 = new Predator(4, 5, &field, &units, 20);
     Predator* tst_predator2 = new Predator(2, 3, &field, &units, 20);
-    Prey* tst_prey = new Prey(3, 4, &field, &units);
+    new Prey(3, 4, &field, &units);
 
     tst_predator1->movePredator();
     tst_predator2->movePredator();
@@ -258,8 +258,8 @@ void ModelTest::predatorPriorityTest()
     Units units;
 
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
-    Prey* tst_prey  = new Prey(3, 3, &field, &units);
-    Prey* tst_prey2 = new Prey(5, 4, &field, &units);
+    new Prey(3, 3, &field, &units);
+    new Prey(5, 4, &field, &units);
 
     tst_predator->movePredator();
 
@@ -294,14 +294,14 @@ void ModelTest::debugTest()
 {
     Field field(10, 10);
     Units units;
-    Predator *tst_pred1 = new Predator(8, 9, &field, &units, 5);
-    Predator *tst_pred2 = new Predator(9, 9, &field, &units, 5);
-    Predator *tst_pred3 = new Predator(0, 0, &field, &units, 5);
+    new Predator(8, 9, &field, &units, 5);
+    new Predator(9, 9, &field, &units, 5);
+    new Predator(0, 0, &field, &units, 5);
 
-    Prey *tst_prey1 = new Prey(0, 1, &field, &units);
-    Prey *tst_prey2 = new Prey(0, 3, &field, &units);
-    Prey *tst_prey3 = new Prey(0, 2, &field, &units);
-    Prey *tst_prey4 = new Prey(0, 4, &field, &units);
+    new Prey(0, 1, &field, &units);
+    new Prey(0, 3, &field, &units);
+    new Prey(0, 2, &field, &units);
+    new Prey(0, 4, &field, &units);
 
     int num_of_predators_moves = 0;
     while (num_of_predators_moves < 5) {

@@ -46,7 +46,6 @@ bool Animal::setDirection(Direction direction)
 
 void Animal::chooseRandomDirection()
 {
-    srand(time(0));
     int flag = rand() % 4;
     //TODO: будет понятнее, если в case тоже использовать enum
     switch (flag) {
