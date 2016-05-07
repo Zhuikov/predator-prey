@@ -89,6 +89,15 @@ void ModelTest::coordinatesTest()
     Coordinates D;
     QCOMPARE(D.getV(), 0);
     QCOMPARE(D.getH(), 0);
+
+    D.changeToDirection(Direction::RIGHT);
+    QCOMPARE(D.getH(), 1);
+    D.changeToDirection(Direction::DOWN);
+    QCOMPARE(D.getV(), 1);
+    D.changeToDirection(Direction::LEFT);
+    QCOMPARE(D.getH(), 0);
+    D.changeToDirection(Direction::UP);
+    QCOMPARE(D.getV(), 0);
 }
 
 //TODO: очень длинный тест, надо разбить на несколько поменьше, на каждую тестируемую функциональность

@@ -31,10 +31,14 @@ class Coordinates
 public:
 
     /**
-     * @brief Coordinates - конструктор с параметрами; создает объект
-     * с заданными координатами
+     * @brief конструктор с параметрами; создает объект с заданными координатами
      */
     Coordinates(int vertical = 0, int horizontal = 0): vertical(vertical), horizontal(horizontal) {}
+
+    /**
+     * @brief метод, изменяющий координаты в соответствие с переданным направлением
+     */
+    void changeToDirection(Direction);
 
     /**
      * @brief метод, устанавливающий координату по вертикали

@@ -45,12 +45,12 @@ public:
      */
     //TODO: Подозреваю, что это ограничение вызвано только размерами, которые возможно отрисовать в консоли, предлагаю вынести его отсюда
     //А вообще ваше поле, кажется, только размером int ограничено, или максимальной длинной вектора
-    static const int MAX_FIELD_SIZE = 30;
+    static constexpr int MAX_FIELD_SIZE = 30;
 
     /**
      * @brief MIN_FIELD_SIZE - минимальная длина и высота поля
      */
-    static const int MIN_FIELD_SIZE = 10;
+    static constexpr int MIN_FIELD_SIZE = 10;
 
     /**
      * @brief конструктор с параметрами, создает поле указанных размеров

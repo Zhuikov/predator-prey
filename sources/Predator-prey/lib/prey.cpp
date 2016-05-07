@@ -38,13 +38,13 @@ void Prey::isChase()
 {
     warning = false;
     for (unsigned int i = 0; i < units_struct->predators.size(); ++i) {
-        if (units_struct->predators[i] != nullptr) {
+//        if (units_struct->predators[i] != nullptr) {
             if (place - units_struct->predators[i]->place < 1.1) {
                 warning = true;
                 dangerous_pred = units_struct->predators[i]->place;
                 break;
             }
-        }
+//        }
     }
 }
 

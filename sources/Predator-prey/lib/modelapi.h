@@ -4,7 +4,6 @@
 #include "field.h"
 #include <vector>
 
-//TODO расставить модификаторы noexcept для методов, которые не возбуждают исключений
 class ModelAPI
 {
 public:

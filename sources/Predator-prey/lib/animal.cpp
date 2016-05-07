@@ -74,11 +74,5 @@ void Animal::chooseRandomDirection() noexcept
 
 void Animal::go() noexcept
 {
-    switch (direction) {
-        case Direction::UP:    { place.setV(place.getV() - 1); break; }
-        case Direction::RIGHT: { place.setH(place.getH() + 1); break; }
-        case Direction::LEFT:  { place.setH(place.getH() - 1); break; }
-        case Direction::DOWN:  { place.setV(place.getV() + 1); break; }
-        default: {}
-    }
+    place.changeToDirection(direction);
 }

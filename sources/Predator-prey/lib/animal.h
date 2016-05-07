@@ -49,7 +49,7 @@ protected:
 
     /**
      * @brief метод устанавливает направление, если соответствующая клетка свободна
-     * @return
+     * @return true, если удалось установить направление
      */
     bool setDirection(Direction) noexcept;
 
