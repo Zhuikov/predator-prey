@@ -13,7 +13,7 @@ class Animal
      * @brief метод, выбирающий свободное направление;
      * используется, если переход по выбранному направлению невозможен
      */
-    void chooseEmptyDirection();
+    void chooseEmptyDirection() noexcept;
 
 protected:
     /**
@@ -51,31 +51,29 @@ protected:
      * @brief метод устанавливает направление, если соответствующая клетка свободна
      * @return
      */
-
-    bool setDirection(Direction);
+    bool setDirection(Direction) noexcept;
 
     /**
      * @brief метод, выбирающий случайное направление,
      * записывает его в direction
      */
-    void chooseRandomDirection();
+    void chooseRandomDirection() noexcept;
 
     /**
      * @brief метод, выбирающий направление для следующего хода,
      * записывает его в directon
      */
-    virtual void directionFinding() = 0;
+    virtual void directionFinding() noexcept = 0;
 
     /**
      * @brief метод, выбирающий направление, в зависимости от положения цели
      */
-    virtual void chooseToTargetDirection() = 0;
+    virtual void chooseToTargetDirection() noexcept = 0;
 
     /**
-     * @brief метод, перемещающий хищника
-     * @param ch - направление перемещения
+     * @brief метод, перемещающий животное в направлении direction
      */
-    virtual void go();
+    virtual void go() noexcept;
 
 public:
 

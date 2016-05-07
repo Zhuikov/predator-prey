@@ -30,24 +30,24 @@ protected:
      */
     Units* units_struct;
 
-    void directionFinding();
-    void chooseToTargetDirection();
+    void directionFinding() noexcept;
+    void chooseToTargetDirection() noexcept;
 
     /**
      * @brief метод поиска жертвы на соседних 8 клетках;
      * в случае успеха записывает координаты жертвы в поле target
      */
-    void findPrey();
+    void findPrey() noexcept;
 
     /**
      * @brief метод, уничтожающий target - цель (если она есть)
      */
-    void killPrey();
+    void killPrey() noexcept;
 
     /**
      * @brief метод, создающий хищника на случайной соседней клетке; записывает его в вектор хищников
      */
-    void createPredator();
+    void createPredator() noexcept;
 
 public:
 
@@ -59,12 +59,12 @@ public:
      * @param units_pointer - указатель на класс с векторами хищников и жертв
      * @param time_of_life - время жизни хищника без еды
      */
-    Predator(const int v, const int h, Field* field_pointer, Units* units_pointer, int time_of_life);
+    Predator(const int v, const int h, Field* field_pointer, Units* units_pointer, int time_of_life) noexcept;
 
     /**
      * @brief метод, передвигающий хищника
      */
-    void movePredator();
+    void movePredator() noexcept;
 };
 
 #endif // PREDATOR_H

@@ -3,7 +3,6 @@
 #include "modelapi.h"
 #include <vector>
 
-//TODO расставить модификаторы noexcept для методов, которые не возбуждают исключений
 //TODO указывать слово override для перекрывающих функций
 class Model : public ModelAPI
 {
@@ -17,23 +16,23 @@ class Model : public ModelAPI
      */
     Units units;
 
-    void incModelTime();
+    void incModelTime() noexcept;
 
 public:
-    explicit Model(Settings *settings);
-    Field* getField() { return &field; }
-    int getTime() const { return model_time; }
-    int getDay() const  { return model_day; }
-    unsigned int getPredatorsNum() const { return this->units.predators.size(); }
-    unsigned int getPreysNum() const     { return units.preys.size(); }
-    void movePreys();
-    void movePredators();
-    bool isEnd() const;
-    void createPredators();
-    void createPreys();
-    void removePredators();
-    void removePreys();
-    void remove();
+    explicit Model(Settings *settings) noexcept;
+    Field* getField() noexcept { return &field; }
+    int getTime() const noexcept { return model_time; }
+    int getDay() const noexcept { return model_day; }
+    unsigned int getPredatorsNum() const noexcept { return this->units.predators.size(); }
+    unsigned int getPreysNum() const noexcept { return units.preys.size(); }
+    void movePreys() noexcept;
+    void movePredators() noexcept;
+    bool isEnd() const noexcept;
+    void createPredators() noexcept;
+    void createPreys() noexcept;
+    void removePredators() noexcept;
+    void removePreys() noexcept;
+    void remove() noexcept;
 
     void saveModel();
     void loadModel();

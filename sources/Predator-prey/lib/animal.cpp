@@ -2,7 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 
-void Animal::chooseEmptyDirection()
+void Animal::chooseEmptyDirection() noexcept
 {
     direction = field->whatIsEmpty(place.getV(), place.getH());
     if (direction == Direction::NO_DIRECTION) {
@@ -11,7 +11,7 @@ void Animal::chooseEmptyDirection()
     }
 }
 
-bool Animal::setDirection(Direction direction)
+bool Animal::setDirection(Direction direction) noexcept
 {
     switch (direction)
     {
@@ -44,7 +44,7 @@ bool Animal::setDirection(Direction direction)
     return false;
 }
 
-void Animal::chooseRandomDirection()
+void Animal::chooseRandomDirection() noexcept
 {
     int flag = rand() % 4;
     //TODO: будет понятнее, если в case тоже использовать enum
@@ -72,7 +72,7 @@ void Animal::chooseRandomDirection()
     }
 }
 
-void Animal::go()
+void Animal::go() noexcept
 {
     switch (direction) {
         case Direction::UP:    { place.setV(place.getV() - 1); break; }

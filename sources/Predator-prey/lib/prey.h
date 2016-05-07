@@ -26,8 +26,8 @@ protected:
      * @brief units_struct - указатель на класс с векторами хищников и жертв
      */
     Units* units_struct;
-    void directionFinding();
-    void chooseToTargetDirection() {} //пока нет травки
+    void directionFinding() noexcept;
+    void chooseToTargetDirection() noexcept {} //пока нет травки
 
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор

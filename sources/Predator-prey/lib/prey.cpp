@@ -3,7 +3,7 @@
 #include <ctime>
 #include <cstdlib>
 
-void Prey::directionFinding()
+void Prey::directionFinding() noexcept
 {
     chooseRandomDirection();
 }

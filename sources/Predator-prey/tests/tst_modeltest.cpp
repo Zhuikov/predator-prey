@@ -43,45 +43,23 @@ int ModelTest::doubleCompare(double a, double b)
 //TODO: думаю, этот тест нереально понять никому, кроме автора
 void ModelTest::moveEnd(Units *units)
 {
-    int num_of_died = 0;
-    for (unsigned int i = 0; i < units->predators.size(); i++) {
-        if (units->predators[i]->died == true)
-            num_of_died ++;
-    }
-
-    int num_deleted_died = 0;
-    while (num_deleted_died < num_of_died) {
-        for (unsigned int i = 0; i < units->predators.size(); i++) {
-            if (units->predators[i]->died == true) {
-                delete units->predators[i];
-                if (units->predators[i] != units->predators.back())
-                    std::swap(units->predators[i], units->predators.back());
-                units->predators.pop_back();
-                num_deleted_died ++;
-                break;
-            }
+    for (std::vector< Predator* >::iterator it = units->predators.begin(); it != units->predators.end(); ++it) {
+        if ( (*it)->died == true ) {
+            delete (*it);
+            (*it) = nullptr;
         }
     }
+    units->predators.erase( std::remove(units->predators.begin(), units->predators.end(), nullptr),
+                            units->predators.end() );
 
-    num_of_died = 0;
-    for (unsigned int i = 0; i < units->preys.size(); i++) {
-        if (units->preys[i]->died == true)
-            num_of_died ++;
-    }
-
-    num_deleted_died = 0;
-    while (num_deleted_died < num_of_died) {
-        for (unsigned int i = 0; i < units->preys.size(); i++) {
-            if (units->preys[i]->died == true) {
-                delete units->preys[i];
-                if (units->preys[i] != units->preys.back())
-                    std::swap(units->preys[i], units->preys.back());
-                units->preys.pop_back();
-                num_deleted_died ++;
-                break;
-            }
+    for (std::vector< Prey* >::iterator it = units->preys.begin(); it != units->preys.end(); ++it) {
+        if ( (*it)->died == true ) {
+            delete (*it);
+            (*it) = nullptr;
         }
     }
+    units->preys.erase( std::remove(units->preys.begin(), units->preys.end(), nullptr),
+                            units->preys.end() );
 }
 
 void ModelTest::coordinatesTest()

@@ -3,7 +3,7 @@
 #include <ctime>
 #include <cstdlib>
 
-Model::Model(Settings *settings):
+Model::Model(Settings *settings) noexcept:
     settings(settings),
     model_time(0),
     model_day(0),
@@ -16,7 +16,7 @@ Model::Model(Settings *settings):
 }
 
 
-bool Model::isEnd() const
+bool Model::isEnd() const noexcept
 {
     if (units.predators.empty() || units.preys.empty()){
         return true;
@@ -24,7 +24,7 @@ bool Model::isEnd() const
     return false;
 }
 
-void Model::createPredators()
+void Model::createPredators() noexcept
 {
     for(int i = 0; i < settings->getNumOfPredators(); i++) {
         int v = 0;
@@ -39,7 +39,7 @@ void Model::createPredators()
     }
 }
 
-void Model::createPreys()
+void Model::createPreys() noexcept
 {
     for(int i = 0; i < settings->getNumOfPreys(); i++) {
         int v = 0;
@@ -54,7 +54,7 @@ void Model::createPreys()
     }
 }
 
-void Model::movePreys()
+void Model::movePreys() noexcept
 {
     incModelTime();
 
@@ -65,7 +65,7 @@ void Model::movePreys()
 
 }
 
-void Model::movePredators()
+void Model::movePredators() noexcept
 {
     incModelTime();
 
@@ -75,7 +75,7 @@ void Model::movePredators()
     }
 }
 
-void Model::incModelTime()
+void Model::incModelTime() noexcept
 {
     if (this->has_changed == false) {
         this->model_time ++;
@@ -91,51 +91,31 @@ void Model::incModelTime()
 
 //TODO: не говоря о прочем, этот метод и removePreys очень похожи, уверена, что используя наследование от animal, можно попытаться объединить в один полиморфный метод,
 //это можно обсудить отдельно после основного и очевидного рефакторинга
-void Model::removePredators()
+void Model::removePredators() noexcept
 {
-//    std::vector< Predator* >::iterator begin = units.predators.begin();
-//    std::vector< Predator* >::iterator end = units.predators.end();
-//    std::remove_if(begin, end, died == true);
-    int num_of_died = 0;
-    for (std::vector< Predator* >::const_iterator it = units.predators.begin();
-         it != units.predators.end(); ++it)
-        if ((*it)->died == true) num_of_died++;
-    int num_deleted_died = 0;
-    while (num_deleted_died < num_of_died) {
-        for (std::vector< Predator* >::iterator it = units.predators.begin();
-             it != units.predators.end(); ++it) {
-            if ((*it)->died == true) {
-                delete (*it);
-                if ((*it) != units.predators.back()) std::swap((*it), units.predators.back());
-                units.predators.pop_back();
-                num_deleted_died ++;
-                break;
-            }
+    for (std::vector< Predator* >::iterator it = units.predators.begin(); it != units.predators.end(); ++it) {
+        if ( (*it)->died == true ) {
+            delete (*it);
+            (*it) = nullptr;
         }
     }
+    units.predators.erase( std::remove(units.predators.begin(), units.predators.end(), nullptr),
+                            units.predators.end() );
 }
 
-void Model::removePreys()
+void Model::removePreys() noexcept
 {
-    int num_of_died = 0;
-    for (std::vector< Prey* >::const_iterator it = units.preys.begin(); it != units.preys.end(); ++it)
-        if ((*it)->died == true) num_of_died++;
-
-    int num_deleted_died = 0;
-    while (num_deleted_died < num_of_died) {
-        for (std::vector< Prey* >::iterator it = units.preys.begin(); it != units.preys.end(); ++it) {
-            if ((*it)->died == true) {
-                delete (*it);
-                if ((*it) != units.preys.back()) std::swap((*it), units.preys.back());
-                units.preys.pop_back();
-                num_deleted_died ++;
-                break;
-            }
+    for (std::vector< Prey* >::iterator it = units.preys.begin(); it != units.preys.end(); ++it) {
+        if ( (*it)->died == true ) {
+            delete (*it);
+            (*it) = nullptr;
         }
     }
+    units.preys.erase( std::remove(units.preys.begin(), units.preys.end(), nullptr),
+                            units.preys.end() );
 }
 
-void Model::remove()
+void Model::remove() noexcept
 {
     removePredators();
     removePreys();

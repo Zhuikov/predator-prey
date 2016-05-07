@@ -6,25 +6,21 @@
 #include <cmath>
 #include <cstdlib>
 
-void Predator::directionFinding()
+void Predator::directionFinding() noexcept
 {
     if (target == nullptr){
         chooseRandomDirection();
     }
     else {
-        double distance = (place) - (target->place);
+        double distance = place - target->place;
         if (fabs(distance - DISTANCE_FOR_KILL) < DELTA) {
-            if (target->place.getV() < place.getV()) direction = Direction::UP;
-            else if (target->place.getV() > place.getV()) direction = Direction::DOWN;
-            else if (target->place.getH() < place.getH()) direction = Direction::LEFT;
-            else if (target->place.getH() > place.getH()) direction = Direction::RIGHT;
             killPrey();
         }
         else chooseToTargetDirection();
     }
 }
 
-void Predator::chooseToTargetDirection()
+void Predator::chooseToTargetDirection() noexcept
 {
     if ((place.getV() <= target->place.getV()) && (place.getH() < target->place.getH())) {
             if (setDirection(Direction::RIGHT) == false)
@@ -44,7 +40,7 @@ void Predator::chooseToTargetDirection()
     }
 }
 
-void Predator::findPrey()
+void Predator::findPrey() noexcept
 {
     if (target != nullptr && (target->died == true ||
            target->place - place > DISTANCE_FOR_RESET_TARGET)) target = nullptr;
@@ -64,21 +60,22 @@ void Predator::findPrey()
     }
 }
 
-void Predator::killPrey()
+void Predator::killPrey() noexcept
 {
-    for (Prey* prey: units_struct->preys)
-        if (prey == target) {
-            prey->died = true;
-        }
+    if (target->place.getV() < place.getV()) direction = Direction::UP;
+    else if (target->place.getV() > place.getV()) direction = Direction::DOWN;
+    else if (target->place.getH() < place.getH()) direction = Direction::LEFT;
+    else if (target->place.getH() > place.getH()) direction = Direction::RIGHT;
+
+    target->died = true;
     
     energy++;
     life_time = -1;
-
     target = nullptr;
 
 }
 
-void Predator::createPredator()
+void Predator::createPredator() noexcept
 {
     chooseRandomDirection();
     switch (direction) {
@@ -108,7 +105,7 @@ void Predator::createPredator()
 
 }
 
-Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int time_of_life):
+Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int time_of_life) noexcept:
     target(nullptr),
     units_struct(units_pointer)
 {
@@ -125,7 +122,7 @@ Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int
     units_pointer->predators.push_back(this);
 }
 
-void Predator::movePredator()
+void Predator::movePredator() noexcept
 {
     findPrey();
     directionFinding();
