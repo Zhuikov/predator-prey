@@ -15,19 +15,25 @@ Settings::Settings():
 
 void Settings::setFieldLength(const int length)
 {
-    if (length < Field::MIN_FIELD_SIZE || length > Field::MAX_FIELD_SIZE) throw BadFieldCreate();
+    if (length < Field::MIN_FIELD_SIZE || length > Field::MAX_FIELD_SIZE) {
+        throw BadFieldLength(length);
+    }
     this->field_length = length;
 }
 
 void Settings::setFieldHeight(const int height)
 {
-    if (height < Field::MIN_FIELD_SIZE || height > Field::MAX_FIELD_SIZE) throw BadFieldCreate();
+    if (height < Field::MIN_FIELD_SIZE || height > Field::MAX_FIELD_SIZE) {
+        throw BadFieldHeight(height);
+    }
     this->field_height = height;
 }
 
 void Settings::setMovesWithoutMeal(const int moves)
 {
-    if (moves < min_moves_without_meal || moves > max_moves_without_meal) throw BadNum();
+    if (moves < min_moves_without_meal || moves > max_moves_without_meal) {
+        throw BadNum(moves, min_moves_without_meal, max_moves_without_meal);
+    }
     this->moves_without_meal = moves;
 }
 
@@ -35,7 +41,9 @@ void Settings::setNumOfPredators(const int num)
 {
     int MAX_NUM = std::max(field_height, field_length) * 2;
 
-    if (num < 1 || num > MAX_NUM) throw BadNum();
+    if (num < 1 || num > MAX_NUM) {
+        throw BadNum(num, 1, MAX_NUM);
+    }
     this->num_of_predators = num;
 }
 
@@ -43,6 +51,8 @@ void Settings::setNumOfPreys(const int num)
 {
     int MAX_NUM = std::max(field_height, field_length) * 2;
 
-    if (num < 1 || num > MAX_NUM) throw BadNum();
+    if (num < 1 || num > MAX_NUM) {
+        throw BadNum(num, 1, MAX_NUM);
+    }
     this->num_of_preys = num;
 }

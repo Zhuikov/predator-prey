@@ -36,7 +36,7 @@ bool Field::isEmpty(int v, int h) const
 void Field::setPosition(int v, int h, Position pos)
 {
     if (checkBoundary(v, h) == false){
-        throw BadFieldBoundary();
+        throw BadFieldBoundary(v, h);
     }
     this->field[v][h] = pos;
 }
@@ -44,7 +44,7 @@ void Field::setPosition(int v, int h, Position pos)
 Position Field::getPosition(int v, int h) const
 {
     if (checkBoundary(v, h) == false){
-        throw BadFieldBoundary();
+        throw BadFieldBoundary(v, h);
     }
     return this->field[v][h];
 }
@@ -52,7 +52,7 @@ Position Field::getPosition(int v, int h) const
 Direction Field::whatIsEmpty(int v, int h) const
 {
     if (checkBoundary(v, h) == false){
-        throw BadFieldBoundary();
+        throw BadFieldBoundary(v, h);
     }
 
     if (isEmpty(v - 1, h) == true) return Direction::UP;
