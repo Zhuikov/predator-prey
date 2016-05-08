@@ -6,10 +6,20 @@
 
 class Predator;
 
+/**
+ * @brief класс для содержания векторов хищников и жертв
+ */
 class Units
 {
 public:
+    /**
+     * @brief preys - вектор указателей на жертву
+     */
     std::vector<Prey*> preys;
+
+    /**
+     * @brief predators - вектор указателей на хищника
+     */
     std::vector<Predator*> predators;
 
     Units();

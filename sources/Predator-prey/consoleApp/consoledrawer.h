@@ -2,6 +2,9 @@
 #define CONSOLEDRAWER_H
 #include "model.h"
 
+/**
+ * @brief класс, отрисовывающий в консоль информацию о модели
+ */
 class ConsoleDrawer
 {
     Field *field;

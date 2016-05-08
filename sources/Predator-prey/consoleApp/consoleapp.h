@@ -15,7 +15,14 @@ class ConsoleApp
     Settings *settings;
     Model *model;
 
+    /**
+     * @brief TIME_FOR_SLEEP - время (мкс) между отрисовкой модели
+     */
     const int TIME_FOR_SLEEP = 500000;
+
+    /**
+     * @brief метод, создающий модель и отрисовывающий информацию о ней в консоль
+     */
     void startModel();
 
 public:

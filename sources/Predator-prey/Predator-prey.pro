@@ -8,4 +8,3 @@ SUBDIRS += \
     consoleApp \
     lib \
     tests \
-    gui

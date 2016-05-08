@@ -118,19 +118,16 @@ int ConsoleDialog::mainMenuPresentation()
     std::cout << "2. Настройки." << std::endl;
     std::cout << "0. Выход." << std::endl;
 
-    std::string choice;
+    int choice;
     bool good_choice = false;
     while (good_choice == false) {
         std::cout << "Выберите нужный пункт меню: ";
-        std::getline(std::cin, choice);
         try {
-            int command = consoleCommands.at(choice);
-            if (command < 3) return command;
+            choice = readInt();
+            if (choice < 3) return choice;
                 else std::cout << "Выбран неверный пункт меню" << std::endl;
-
         }
-
-        catch (std::exception &) {
+        catch (InputError) {
             std::cout << "Выбран неверный пункт меню" << std::endl;
         }
     }
@@ -152,16 +149,15 @@ int ConsoleDialog::settingsPresentation()
     std::cout << "0. Назад" << std::endl;
 
     bool good_choice = false;
-    std::string choice;
+    int choice;
     while (good_choice == false) {
         std::cout << "Выберите нужный пункт меню: ";
-        std::getline(std::cin, choice);
         try {
-            int command = consoleCommands.at(choice);
-            if (command < 5) return command;
+            choice = readInt();
+            if (choice < 5) return choice;
                 else std::cout << "Выбран неверный пункт меню" << std::endl;
         }
-        catch (std::exception &) {
+        catch (InputError) {
             std::cout << "Выбран неверный пункт меню" << std::endl;
         }
     }

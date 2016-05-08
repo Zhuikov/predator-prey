@@ -2,6 +2,9 @@
 #define BADBOUNDARY_H
 #include <exception>
 
+/**
+ * @brief класс-исключение, генерируется при указании неверных индексов
+ */
 class BadFieldBoundary : public std::exception
 {
     int vertical;

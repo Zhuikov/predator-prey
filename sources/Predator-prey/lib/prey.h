@@ -4,6 +4,9 @@
 
 class Units;
 
+/**
+ * @brief класс для реализации жертвы в модели
+ */
 class Prey : public Animal
 {
 protected:

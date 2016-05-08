@@ -7,11 +7,29 @@ class Units;
 class Field;
 class Prey;
 
+/**
+ * @brief класс, реализующий хищника в модели
+ */
 class Predator : public Animal
 {
+    /**
+     * @brief DISTANCE_FOR_KILL - дистанция до жертвы, при которой можно ее съесть
+     */
     static constexpr double DISTANCE_FOR_KILL = 1;
+
+    /**
+     * @brief DISTANCE_FOR_TARGET - дистанция для взятия жертвы в цель
+     */
     static constexpr double DISTANCE_FOR_TARGET = 1.4;
+
+    /**
+     * @brief DISTANCE_FOR_RESET_TARGET - дистанция, при которой жертва убегает от хищника
+     */
     static constexpr double DISTANCE_FOR_RESET_TARGET = 2.1;
+
+    /**
+     * @brief DELTA - константа, необходимая для сравнения чисел
+     */
     static constexpr double DELTA = 0.1;
 
 protected:

@@ -2,6 +2,9 @@
 #define BADINPUT_H
 #include <exception>
 
+/**
+ * @brief класс-исключение, генерируется при неверном вводе
+ */
 class InputError : public std::exception
 {
 public:

@@ -20,12 +20,12 @@ void ConsoleApp::startModel()
     delete this->model; // ???
 }
 
-ConsoleApp::ConsoleApp()
+ConsoleApp::ConsoleApp():
+    drawer(nullptr),
+    model(nullptr)
 {
     this->settings = new Settings;
     this->dialog = new ConsoleDialog(this->settings);
-    this->model = nullptr;
-    this->drawer = nullptr;
 }
 
 void ConsoleApp::createConsole()
@@ -37,7 +37,6 @@ void ConsoleApp::createConsole()
         switch (menuChoice) {
             case 1: {
                 this->startModel();
-
                 break;
             }
 
@@ -56,8 +55,6 @@ void ConsoleApp::createConsole()
 ConsoleApp::~ConsoleApp()
 {
     delete this->settings;
-   // delete this->drawer;
     delete this->dialog;
-    //delete this->model;
 }
 

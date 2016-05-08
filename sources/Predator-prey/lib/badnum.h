@@ -2,10 +2,22 @@
 #define BADNUM_H
 #include <exception>
 
+/**
+ * @brief класс-исключение, генерируется при вводе числа, не принадлежащего
+ * указанному промежутку
+ */
 class BadNum : public std::exception
 {
     int bad_number;
+
+    /**
+     * @brief min_boundary - нижняя граница промежутка
+     */
     int min_boundary;
+
+    /**
+     * @brief max_boundary - верхняя граница промежутка
+     */
     int max_boundary;
 public:
     BadNum(int bad_number, int min_boundary, int max_boundary):
@@ -24,8 +36,16 @@ public:
         }
         return string;
     }
-   int getMaxBoundary() { return max_boundary; }
-   int getMinBoundary() { return min_boundary; }
+
+    /**
+     * @brief метод, возвращающий верхнюю границу промежутка
+     */
+    int getMaxBoundary() { return max_boundary; }
+
+    /**
+     * @brief метод, возвращающий нижнюю границу промежутка
+     */
+    int getMinBoundary() { return min_boundary; }
 };
 
 #endif // BADNUM_H

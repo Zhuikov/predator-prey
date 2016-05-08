@@ -7,7 +7,6 @@ Units::Units()
     preys.reserve(1);
 }
 
-//TODO: foreach syntax
 Units::~Units()
 {
     for (Predator* predator: predators) {

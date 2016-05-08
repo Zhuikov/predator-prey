@@ -4,6 +4,9 @@
 #include "field.h"
 #include <vector>
 
+/**
+ * @brief класс, предоставляющий методы ядра
+ */
 class ModelAPI
 {
 public:

@@ -1,6 +1,9 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+/**
+ * @brief класс, содержащий настройки модели
+ */
 class Settings
 {
     /**
@@ -41,6 +44,10 @@ class Settings
 public:
 
     Settings();
+
+    /**
+     * @brief методы, возвращающие информацию о текущий настройках
+     */
     int getFieldLength() const { return field_length; }
     int getFieldHeight() const { return field_height; }
     int getNumOfPreys()  const { return num_of_preys; }
@@ -49,6 +56,10 @@ public:
     int getMinMovesWithoutMeal() const { return min_moves_without_meal; }
     int getMaxMovesWithoutMeal() const { return max_moves_without_meal; }
 
+    /**
+     * @brief методы, устанавливающие новые настройки;
+     * при неоходимости генерируют исключения
+     */
     void setFieldLength(const int);
     void setFieldHeight(const int);
     void setNumOfPredators(const int);

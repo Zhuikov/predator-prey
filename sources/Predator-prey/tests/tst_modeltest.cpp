@@ -5,6 +5,7 @@
 #include "coordinates.h"
 #include "badfield.h"
 #include "badboundary.h"
+#include "badnum.h"
 #include "model.h"
 #include "predator.h"
 
@@ -22,6 +23,7 @@ private Q_SLOTS:
 
     void coordinatesTest();
     void fieldTest();
+    void settingsTest();
     void predatorMoveTest();
     void predatorCreateTest();
     void predatorMoveKillTest();
@@ -136,6 +138,15 @@ void ModelTest::fieldTest()
     QVERIFY_EXCEPTION_THROWN(field.setPosition(10, 10, Position::PREY), BadFieldBoundary);
     QCOMPARE(field.whatIsEmpty(2, 4), Direction::LEFT);
 
+}
+
+void ModelTest::settingsTest()
+{
+    Settings settings;
+
+    QVERIFY_EXCEPTION_THROWN(settings.setFieldHeight(-1), BadFieldHeight);
+    QVERIFY_EXCEPTION_THROWN(settings.setFieldLength(-1), BadFieldLength);
+    QVERIFY_EXCEPTION_THROWN(settings.setNumOfPredators(-1), BadNum);
 }
 
 void ModelTest::predatorMoveTest()
