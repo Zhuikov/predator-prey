@@ -91,6 +91,7 @@ void ConsoleDrawer::drawField()
                 case Position::EMPTY:    { std::cout << ". "; break; }
                 case Position::PREDATOR: { std::cout << "X "; break; }
                 case Position::PREY:     { std::cout << "O "; break; }
+                case Position::GRASS:    { std::cout << "w "; break; }
             }
         }
         std::cout << std::endl;

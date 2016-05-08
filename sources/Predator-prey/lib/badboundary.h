@@ -9,6 +9,7 @@ class BadFieldBoundary : public std::exception
 {
     int vertical;
     int horizontal;
+
 public:
     BadFieldBoundary(int v, int h): vertical(v), horizontal(h) {}
     virtual const char *what() const throw()

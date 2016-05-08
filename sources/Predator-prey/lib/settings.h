@@ -46,7 +46,7 @@ public:
     Settings();
 
     /**
-     * @brief методы, возвращающие информацию о текущий настройках
+     * @brief методы, возвращающие информацию о текущих настройках
      */
     int getFieldLength() const { return field_length; }
     int getFieldHeight() const { return field_height; }

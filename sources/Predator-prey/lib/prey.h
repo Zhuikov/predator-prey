@@ -1,8 +1,10 @@
 #ifndef PREY_H
 #define PREY_H
 #include "animal.h"
+#include "modelapi.h"
 
 class Units;
+class Grass;
 
 /**
  * @brief класс для реализации жертвы в модели
@@ -29,6 +31,17 @@ protected:
      * @brief units_struct - указатель на класс с векторами хищников и жертв
      */
     Units* units_struct;
+
+    /**
+     * @brief target - указатель на текущую цель
+     */
+    Grass* target;
+
+    /**
+     * @brief метод поиска корма на соседних клетках;
+     * в случае успеха, записывает координаты в target
+     */
+    void findGrass();
     void directionFinding() noexcept;
     void chooseToTargetDirection() noexcept {} //пока нет травки
 

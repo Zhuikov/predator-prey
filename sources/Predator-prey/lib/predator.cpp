@@ -1,6 +1,4 @@
 #include "predator.h"
-#include "coordinates.h"
-#include "units.h"
 #include <vector>
 #include <ctime>
 #include <cmath>
@@ -13,7 +11,7 @@ void Predator::directionFinding() noexcept
     }
     else {
         double distance = place - target->place;
-        if (fabs(distance - DISTANCE_FOR_KILL) < DELTA) {
+        if (fabs(distance - DISTANCE_FOR_EAT) < DELTA) {
             killPrey();
         }
         else chooseToTargetDirection();
@@ -49,7 +47,7 @@ void Predator::findPrey() noexcept
     for (Prey* prey: units_struct->preys) {
         if (prey->died == false) {
             distance = place - prey->place;
-            if (distance < DISTANCE_FOR_KILL + DELTA) {
+            if (distance < DISTANCE_FOR_EAT + DELTA) {
                 target = prey;
                 break;
             }

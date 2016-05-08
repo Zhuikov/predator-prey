@@ -10,6 +10,7 @@
 class BadFieldLength : public std::exception
 {
     int length;
+
 public:
     BadFieldLength(int length): length(length) {}
     virtual const char *what() const throw()
@@ -35,6 +36,7 @@ public:
 class BadFieldHeight : public std::exception
 {
     int height;
+
 public:
     BadFieldHeight(int height): height(height) {}
     virtual const char *what() const throw()

@@ -24,13 +24,15 @@ private Q_SLOTS:
     void coordinatesTest();
     void fieldTest();
     void settingsTest();
+
     void predatorMoveTest();
     void predatorCreateTest();
     void predatorMoveKillTest();
     void predatorPriorityTest();
     void predatorHungryTest();
     void twoPredatorsTest();
-    void modelppInitializeTest();
+
+    void modelInitializeTest();
     void debugTest();
 };
 
@@ -265,7 +267,7 @@ void ModelTest::predatorPriorityTest()
     QCOMPARE(tst_predator->place.getH(), 4);
 }
 
-void ModelTest::modelppInitializeTest()
+void ModelTest::modelInitializeTest()
 {
     Settings sett;
     Model model(&sett);

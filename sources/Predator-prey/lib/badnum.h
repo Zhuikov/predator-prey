@@ -19,6 +19,7 @@ class BadNum : public std::exception
      * @brief max_boundary - верхняя граница промежутка
      */
     int max_boundary;
+
 public:
     BadNum(int bad_number, int min_boundary, int max_boundary):
         bad_number(bad_number),

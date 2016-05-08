@@ -18,7 +18,8 @@ SOURCES += \
     animal.cpp \
     units.cpp \
     coordinates.cpp \
-    model.cpp
+    model.cpp \
+    grass.cpp
 
 HEADERS += \
     settings.h \
@@ -33,7 +34,8 @@ HEADERS += \
     badinput.h \
     badfield.h \
     badboundary.h \
-    badnum.h
+    badnum.h \
+    grass.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

@@ -1,6 +1,5 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
-#include "coordinates.h"
 #include "field.h"
 
 /**
@@ -16,6 +15,22 @@ class Animal
     void chooseEmptyDirection() noexcept;
 
 protected:
+
+    /**
+     * @brief DISTANCE_FOR_KILL - дистанция до жертвы, при которой можно ее съесть
+     */
+    static constexpr double DISTANCE_FOR_EAT = 1;
+
+    /**
+     * @brief DISTANCE_FOR_TARGET - дистанция для взятия жертвы в цель
+     */
+    static constexpr double DISTANCE_FOR_TARGET = 1.4;
+
+    /**
+     * @brief DELTA - константа, необходимая для сравнения чисел
+     */
+    static constexpr double DELTA = 0.1;
+
     /**
      * @brief life_time - счетчик ходов животного на поле
      */

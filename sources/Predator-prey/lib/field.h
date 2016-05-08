@@ -11,7 +11,8 @@ enum class Position
 {
     EMPTY,
     PREDATOR,
-    PREY
+    PREY,
+    GRASS
 };
 
 /**

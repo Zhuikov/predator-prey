@@ -1,7 +1,27 @@
 #include "prey.h"
-#include "units.h"
 #include <ctime>
 #include <cstdlib>
+
+void Prey::findGrass()
+{
+    if (target != nullptr && target->eaten == true) {
+        target = nullptr;
+    }
+
+    double distance = 0;
+    for (Grass* grass: units_struct->grass) {
+        if (grass->eaten == false) {
+            distance = place - grass->place;
+            if (distance < DISTANCE_FOR_EAT + DELTA) {
+                target = grass;
+                break;
+            }
+            if (distance < DISTANCE_FOR_TARGET + DELTA) {
+                target = grass;
+            }
+        }
+    }
+}
 
 void Prey::directionFinding() noexcept
 {
@@ -50,7 +70,8 @@ void Prey::isChase()
 
 Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer):
     warning(false),
-    units_struct(units_pointer)
+    units_struct(units_pointer),
+    target(nullptr)
 {
     place.setV(v);
     place.setH(h);
