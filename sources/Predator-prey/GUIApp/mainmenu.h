@@ -26,6 +26,7 @@ class MainMenu : public QWidget
                 " border: 1.5px solid #324ab2;"
             "}";
 
+    QPushButton* settings_button;
     QPushButton* exit_button;
 
 public:
