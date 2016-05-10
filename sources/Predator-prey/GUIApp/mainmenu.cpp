@@ -3,6 +3,7 @@
 MainMenu::MainMenu(QWidget* parent)
 {
     this->setFixedSize(WINDOW_SIZE);
+    this->setWindowTitle("Хищник-жертва");
 
     QPixmap background(":/background2.jpg");
     QPalette pal;
@@ -26,11 +27,6 @@ MainMenu::MainMenu(QWidget* parent)
 
 void MainMenu::close_window()
 {
-    this->close();
-//    QWidget wgt(this);
-
-//    QPushButton* yes = new QPushButton("Да", &wgt);
-//    yes->setStyleSheet(button_style);
-//    yes->resize(150, 30);
-//    wgt.show();
+    ExitWindow exit_window(this);
+    exit_window.show();
 }
