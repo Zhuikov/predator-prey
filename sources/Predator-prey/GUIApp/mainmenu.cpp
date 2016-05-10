@@ -4,11 +4,10 @@ MainMenu::MainMenu(QWidget* parent)
 {
     this->setFixedSize(WINDOW_SIZE);
 
-//    QPixmap background("background.png");
-//    QPalette pal;
-//    pal.setBrush(this->backgroundRole(), QBrush(background));
-//    this->setPalette(pal);
-//    this->setAutoFillBackground(true);
+    QPixmap background("background.jpg");
+    QPalette pal;
+    pal.setBrush(this->backgroundRole(), QBrush(background));
+    this->setPalette(pal);
 
     settings_button = new QPushButton("Настройки", this);
     settings_button->setStyleSheet(button_style);
