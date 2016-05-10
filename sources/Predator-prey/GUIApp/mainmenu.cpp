@@ -4,7 +4,7 @@ MainMenu::MainMenu(QWidget* parent)
 {
     this->setFixedSize(WINDOW_SIZE);
 
-    QPixmap background("background.jpg");
+    QPixmap background(":resources/background.jpg");
     QPalette pal;
     pal.setBrush(this->backgroundRole(), QBrush(background));
     this->setPalette(pal);

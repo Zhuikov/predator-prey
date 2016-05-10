@@ -19,3 +19,6 @@ HEADERS  += \
     mainmenu.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc
