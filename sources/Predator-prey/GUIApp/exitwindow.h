@@ -17,7 +17,7 @@ class ExitWindow : public QDialog
     QLabel* exit_label;
 
 public:
-    ExitWindow(QWidget* parent);
+    explicit ExitWindow(QWidget* parent);
 
 private slots:
     void close_app();

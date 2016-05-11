@@ -27,6 +27,7 @@ class ConsoleApp
 
 public:
     ConsoleApp();
+    ConsoleApp(const ConsoleApp&) = delete;
 
     /**
      * @brief метод, создающий консольное приложение

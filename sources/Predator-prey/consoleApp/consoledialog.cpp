@@ -124,7 +124,10 @@ int ConsoleDialog::mainMenuPresentation()
         std::cout << "Выберите нужный пункт меню: ";
         try {
             choice = readInt();
-            if (choice < 3) return choice;
+            if (choice < 3) {
+                good_choice = true;
+                return choice;
+            }
                 else std::cout << "Выбран неверный пункт меню" << std::endl;
         }
         catch (InputError) {
@@ -154,7 +157,10 @@ int ConsoleDialog::settingsPresentation()
         std::cout << "Выберите нужный пункт меню: ";
         try {
             choice = readInt();
-            if (choice < 5) return choice;
+            if (choice < 5) {
+                good_choice = true;
+                return choice;
+            }
                 else std::cout << "Выбран неверный пункт меню" << std::endl;
         }
         catch (InputError) {

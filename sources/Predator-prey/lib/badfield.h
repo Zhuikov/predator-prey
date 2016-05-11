@@ -12,7 +12,7 @@ class BadFieldLength : public std::exception
     int length;
 
 public:
-    BadFieldLength(int length): length(length) {}
+    explicit BadFieldLength(int length): length(length) {}
     virtual const char *what() const throw()
     {
         const char *string = "Невозможно создать поле с введенной длиной";
@@ -38,7 +38,7 @@ class BadFieldHeight : public std::exception
     int height;
 
 public:
-    BadFieldHeight(int height): height(height) {}
+    explicit BadFieldHeight(int height): height(height) {}
     virtual const char *what() const throw()
     {
         const char *string = "Невозможно создать поле с введенной высотой";

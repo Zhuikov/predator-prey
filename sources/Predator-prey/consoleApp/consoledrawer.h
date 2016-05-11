@@ -32,7 +32,7 @@ class ConsoleDrawer
     void drawField();
 
 public:
-    ConsoleDrawer(Model *model): field(model->getField()), model(model) {}
+    explicit ConsoleDrawer(Model *model): field(model->getField()), model(model) {}
 
     /**
      * @brief метод, выводящий в консоль всю текущую информацию о модели

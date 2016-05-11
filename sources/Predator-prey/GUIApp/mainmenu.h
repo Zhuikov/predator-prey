@@ -36,7 +36,7 @@ class MainMenu : public QWidget
     QDialog* exit_menu;
 
 public:
-    MainMenu(QWidget *parent);
+    explicit MainMenu(QWidget *parent);
 
 private slots:
     void close_menu();

@@ -45,7 +45,7 @@ class ConsoleDialog
     int readInt();
 
 public:
-    ConsoleDialog(Settings *settings): settings(settings) {}
+    explicit ConsoleDialog(Settings *settings): settings(settings) {}
 
     /**
      * @brief метод, выводящий в консоль главное меню
