@@ -22,11 +22,11 @@ MainMenu::MainMenu(QWidget* parent)
     exit_button->resize(BUTTON_SIZE);
     exit_button->move(WINDOW_SIZE.width() / 2 - BUTTON_SIZE.width() / 2,
                       WINDOW_SIZE.height() / 2 - BUTTON_SIZE.height() / 2 + 200);
-    connect(exit_button, SIGNAL(clicked()), SLOT(close_window()));
+    connect(exit_button, SIGNAL(clicked()), SLOT(close_menu()));
 }
 
-void MainMenu::close_window()
+void MainMenu::close_menu()
 {
-    ExitWindow exit_window(this);
-    exit_window.show();
+    exit_menu = new ExitWindow(this);
+    exit_menu->exec();
 }

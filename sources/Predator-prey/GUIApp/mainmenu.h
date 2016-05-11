@@ -33,12 +33,13 @@ class MainMenu : public QWidget
     QPushButton* settings_button;
     QPushButton* exit_button;
 
+    QDialog* exit_menu;
 
 public:
     MainMenu(QWidget *parent);
 
 private slots:
-    void close_window();
+    void close_menu();
 };
 
 #endif // MAINMENU_H

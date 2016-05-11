@@ -3,7 +3,7 @@
 #include <QtWidgets>
 #include "mainmenu.h"
 
-class ExitWindow : public QWidget
+class ExitWindow : public QDialog
 {
     Q_OBJECT
 
@@ -12,25 +12,16 @@ class ExitWindow : public QWidget
 
     QPushButton* yes_button;
     QPushButton* no_button;
-//    QString button_style =
-//            "QPushButton {"
-//                " border: 1px solid #324ab2;"
-//                " background: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0,  stop: 0 #ffb366, stop: 1 #ff4f00);"
-//                " border-radius: 9px;"
-//                " color: #324ab2;"
-//                " font-size: 20px;"
-//                " font-weight: bold;"
-//            "}"
-//            "QPushButton:pressed {"
-//                " background: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0,  stop: 0 #ff7433, stop: 1 #ffb366);"
-//            "}"
-//            "QPushButton:hover {"
-//                " color: #33ff33;"
-//                " border: 1.5px solid #324ab2;"
-//            "}";
+
+    QWidget* parent;
+    QLabel* exit_label;
 
 public:
     ExitWindow(QWidget* parent);
+
+private slots:
+    void close_app();
+    void close_exit_window();
 };
 
 #endif // EXITWINDOW_H

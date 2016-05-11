@@ -2,5 +2,6 @@
 <qresource>
     <file>background.jpg</file>
     <file>background2.jpg</file>
+    <file>texture.jpg</file>
 </qresource>
 </RCC>
