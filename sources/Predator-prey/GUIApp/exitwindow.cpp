@@ -14,7 +14,7 @@ ExitWindow::ExitWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint | 
 
     exit_label =  new QLabel(this);
     exit_label->setStyleSheet(
-                "color: #33ff33;"
+                "color: #122faa;"
                 "font-size: 15px;"
                 "font-weight: bold;");
     exit_label->move(WINDOW_SIZE.width() - 283, WINDOW_SIZE.height()  - 80);

@@ -9,25 +9,25 @@
 static const QString button_style =
         "QPushButton {"
             " border: 1px solid #324ab2;"
-            " background: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0,  stop: 0 #ffb366, stop: 1 #ff4f00);"
+            " background: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0,  stop: 0 #122faa, stop: 1 #24a4ff);"
             " border-radius: 9px;"
-            " color: #324ab2;"
+            " color: #ffd7a8;"
             " font-size: 20px;"
             " font-weight: bold;"
         "}"
         "QPushButton:pressed {"
-            " background: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0,  stop: 0 #ff7433, stop: 1 #ffb366);"
+            " background: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0,  stop: 0 #24a4ff, stop: 1 #0047ab);"
         "}"
         "QPushButton:hover {"
             " color: #33ff33;"
-            " border: 1.5px solid #324ab2;"
+            " border: 2px solid #f07000;"
         "}";
 
 class MainMenu : public QWidget
 {
     Q_OBJECT
 
-    const QSize WINDOW_SIZE { 700, 540 };
+    const QSize WINDOW_SIZE { 660, 540 };
     const QSize BUTTON_SIZE { 300, 30 };
 
     QPushButton* settings_button;

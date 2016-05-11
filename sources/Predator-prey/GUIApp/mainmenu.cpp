@@ -29,4 +29,5 @@ void MainMenu::close_menu()
 {
     exit_menu = new ExitWindow(this);
     exit_menu->exec();
+    delete exit_menu;
 }
