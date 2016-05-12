@@ -28,7 +28,7 @@ class MainMenu : public QWidget
     Q_OBJECT
 
     const QSize WINDOW_SIZE { 660, 540 };
-    const QSize BUTTON_SIZE { 160, 30 };
+    const QSize BUTTON_SIZE { 180, 30 };
 
     QPushButton* new_model_button;
     QPushButton* settings_button;

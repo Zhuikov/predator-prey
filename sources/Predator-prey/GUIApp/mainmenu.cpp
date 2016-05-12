@@ -14,20 +14,20 @@ MainMenu::MainMenu(QWidget* parent)
     new_model_button = new QPushButton("Новая модель", this);
     new_model_button->setStyleSheet(button_style);
     new_model_button->resize(BUTTON_SIZE);
-    new_model_button->move(WINDOW_SIZE.width() - 170,
-                           WINDOW_SIZE.height() / 2 - BUTTON_SIZE.height() / 2 + 135);
+    new_model_button->move(WINDOW_SIZE.width() - 200,
+                           WINDOW_SIZE.height() - 500);
 
     settings_button = new QPushButton("Настройки", this);
     settings_button->setStyleSheet(button_style);
     settings_button->resize(BUTTON_SIZE);
-    settings_button->move(WINDOW_SIZE.width() - 170,
-                          WINDOW_SIZE.height() / 2 - BUTTON_SIZE.height() / 2 + 180);
+    settings_button->move(WINDOW_SIZE.width() - 200,
+                          WINDOW_SIZE.height() - 450);
 
     exit_button = new QPushButton("Выход", this);
     exit_button->setStyleSheet(button_style);
     exit_button->resize(BUTTON_SIZE);
-    exit_button->move(WINDOW_SIZE.width() - 170,
-                      WINDOW_SIZE.height() / 2 - BUTTON_SIZE.height() / 2 + 225);
+    exit_button->move(WINDOW_SIZE.width() - 200,
+                      WINDOW_SIZE.height() - 400);
     connect(exit_button, SIGNAL(clicked()), SLOT(close_menu()));
 
 }
