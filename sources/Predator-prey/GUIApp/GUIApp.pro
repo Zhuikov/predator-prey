@@ -14,11 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     mainmenu.cpp \
-    exitwindow.cpp
+    exitwindow.cpp \
+    settingswindow.cpp
 
 HEADERS  += \
     mainmenu.h \
-    exitwindow.h
+    exitwindow.h \
+    settingswindow.h
 
 FORMS    += mainwindow.ui
 

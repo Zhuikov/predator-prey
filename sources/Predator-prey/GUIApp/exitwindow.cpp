@@ -1,6 +1,6 @@
 #include "exitwindow.h"
 
-ExitWindow::ExitWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint)
+ExitWindow::ExitWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint)
 {
     this->parent = parent;
     this->setFixedSize(WINDOW_SIZE);

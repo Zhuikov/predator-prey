@@ -22,6 +22,7 @@ MainMenu::MainMenu(QWidget* parent)
     settings_button->resize(BUTTON_SIZE);
     settings_button->move(WINDOW_SIZE.width() - 200,
                           WINDOW_SIZE.height() - 450);
+    connect(settings_button, SIGNAL(clicked()), SLOT(settings_menu()));
 
     exit_button = new QPushButton("Выход", this);
     exit_button->setStyleSheet(button_style);
@@ -34,7 +35,15 @@ MainMenu::MainMenu(QWidget* parent)
 
 void MainMenu::close_menu()
 {
-    exit_menu = new ExitWindow(this);
+    ExitWindow* exit_menu = new ExitWindow(this);
     exit_menu->exec();
     delete exit_menu;
+}
+
+void MainMenu::settings_menu()
+{
+    SettingsWindow* settings_menu = new SettingsWindow(this);
+    this->hide();
+    settings_menu->exec();
+    delete settings_menu;
 }
