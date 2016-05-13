@@ -39,6 +39,7 @@ public:
     explicit MainMenu(QWidget *parent);
 
 private slots:
+    // todo перегрузить крестик
     void close_menu();
     void settings_menu();
 };

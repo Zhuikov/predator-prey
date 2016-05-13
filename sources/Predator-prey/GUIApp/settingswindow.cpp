@@ -6,6 +6,12 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitl
     this->setWindowTitle("Настройки");
     this->parent = parent;
 
+    QPixmap background(":/settings_texture2.jpg");
+    QPalette pal;
+    pal.setBrush(this->backgroundRole(), QBrush(background));
+    this->setPalette(pal);
+    this->setAutoFillBackground(true);
+
     field_length_label = createLabel("Длина поля", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 480);
     field_height_label = createLabel("Высота поля", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 430);
     predators_label    = createLabel("Количество хищников", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 380);
@@ -15,20 +21,12 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitl
     success_label = createLabel("Настройки успешно сохранены",
                                 WINDOW_SIZE.width() - 500, WINDOW_SIZE.height() - 80, true);
 
-    field_length = new QSpinBox(this);
-    field_length->setRange(10, 30);
-    field_length->setStyleSheet(
-                "color: #122faa;"
-                "font-size: 20px;");
-    field_length->move(WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 480);
-    field_length->setSuffix(" клеток");
-    field_length->show();
-
-    QPixmap background(":/settings_texture2.jpg");
-    QPalette pal;
-    pal.setBrush(this->backgroundRole(), QBrush(background));
-    this->setPalette(pal);
-    this->setAutoFillBackground(true);
+    field_length = createSpinBox(10, 30, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 480);
+    field_height = createSpinBox(10, 30, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 430);
+    // todo изменить максимумы
+    predators    = createSpinBox( 1, 30, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 380);
+    preys        = createSpinBox( 1, 30, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 330);
+    moves_without_meal = createSpinBox(5, 1000, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 280);
 
     back_button = new QPushButton("Назад", this);
     back_button->setStyleSheet(button_style);
@@ -57,6 +55,19 @@ QLabel* SettingsWindow::createLabel(QString text, int horizontal, int vertical, 
     }
 
     return label;
+}
+
+QSpinBox* SettingsWindow::createSpinBox(int min, int max, int horizontal, int vertical)
+{
+    QSpinBox* spinBox = new QSpinBox(this);
+    spinBox->setRange(min, max);
+    spinBox->setStyleSheet(
+                "color: #122faa;"
+                "font-size: 18px;");
+    spinBox->move(horizontal, vertical);
+    spinBox->show();
+
+    return spinBox;
 }
 
 void SettingsWindow::close_settings()

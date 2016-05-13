@@ -27,10 +27,15 @@ class SettingsWindow : public QDialog
     QLabel* moves_without_meal_label;
 
     QSpinBox* field_length;
+    QSpinBox* field_height;
+    QSpinBox* predators;
+    QSpinBox* preys;
+    QSpinBox* moves_without_meal;
 
     QWidget* parent;
 
     QLabel* createLabel(QString text, int horizontal, int vertical, bool invisiblity = false);
+    QSpinBox* createSpinBox(int min, int max, int horizontal, int vertical);
 
 public:
     explicit SettingsWindow(QWidget* parent);
