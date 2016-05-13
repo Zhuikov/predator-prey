@@ -1,11 +1,9 @@
-#include "mainmenu.h"
-#include <QApplication>
+#include "modelgui.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainMenu menu(0);
-    menu.show();
+    ModelGUI modelGUI(argc, argv);
+    modelGUI.startGUI();
 
-    return a.exec();
+    return 0;
 }

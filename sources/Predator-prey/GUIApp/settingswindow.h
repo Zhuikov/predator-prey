@@ -2,6 +2,7 @@
 #define SETTINGSWINDOW_H
 #include <QtWidgets>
 #include "mainmenu.h"
+#include "settings.h"
 
 class SettingsWindow : public QDialog
 {
@@ -13,9 +14,6 @@ class SettingsWindow : public QDialog
     QPushButton* back_button;
     QPushButton* save_button;
 
-    QLabel* success_label;
-    QTimer* timer_for_label;
-
     QString label_style =
                 "color: #122faa;"
                 "font-size: 20px;"
@@ -25,6 +23,9 @@ class SettingsWindow : public QDialog
     QLabel* predators_label;
     QLabel* preys_label;
     QLabel* moves_without_meal_label;
+    QLabel* success_label;
+    QTimer* timer_for_label;
+
 
     QSpinBox* field_length;
     QSpinBox* field_height;
@@ -33,16 +34,17 @@ class SettingsWindow : public QDialog
     QSpinBox* moves_without_meal;
 
     QWidget* parent;
+    Settings* settings;
 
     QLabel* createLabel(QString text, int horizontal, int vertical, bool invisiblity = false);
     QSpinBox* createSpinBox(int min, int max, int horizontal, int vertical);
 
 public:
-    explicit SettingsWindow(QWidget* parent);
+    SettingsWindow(QWidget* parent, Settings* settings);
 
 private slots:
-    void close_settings();
-    void save_settings();
+    void closeSettings();
+    void saveSettings();
 };
 
 #endif // SETTINGSWINDOW_H

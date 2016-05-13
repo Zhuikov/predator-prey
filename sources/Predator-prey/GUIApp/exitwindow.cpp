@@ -25,22 +25,22 @@ ExitWindow::ExitWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint)
     yes_button->resize(BUTTON_SIZE);
     yes_button->setStyleSheet(button_style);
     yes_button->move(WINDOW_SIZE.width() - 275, WINDOW_SIZE.height() - 50);
-    connect(yes_button, SIGNAL(clicked()), SLOT(close_app()));
+    connect(yes_button, SIGNAL(clicked()), SLOT(closeApp()));
 
     no_button = new QPushButton("Нет", this);
     no_button->resize(BUTTON_SIZE);
     no_button->setStyleSheet(button_style);
     no_button->move(WINDOW_SIZE.width() - 125, WINDOW_SIZE.height() - 50);
-    connect(no_button, SIGNAL(clicked()), SLOT(close_exit_window()));
+    connect(no_button, SIGNAL(clicked()), SLOT(closeExitWindow()));
 }
 
-void ExitWindow::close_app()
+void ExitWindow::closeApp()
 {
     this->close();
     this->parent->close();
 }
 
-void ExitWindow::close_exit_window()
+void ExitWindow::closeExitWindow()
 {
     this->close();
 }

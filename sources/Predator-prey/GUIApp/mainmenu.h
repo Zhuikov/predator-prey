@@ -3,6 +3,7 @@
 #include "QtWidgets"
 #include "exitwindow.h"
 #include "settingswindow.h"
+#include "settings.h"
 
 /// это просто ужасно...
 /// эту вещь хочется закинуть в класс, но компилятор не дает. Пишет, что что-то там не литерал(
@@ -35,13 +36,15 @@ class MainMenu : public QWidget
     QPushButton* settings_button;
     QPushButton* exit_button;
 
+    Settings* settings;
+
 public:
-    explicit MainMenu(QWidget *parent);
+    MainMenu(QWidget *parent, Settings*);
 
 private slots:
     // todo перегрузить крестик
-    void close_menu();
-    void settings_menu();
+    void closeMenu();
+    void settingsMenu();
 };
 
 #endif // MAINMENU_H

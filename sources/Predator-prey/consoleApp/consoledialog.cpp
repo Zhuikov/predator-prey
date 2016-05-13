@@ -47,9 +47,7 @@ void ConsoleDialog::changeMovesWithoutMeal()
 
 void ConsoleDialog::changeNumOfPredators()
 {
-    int MAX_NUM = std::max(settings->getFieldHeight(), settings->getFieldLength()) * 2;
-
-    std::cout << "Значение должно быть в пределах от 1 до " << MAX_NUM << std::endl
+    std::cout << "Значение должно быть в пределах от 1 до " << settings->getMaxUnits() << std::endl
               << "Введите новое число хищников: ";
 
     int number = readInt();
@@ -60,9 +58,7 @@ void ConsoleDialog::changeNumOfPredators()
 
 void ConsoleDialog::changeNumOfPreys()
 {
-    int MAX_NUM = std::max(settings->getFieldHeight(), settings->getFieldLength()) * 2;
-
-    std::cout << "Значение должно быть в пределах от 1 до " << MAX_NUM << std::endl
+    std::cout << "Значение должно быть в пределах от 1 до " << settings->getMaxUnits() << std::endl
               << "Введите новое число жертв: ";
 
     int number = readInt();

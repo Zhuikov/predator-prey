@@ -1,9 +1,10 @@
 #include "mainmenu.h"
 
-MainMenu::MainMenu(QWidget* parent)
+MainMenu::MainMenu(QWidget* parent, Settings* settings)
 {
     this->setFixedSize(WINDOW_SIZE);
     this->setWindowTitle("Хищник-жертва");
+    this->settings = settings;
 
     QPixmap background(":/background2.jpg");
     QPalette pal;
@@ -22,27 +23,27 @@ MainMenu::MainMenu(QWidget* parent)
     settings_button->resize(BUTTON_SIZE);
     settings_button->move(WINDOW_SIZE.width() - 200,
                           WINDOW_SIZE.height() - 450);
-    connect(settings_button, SIGNAL(clicked()), SLOT(settings_menu()));
+    connect(settings_button, SIGNAL(clicked()), SLOT(settingsMenu()));
 
     exit_button = new QPushButton("Выход", this);
     exit_button->setStyleSheet(button_style);
     exit_button->resize(BUTTON_SIZE);
     exit_button->move(WINDOW_SIZE.width() - 200,
                       WINDOW_SIZE.height() - 400);
-    connect(exit_button, SIGNAL(clicked()), SLOT(close_menu()));
+    connect(exit_button, SIGNAL(clicked()), SLOT(closeMenu()));
 
 }
 
-void MainMenu::close_menu()
+void MainMenu::closeMenu()
 {
     ExitWindow* exit_menu = new ExitWindow(this);
     exit_menu->exec();
     delete exit_menu;
 }
 
-void MainMenu::settings_menu()
+void MainMenu::settingsMenu()
 {
-    SettingsWindow* settings_menu = new SettingsWindow(this);
+    SettingsWindow* settings_menu = new SettingsWindow(this, settings);
     this->hide();
     settings_menu->exec();
     delete settings_menu;

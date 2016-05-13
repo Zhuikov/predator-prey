@@ -1,10 +1,12 @@
 #include "settingswindow.h"
+#include "field.h"
 
-SettingsWindow::SettingsWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint)
+SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QDialog(parent, Qt::WindowTitleHint)
 {
     this->setFixedSize(WINDOW_SIZE);
     this->setWindowTitle("Настройки");
     this->parent = parent;
+    this->settings = settings;
 
     QPixmap background(":/settings_texture2.jpg");
     QPalette pal;
@@ -12,6 +14,7 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitl
     this->setPalette(pal);
     this->setAutoFillBackground(true);
 
+    /// простыня)
     field_length_label = createLabel("Длина поля", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 480);
     field_height_label = createLabel("Высота поля", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 430);
     predators_label    = createLabel("Количество хищников", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 380);
@@ -21,24 +24,35 @@ SettingsWindow::SettingsWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitl
     success_label = createLabel("Настройки успешно сохранены",
                                 WINDOW_SIZE.width() - 500, WINDOW_SIZE.height() - 80, true);
 
-    field_length = createSpinBox(10, 30, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 480);
-    field_height = createSpinBox(10, 30, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 430);
-    // todo изменить максимумы
-    predators    = createSpinBox( 1, 30, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 380);
-    preys        = createSpinBox( 1, 30, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 330);
-    moves_without_meal = createSpinBox(5, 1000, WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 280);
+    field_length = createSpinBox(Field::MIN_FIELD_SIZE, Field::MAX_FIELD_SIZE,
+                                 WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 480);
+    field_length->setValue(settings->getFieldLength());
+
+    field_height = createSpinBox(Field::MIN_FIELD_SIZE, Field::MAX_FIELD_SIZE,
+                                 WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 430);
+    field_height->setValue(settings->getFieldHeight());
+
+    predators    = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 380);
+    predators->setValue(settings->getNumOfPredators());
+
+    preys        = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 330);
+    preys->setValue(settings->getNumOfPreys());
+
+    moves_without_meal = createSpinBox(settings->getMinMovesWithoutMeal(), settings->getMaxMovesWithoutMeal(),
+                                       WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 280);
+    moves_without_meal->setValue(settings->getMovesWithoutMeal());
 
     back_button = new QPushButton("Назад", this);
     back_button->setStyleSheet(button_style);
     back_button->resize(BUTTON_SIZE);
     back_button->move(WINDOW_SIZE.width() - 600, WINDOW_SIZE.height() - 130);
-    connect(back_button, SIGNAL(clicked()), SLOT(close_settings()));
+    connect(back_button, SIGNAL(clicked()), SLOT(closeSettings()));
 
     save_button = new QPushButton("Сохранить", this);
     save_button->setStyleSheet(button_style);
     save_button->resize(BUTTON_SIZE);
     save_button->move(WINDOW_SIZE.width() - 260, WINDOW_SIZE.height() - 130);
-    connect(save_button, SIGNAL(clicked()), SLOT(save_settings()));
+    connect(save_button, SIGNAL(clicked()), SLOT(saveSettings()));
 }
 
 QLabel* SettingsWindow::createLabel(QString text, int horizontal, int vertical, bool invisiblity)
@@ -70,14 +84,20 @@ QSpinBox* SettingsWindow::createSpinBox(int min, int max, int horizontal, int ve
     return spinBox;
 }
 
-void SettingsWindow::close_settings()
+void SettingsWindow::closeSettings()
 {
     this->close();
     parent->show();
 }
 
-void SettingsWindow::save_settings()
+void SettingsWindow::saveSettings()
 {
+    settings->setFieldHeight(field_height->value());
+    settings->setFieldLength(field_length->value());
+    settings->setMovesWithoutMeal(moves_without_meal->value());
+    settings->setNumOfPredators(predators->value());
+    settings->setNumOfPreys(preys->value());
+
     success_label->show();
     // todo блокировать кнопку на время
     QTimer::singleShot(2 * 1000, success_label, SLOT(hide()));

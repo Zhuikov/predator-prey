@@ -55,6 +55,7 @@ public:
     int getMovesWithoutMeal() const { return moves_without_meal; }
     int getMinMovesWithoutMeal() const { return min_moves_without_meal; }
     int getMaxMovesWithoutMeal() const { return max_moves_without_meal; }
+    int getMaxUnits() const;
 
     /**
      * @brief методы, устанавливающие новые настройки;

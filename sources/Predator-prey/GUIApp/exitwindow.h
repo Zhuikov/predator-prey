@@ -20,8 +20,8 @@ public:
     explicit ExitWindow(QWidget* parent);
 
 private slots:
-    void close_app();
-    void close_exit_window();
+    void closeApp();
+    void closeExitWindow();
 };
 
 #endif // EXITWINDOW_H
