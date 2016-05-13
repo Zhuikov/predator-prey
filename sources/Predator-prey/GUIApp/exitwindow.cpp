@@ -38,9 +38,11 @@ void ExitWindow::closeApp()
 {
     this->close();
     this->parent->close();
+    delete this;
 }
 
 void ExitWindow::closeExitWindow()
 {
     this->close();
+    delete this;
 }

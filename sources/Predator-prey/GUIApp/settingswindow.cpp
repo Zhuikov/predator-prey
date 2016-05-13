@@ -15,31 +15,33 @@ SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QDialog(pa
     this->setAutoFillBackground(true);
 
     /// простыня)
+
     field_length_label = createLabel("Длина поля", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 480);
     field_height_label = createLabel("Высота поля", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 430);
-    predators_label    = createLabel("Количество хищников", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 380);
-    preys_label        = createLabel("Количество жертв", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 330);
+    predators_label = createLabel("Количество хищников", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 380);
+    preys_label = createLabel("Количество жертв", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 330);
     moves_without_meal_label = createLabel("Время жизни хищника без еды",
                                            WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 280);
     success_label = createLabel("Настройки успешно сохранены",
                                 WINDOW_SIZE.width() - 500, WINDOW_SIZE.height() - 80, true);
 
+
     field_length = createSpinBox(Field::MIN_FIELD_SIZE, Field::MAX_FIELD_SIZE,
-                                 WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 480);
+                                 WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 480);
     field_length->setValue(settings->getFieldLength());
 
     field_height = createSpinBox(Field::MIN_FIELD_SIZE, Field::MAX_FIELD_SIZE,
-                                 WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 430);
+                                 WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 430);
     field_height->setValue(settings->getFieldHeight());
 
-    predators    = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 380);
+    predators = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 380);
     predators->setValue(settings->getNumOfPredators());
 
-    preys        = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 330);
+    preys = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 330);
     preys->setValue(settings->getNumOfPreys());
 
     moves_without_meal = createSpinBox(settings->getMinMovesWithoutMeal(), settings->getMaxMovesWithoutMeal(),
-                                       WINDOW_SIZE.width() - 150, WINDOW_SIZE.height() - 280);
+                                       WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 280);
     moves_without_meal->setValue(settings->getMovesWithoutMeal());
 
     back_button = new QPushButton("Назад", this);
@@ -77,7 +79,8 @@ QSpinBox* SettingsWindow::createSpinBox(int min, int max, int horizontal, int ve
     spinBox->setRange(min, max);
     spinBox->setStyleSheet(
                 "color: #122faa;"
-                "font-size: 18px;");
+                "font-size: 18px;"
+                "font-weight: bold");
     spinBox->move(horizontal, vertical);
     spinBox->show();
 
@@ -100,5 +103,5 @@ void SettingsWindow::saveSettings()
 
     success_label->show();
     // todo блокировать кнопку на время
-    QTimer::singleShot(2 * 1000, success_label, SLOT(hide()));
+    QTimer::singleShot(1000, success_label, SLOT(hide()));
 }

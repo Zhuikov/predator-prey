@@ -1,4 +1,5 @@
 #include "mainmenu.h"
+#include "unistd.h"
 
 MainMenu::MainMenu(QWidget* parent, Settings* settings)
 {
@@ -38,7 +39,7 @@ void MainMenu::closeMenu()
 {
     ExitWindow* exit_menu = new ExitWindow(this);
     exit_menu->exec();
-    delete exit_menu;
+    //delete exit_menu;
 }
 
 void MainMenu::settingsMenu()
