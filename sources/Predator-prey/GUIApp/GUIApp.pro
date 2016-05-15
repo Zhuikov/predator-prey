@@ -17,13 +17,15 @@ SOURCES += main.cpp \
     mainmenu.cpp \
     exitwindow.cpp \
     settingswindow.cpp \
-    modelgui.cpp
+    modelgui.cpp \
+    modelwindow.cpp
 
 HEADERS  += \
     mainmenu.h \
     exitwindow.h \
     settingswindow.h \
-    modelgui.h
+    modelgui.h \
+    modelwindow.h
 
 FORMS    += mainwindow.ui
 

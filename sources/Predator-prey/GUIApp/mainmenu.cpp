@@ -6,18 +6,19 @@ MainMenu::MainMenu(QWidget* parent, Settings* settings)
     this->setFixedSize(WINDOW_SIZE);
     this->setWindowTitle("Хищник-жертва");
     this->settings = settings;
+    //this->model = nullptr;
 
     QPixmap background(":/background2.jpg");
     QPalette pal;
     pal.setBrush(this->backgroundRole(), QBrush(background));
     this->setPalette(pal);
-    this->setAutoFillBackground(true);
 
     new_model_button = new QPushButton("Новая модель", this);
     new_model_button->setStyleSheet(button_style);
     new_model_button->resize(BUTTON_SIZE);
     new_model_button->move(WINDOW_SIZE.width() - 200,
                            WINDOW_SIZE.height() - 500);
+    connect(new_model_button, SIGNAL(clicked()), SLOT(createModel()));
 
     settings_button = new QPushButton("Настройки", this);
     settings_button->setStyleSheet(button_style);
@@ -39,13 +40,24 @@ void MainMenu::closeMenu()
 {
     ExitWindow* exit_menu = new ExitWindow(this);
     exit_menu->exec();
-    //delete exit_menu;
+    delete exit_menu;
 }
 
 void MainMenu::settingsMenu()
 {
     SettingsWindow* settings_menu = new SettingsWindow(this, settings);
+    settings_menu->move(this->x(), this->y());
     this->hide();
     settings_menu->exec();
     delete settings_menu;
+}
+
+void MainMenu::createModel()
+{
+    Model* model = new Model(this->settings);
+    ModelWindow* model_window = new ModelWindow(this, model);
+    model_window->move(this->x(), this->y());
+    this->hide();
+    model_window->exec();
+    delete model_window;
 }

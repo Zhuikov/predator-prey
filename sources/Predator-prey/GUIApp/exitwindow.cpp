@@ -10,7 +10,6 @@ ExitWindow::ExitWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint)
     QPalette pal;
     pal.setBrush(this->backgroundRole(), QBrush(background));
     this->setPalette(pal);
-    this->setAutoFillBackground(true);
 
     exit_label =  new QLabel(this);
     exit_label->setStyleSheet(
@@ -38,11 +37,9 @@ void ExitWindow::closeApp()
 {
     this->close();
     this->parent->close();
-    delete this;
 }
 
 void ExitWindow::closeExitWindow()
 {
     this->close();
-    delete this;
 }

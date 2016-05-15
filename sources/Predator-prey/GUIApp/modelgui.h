@@ -6,7 +6,6 @@
 
 class ModelGUI
 {
-    Model* model;
     Settings* settings;
 
     int argc;

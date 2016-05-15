@@ -4,6 +4,8 @@
 #include "exitwindow.h"
 #include "settingswindow.h"
 #include "settings.h"
+#include "modelwindow.h"
+#include "model.h"
 
 /// это просто ужасно...
 /// эту вещь хочется закинуть в класс, но компилятор не дает. Пишет, что что-то там не литерал(
@@ -45,6 +47,7 @@ private slots:
     // todo перегрузить крестик
     void closeMenu();
     void settingsMenu();
+    void createModel();
 };
 
 #endif // MAINMENU_H

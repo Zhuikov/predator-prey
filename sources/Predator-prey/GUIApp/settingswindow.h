@@ -8,6 +8,9 @@ class SettingsWindow : public QDialog
 {
     Q_OBJECT
 
+    QWidget* parent;
+    Settings* settings;
+
     const QSize WINDOW_SIZE { 660, 540 };
     const QSize BUTTON_SIZE { 200, 30 };
 
@@ -32,9 +35,6 @@ class SettingsWindow : public QDialog
     QSpinBox* predators;
     QSpinBox* preys;
     QSpinBox* moves_without_meal;
-
-    QWidget* parent;
-    Settings* settings;
 
     QLabel* createLabel(QString text, int horizontal, int vertical, bool invisiblity = false);
     QSpinBox* createSpinBox(int min, int max, int horizontal, int vertical);

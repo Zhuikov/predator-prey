@@ -12,7 +12,6 @@ SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QDialog(pa
     QPalette pal;
     pal.setBrush(this->backgroundRole(), QBrush(background));
     this->setPalette(pal);
-    this->setAutoFillBackground(true);
 
     /// простыня)
 
@@ -25,11 +24,20 @@ SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QDialog(pa
     success_label = createLabel("Настройки успешно сохранены",
                                 WINDOW_SIZE.width() - 500, WINDOW_SIZE.height() - 80, true);
 
-
     field_length = createSpinBox(Field::MIN_FIELD_SIZE, Field::MAX_FIELD_SIZE,
                                  WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 480);
     field_length->setValue(settings->getFieldLength());
 
+//    field_length = new QSlider(Qt::Horizontal, this);
+//    field_length->setStyleSheet(
+//                "color: #122faa;"
+//                "font-size: 18px;"
+//                "font-weight: bold");
+//    field_length->setRange(10, 30);
+//    field_length->setValue(20);
+//    field_length->setTickInterval(3);
+//    field_length->setTickPosition(QSlider::TicksBelow);
+//    field_length->move(WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 480);
     field_height = createSpinBox(Field::MIN_FIELD_SIZE, Field::MAX_FIELD_SIZE,
                                  WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 430);
     field_height->setValue(settings->getFieldHeight());
@@ -90,6 +98,7 @@ QSpinBox* SettingsWindow::createSpinBox(int min, int max, int horizontal, int ve
 void SettingsWindow::closeSettings()
 {
     this->close();
+    parent->move(this->x(), this->y());
     parent->show();
 }
 
