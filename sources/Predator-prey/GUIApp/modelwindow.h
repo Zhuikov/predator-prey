@@ -1,23 +1,28 @@
 #ifndef MODELWINDOW_H
 #define MODELWINDOW_H
 #include <QtWidgets>
+#include <QPainter>
 #include "model.h"
 #include "mainmenu.h"
 
-class ModelWindow : public QDialog
+class ModelWindow : public QWidget
 {
     Q_OBJECT
 
     QWidget* parent;
+    Settings* settings;
     Model* model;
 
     const QSize WINDOW_SIZE { 660, 540 };
     const QSize BUTTON_SIZE { 180,  30 };
 
     QPushButton* menu_button;
+    QWidget* wgt;
+
+    void drawField(Field* field);
 
 public:
-    ModelWindow(QWidget* parent, Model* model);
+    ModelWindow(QWidget* parent, Settings *settings);
 
 private slots:
     void exitToMenu();

@@ -1,12 +1,11 @@
 #include "mainmenu.h"
 #include "unistd.h"
 
-MainMenu::MainMenu(QWidget* parent, Settings* settings)
+//MainMenu::MainMenu(QWidget* parent, Settings* settings)
 {
     this->setFixedSize(WINDOW_SIZE);
     this->setWindowTitle("Хищник-жертва");
     this->settings = settings;
-    //this->model = nullptr;
 
     QPixmap background(":/background2.jpg");
     QPalette pal;
@@ -54,10 +53,9 @@ void MainMenu::settingsMenu()
 
 void MainMenu::createModel()
 {
-    Model* model = new Model(this->settings);
-    ModelWindow* model_window = new ModelWindow(this, model);
+    ModelWindow* model_window = new ModelWindow(this, settings);
     model_window->move(this->x(), this->y());
+    model_window->show();
     this->hide();
-    model_window->exec();
-    delete model_window;
+   // delete model_window;
 }
