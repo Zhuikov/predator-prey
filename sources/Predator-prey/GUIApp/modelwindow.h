@@ -4,6 +4,7 @@
 #include <QPainter>
 #include "model.h"
 #include "mainmenu.h"
+#include "fieldframe.h"
 
 class ModelWindow : public QWidget
 {
@@ -16,8 +17,6 @@ class ModelWindow : public QWidget
     const QSize BUTTON_SIZE { 180,  30 };
 
     QPushButton* menu_button;
-
-    void drawField(Field* field);
 
 public:
     ModelWindow(QWidget* parent, Settings *settings);
