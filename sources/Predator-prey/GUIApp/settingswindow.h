@@ -4,7 +4,7 @@
 #include "mainmenu.h"
 #include "settings.h"
 
-class SettingsWindow : public QDialog
+class SettingsWindow : public QWidget
 {
     Q_OBJECT
 

@@ -1,11 +1,11 @@
 #include "settingswindow.h"
 #include "field.h"
 
-SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QDialog(parent, Qt::WindowTitleHint)
+SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QWidget(parent, Qt::WindowTitleHint)
 {
     this->setFixedSize(WINDOW_SIZE);
     this->setWindowTitle("Настройки");
-    this->parent = parent;
+    //this->parent = parent;
     this->settings = settings;
 
     QPixmap background(":/settings_texture2.jpg");
@@ -86,9 +86,10 @@ QSpinBox* SettingsWindow::createSpinBox(int min, int max, int horizontal, int ve
 
 void SettingsWindow::closeSettings()
 {
-    this->hide();
-    parent->move(this->x(), this->y());
-    parent->show();
+    MainMenu* menu_window = new MainMenu(0, settings);
+    menu_window->move(this->x(), this->y());
+    menu_window->show();
+    this->close();
 }
 
 void SettingsWindow::saveSettings()

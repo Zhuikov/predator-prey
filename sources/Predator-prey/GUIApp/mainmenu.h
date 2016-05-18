@@ -44,7 +44,6 @@ public:
     MainMenu(QWidget *parent, Settings*);
 
 private slots:
-    // todo перегрузить крестик
     void closeMenu();
     void settingsMenu();
     void createModel();

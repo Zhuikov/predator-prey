@@ -2,7 +2,6 @@
 
 ModelWindow::ModelWindow(QWidget* parent, Settings* settings) : QWidget(parent, Qt::WindowTitleHint)
 {
-    this->parent = parent;
     this->settings = settings;
     this->setFixedSize(WINDOW_SIZE);
     model = new Model(this->settings);
@@ -35,7 +34,8 @@ void ModelWindow::drawField(Field *field)
 
 void ModelWindow::exitToMenu()
 {
-    parent->move(this->x(), this->y());
-    parent->show();
+    MainMenu* menu_window = new MainMenu(0, settings);
+    menu_window->move(this->x(), this->y());
+    menu_window->show();
     this->close();
 }

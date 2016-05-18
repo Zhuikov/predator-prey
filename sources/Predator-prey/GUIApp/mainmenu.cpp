@@ -1,7 +1,7 @@
 #include "mainmenu.h"
 #include "unistd.h"
 
-//MainMenu::MainMenu(QWidget* parent, Settings* settings)
+MainMenu::MainMenu(QWidget* parent, Settings* settings) : QWidget(parent, Qt::WindowTitleHint)
 {
     this->setFixedSize(WINDOW_SIZE);
     this->setWindowTitle("Хищник-жертва");
@@ -44,18 +44,17 @@ void MainMenu::closeMenu()
 
 void MainMenu::settingsMenu()
 {
-    SettingsWindow* settings_menu = new SettingsWindow(this, settings);
+    SettingsWindow* settings_menu = new SettingsWindow(0, settings);
     settings_menu->move(this->x(), this->y());
-    this->hide();
-    settings_menu->exec();
-    delete settings_menu;
+    settings_menu->show();
+    this->close();
 }
 
 void MainMenu::createModel()
 {
-    ModelWindow* model_window = new ModelWindow(this, settings);
+    ModelWindow* model_window = new ModelWindow(0, settings);
     model_window->move(this->x(), this->y());
     model_window->show();
-    this->hide();
+    this->close();
    // delete model_window;
 }

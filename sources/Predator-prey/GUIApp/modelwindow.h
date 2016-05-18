@@ -9,7 +9,6 @@ class ModelWindow : public QWidget
 {
     Q_OBJECT
 
-    QWidget* parent;
     Settings* settings;
     Model* model;
 
@@ -17,7 +16,6 @@ class ModelWindow : public QWidget
     const QSize BUTTON_SIZE { 180,  30 };
 
     QPushButton* menu_button;
-    QWidget* wgt;
 
     void drawField(Field* field);
 
