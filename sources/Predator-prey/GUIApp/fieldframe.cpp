@@ -1,5 +1,5 @@
 #include "fieldframe.h"
-#include <Qpainter>
+#include <QPainter>
 
 FieldFrame::FieldFrame(QWidget *parent, Field* field) : QFrame(parent)
 {
