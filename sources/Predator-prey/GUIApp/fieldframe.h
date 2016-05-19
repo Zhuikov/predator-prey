@@ -9,11 +9,14 @@ class FieldFrame : public QFrame
 
     QSize field_size;
     Field* field;
-    const QPoint field_place { 50,  80 };
+    const QPoint field_place { 50, 80 };
+    static constexpr int LINE_WIDTH_DELTA = 1;
 
     QWidget* parent;
+
     int cell_size;
     void createField(QPainter &painter);
+    void createUnits(QPainter &painter);
     void paintEvent(QPaintEvent*);
 
 public:

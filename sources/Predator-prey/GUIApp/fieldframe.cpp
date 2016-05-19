@@ -1,5 +1,6 @@
 #include "fieldframe.h"
 #include <QPainter>
+#include <QBrush>
 
 FieldFrame::FieldFrame(QWidget *parent, Field* field) : QFrame(parent)
 {
@@ -13,34 +14,62 @@ FieldFrame::FieldFrame(QWidget *parent, Field* field) : QFrame(parent)
     pal.setBrush(this->backgroundRole(), Qt::white);
     this->setAutoFillBackground(true);
     this->setPalette(pal);
+
+    cell_size = FIELD_SIDE / std::max(field->getLength(), field->getHeight());
 }
 
 void FieldFrame::createField(QPainter &painter)
 {
-    cell_size = FIELD_SIDE / std::max(field->getLength(), field->getHeight());
-
     field_size.setHeight(field->getHeight() * cell_size);
     field_size.setWidth (field->getLength() * cell_size);
 
     int vert_line_coordX = 0;
-    painter.drawLine(vert_line_coordX + 1, 0, vert_line_coordX + 1, field_size.height());
+    painter.drawLine(vert_line_coordX + LINE_WIDTH_DELTA, 0, vert_line_coordX + LINE_WIDTH_DELTA, field_size.height());
     for (int i = 0; i < field->getLength(); i++) {
         vert_line_coordX += cell_size;
         painter.drawLine(vert_line_coordX, 0, vert_line_coordX, field_size.height());
     }
 
     int horiz_line_coordY = 0;
-    painter.drawLine(0, horiz_line_coordY + 1, field_size.width(), horiz_line_coordY + 1);
+    painter.drawLine(0, horiz_line_coordY + LINE_WIDTH_DELTA, field_size.width(), horiz_line_coordY + LINE_WIDTH_DELTA);
     for (int i = 0; i < field->getHeight(); i++) {
         horiz_line_coordY += cell_size;
         painter.drawLine(0, horiz_line_coordY, field_size.width(), horiz_line_coordY);
     }
-    field_size.setWidth (vert_line_coordX + 1);
-    field_size.setHeight(horiz_line_coordY + 1);
+    field_size.setWidth (vert_line_coordX + LINE_WIDTH_DELTA);
+    field_size.setHeight(horiz_line_coordY + LINE_WIDTH_DELTA);
 
     this->setFixedSize(field_size);
-    this->move(field_place.x() + (FieldFrame::FIELD_SIDE - this->width()) / 2,
-               field_place.y() + (FieldFrame::FIELD_SIDE - this->height()) / 2);
+
+}
+
+void FieldFrame::createUnits(QPainter &painter)
+{
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    for (int i = 0; i < field->getHeight(); i++) {
+        for (int j = 0; j < field->getLength(); j++) {
+            switch (field->getPosition(i, j) ) {
+            case Position::PREDATOR : {
+                        brush.setColor(Qt::red);
+                        painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
+                                         i * cell_size + LINE_WIDTH_DELTA,
+                                         cell_size - 2 * LINE_WIDTH_DELTA,
+                                         cell_size - 2 * LINE_WIDTH_DELTA,
+                                         brush);
+                        break;
+            }
+            case Position::PREY : {
+                        brush.setColor(Qt::blue);
+                        painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
+                                         i * cell_size + LINE_WIDTH_DELTA,
+                                         cell_size - 2 * LINE_WIDTH_DELTA,
+                                         cell_size - 2 * LINE_WIDTH_DELTA,
+                                         brush);
+            }
+            }
+        }
+    }
 }
 
 void FieldFrame::paintEvent(QPaintEvent* event)
@@ -49,5 +78,7 @@ void FieldFrame::paintEvent(QPaintEvent* event)
     QPainter painter(this);
     painter.setPen(QPen(Qt::black, 2, Qt::SolidLine));
     createField(painter);
-    this->setFixedSize(field_size);
+    createUnits(painter);
+    this->move(field_place.x() + (FieldFrame::FIELD_SIDE - this->width()) / 2,
+               field_place.y() + (FieldFrame::FIELD_SIDE - this->height()) / 2);
 }
