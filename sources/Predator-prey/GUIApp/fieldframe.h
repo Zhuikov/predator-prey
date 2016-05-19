@@ -9,7 +9,7 @@ class FieldFrame : public QFrame
 
     QSize field_size;
     Field* field;
-    const QPoint field_place { 50, 80 };
+    const QPoint FIELD_PLACE { 30, 80 };
     static constexpr int LINE_WIDTH_DELTA = 1;
 
     QWidget* parent;

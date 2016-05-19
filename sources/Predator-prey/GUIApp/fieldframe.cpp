@@ -20,6 +20,7 @@ FieldFrame::FieldFrame(QWidget *parent, Field* field) : QFrame(parent)
 
 void FieldFrame::createField(QPainter &painter)
 {
+    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine));
     field_size.setHeight(field->getHeight() * cell_size);
     field_size.setWidth (field->getLength() * cell_size);
 
@@ -67,6 +68,7 @@ void FieldFrame::createUnits(QPainter &painter)
                                          cell_size - 2 * LINE_WIDTH_DELTA,
                                          brush);
             }
+            default : {}
             }
         }
     }
@@ -76,9 +78,8 @@ void FieldFrame::paintEvent(QPaintEvent* event)
 {
     QFrame::paintEvent(event);
     QPainter painter(this);
-    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine));
     createField(painter);
     createUnits(painter);
-    this->move(field_place.x() + (FieldFrame::FIELD_SIDE - this->width()) / 2,
-               field_place.y() + (FieldFrame::FIELD_SIDE - this->height()) / 2);
+    this->move(FIELD_PLACE.x() + (FieldFrame::FIELD_SIDE - this->width()) / 2,
+               FIELD_PLACE.y() + (FieldFrame::FIELD_SIDE - this->height()) / 2);
 }

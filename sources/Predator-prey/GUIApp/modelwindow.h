@@ -5,6 +5,7 @@
 #include "model.h"
 #include "mainmenu.h"
 #include "fieldframe.h"
+#include "statusframe.h"
 
 class ModelWindow : public QWidget
 {

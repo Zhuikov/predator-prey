@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     settingswindow.cpp \
     modelgui.cpp \
     modelwindow.cpp \
-    fieldframe.cpp
+    fieldframe.cpp \
+    statusframe.cpp
 
 HEADERS  += \
     mainmenu.h \
@@ -27,7 +28,8 @@ HEADERS  += \
     settingswindow.h \
     modelgui.h \
     modelwindow.h \
-    fieldframe.h
+    fieldframe.h \
+    statusframe.h
 
 FORMS    += mainwindow.ui
 
