@@ -17,10 +17,6 @@ class SettingsWindow : public QWidget
     QPushButton* back_button;
     QPushButton* save_button;
 
-    QString label_style =
-                "color: #122faa;"
-                "font-size: 20px;"
-                "font-weight: bold;";
     QLabel* field_length_label;
     QLabel* field_height_label;
     QLabel* predators_label;
@@ -45,6 +41,7 @@ public:
 private slots:
     void closeSettings();
     void saveSettings();
+    void unlockSaveButton();
 };
 
 #endif // SETTINGSWINDOW_H

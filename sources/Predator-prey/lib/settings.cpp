@@ -21,12 +21,23 @@ int Settings::getMaxUnits() const
     return max_num;
 }
 
+void Settings::checkNumOfUnits()
+{
+    if (num_of_predators > getMaxUnits()) {
+        setNumOfPredators(getMaxUnits());
+    }
+    if (num_of_preys > getMaxUnits()) {
+        setNumOfPreys(getMaxUnits());
+    }
+}
+
 void Settings::setFieldLength(const int length)
 {
     if (length < Field::MIN_FIELD_SIZE || length > Field::MAX_FIELD_SIZE) {
         throw BadFieldLength(length);
     }
     this->field_length = length;
+    checkNumOfUnits();
 }
 
 void Settings::setFieldHeight(const int height)
@@ -35,6 +46,7 @@ void Settings::setFieldHeight(const int height)
         throw BadFieldHeight(height);
     }
     this->field_height = height;
+    checkNumOfUnits();
 }
 
 void Settings::setMovesWithoutMeal(const int moves)

@@ -2,6 +2,9 @@
 #define STATUSFRAME_H
 #include <QtWidgets>
 #include "model.h"
+#include "modelwindow.h"
+
+class ModelWindow;
 
 class StatusFrame : public QFrame
 {
@@ -11,22 +14,26 @@ class StatusFrame : public QFrame
     const QPoint PLACE { 500, 80 };
     Model* model;
 
-    QString label_style =
-                "color: #122faa;"
-                "font-size: 20px;"
-                "font-weight: bold;";
     QLabel* predators;
     QLabel* preys;
     QLabel* day;
     QLabel* time;
-    QLabel* number_label;
 
-    QLabel* createLabel(QString, int, int);
-//    void drawStatus();
+    QString label_style =
+            "color: #122faa;"
+            "font-size: 20px;"
+            "font-weight: bold;";
+    QLabel* predators_number_label;
+    QLabel* preys_number_label;
+    QLabel* day_number_label;
+    QLabel* time_number_label;
+
+    void fillLabel(QLabel*, QString, int, int);
     void paintEvent(QPaintEvent*);
 
 public:
     StatusFrame(QWidget* parent, Model* model);
+    void drawStatus();
 };
 
 #endif // STATUSFRAME_H

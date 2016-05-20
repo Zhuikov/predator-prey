@@ -17,7 +17,7 @@ void ConsoleApp::startModel()
     }
     this->drawer->showResult();
     delete this->drawer;
-    delete this->model; // ???
+    delete this->model;
 }
 
 ConsoleApp::ConsoleApp():

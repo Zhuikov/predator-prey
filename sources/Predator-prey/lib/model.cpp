@@ -18,10 +18,7 @@ Model::Model(Settings *settings) noexcept:
 
 bool Model::isEnd() const noexcept
 {
-    if (units.predators.empty() || units.preys.empty()){
-        return true;
-    }
-    return false;
+   return (units.predators.empty() || units.preys.empty());
 }
 
 void Model::createPredators() noexcept

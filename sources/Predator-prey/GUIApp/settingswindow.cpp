@@ -57,7 +57,10 @@ SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QWidget(pa
 QLabel* SettingsWindow::createLabel(QString text, int horizontal, int vertical, bool invisiblity)
 {
     QLabel* label = new QLabel(this);
-    label->setStyleSheet(label_style);
+    label->setStyleSheet(
+                "color: #122faa;"
+                "font-size: 18px;"
+                "font-weight: bold;");
     label->move(horizontal, vertical);
     label->setText(text);
     if (invisiblity == false) {
@@ -77,7 +80,7 @@ QSpinBox* SettingsWindow::createSpinBox(int min, int max, int horizontal, int ve
     spinBox->setStyleSheet(
                 "color: #122faa;"
                 "font-size: 18px;"
-                "font-weight: bold");
+                "font-weight: bold;");
     spinBox->move(horizontal, vertical);
     spinBox->show();
 
@@ -94,13 +97,35 @@ void SettingsWindow::closeSettings()
 
 void SettingsWindow::saveSettings()
 {
+    save_button->setEnabled(false);
     settings->setFieldHeight(field_height->value());
     settings->setFieldLength(field_length->value());
+    predators->setMaximum(settings->getMaxUnits());
+    preys->setMaximum(settings->getMaxUnits());
     settings->setMovesWithoutMeal(moves_without_meal->value());
+
+    try {
     settings->setNumOfPredators(predators->value());
+    }
+    catch (std::exception&) {
+        settings->setNumOfPredators(settings->getMaxUnits());
+        predators->setValue(settings->getNumOfPredators());
+    }
+
+    try {
     settings->setNumOfPreys(preys->value());
+    }
+    catch (std::exception&) {
+        settings->setNumOfPreys(settings->getMaxUnits());
+        preys->setValue(settings->getNumOfPreys());
+    }
 
     success_label->show();
-    // todo блокировать кнопку на время
-    QTimer::singleShot(1000, success_label, SLOT(hide()));
+    QTimer::singleShot(1000, this, SLOT(unlockSaveButton()));
+}
+
+void SettingsWindow::unlockSaveButton()
+{
+    save_button->setEnabled(true);
+    success_label->hide();
 }

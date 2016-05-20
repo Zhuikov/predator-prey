@@ -56,5 +56,4 @@ void MainMenu::createModel()
     model_window->move(this->x(), this->y());
     model_window->show();
     this->close();
-   // delete model_window;
 }
