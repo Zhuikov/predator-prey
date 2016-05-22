@@ -1,6 +1,5 @@
 <!DOCTYPE RCC> <RCC version="1.0">
 <qresource>
-    <file>background.jpg</file>
     <file>background2.jpg</file>
     <file>texture.jpg</file>
     <file>settings_texture2.jpg</file>

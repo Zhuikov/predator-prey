@@ -5,7 +5,6 @@ SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QWidget(pa
 {
     this->setFixedSize(WINDOW_SIZE);
     this->setWindowTitle("Настройки");
-    //this->parent = parent;
     this->settings = settings;
 
     QPixmap background(":/settings_texture2.jpg");

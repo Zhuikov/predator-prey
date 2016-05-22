@@ -8,7 +8,6 @@ class SettingsWindow : public QWidget
 {
     Q_OBJECT
 
-    QWidget* parent;
     Settings* settings;
 
     const QSize WINDOW_SIZE { 660, 540 };
