@@ -22,7 +22,7 @@
 борьбы хищников и жертв.  
 
 ## Диаграмма прецедентов использования
-![Диаграмма прецедентов использования](https://github.com/Zhuikov/predator-prey/blob/master/report/pictures/UseCaseDiagram1.png)
+![Диаграмма прецедентов использования](https://github.com/Zhuikov/predator-prey/blob/master/report/pictures/UseCaseDiagram.png)
 
 ## Диаграмма последовательностей
 
