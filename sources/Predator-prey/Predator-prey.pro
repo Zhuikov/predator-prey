@@ -9,4 +9,5 @@ SUBDIRS += \
     consoleApp \
     lib \
     tests \
-    GUIApp
+    GUIApp \
+    CLI

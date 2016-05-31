@@ -27,6 +27,11 @@ public:
     virtual int getDay() const noexcept = 0;
 
     /**
+     * @brief метод, возвращающий текущий шаг
+     */
+    virtual int getStep() const noexcept = 0;
+
+    /**
      * @brief метод, возвращающий количество хищников на поле
      */
     virtual unsigned int getPredatorsNum() const noexcept = 0;

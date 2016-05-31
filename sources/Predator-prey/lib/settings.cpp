@@ -3,14 +3,15 @@
 #include "badfield.h"
 #include "badnum.h"
 
-Settings::Settings():
-    field_length(10),
-    field_height(10),
-    moves_without_meal(20),
-    min_moves_without_meal(5),
-    max_moves_without_meal(1000),
-    num_of_predators(3),
-    num_of_preys(3)
+Settings::Settings(int field_length_, int field_height_, int num_of_predators_, int num_of_preys_,
+                   int moves_without_meal_, int min_moves_without_meal_, int max_moves_without_meal_):
+    field_length(field_length_),
+    field_height(field_height_),
+    num_of_predators(num_of_predators_),
+    num_of_preys(num_of_preys_),
+    moves_without_meal(moves_without_meal_),
+    min_moves_without_meal(min_moves_without_meal_),
+    max_moves_without_meal(max_moves_without_meal_)
 {}
 
 int Settings::getMaxUnits() const
