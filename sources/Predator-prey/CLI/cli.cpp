@@ -17,11 +17,12 @@ void CLI::startModel()
 {
     model = new Model(settings);
 
+    logs->addLog(model);
     while( model->isEnd() == false ) {
-        logs->addLog(model);
         this->model->movePredators();
         this->model->movePreys();
         this->model->remove();
+        logs->addLog(model);
     }
     // todo log winner
 }
