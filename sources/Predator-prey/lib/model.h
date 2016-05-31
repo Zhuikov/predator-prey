@@ -23,6 +23,7 @@ public:
     Field* getField() noexcept { return &field; }
     int getTime() const noexcept { return model_time; }
     int getDay() const noexcept { return model_day; }
+    int getStep() const noexcept { return model_day*24+model_time; }
     unsigned int getPredatorsNum() const noexcept { return this->units.predators.size(); }
     unsigned int getPreysNum() const noexcept { return units.preys.size(); }
     void movePreys() noexcept;

@@ -1,9 +1,11 @@
-#include <iostream>
+#include "cli.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    cout << "Hello World!" << endl;
+    CLI cli(argc, argv);
+    cli.startModel();
+
     return 0;
 }

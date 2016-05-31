@@ -17,6 +17,16 @@ class Settings
     int field_height;
 
     /**
+     * @brief num_of_predators - текущее число хищников
+     */
+    int num_of_predators;
+
+    /**
+     * @brief num_of_preys - текущее число жертв
+     */
+    int num_of_preys;
+
+    /**
      * @brief moves_without_meal - текущее время жизни животного без еды
      */
     int moves_without_meal;
@@ -32,16 +42,6 @@ class Settings
     int max_moves_without_meal;
 
     /**
-     * @brief num_of_predators - текущее число хищников
-     */
-    int num_of_predators;
-
-    /**
-     * @brief num_of_preys - текущее число жертв
-     */
-    int num_of_preys;
-
-    /**
      * @brief метод, проверяющий число хищников и жертв;
      * если число больше максимально допустимого при текущих настройках поля,
      * устанавливается максимально возможное
@@ -50,7 +50,8 @@ class Settings
 
 public:
 
-    Settings();
+    Settings(int field_length_ = 10, int field_height_ = 10, int num_of_predators_ = 3, int num_of_preys_ = 3,
+             int moves_without_meal_ = 20, int min_moves_without_meal_ = 5, int max_moves_without_meal_ = 1000);
 
     /**
      * @brief методы, возвращающие информацию о текущих настройках
