@@ -7,8 +7,8 @@ RUN apt-get -y update && apt-get install -y build-essential git qt5-default
 RUN git clone https://github.com/Zhuikov/predator-prey.git
 RUN qmake /predator-prey/sources/Predator-prey/Predator-prey.pro
 RUN make sub-lib
-RUN make sub-consoleApp
-RUN cp /consoleApp/consoleApp /usr/bin/pp-model
+RUN make sub-CLI
+RUN cp /CLI/CLI /usr/bin/pp-model
 
 ADD https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh conda.sh
 RUN chmod +x conda.sh
