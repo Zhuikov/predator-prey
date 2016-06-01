@@ -15,5 +15,5 @@ RUN chmod +x conda.sh
 RUN ./conda.sh -b -p /opt/anaconda
 RUN /opt/anaconda/bin/conda install --quiet --yes jupyter
 
-CMD /opt/anaconda/bin/conda run "jupyter notebook --ip=0.0.0.0 --no-browser"
+CMD /opt/anaconda/bin/conda run "jupyter notebook --ip=0.0.0.0"
 
