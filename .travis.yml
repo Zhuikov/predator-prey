@@ -1,0 +1,16 @@
+sudo: required
+
+language: c
+
+services:
+- docker
+
+before_install:
+- docker build -t zhuikov/predator-prey .
+
+script:
+- docker run zhuikov/predator-prey "jupyter nbconvert --to notebook --execute predator-prey/ModelLaunchExample.ipynb"
+
+notifications:
+  email:
+    - k.vilegzhanina@gmail.com
