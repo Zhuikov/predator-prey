@@ -1,0 +1,19 @@
+sudo: required
+
+language: c
+
+services:
+- docker
+
+before_install:
+- docker build -t zhuikov/predator-prey .
+
+script:
+- echo HelloWorld
+
+notifications:
+  email:
+    - k.vilegzhanina@gmail.com
+    - artem.zhuikov@mail.ru
+    - vadik.dyachkov@gmail.com
+    - yurij.lezhenin@yandex.ru
