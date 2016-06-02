@@ -9,8 +9,9 @@ before_install:
 - docker build -t zhuikov/predator-prey .
 
 script:
-- docker run zhuikov/predator-prey "jupyter nbconvert --to notebook --execute predator-prey/ModelLaunchExample.ipynb"
+- echo HelloWorld
 
 notifications:
   email:
     - k.vilegzhanina@gmail.com
+    - artem.zhuikov@mail.ru
