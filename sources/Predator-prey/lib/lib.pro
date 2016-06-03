@@ -19,7 +19,10 @@ SOURCES += \
     units.cpp \
     coordinates.cpp \
     model.cpp \
-    grass.cpp
+    grass.cpp \
+    movement.cpp \
+    sense.cpp \
+    brain.cpp
 
 HEADERS += \
     settings.h \
@@ -35,7 +38,10 @@ HEADERS += \
     badfield.h \
     badboundary.h \
     badnum.h \
-    grass.h
+    grass.h \
+    movement.h \
+    sense.h \
+    brain.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
