@@ -6,3 +6,6 @@ build*
 *.tdo 
 *.toc 
 
+.idea/
+.vagrant/
+notebooks/.ipynb_checkpoints/
