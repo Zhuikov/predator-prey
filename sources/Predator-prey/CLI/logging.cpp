@@ -1,8 +1,8 @@
 #include "logging.h"
 
-Logging::Logging()
+Logging::Logging(std::string &name)
 {
-    out.open("data.csv");
+    out.open(name + ".csv");
 }
 
 void Logging::addLog(Model *model)

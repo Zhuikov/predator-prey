@@ -1,27 +1,31 @@
 #include "cli.h"
 
-CLI::CLI(int argc, char *argv[])
+Cli::Cli(int argc, char *argv[])
 {
-    assert(argc == 5); // c++11 statement, if false then error
+    assert(argc == 6); // c++11 statement, if false then error
 
     int field_length = atoi(argv[1]);
     int field_height = atoi(argv[2]);
-    int num_of_predators = atoi(argv[3]);
-    int num_of_preys = atoi(argv[4]);
+    int predators = atoi(argv[3]);
+    int preys = atoi(argv[4]);
+    int seed = atoi(argv[5]);
 
-    settings = new Settings(field_length, field_height, num_of_predators, num_of_preys);
-    logs = new Logging();
+    // todo add seet to settings
+    settings = new Settings(field_length, field_height, predators, preys);
+
+    string name = string(argv[1]) + 'x' + argv[2] + '_' + argv[3] + '_' + argv[4] + '_' + argv[5];
+    logs = new Logging(name);
 }
 
-void CLI::startModel()
+void Cli::startModel()
 {
     model = new Model(settings);
 
     logs->addLog(model);
     while( model->isEnd() == false ) {
-        this->model->movePredators();
-        this->model->movePreys();
-        this->model->remove();
+        model->movePredators();
+        model->movePreys();
+        model->remove();
         logs->addLog(model);
     }
     // todo log winner
