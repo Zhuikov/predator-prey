@@ -8,6 +8,7 @@
 #include "badnum.h"
 #include "model.h"
 #include "predator.h"
+#include "movement.h"
 
 //TODO: сделать отдельный проект с функциональными тестами и добавить их
 class ModelTest : public QObject
@@ -34,6 +35,9 @@ private Q_SLOTS:
 
     void modelInitializeTest();
     void debugTest();
+
+    void moveTest();
+    void moveApartTest();
 };
 
 ModelTest::ModelTest() {}
@@ -314,6 +318,33 @@ void ModelTest::debugTest()
     QCOMPARE(final_vec_size, 3);
 
 }
+
+void ModelTest::moveTest()
+{
+    Movement movement(Coordinates(0, 0));
+    movement.setTarget(Coordinates(5, 5));
+    movement.move();
+    QCOMPARE(movement.getCurrent(), Coordinates(1, 1));
+    movement.setSpeed(3);
+    movement.move();
+    QCOMPARE(movement.getCurrent(), Coordinates(3, 3));
+    movement.setSpeed(7.2);
+    movement.move();
+    QCOMPARE(movement.getCurrent(), Coordinates(5, 5));
+    movement.setTarget(Coordinates(5, 15));
+    movement.move();
+    QCOMPARE(movement.getCurrent(), Coordinates(5, 12));
+
+}
+
+void ModelTest::moveApartTest()
+{
+    Movement movement(Coordinates(5, 5));
+    movement.setTarget(Coordinates(5, 10));
+    movement.moveApart();
+    QCOMPARE(movement.getCurrent(), Coordinates(5, 4));
+}
+
 
 QTEST_APPLESS_MAIN(ModelTest)
 
