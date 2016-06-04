@@ -12,7 +12,7 @@ using std::string;
 class Logging
 {
 public:
-    Logging(string &name);
+    Logging(string &fileName);
     void addLog(Model *model);
     ~Logging();
 

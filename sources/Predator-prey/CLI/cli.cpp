@@ -10,17 +10,14 @@ Cli::Cli(int argc, char *argv[])
     int preys = atoi(argv[4]);
     int seed = atoi(argv[5]);
 
-    // todo add seet to settings
     settings = new Settings(field_length, field_height, predators, preys);
-
-    string name = string(argv[1]) + 'x' + argv[2] + '_' + argv[3] + '_' + argv[4] + '_' + argv[5];
-    logs = new Logging(name);
+    string fileName = string(argv[1]) + 'x' + argv[2] + '_' + argv[3] + '_' + argv[4] + '_' + argv[5];
+    logs = new Logging(fileName);
+    model = new Model(settings, seed);
 }
 
 void Cli::startModel()
 {
-    model = new Model(settings);
-
     logs->addLog(model);
     while( model->isEnd() == false ) {
         model->movePredators();
