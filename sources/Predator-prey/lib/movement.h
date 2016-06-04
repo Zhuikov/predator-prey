@@ -7,15 +7,17 @@ class Movement
 public:
     Movement(Coordinates current, double speed = 1);
 
+    Coordinates getCurrent() {}
 
-    Coordinates nextCoordinates();
-    Coordinates getCurrent();
+    void move() {}
+    void moveApart() {}
+    void setTarget(Coordinates target) {}
+    void setRandomTarget() {}
+    void setSpeed(double speed) {}
 
-    void move();
-    void moveApart();
-    void setTarget(Coordinates target);
-    void setRandomTarget();
-    void setSpeed(double speed);
+private:
+
+    Coordinates nextCoordinates() {}
 
     Coordinates current;
     Coordinates target;

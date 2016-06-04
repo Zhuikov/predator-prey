@@ -16,7 +16,8 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 
-SOURCES += tst_modeltest.cpp
+SOURCES += tst_modeltest.cpp \
+    tst_movementtest.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lib/release/ -llib
