@@ -22,7 +22,8 @@ SOURCES += \
     grass.cpp \
     movement.cpp \
     sense.cpp \
-    brain.cpp
+    brain.cpp \
+    unit.cpp
 
 HEADERS += \
     settings.h \
@@ -41,7 +42,8 @@ HEADERS += \
     grass.h \
     movement.h \
     sense.h \
-    brain.h
+    brain.h \
+    unit.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
