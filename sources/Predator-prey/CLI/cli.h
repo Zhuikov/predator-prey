@@ -14,11 +14,17 @@ class Cli
 public:
     Cli(int argc, char *argv[]);
 
-    void startModel();
+    int startModel();
+    int modeWithLogs();
+    int modeWithSteps();
+    int modeWithWinner();
+
 private:
     Settings *settings;
-    Logging *logs;
     Model *model;
+    Logging *logs;
+    string name;
+    char mode;
 };
 
 #endif // CLI_H

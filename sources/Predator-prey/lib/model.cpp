@@ -71,6 +71,12 @@ void Model::movePredators() noexcept
     }
 }
 
+void Model::move() noexcept
+{
+    movePredators();
+    movePreys();
+}
+
 void Model::incModelTime() noexcept
 {
     if (this->has_changed == false) {

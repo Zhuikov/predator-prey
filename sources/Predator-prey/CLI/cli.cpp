@@ -2,28 +2,62 @@
 
 Cli::Cli(int argc, char *argv[])
 {
-    assert(argc == 6); // c++11 statement, if false then error
+    assert(argc == 7); // c++11 statement, if false then error
 
-    int field_length = atoi(argv[1]);
-    int field_height = atoi(argv[2]);
-    int predators = atoi(argv[3]);
-    int preys = atoi(argv[4]);
-    int seed = atoi(argv[5]);
+    mode = *argv[1];
+
+    int field_length = atoi(argv[2]);
+    int field_height = atoi(argv[3]);
+    int predators = atoi(argv[4]);
+    int preys = atoi(argv[5]);
+    int seed = atoi(argv[6]);
 
     settings = new Settings(field_length, field_height, predators, preys);
-    string fileName = string(argv[1]) + 'x' + argv[2] + '_' + argv[3] + '_' + argv[4] + '_' + argv[5];
-    logs = new Logging(fileName);
+    name = string(argv[2]) + 'x' + argv[3] + '_' + argv[4] + '_' + argv[5] + '_' + argv[6];
     model = new Model(settings, seed);
 }
 
-void Cli::startModel()
+int Cli::startModel()
 {
+    switch( mode ) {
+        case 'l' :
+        case 'L' : return modeWithLogs();
+        case 's' :
+        case 'S' : return modeWithSteps();
+        case 'w' :
+        case 'W' : return modeWithWinner();
+    }
+    return -100; // some kind of wrong value
+}
+
+int Cli::modeWithLogs()
+{
+    Logging *logs = new Logging(name);
     logs->addLog(model);
     while( model->isEnd() == false ) {
-        model->movePredators();
-        model->movePreys();
+        model->move();
         model->remove();
         logs->addLog(model);
     }
-    // todo log winner
+    return model->getStep();
+}
+
+int Cli::modeWithSteps()
+{
+    while( model->isEnd() == false ) {
+        model->move();
+        model->remove();
+    }
+    return model->getStep();
+}
+
+int Cli::modeWithWinner()
+{
+    while( model->isEnd() == false ) {
+        model->move();
+        model->remove();
+    }
+    if (model->getPredatorsNum() > 0 && model->getPreysNum() == 0) return 1; // Predators win
+    else if (model->getPredatorsNum() == 0 && model->getPreysNum() == 0) return 0; // Draw
+    else if (model->getPredatorsNum() == 0 && model->getPreysNum() > 0) return -1; // Preys win
 }

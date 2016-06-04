@@ -29,6 +29,7 @@ public:
     unsigned int getPreysNum() const noexcept { return units.preys.size(); }
     void movePreys() noexcept;
     void movePredators() noexcept;
+    void move() noexcept;
     bool isEnd() const noexcept;
     void createPredators() noexcept;
     void createPreys() noexcept;
