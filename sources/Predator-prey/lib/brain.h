@@ -1,13 +1,15 @@
 #ifndef BRAIN_H
 #define BRAIN_H
 #include "coordinates.h"
+#include "unit.h"
+#include <list>
 
 class Brain
 {
 public:
     Brain();
 
-    //Coordinates getTargets(std::list< Unit* > targets);
+    Coordinates getTarget(std::list< Unit* > targets);
 
 
     int age;

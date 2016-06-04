@@ -1,12 +1,13 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
 #include "field.h"
+#include "unit.h"
 
 /**
  * @brief класс, от которого наследуются хищники и жертвы
  */
 
-class Animal
+class Animal : public Unit
 {
     /**
      * @brief метод, выбирающий свободное направление;
