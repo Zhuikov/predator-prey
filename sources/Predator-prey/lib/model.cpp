@@ -1,16 +1,15 @@
 #include "model.h"
 #include <algorithm>
-#include <ctime>
 #include <cstdlib>
 
-Model::Model(Settings *settings) noexcept:
+Model::Model(Settings *settings, int seed) noexcept:
     settings(settings),
     model_time(0),
     model_day(0),
     has_changed(false),
     field(settings->getFieldHeight(), settings->getFieldLength())
 {
-    srand(time(0));
+    srand(seed);
     createPredators();
     createPreys();
 }
