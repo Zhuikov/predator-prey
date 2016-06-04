@@ -1,6 +1,6 @@
 #include "movement.h"
 
-Movement::Movement()
+Movement::Movement(Coordinates current, double speed)
 {
 
 }

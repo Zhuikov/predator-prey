@@ -7,7 +7,7 @@ class Brain
 public:
     Brain();
 
-    Coordinates getTargets(std::list< Unit* > targets);
+    //Coordinates getTargets(std::list< Unit* > targets);
 
 
     int age;

@@ -8,7 +8,7 @@ public:
     Sense();
 
     void setRadius();
-    std::list< Unit* >getTargets(Coordinates current);
+    //std::list< Unit* >getTargets(Coordinates current);
 
     double radius;
     Field* field;

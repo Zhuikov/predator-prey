@@ -10,6 +10,7 @@ public:
 
     Coordinates nextCoordinates();
     Coordinates getCurrent();
+
     void move();
     void moveApart();
     void setTarget(Coordinates target);
