@@ -12,7 +12,7 @@ public:
     void move();
     void moveApart();
     void setTarget(Coordinates target);
-    void setRandomTarget() {}
+    void setRandomTarget();
     void setSpeed(double speed);
 
 private:

@@ -28,6 +28,17 @@ void Movement::move()
     current.setV(current.getV() + vertical);
 }
 
+void Movement::moveApart()
+{
+    Coordinates tempTarget = target;
+
+    target.setH( 2 * current.getH() - target.getH());
+    target.setV( 2 * current.getV() - target.getV());
+
+    move();
+
+    target = tempTarget;
+}
 
 
 void Movement::setTarget(Coordinates target)
