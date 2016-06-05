@@ -5,19 +5,20 @@
 class Movement
 {
 public:
-    Movement(Coordinates current, double speed = 1);
+    Movement(Coordinates current, double speed = 1.0);
 
-    Coordinates getCurrent() {}
+    Coordinates getCurrent();
 
-    void move() {}
-    void moveApart() {}
-    void setTarget(Coordinates target) {}
+    void move();
+    void moveApart();
+    void setTarget(Coordinates target);
     void setRandomTarget() {}
-    void setSpeed(double speed) {}
+    void setSpeed(double speed);
 
 private:
 
-    Coordinates nextCoordinates() {}
+    double getDistance(Coordinates source, Coordinates dest);
+    int round(double number);
 
     Coordinates current;
     Coordinates target;
