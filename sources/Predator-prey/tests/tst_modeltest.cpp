@@ -327,13 +327,23 @@ void ModelTest::moveTest()
     QCOMPARE(movement.getCurrent(), Coordinates(1, 1));
     movement.setSpeed(3);
     movement.move();
-    QCOMPARE(movement.getCurrent(), Coordinates(3, 3));
+    QCOMPARE(movement.getCurrent(), Coordinates(4, 4));
     movement.setSpeed(7.2);
     movement.move();
     QCOMPARE(movement.getCurrent(), Coordinates(5, 5));
     movement.setTarget(Coordinates(5, 15));
     movement.move();
-    QCOMPARE(movement.getCurrent(), Coordinates(5, 12));
+    QCOMPARE(movement.getCurrent(), Coordinates(5, 13));
+    movement.setTarget(Coordinates(5, 5));
+    movement.move();
+    QCOMPARE(movement.getCurrent(), Coordinates(5, 5));
+    movement.setSpeed(3);
+    movement.setTarget(Coordinates(0,0));
+    movement.move();
+    QCOMPARE(movement.getCurrent(), Coordinates(2, 2));
+    movement.move();
+    QCOMPARE(movement.getCurrent(), Coordinates(0, 0));
+
 
 }
 
