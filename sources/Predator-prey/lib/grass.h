@@ -5,7 +5,7 @@
 
 class Units;
 
-class Grass
+class Grass : public Unit
 {
 
 public:

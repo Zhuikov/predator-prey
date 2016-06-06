@@ -2,6 +2,7 @@
 #define MODEL_H
 #include "modelapi.h"
 #include <vector>
+#include <ctime>
 
 //TODO указывать слово override для перекрывающих функций
 class Model : public ModelAPI
@@ -19,7 +20,7 @@ class Model : public ModelAPI
     void incModelTime() noexcept;
 
 public:
-    explicit Model(Settings *settings) noexcept;
+    explicit Model(Settings *settings, int seed = time(0)) noexcept;
     Field* getField() noexcept { return &field; }
     int getTime() const noexcept { return model_time; }
     int getDay() const noexcept { return model_day; }
@@ -28,6 +29,7 @@ public:
     unsigned int getPreysNum() const noexcept { return units.preys.size(); }
     void movePreys() noexcept;
     void movePredators() noexcept;
+    void move() noexcept;
     bool isEnd() const noexcept;
     void createPredators() noexcept;
     void createPreys() noexcept;
