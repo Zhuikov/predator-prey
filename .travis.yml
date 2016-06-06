@@ -9,6 +9,8 @@ before_install:
 - docker build -t zhuikov/predator-prey .
 
 script:
+- ls
+- pwd
 - docker run zhuikov/predator-prey /tests/tst_modeltest
 
 notifications:
