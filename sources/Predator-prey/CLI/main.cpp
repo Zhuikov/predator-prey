@@ -4,8 +4,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    CLI cli(argc, argv);
-    cli.startModel();
+    Cli cli(argc, argv);
 
-    return 0;
+    return cli.startModel();
 }

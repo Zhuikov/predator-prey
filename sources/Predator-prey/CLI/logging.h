@@ -3,14 +3,16 @@
 
 #include "fstream"
 #include "model.h"
+#include "string"
 
 using std::ofstream;
 using std::endl;
+using std::string;
 
 class Logging
 {
 public:
-    Logging();
+    Logging(string &fileName);
     void addLog(Model *model);
     ~Logging();
 
