@@ -83,7 +83,7 @@ void ModelTest::coordinatesTest()
 
     QCOMPARE(A.getV(), 0);
     A.setH(110000);
-    QCOMPARE(A.getH(), 110000);
+    QCOMPARE(A.getH(), 110001);
 
     A.setV(15); A.setH(15);
     B.setV(15); B.setH(15);
