@@ -5,17 +5,26 @@
 #include "settings.h"
 #include "logging.h"
 #include "cassert"
+#include "string"
 
-class CLI
+using std::string;
+
+class Cli
 {
 public:
-    CLI(int argc, char *argv[]);
+    Cli(int argc, char *argv[]);
 
-    void startModel();
+    int startModel();
+    int modeWithLogs();
+    int modeWithSteps();
+    int modeWithWinner();
+
 private:
     Settings *settings;
-    Logging *logs;
     Model *model;
+    Logging *logs;
+    string name;
+    char mode;
 };
 
 #endif // CLI_H
