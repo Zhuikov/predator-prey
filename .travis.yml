@@ -9,9 +9,8 @@ before_install:
 - docker build -t zhuikov/predator-prey .
 
 script:
-- docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources  -it zhuikov/predator-prey /bin/bash -c "cd /sources/Predator-prey; qmake; make; cp /sources/Predator-prey/CLI/CLI /usr/bin/pp-model"
-- 
-- docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources  -it zhuikov/predator-prey
+- docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources zhuikov/predator-prey /bin/bash -c "cd /sources/Predator-prey; qmake; make; cp /sources/Predator-prey/CLI/CLI /usr/bin/pp-model"
+- docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources zhuikov/predator-prey /sources/Predator-prey/tests/tst_modeltest
 
 notifications:
   email:
