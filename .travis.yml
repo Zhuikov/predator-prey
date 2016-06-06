@@ -9,7 +9,7 @@ before_install:
 - docker build -t zhuikov/predator-prey .
 
 script:
-- echo HelloWorld
+- docker run -it zhuikov/predator-prey /tests/tst_modeltest
 
 notifications:
   email:
