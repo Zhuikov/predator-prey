@@ -12,7 +12,7 @@ void Coordinates::changeToDirection(Direction direction)
     }
 }
 
-double Coordinates::operator-(Coordinates &a)
+double Coordinates::operator-(const Coordinates &a)
 {
     double distance_between_points = 0;
     distance_between_points = sqrt(pow(vertical - a.getV(), 2) + pow(horizontal - a.getH(), 2));

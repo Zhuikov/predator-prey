@@ -2,18 +2,8 @@
 #define FIELD_H
 #include "settings.h"
 #include "coordinates.h"
+#include "unit.h"
 #include <vector>
-
-/**
- * @brief Position - перечисление всех возможных состояний клетки поля
- */
-enum class Position
-{
-    EMPTY,
-    PREDATOR,
-    PREY,
-    GRASS
-};
 
 /**
  * @brief класс для представления поля в программе
@@ -65,9 +55,9 @@ public:
      * @brief метод, позволяющий установить на клетку с данными координатами заданный символ
      * @param v - координата по вертикали
      * @param h - координата по горизонтали
-     * @param Position - позиция, которую надо установить
+     * @param unit - указатель на Unit, который надо установить
      */
-    void setPosition(int v, int h, Position);
+    void setPosition(int v, int h, Unit *unit);
 
     /**
      * @brief метод, возвращающий свободное направление хода для заданной клетки
@@ -77,12 +67,11 @@ public:
     Direction whatIsEmpty(int v, int h) const;
 
     /**
-     * @brief метод, возвращающий значение клетки с заданными координатами
+     * @brief метод, возвращающий указатель на Unit, стоящий на клетке
      * @param v - координата по вертикали
      * @param h - координата по горизонтали
-     * @return символ - значение
      */
-    Position getPosition(int v, int h) const;
+    Unit* getPosition(int v, int h) const;
 
     /**
      * @brief метод, возвращающий длину поля в клетках

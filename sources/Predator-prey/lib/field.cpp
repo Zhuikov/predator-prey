@@ -8,7 +8,7 @@ Field::Field(int height, int length)
     this->length = length;
 
     for(int i = 0; i < height; i++){
-        field.push_back(std::vector<Position>(length, Position::EMPTY));
+        field.push_back(std::vector< Unit* >(length, nullptr));
     }
 }
 
@@ -26,22 +26,22 @@ bool Field::isEmpty(int v, int h) const
         return false;
     }
 
-    if (this->field[v][h] != Position::EMPTY){
+    if (this->field[v][h] != nullptr){
         return false;
     }
 
     return true;
 }
 
-void Field::setPosition(int v, int h, Position pos)
+void Field::setPosition(int v, int h, Unit* unit)
 {
     if (checkBoundary(v, h) == false){
         throw BadFieldBoundary(v, h);
     }
-    this->field[v][h] = pos;
+    this->field[v][h] = unit;
 }
 
-Position Field::getPosition(int v, int h) const
+Unit* Field::getPosition(int v, int h) const
 {
     if (checkBoundary(v, h) == false){
         throw BadFieldBoundary(v, h);

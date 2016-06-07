@@ -10,7 +10,7 @@ void Predator::directionFinding() noexcept
         chooseRandomDirection();
     }
     else {
-        double distance = place - target->place;
+        double distance = movement.getCurrent() - target->getPlace();
         if (fabs(distance - DISTANCE_FOR_EAT) < DELTA) {
             killPrey();
         }
@@ -20,19 +20,23 @@ void Predator::directionFinding() noexcept
 
 void Predator::chooseToTargetDirection() noexcept
 {
-    if ((place.getV() <= target->place.getV()) && (place.getH() < target->place.getH())) {
+    if ((movement.getCurrent().getV() <= target->getPlace().getV()) &&
+        (movement.getCurrent().getH() < target->getPlace().getH())) {
             if (setDirection(Direction::RIGHT) == false)
                 if (setDirection(Direction::DOWN) == false) chooseRandomDirection();
     }
-    if ((place.getV() < target->place.getV()) && (place.getH() >= target->place.getH())) {
+    if ((movement.getCurrent().getV() < target->getPlace().getV()) &&
+        (movement.getCurrent().getH() >= target->getPlace().getH())) {
             if (setDirection(Direction::DOWN) == false)
                 if (setDirection(Direction::LEFT) == false) chooseRandomDirection();
     }
-    if ((place.getV() > target->place.getV()) && (place.getH() <= target->place.getH())) {
+    if ((movement.getCurrent().getV() > target->getPlace().getV()) &&
+        (movement.getCurrent().getH() <= target->getPlace().getH())) {
             if (setDirection(Direction::UP) == false)
                 if (setDirection(Direction::RIGHT) == false) chooseRandomDirection();
     }
-    if ((place.getV() >= target->place.getV()) && (place.getH() > target->place.getH())) {
+    if ((movement.getCurrent().getV() >= target->getPlace().getV()) &&
+        (movement.getCurrent().getH() > target->getPlace().getH())) {
             if (setDirection(Direction::LEFT) == false)
                 if (setDirection(Direction::UP) == false) chooseRandomDirection();
     }
@@ -40,13 +44,13 @@ void Predator::chooseToTargetDirection() noexcept
 
 void Predator::findPrey() noexcept
 {
-    if (target != nullptr && (target->died == true ||
-           target->place - place > DISTANCE_FOR_RESET_TARGET)) target = nullptr;
+    if (target != nullptr && (target->exist == false ||
+           target->getPlace() - movement.getCurrent() > DISTANCE_FOR_RESET_TARGET)) target = nullptr;
     
     double distance = 0;
     for (Prey* prey: units_struct->preys) {
-        if (prey->died == false) {
-            distance = place - prey->place;
+        if (prey->exist == true) {
+            distance = movement.getCurrent() - prey->getPlace();
             if (distance < DISTANCE_FOR_EAT + DELTA) {
                 target = prey;
                 break;
@@ -60,14 +64,14 @@ void Predator::findPrey() noexcept
 
 void Predator::killPrey() noexcept
 {
-    if (target->place.getV() < place.getV()) direction = Direction::UP;
-    else if (target->place.getV() > place.getV()) direction = Direction::DOWN;
-    else if (target->place.getH() < place.getH()) direction = Direction::LEFT;
-    else if (target->place.getH() > place.getH()) direction = Direction::RIGHT;
+    if (target->getPlace().getV() < movement.getCurrent().getV()) direction = Direction::UP;
+    else if (target->getPlace().getV() > movement.getCurrent().getV()) direction = Direction::DOWN;
+    else if (target->getPlace().getH() < movement.getCurrent().getH()) direction = Direction::LEFT;
+    else if (target->getPlace().getH() > movement.getCurrent().getH()) direction = Direction::RIGHT;
 
-    target->died = true;
+    target->exist = false;
     
-    energy++;
+    energy ++;
     life_time = -1;
     target = nullptr;
 
@@ -78,22 +82,22 @@ void Predator::createPredator() noexcept
     chooseRandomDirection();
     switch (direction) {
     case Direction::UP:    {
-        new Predator(this->place.getV() - 1, this->place.getH(), this->field,
+        new Predator(movement.getCurrent().getV() - 1, movement.getCurrent().getH(), this->field,
                                           this->units_struct, this->max_life_time);
         break;
     }
     case Direction::RIGHT: {
-        new Predator(this->place.getV(), this->place.getH() + 1, this->field,
+        new Predator(movement.getCurrent().getV(), movement.getCurrent().getH() + 1, this->field,
                                           this->units_struct, this->max_life_time);
         break;
     }
     case Direction::DOWN:  {
-        new Predator(this->place.getV() + 1, this->place.getH(), this->field,
+        new Predator(movement.getCurrent().getV() + 1, movement.getCurrent().getH(), this->field,
                                           this->units_struct, this->max_life_time);
         break;
     }
     case Direction::LEFT:  {
-        new Predator(this->place.getV(), this->place.getH() - 1, this->field,
+        new Predator(movement.getCurrent().getV(), movement.getCurrent().getH() - 1, this->field,
                                           this->units_struct, this->max_life_time);
     }
     default: {}
@@ -107,17 +111,21 @@ Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int
     target(nullptr),
     units_struct(units_pointer)
 {
-    place.setV(v);
-    place.setH(h);
+    movement = Movement(Coordinates(v, h));
     life_time = 0;
     max_life_time = time_of_life;
     energy = 0;
     has_moved = false;
-    died = false;
     field = field_pointer;
-    field->setPosition(place.getV(), place.getH(), Position::PREDATOR);
+    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
     direction = Direction::UP;
     units_pointer->predators.push_back(this);
+    type = UnitType::PREDATOR;
+}
+
+Coordinates Predator::getPlace()
+{
+    return movement.getCurrent();
 }
 
 void Predator::movePredator() noexcept
@@ -125,9 +133,9 @@ void Predator::movePredator() noexcept
     findPrey();
     directionFinding();
     if (has_moved == false) {
-        field->setPosition(place.getV(), place.getH(), Position::EMPTY);
+        field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
         go();
-        field->setPosition(place.getV(), place.getH(), Position::PREDATOR);
+        field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
     }
     else has_moved = false;
 
@@ -137,7 +145,7 @@ void Predator::movePredator() noexcept
 
     life_time++;
     if (life_time == max_life_time) {
-        field->setPosition(place.getV(), place.getH(), Position::EMPTY);
-        died = true;
+        field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
+        exist = false;
     }
 }

@@ -56,7 +56,7 @@ void Model::movePreys() noexcept
 
     std::vector< Prey* >::iterator last = units.preys.end();
     for (std::vector< Prey* >::iterator i = units.preys.begin(); i != last; ++i) {
-        if ((*i)->died == false) (*i)->movePrey();
+        if ((*i)->exist == true) (*i)->movePrey();
     }
 
 }
@@ -67,7 +67,7 @@ void Model::movePredators() noexcept
 
     std::vector< Predator* >::iterator last = units.predators.end();
     for (std::vector< Predator* >::iterator i = units.predators.begin(); i !=last; ++i) {
-        if ((*i)->died == false) (*i)->movePredator();
+        if ((*i)->exist == true) (*i)->movePredator();
     }
 }
 
@@ -96,7 +96,7 @@ void Model::incModelTime() noexcept
 void Model::removePredators() noexcept
 {
     for (std::vector< Predator* >::iterator it = units.predators.begin(); it != units.predators.end(); ++it) {
-        if ( (*it)->died == true ) {
+        if ( (*it)->exist == false ) {
             delete (*it);
             (*it) = nullptr;
         }
@@ -108,7 +108,7 @@ void Model::removePredators() noexcept
 void Model::removePreys() noexcept
 {
     for (std::vector< Prey* >::iterator it = units.preys.begin(); it != units.preys.end(); ++it) {
-        if ( (*it)->died == true ) {
+        if ( (*it)->exist == false ) {
             delete (*it);
             (*it) = nullptr;
         }

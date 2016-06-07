@@ -2,6 +2,7 @@
 #define ANIMAL_H
 #include "field.h"
 #include "unit.h"
+#include "movement.h"
 
 /**
  * @brief класс, от которого наследуются хищники и жертвы
@@ -91,18 +92,10 @@ protected:
      */
     virtual void go() noexcept;
 
+
+    Movement movement{0, 0};
+
 public:
-
-    /**
-     * @brief place - координаты животного на поле
-     */
-    Coordinates place;
-
-    /**
-     * @brief died - флаг; died = true, если животное умерло,
-     * died = false если животное живое
-     */
-    bool died;
     
     virtual ~Animal() {}
 };

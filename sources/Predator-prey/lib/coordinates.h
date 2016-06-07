@@ -63,7 +63,7 @@ public:
     /**
      * @brief Разность координат - расстояние между соответсвующими точками на плоскости
      */
-    double operator-(Coordinates &);
+    double operator-(const Coordinates &);
     bool operator==(Coordinates a) const;
     bool operator!=(Coordinates a) const;
 

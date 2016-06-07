@@ -66,6 +66,8 @@ public:
      */
     Prey(const int v, const int h, Field* field_pointer, Units* units_pointer);
 
+    Coordinates getPlace();
+
     /**
      * @brief метод, передвигающий жертву
      */

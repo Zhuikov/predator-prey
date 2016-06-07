@@ -4,14 +4,14 @@
 
 void Prey::findGrass()
 {
-    if (target != nullptr && target->eaten == true) {
+    if (target != nullptr && target->exist == false) {
         target = nullptr;
     }
 
     double distance = 0;
     for (Grass* grass: units_struct->grass) {
-        if (grass->eaten == false) {
-            distance = place - grass->place;
+        if (grass->exist == true) {
+            distance = movement.getCurrent() - grass->getPlace();
             if (distance < DISTANCE_FOR_EAT + DELTA) {
                 target = grass;
                 break;
@@ -34,19 +34,19 @@ void Prey::createPrey()
     chooseRandomDirection();
     switch (direction) {
         case Direction::UP: {
-            new Prey(this->place.getV() - 1, this->place.getH(), this->field, this->units_struct);
+            new Prey(movement.getCurrent().getV() - 1, movement.getCurrent().getH(), this->field, this->units_struct);
             break;
         }
         case Direction::RIGHT: {
-            new Prey(this->place.getV(), this->place.getH() + 1, this->field, this->units_struct);
+            new Prey(movement.getCurrent().getV(), movement.getCurrent().getH() + 1, this->field, this->units_struct);
             break;
         }
         case Direction::DOWN: {
-            new Prey(this->place.getV() + 1, this->place.getH(), this->field, this->units_struct);
+            new Prey(movement.getCurrent().getV() + 1, movement.getCurrent().getH(), this->field, this->units_struct);
             break;
         }
         case Direction::LEFT: {
-            new Prey(this->place.getV(), this->place.getH() - 1, this->field, this->units_struct);
+            new Prey(movement.getCurrent().getV(), movement.getCurrent().getH() - 1, this->field, this->units_struct);
         }
         default: {}
     }
@@ -59,9 +59,9 @@ void Prey::isChase()
     warning = false;
     for (unsigned int i = 0; i < units_struct->predators.size(); ++i) {
 //        if (units_struct->predators[i] != nullptr) {
-            if (place - units_struct->predators[i]->place < 1.1) {
+            if (movement.getCurrent() - units_struct->predators[i]->getPlace() < 1.1) {
                 warning = true;
-                dangerous_pred = units_struct->predators[i]->place;
+                dangerous_pred = units_struct->predators[i]->getPlace();
                 break;
             }
 //        }
@@ -73,18 +73,22 @@ Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer)
     units_struct(units_pointer),
     target(nullptr)
 {
-    place.setV(v);
-    place.setH(h);
+    movement = Movement(Coordinates(v, h));
     dangerous_pred.setV(-1);
     dangerous_pred.setH(-1);
     energy = 0;
     life_time = 0;
     has_moved = false;
-    died = false;
     field = field_pointer;
-    field->setPosition(this->place.getV(), this->place.getH(), Position::PREY);
+    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
     direction = Direction::UP;
     units_struct->preys.push_back(this);
+    type = UnitType::PREY;
+}
+
+Coordinates Prey::getPlace()
+{
+    return movement.getCurrent();
 }
 
 void Prey::movePrey()
@@ -92,9 +96,9 @@ void Prey::movePrey()
     isChase();
     directionFinding();
     if (has_moved == false) {
-        field->setPosition(place.getV(), place.getH(), Position::EMPTY);
+        field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
         go();
-        field->setPosition(place.getV(), place.getH(), Position::PREY);
+        field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
     }
     else has_moved = false;
     if (energy == PREY_CREATE_ENERGY) {

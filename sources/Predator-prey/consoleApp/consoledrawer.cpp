@@ -83,15 +83,15 @@ void ConsoleDrawer::drawLegend()
 
 void ConsoleDrawer::drawField()
 {
-    Position position;
+    UnitType position;
     for (int i = 0; i < this->field->getHeight(); i++) {
         for (int j = 0; j < this->field->getLength(); j++) {
             position = this->field->getPosition(i, j);
             switch (position) {
-                case Position::EMPTY:    { std::cout << ". "; break; }
-                case Position::PREDATOR: { std::cout << "X "; break; }
-                case Position::PREY:     { std::cout << "O "; break; }
-                case Position::GRASS:    { std::cout << "w "; break; }
+                case UnitType::EMPTY:    { std::cout << ". "; break; }
+                case UnitType::PREDATOR: { std::cout << "X "; break; }
+                case UnitType::PREY:     { std::cout << "O "; break; }
+                case UnitType::GRASS:    { std::cout << "w "; break; }
             }
         }
         std::cout << std::endl;

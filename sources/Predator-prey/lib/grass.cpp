@@ -1,9 +1,10 @@
 #include "grass.h"
 
-Grass::Grass(const int v, const int h, Units *units):
-    eaten(false)
+Grass::Grass(const int v, const int h, Units *units)
 {
-    place.setV(v);
-    place.setH(h);
+    current.setV(v);
+    current.setH(h);
     units->grass.push_back(this);
+    type = UnitType::GRASS;
+    exist = true;
 }

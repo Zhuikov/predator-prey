@@ -4,7 +4,7 @@
 
 void Animal::chooseEmptyDirection() noexcept
 {
-    direction = field->whatIsEmpty(place.getV(), place.getH());
+    direction = field->whatIsEmpty(movement.getCurrent().getV(), movement.getCurrent().getH());
     if (direction == Direction::NO_DIRECTION) {
         has_moved = true;
         direction = Direction::UP;
@@ -16,25 +16,25 @@ bool Animal::setDirection(Direction direction) noexcept
     switch (direction)
     {
         case Direction::UP: {
-            if (field->isEmpty(place.getV() - 1, place.getH())) {
+            if (field->isEmpty(movement.getCurrent().getV() - 1, movement.getCurrent().getH())) {
                 this->direction = Direction::UP;
                 return true;
             }
         }
         case Direction::DOWN: {
-            if (field->isEmpty(place.getV() + 1, place.getH())) {
+            if (field->isEmpty(movement.getCurrent().getV() + 1, movement.getCurrent().getH())) {
                 this->direction = Direction::DOWN;
                 return true;
             }
         }
         case Direction::LEFT: {
-            if (field->isEmpty(place.getV(), place.getH() - 1)) {
+            if (field->isEmpty(movement.getCurrent().getV(), movement.getCurrent().getH() - 1)) {
                 this->direction = Direction::LEFT;
                 return true;
             }
         }
         case Direction::RIGHT: {
-            if (field->isEmpty(place.getV(), place.getH() + 1)) {
+            if (field->isEmpty(movement.getCurrent().getV(), movement.getCurrent().getH() + 1)) {
                 this->direction = Direction::RIGHT;
                 return true;
             }
@@ -74,5 +74,6 @@ void Animal::chooseRandomDirection() noexcept
 
 void Animal::go() noexcept
 {
-    place.changeToDirection(direction);
+    movement.setTarget(Coordinates(0, 0));
+    movement.move();
 }

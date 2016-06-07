@@ -51,7 +51,7 @@ void FieldFrame::createUnits(QPainter &painter)
     for (int i = 0; i < field->getHeight(); i++) {
         for (int j = 0; j < field->getLength(); j++) {
             switch (field->getPosition(i, j) ) {
-            case Position::PREDATOR : {
+            case UnitType::PREDATOR : {
                         brush.setColor(Qt::red);
                         painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
                                          i * cell_size + LINE_WIDTH_DELTA,
@@ -60,7 +60,7 @@ void FieldFrame::createUnits(QPainter &painter)
                                          brush);
                         break;
             }
-            case Position::PREY : {
+            case UnitType::PREY : {
                         brush.setColor(Qt::blue);
                         painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
                                          i * cell_size + LINE_WIDTH_DELTA,
