@@ -1,6 +1,7 @@
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
 #include "coordinates.h"
+#include "field.h"
 
 class Movement
 {
@@ -23,6 +24,7 @@ private:
     Coordinates current;
     Coordinates target;
     double speed;
+    Field *field;
 
 };
 

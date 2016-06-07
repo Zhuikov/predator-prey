@@ -14,7 +14,7 @@ public:
     void setRadius();
     std::list< Unit* > getTargets(Coordinates current);
 
-    double sense_radius;
+    double senseRadius;
     Field* field;
 };
 

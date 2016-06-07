@@ -20,7 +20,7 @@ enum class Position
  */
 class Field
 {
-    std::vector< std::vector<Position> > field;
+    std::vector< std::vector< Unit* > > field;
 
     /**
      * @brief height - текущая длина поля
@@ -32,13 +32,6 @@ class Field
      */
     int length;
 
-    /**
-     * @brief проверить, не находится ли позиция за границами поля
-     * @param vertical_position по вертикали
-     * @param horizontal_position по горизонтали
-     * @return
-     */
-    bool checkBoundary(int vertical_position, int horizontal_position) const;
 
 public:
     /**
@@ -106,6 +99,14 @@ public:
     /**
      * @brief перегруженный оператор присваивания; при необходимости, изменяет развер поля
      */
+
+    /**
+     * @brief проверить, не находится ли позиция за границами поля
+     * @param vertical_position по вертикали
+     * @param horizontal_position по горизонтали
+     * @return
+     */
+    bool checkBoundary(int vertical_position, int horizontal_position) const;
 };
 
 #endif // FIELD_H
