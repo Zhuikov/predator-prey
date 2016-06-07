@@ -3,6 +3,7 @@
 #include "field.h"
 #include "unit.h"
 #include "movement.h"
+#include "sense.h"
 
 /**
  * @brief класс, от которого наследуются хищники и жертвы
@@ -65,6 +66,16 @@ protected:
     Field* field;
 
     /**
+     * @brief target - указатель на текущую цель
+     */
+    Unit* target;
+
+    /**
+     * @brief метод, уничтожающий target - цель (если она есть)
+     */
+    void killTarget() noexcept;
+
+    /**
      * @brief метод устанавливает направление, если соответствующая клетка свободна
      * @return true, если удалось установить направление
      */
@@ -92,12 +103,12 @@ protected:
      */
     virtual void go() noexcept;
 
-
-    Movement movement{0, 0};
+    Sense sense {1.0, nullptr};
+    Movement movement {0, 0};
 
 public:
     
-    virtual ~Animal() {}
+    //virtual ~Animal() {}
 };
 
 #endif // ANIMAL_H

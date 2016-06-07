@@ -2,6 +2,7 @@
 #define PREY_H
 #include "animal.h"
 #include "modelapi.h"
+#include "preysbrain.h"
 
 class Units;
 class Grass;
@@ -11,6 +12,8 @@ class Grass;
  */
 class Prey : public Animal
 {
+    PreysBrain brain;
+
 protected:
     /**
      * @brief PREY_CREATE_ENERGY - необходимая энергия для создания жертвы
@@ -31,11 +34,6 @@ protected:
      * @brief units_struct - указатель на класс с векторами хищников и жертв
      */
     Units* units_struct;
-
-    /**
-     * @brief target - указатель на текущую цель
-     */
-    Grass* target;
 
     /**
      * @brief метод поиска корма на соседних клетках;
@@ -73,7 +71,6 @@ public:
      */
     void movePrey();
 
-    ~Prey() {}
 };
 
 #endif // PREY_H

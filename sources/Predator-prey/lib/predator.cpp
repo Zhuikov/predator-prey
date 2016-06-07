@@ -12,7 +12,7 @@ void Predator::directionFinding() noexcept
     else {
         double distance = movement.getCurrent() - target->getPlace();
         if (fabs(distance - DISTANCE_FOR_EAT) < DELTA) {
-            killPrey();
+            killTarget();
         }
         else chooseToTargetDirection();
     }
@@ -62,21 +62,6 @@ void Predator::findPrey() noexcept
     }
 }
 
-void Predator::killPrey() noexcept
-{
-    if (target->getPlace().getV() < movement.getCurrent().getV()) direction = Direction::UP;
-    else if (target->getPlace().getV() > movement.getCurrent().getV()) direction = Direction::DOWN;
-    else if (target->getPlace().getH() < movement.getCurrent().getH()) direction = Direction::LEFT;
-    else if (target->getPlace().getH() > movement.getCurrent().getH()) direction = Direction::RIGHT;
-
-    target->exist = false;
-    
-    energy ++;
-    life_time = -1;
-    target = nullptr;
-
-}
-
 void Predator::createPredator() noexcept
 {
     chooseRandomDirection();
@@ -108,7 +93,6 @@ void Predator::createPredator() noexcept
 }
 
 Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int time_of_life) noexcept:
-    target(nullptr),
     units_struct(units_pointer)
 {
     movement = Movement(Coordinates(v, h));
@@ -116,7 +100,9 @@ Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int
     max_life_time = time_of_life;
     energy = 0;
     has_moved = false;
+    target = nullptr;
     field = field_pointer;
+    sense = Sense(1.0, field);
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
     direction = Direction::UP;
     units_pointer->predators.push_back(this);

@@ -4,23 +4,26 @@
 
 void Prey::findGrass()
 {
-    if (target != nullptr && target->exist == false) {
-        target = nullptr;
-    }
+//    if (target != nullptr && target->exist == false) {
+//        target = nullptr;
+//    }
 
-    double distance = 0;
-    for (Grass* grass: units_struct->grass) {
-        if (grass->exist == true) {
-            distance = movement.getCurrent() - grass->getPlace();
-            if (distance < DISTANCE_FOR_EAT + DELTA) {
-                target = grass;
-                break;
-            }
-            if (distance < DISTANCE_FOR_TARGET + DELTA) {
-                target = grass;
-            }
-        }
-    }
+//    double distance = 0;
+//    for (Grass* grass: units_struct->grass) {
+//        if (grass->exist == true) {
+//            distance = movement.getCurrent() - grass->getPlace();
+//            if (distance < DISTANCE_FOR_EAT + DELTA) {
+//                target = grass;
+//                break;
+//            }
+//            if (distance < DISTANCE_FOR_TARGET + DELTA) {
+//                target = grass;
+//            }
+//        }
+//    }
+    std::list< Unit* > targets;
+    targets = sense.getTargets(movement.getCurrent());
+    target = brain.getTarget(targets);
 }
 
 void Prey::directionFinding() noexcept
@@ -70,8 +73,7 @@ void Prey::isChase()
 
 Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer):
     warning(false),
-    units_struct(units_pointer),
-    target(nullptr)
+    units_struct(units_pointer)
 {
     movement = Movement(Coordinates(v, h));
     dangerous_pred.setV(-1);
@@ -79,7 +81,9 @@ Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer)
     energy = 0;
     life_time = 0;
     has_moved = false;
+    target = nullptr;
     field = field_pointer;
+    sense = Sense(1.0, field);
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
     direction = Direction::UP;
     units_struct->preys.push_back(this);

@@ -16,6 +16,9 @@ public:
     void setRandomTarget();
     void setSpeed(double speed);
 
+    //todo убрать когда не будет Direction
+    void setTarget2(Direction);
+
 private:
 
     double getDistance(Coordinates source, Coordinates dest);

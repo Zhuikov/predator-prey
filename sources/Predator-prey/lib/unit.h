@@ -14,6 +14,7 @@ enum class UnitType
 
 class Unit
 {
+
 protected:
     UnitType type;
 
@@ -22,7 +23,7 @@ public:
     bool exist;
     UnitType getType() { return type; }
 
-   virtual ~Unit();
+    virtual ~Unit() {}
 };
 
 #endif // UNIT_H

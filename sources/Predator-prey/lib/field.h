@@ -93,7 +93,6 @@ public:
      * @brief проверить, не находится ли позиция за границами поля
      * @param vertical_position по вертикали
      * @param horizontal_position по горизонтали
-     * @return
      */
     bool checkBoundary(int vertical_position, int horizontal_position) const;
 };

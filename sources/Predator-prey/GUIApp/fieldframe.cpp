@@ -48,27 +48,31 @@ void FieldFrame::createUnits(QPainter &painter)
 {
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
+    Unit* position;
     for (int i = 0; i < field->getHeight(); i++) {
         for (int j = 0; j < field->getLength(); j++) {
-            switch (field->getPosition(i, j) ) {
-            case UnitType::PREDATOR : {
-                        brush.setColor(Qt::red);
-                        painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
-                                         i * cell_size + LINE_WIDTH_DELTA,
-                                         cell_size - 2 * LINE_WIDTH_DELTA,
-                                         cell_size - 2 * LINE_WIDTH_DELTA,
-                                         brush);
-                        break;
-            }
-            case UnitType::PREY : {
-                        brush.setColor(Qt::blue);
-                        painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
-                                         i * cell_size + LINE_WIDTH_DELTA,
-                                         cell_size - 2 * LINE_WIDTH_DELTA,
-                                         cell_size - 2 * LINE_WIDTH_DELTA,
-                                         brush);
-            }
-            default : {}
+            position = field->getPosition(i, j);
+            if (position != nullptr) {
+                switch (position->getType() ) {
+                case UnitType::PREDATOR : {
+                            brush.setColor(Qt::red);
+                            painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
+                                             i * cell_size + LINE_WIDTH_DELTA,
+                                             cell_size - 2 * LINE_WIDTH_DELTA,
+                                             cell_size - 2 * LINE_WIDTH_DELTA,
+                                             brush);
+                            break;
+                }
+                case UnitType::PREY : {
+                            brush.setColor(Qt::blue);
+                            painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
+                                             i * cell_size + LINE_WIDTH_DELTA,
+                                             cell_size - 2 * LINE_WIDTH_DELTA,
+                                             cell_size - 2 * LINE_WIDTH_DELTA,
+                                             brush);
+                }
+                default : {}
+                }
             }
         }
     }

@@ -44,6 +44,21 @@ bool Animal::setDirection(Direction direction) noexcept
     return false;
 }
 
+void Animal::killTarget() noexcept
+{
+    if (target->getPlace().getV() < movement.getCurrent().getV()) direction = Direction::UP;
+    else if (target->getPlace().getV() > movement.getCurrent().getV()) direction = Direction::DOWN;
+    else if (target->getPlace().getH() < movement.getCurrent().getH()) direction = Direction::LEFT;
+    else if (target->getPlace().getH() > movement.getCurrent().getH()) direction = Direction::RIGHT;
+
+    target->exist = false;
+
+    energy ++;
+    life_time = -1;
+    target = nullptr;
+
+}
+
 void Animal::chooseRandomDirection() noexcept
 {
     int flag = rand() % 4;
@@ -74,6 +89,6 @@ void Animal::chooseRandomDirection() noexcept
 
 void Animal::go() noexcept
 {
-    movement.setTarget(Coordinates(0, 0));
+    movement.setTarget2(direction);
     movement.move();
 }

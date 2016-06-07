@@ -6,16 +6,14 @@
 
 class Sense
 {
-    Coordinates current;
-
-public:
-    Sense();
-
-    void setRadius();
-    std::list< Unit* > getTargets(Coordinates current);
-
     double senseRadius;
     Field* field;
+
+public:
+
+    Sense(double radius, Field* field);
+    void setRadius(double radius) { senseRadius = radius; }
+    std::list< Unit* > getTargets(Coordinates current);
 };
 
 #endif // SENSE_H

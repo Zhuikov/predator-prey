@@ -1,16 +1,14 @@
 #ifndef BRAIN_H
 #define BRAIN_H
-#include "coordinates.h"
+//#include "coordinates.h"
 #include "unit.h"
 #include <list>
 
 class Brain
 {
 public:
-    Brain();
 
-    Coordinates getTarget(std::list< Unit* > targets);
-
+    virtual Unit* getTarget(std::list< Unit* > targets) = 0;
 
     int age;
     int energy;

@@ -51,6 +51,17 @@ void Movement::setSpeed(double speed)
     this->speed = speed;
 }
 
+void Movement::setTarget2(Direction direction)
+{
+    switch (direction) {
+        case Direction::UP:    { current.setV(current.getV() - 1); break; }
+        case Direction::RIGHT: { current.setH(current.getH() + 1); break; }
+        case Direction::LEFT:  { current.setH(current.getH() - 1); break; }
+        case Direction::DOWN:  { current.setV(current.getV() + 1); break; }
+        default: {}
+    }
+}
+
 double Movement::getDistance(Coordinates source, Coordinates dest)
 {
     int horizontal;

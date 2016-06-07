@@ -23,7 +23,8 @@ SOURCES += \
     movement.cpp \
     sense.cpp \
     brain.cpp \
-    unit.cpp
+    unit.cpp \
+    preysbrain.cpp
 
 HEADERS += \
     settings.h \
@@ -43,7 +44,8 @@ HEADERS += \
     movement.h \
     sense.h \
     brain.h \
-    unit.h
+    unit.h \
+    preysbrain.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

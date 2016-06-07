@@ -23,11 +23,6 @@ protected:
     static const int PREDATOR_CREATE_ENERGY = 2;
 
     /**
-     * @brief target - указатель на текущую цель
-     */
-    Prey* target;
-
-    /**
      * @brief units_struct - указатель на класс с векторами хищников и жертв
      */
     Units* units_struct;
@@ -40,11 +35,6 @@ protected:
      * в случае успеха записывает жертву в поле target
      */
     void findPrey() noexcept;
-
-    /**
-     * @brief метод, уничтожающий target - цель (если она есть)
-     */
-    void killPrey() noexcept;
 
     /**
      * @brief метод, создающий хищника на случайной соседней клетке; записывает его в вектор хищников
