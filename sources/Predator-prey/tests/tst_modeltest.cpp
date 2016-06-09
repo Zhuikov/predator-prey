@@ -367,11 +367,17 @@ void ModelTest::senseTest()
     new Predator(5, 5, &field, &units, 20);
     Sense sense(2, &field);
     std::list< Unit* > tst_list;
-    Coordinates tst_coord(4, 4);
+    Coordinates tst_coord1(4, 4);
+    Coordinates tst_coord2(6, 5);
 
     //todo эта штука не работает, если возвращается пустой список
-    tst_list = sense.getTargets(tst_coord);
+    tst_list = sense.getTargets(tst_coord1);
     unsigned int size = 2;
+    QCOMPARE(tst_list.size(), size);
+
+    sense.setRadius(1);
+    tst_list = sense.getTargets(tst_coord2);
+    size = 1;
     QCOMPARE(tst_list.size(), size);
 }
 

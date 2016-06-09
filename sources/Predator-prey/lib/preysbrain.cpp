@@ -5,7 +5,7 @@ PreysBrain::PreysBrain()
 
 }
 
-Unit *PreysBrain::getTarget(std::list<Unit *> targets)
+Unit* PreysBrain::getTarget(std::list<Unit *> targets)
 {
     for (std::list< Unit* >::const_iterator it = targets.begin(); it != targets.end(); ++it){
         //todo Пусть тут ближайшее выбирает. И не только траву ищет
