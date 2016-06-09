@@ -51,7 +51,7 @@ void Movement::setSpeed(double speed)
     this->speed = speed;
 }
 
-void Movement::setTarget2(Direction direction)
+void Movement::goToDirection(Direction direction)
 {
     switch (direction) {
         case Direction::UP:    { current.setV(current.getV() - 1); break; }

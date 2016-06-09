@@ -89,6 +89,6 @@ void Animal::chooseRandomDirection() noexcept
 
 void Animal::go() noexcept
 {
-    movement.setTarget2(direction);
-    movement.move();
+    movement.goToDirection(direction);
+   // movement.move();
 }

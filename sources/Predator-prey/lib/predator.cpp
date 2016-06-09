@@ -107,6 +107,7 @@ Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int
     direction = Direction::UP;
     units_pointer->predators.push_back(this);
     type = UnitType::PREDATOR;
+    exist = true;
 }
 
 Coordinates Predator::getPlace()

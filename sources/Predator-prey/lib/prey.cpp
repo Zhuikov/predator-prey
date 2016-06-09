@@ -88,6 +88,7 @@ Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer)
     direction = Direction::UP;
     units_struct->preys.push_back(this);
     type = UnitType::PREY;
+    exist = true;
 }
 
 Coordinates Prey::getPlace()

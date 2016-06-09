@@ -17,7 +17,7 @@ public:
     void setSpeed(double speed);
 
     //todo убрать когда не будет Direction
-    void setTarget2(Direction);
+    void goToDirection(Direction);
 
 private:
 

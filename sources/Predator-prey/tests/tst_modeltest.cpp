@@ -167,7 +167,7 @@ void ModelTest::predatorNoMoveTest()
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     new Predator(3, 4, &field, &units, 20);
-    new Predator(4, 4, &field, &units, 20);
+    new Predator(4, 5, &field, &units, 20);
     new Predator(5, 4, &field, &units, 20);
     new Predator(4, 3, &field, &units, 20);
 
@@ -363,12 +363,14 @@ void ModelTest::senseTest()
 {
     Field field;
     Units units;
-    Predator predator1(3, 3, &field, &units, 20);
-    Predator predator2(5, 5, &field, &units, 20);
-    Sense sense(1, &field);
+    new Predator (3, 3, &field, &units, 20);
+    new Predator(5, 5, &field, &units, 20);
+    Sense sense(2, &field);
     std::list< Unit* > tst_list;
+    Coordinates tst_coord(4, 4);
 
-    tst_list = sense.getTargets(Coordinates(4, 4));
+    //todo эта штука не работает, если возвращается пустой список
+    tst_list = sense.getTargets(tst_coord);
     unsigned int size = 2;
     QCOMPARE(tst_list.size(), size);
 }
