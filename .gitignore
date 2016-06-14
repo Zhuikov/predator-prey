@@ -1,4 +1,6 @@
 build* 
+*.o
+*.a
 *.pro.user* 
 *.aux 
 *.log 
