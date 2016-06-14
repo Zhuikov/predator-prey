@@ -8,6 +8,7 @@ ADD https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh conda.
 RUN chmod +x conda.sh
 RUN ./conda.sh -b -p /opt/anaconda
 RUN /opt/anaconda/bin/conda install --quiet --yes jupyter
+RUN /opt/anaconda/bin/conda install --yes matplotlib
 
 CMD /opt/anaconda/bin/conda run "jupyter notebook --ip=0.0.0.0"
 
