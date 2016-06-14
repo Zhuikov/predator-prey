@@ -11,8 +11,8 @@ before_install:
 script:
 - docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources zhuikov/predator-prey /bin/bash -c "cd /sources/Predator-prey; qmake; make; cp /sources/Predator-prey/CLI/CLI /usr/bin/pp-model"
 - docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources zhuikov/predator-prey /sources/Predator-prey/tests/tst_modeltest
-- docker run /opt/anaconda/bin/conda run "jupyter nbconvert --to notebook --execute ModelLaunchExample.ipynb"
-- docker run /opt/anaconda/bin/conda run "jupyter nbconvert --to notebook --execute LifeModel.ipynb"
+- docker run zhuikov/predator-prey /opt/anaconda/bin/conda run "jupyter nbconvert --to notebook --execute ModelLaunchExample.ipynb"
+- docker run zhuikov/predator-prey /opt/anaconda/bin/conda run "jupyter nbconvert --to notebook --execute LifeModel.ipynb"
 
 notifications:
   email:
