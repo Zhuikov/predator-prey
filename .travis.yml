@@ -6,6 +6,7 @@ services:
 - docker
 
 before_install:
+- cat /proc/cpuinfo
 - docker build -t zhuikov/predator-prey .
 
 script:
