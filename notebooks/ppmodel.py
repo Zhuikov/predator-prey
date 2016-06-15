@@ -27,3 +27,6 @@ def start_model(mode, height, width, n_preys, n_predators, seed):
 
     else:
         return return_code
+
+def f(x):
+    return start_model("S", 200, 200, 3000, 3000, x)
