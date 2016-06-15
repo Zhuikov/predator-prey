@@ -20,7 +20,7 @@ http://conda.pydata.org/miniconda.html
 
 https://www.jetbrains.com/pycharm/download
 
-Сделать клон репозитория predator-prey, открыть папку с репозиторием в pycharm --
+Сделать клон репозитория predator-prey, открыть папку /notebooks в pycharm --
 будет создан проект pycharm
 
 File --> Settings --> Project:predator-prey --> Project interpreter
