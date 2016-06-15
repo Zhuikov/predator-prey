@@ -3,6 +3,8 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
+QMAKE_LFLAGS_CONSOLE += -static -static-libgcc -static-libstdc++  -Wl,-Bstatic  -lstdc++ -lpthread
+
 SOURCES += main.cpp \
     consoledrawer.cpp \
     consoleapp.cpp \

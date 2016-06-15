@@ -12,6 +12,7 @@ TARGET = GUIApp
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++11
 
+QMAKE_LFLAGS_CONSOLE += -static
 
 SOURCES += main.cpp \
     mainmenu.cpp \

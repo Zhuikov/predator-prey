@@ -10,6 +10,8 @@ TARGET = lib
 TEMPLATE = lib
 CONFIG += staticlib c++11
 
+QMAKE_LFLAGS_CONSOLE += -static
+
 SOURCES += \
     predator.cpp \
     prey.cpp \
