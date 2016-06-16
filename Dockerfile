@@ -3,7 +3,7 @@ FROM ubuntu:latest
 MAINTAINER artem.zhuikov@mail.ru
 
 RUN apt-get -y update && apt-get install -y build-essential git qt5-default
-RUN sudo apt-get clean
+RUN apt-get clean
 
 ADD https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh conda.sh
 RUN chmod +x conda.sh
