@@ -1,5 +1,6 @@
 #include "movement.h"
 #include <cmath>
+#include <cstdlib>
 
 Movement::Movement(Coordinates current, double speed) : current(current), speed(speed)
 {
@@ -44,6 +45,12 @@ void Movement::moveApart()
 void Movement::setTarget(Coordinates target)
 {
     this->target = target;
+}
+
+void Movement::setRandomTarget()
+{
+    target.setH(std::rand() % field->getHeight());
+    target.setV(std::rand() % field->getLength());
 }
 
 void Movement::setSpeed(double speed)
