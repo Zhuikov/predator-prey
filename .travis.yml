@@ -12,7 +12,7 @@ before_install:
 script:
 - docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources zhuikov/predator-prey /bin/bash -c "cd /sources/Predator-prey; qmake; make"
 - docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources zhuikov/predator-prey /sources/Predator-prey/tests/tst_modeltest
-- docker run -v /home/travis/build/Zhuikov/predator-prey/:/repo zhuikov/predator-prey /bin/bash /repo/notebooks/nbconv.sh
+#- docker run -v /home/travis/build/Zhuikov/predator-prey/:/repo zhuikov/predator-prey /bin/bash /repo/notebooks/nbconv.sh
 
 notifications:
   email:
