@@ -1,7 +1,7 @@
 #!/bin/bash
 
-time jupyter nbconvert --to notebook --execute LifeModel.ipynb
+time jupyter nbconvert --to html --execute LifeModel.ipynb
 #cp /repo/sources/Predator-prey/CLI/CLI /usr/bin/pp-model
-time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to notebook --execute AgentsToSteps.ipynb
-time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to notebook --execute SeedToSteps2.ipynb
-time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to notebook --execute SS.ipynb
+time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to html --execute AgentsToSteps.ipynb
+time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to html --execute SeedToSteps.ipynb
+time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to html --execute SpaceToAgent.ipynb
