@@ -7,6 +7,8 @@
 QT       += testlib
 QMAKE_CXXFLAGS += -std=c++11
 
+QMAKE_LFLAGS_CONSOLE += -static
+
 QT       -= gui
 
 TARGET = tst_modeltest

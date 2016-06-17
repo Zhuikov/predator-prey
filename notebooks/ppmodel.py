@@ -1,7 +1,7 @@
 import subprocess
 
 
-def start_model(mode, height, width, n_preys, n_predators, seed):
+def start_model(mode: object, height: object, width: object, n_preys: object, n_predators: object, seed: object) -> object:
     height = str(height)
     width = str(width)
     n_preys = str(n_preys)
@@ -27,3 +27,26 @@ def start_model(mode, height, width, n_preys, n_predators, seed):
 
     else:
         return return_code
+
+class ModelParams:
+    mode = "S"
+    height = 0
+    width = 0
+    n_preys = 0
+    n_predators = 0
+    seed = 0
+
+    def __init__(self, mode, height, width, n_preys, n_predators, seed):
+        self.mode = mode
+        self.height = height
+        self.width = width
+        self.n_preys = n_preys
+        self.n_predators = n_predators
+        self.seed = seed
+
+
+def f(params):
+    return start_model(params.mode, params.height, params.width, params.n_preys, params.n_predators, params.seed)
+
+#def f1(params):
+#    return start_model("S", params.height, params.width, params.n_preys, params.n_predators, params.seed)
