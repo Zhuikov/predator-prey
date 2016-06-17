@@ -6,7 +6,7 @@
 class Movement
 {
 public:
-    Movement(Coordinates current, double speed = 1.0);
+    Movement(Coordinates current, Field* field, double speed = 1.0);
 
     Coordinates getCurrent();
 
@@ -15,9 +15,6 @@ public:
     void setTarget(Coordinates target);
     void setRandomTarget();
     void setSpeed(double speed);
-
-    //todo убрать когда не будет Direction
-    void goToDirection(Direction);
 
 private:
 

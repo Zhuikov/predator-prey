@@ -11,11 +11,11 @@
 
 class Animal : public Unit
 {
-    /**
-     * @brief метод, выбирающий свободное направление;
-     * используется, если переход по выбранному направлению невозможен
-     */
-    void chooseEmptyDirection() noexcept;
+//    /**
+//     * @brief метод, выбирающий свободное направление;
+//     * используется, если переход по выбранному направлению невозможен
+//     */
+//    void chooseEmptyDirection() noexcept;
 
 protected:
 
@@ -55,10 +55,10 @@ protected:
      */
     bool has_moved;
 
-    /**
-     * @brief direction - текущее направление животного
-     */
-    Direction direction;
+//    /**
+//     * @brief direction - текущее направление животного
+//     */
+//    Direction direction;
 
     /**
      * @brief field - указатель на поле, где стоит животное
@@ -75,35 +75,7 @@ protected:
      */
     void killTarget() noexcept;
 
-    /**
-     * @brief метод устанавливает направление, если соответствующая клетка свободна
-     * @return true, если удалось установить направление
-     */
-    bool setDirection(Direction) noexcept;
-
-    /**
-     * @brief метод, выбирающий случайное направление,
-     * записывает его в direction
-     */
-    void chooseRandomDirection() noexcept;
-
-    /**
-     * @brief метод, выбирающий направление для следующего хода,
-     * записывает его в directon
-     */
-    virtual void directionFinding() noexcept = 0;
-
-    /**
-     * @brief метод, выбирающий направление, в зависимости от положения цели
-     */
-    virtual void chooseToTargetDirection() noexcept = 0;
-
-    /**
-     * @brief метод, перемещающий животное в направлении direction
-     */
-    virtual void go() noexcept;
-
-    Sense sense {1.0, nullptr};
+    Sense sense {nullptr};
     Movement movement {0, 0};
 
 public:

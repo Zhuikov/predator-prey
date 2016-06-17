@@ -2,6 +2,7 @@
 #define PREDATOR_H
 #include "modelapi.h"
 #include "animal.h"
+#include "predatorsbrain.h"
 
 class Units;
 class Prey;
@@ -16,6 +17,8 @@ class Predator : public Animal
      */
     static constexpr double DISTANCE_FOR_RESET_TARGET = 2.1;
 
+    PredatorsBrain brain;
+
 protected:
     /**
      * @brief PREDATOR_CREATE_ENERGY - энергия, необходимая для создания хищника
@@ -26,9 +29,6 @@ protected:
      * @brief units_struct - указатель на класс с векторами хищников и жертв
      */
     Units* units_struct;
-
-    void directionFinding() noexcept;
-    void chooseToTargetDirection() noexcept;
 
     /**
      * @brief метод поиска жертвы на соседних 8 клетках;

@@ -24,7 +24,8 @@ SOURCES += \
     sense.cpp \
     brain.cpp \
     unit.cpp \
-    preysbrain.cpp
+    preysbrain.cpp \
+    predatorsbrain.cpp
 
 HEADERS += \
     settings.h \
@@ -45,7 +46,8 @@ HEADERS += \
     sense.h \
     brain.h \
     unit.h \
-    preysbrain.h
+    preysbrain.h \
+    predatorsbrain.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

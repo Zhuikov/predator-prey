@@ -40,18 +40,11 @@ protected:
      * в случае успеха, записывает координаты в target
      */
     void findGrass();
-    void directionFinding() noexcept;
-    void chooseToTargetDirection() noexcept {} //пока нет травки
 
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор
      */
     void createPrey();
-
-    /**
-     * @brief метод, проверяющий, не преследуется ли жертва
-     */
-    void isChase();
 
 public:
 

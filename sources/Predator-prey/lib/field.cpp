@@ -48,16 +48,3 @@ Unit* Field::getPosition(int v, int h) const
     }
     return this->field[v][h];
 }
-
-Direction Field::whatIsEmpty(int v, int h) const
-{
-    if (checkBoundary(v, h) == false){
-        throw BadFieldBoundary(v, h);
-    }
-
-    if (isEmpty(v - 1, h) == true) return Direction::UP;
-    if (isEmpty(v, h + 1) == true) return Direction::RIGHT;
-    if (isEmpty(v + 1, h) == true) return Direction::DOWN;
-    if (isEmpty(v, h - 1) == true) return Direction::LEFT;
-    return Direction::NO_DIRECTION;
-}

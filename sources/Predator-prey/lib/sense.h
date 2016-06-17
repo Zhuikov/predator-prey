@@ -11,9 +11,9 @@ class Sense
 
 public:
 
-    Sense(double radius, Field* field);
+    Sense(Field* field, double radius = 2.0);
     void setRadius(double radius) { senseRadius = radius; }
-    std::list< Unit* > getTargets(Coordinates current);
+    std::list< std::pair< Unit*, double > > getTargets(Coordinates current);
 };
 
 #endif // SENSE_H

@@ -19,6 +19,7 @@ protected:
     UnitType type;
 
 public:
+
     virtual Coordinates getPlace() = 0;
     bool exist;
     UnitType getType() { return type; }

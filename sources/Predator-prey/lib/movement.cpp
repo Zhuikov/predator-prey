@@ -2,9 +2,11 @@
 #include <cmath>
 #include <cstdlib>
 
-Movement::Movement(Coordinates current, double speed) : current(current), speed(speed)
+Movement::Movement(Coordinates current, Field *field, double speed) :
+    current(current),
+    speed(speed),
+    field(field)
 {
-
 }
 
 Coordinates Movement::getCurrent()
@@ -22,6 +24,7 @@ void Movement::move()
         return;
     }
 
+    //?????????
     int horizontal = round(((target.getH() - current.getH()) / distance) * speed);
     int vertical   = round(((target.getV() - current.getV()) / distance) * speed);
 
@@ -58,16 +61,16 @@ void Movement::setSpeed(double speed)
     this->speed = speed;
 }
 
-void Movement::goToDirection(Direction direction)
-{
-    switch (direction) {
-        case Direction::UP:    { current.setV(current.getV() - 1); break; }
-        case Direction::RIGHT: { current.setH(current.getH() + 1); break; }
-        case Direction::LEFT:  { current.setH(current.getH() - 1); break; }
-        case Direction::DOWN:  { current.setV(current.getV() + 1); break; }
-        default: {}
-    }
-}
+//void Movement::goToDirection(Direction direction)
+//{
+//    switch (direction) {
+//        case Direction::UP:    { current.setV(current.getV() - 1); break; }
+//        case Direction::RIGHT: { current.setH(current.getH() + 1); break; }
+//        case Direction::LEFT:  { current.setH(current.getH() - 1); break; }
+//        case Direction::DOWN:  { current.setV(current.getV() + 1); break; }
+//        default: {}
+//    }
+//}
 
 double Movement::getDistance(Coordinates source, Coordinates dest)
 {
