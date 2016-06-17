@@ -11,5 +11,5 @@ RUN ./conda.sh -b -p /opt/anaconda
 RUN /opt/anaconda/bin/conda install --quiet --yes jupyter
 RUN /opt/anaconda/bin/conda install --yes matplotlib
 
-CMD /opt/anaconda/bin/conda run "jupyter notebook --ip=0.0.0.0"
+CMD /opt/anaconda/bin/jupyter notebook --ip=0.0.0.0
 
