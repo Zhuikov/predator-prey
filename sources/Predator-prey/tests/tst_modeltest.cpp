@@ -37,6 +37,8 @@ private Q_SLOTS:
     void modelInitializeTest();
     void debugTest();
 
+    void debugTest2();
+
     void moveTest();
     void moveApartTest();
 
@@ -324,6 +326,20 @@ void ModelTest::debugTest()
     moveEnd(&units);
     int final_vec_size = units.predators.size();
     QCOMPARE(final_vec_size, 3);
+
+}
+
+void ModelTest::debugTest2()
+{
+    Field field;
+    Units units;
+
+    new Predator(4, 5, &field, &units, 20);
+    Movement movement(Coordinates(4, 4), &field);
+    movement.setSpeed(1);
+    movement.setTarget(Coordinates(4, 6));
+
+    movement.move();
 
 }
 
