@@ -24,10 +24,11 @@ void Movement::move()
         return;
     }
 
-    //?????????
     int horizontal = round(((target.getH() - current.getH()) / distance) * speed);
     int vertical   = round(((target.getV() - current.getV()) / distance) * speed);
 
+    // вот тут надо проверять, свободна ли клетка, на которую встаем. Таргет может быть свободным,
+    // но место, куда идем - нет.
     current.setH(current.getH() + horizontal);
     current.setV(current.getV() + vertical);
 }
@@ -50,27 +51,24 @@ void Movement::setTarget(Coordinates target)
     this->target = target;
 }
 
+// мб метод сделать приватным и пусть вызывается, когда дали nullptr в качестве таргета
 void Movement::setRandomTarget()
 {
-    target.setH(std::rand() % field->getHeight());
-    target.setV(std::rand() % field->getLength());
+    int vertical = 0;
+    int horizontal = 0;
+    do {
+        vertical = std::rand() % field->getLength();
+        horizontal = std::rand() % field->getHeight();
+    }
+    while (field->isEmpty(vertical, horizontal) == false);
+    target.setV(vertical);
+    target.setH(horizontal);
 }
 
 void Movement::setSpeed(double speed)
 {
     this->speed = speed;
 }
-
-//void Movement::goToDirection(Direction direction)
-//{
-//    switch (direction) {
-//        case Direction::UP:    { current.setV(current.getV() - 1); break; }
-//        case Direction::RIGHT: { current.setH(current.getH() + 1); break; }
-//        case Direction::LEFT:  { current.setH(current.getH() - 1); break; }
-//        case Direction::DOWN:  { current.setV(current.getV() + 1); break; }
-//        default: {}
-//    }
-//}
 
 double Movement::getDistance(Coordinates source, Coordinates dest)
 {

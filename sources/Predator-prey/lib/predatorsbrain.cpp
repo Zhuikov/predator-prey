@@ -5,7 +5,7 @@ PredatorsBrain::PredatorsBrain()
 
 }
 
-Unit *PredatorsBrain::getTarget(std::list<std::pair<Unit *, double > > targets)
+Unit* PredatorsBrain::getTarget(std::list<std::pair< Unit* , double > > targets)
 {
     double distanceToTarget = 100000; // расстояние до ближайшей цели
     Unit* result = nullptr;

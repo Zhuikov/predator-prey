@@ -43,9 +43,9 @@ Coordinates Prey::getPlace()
 void Prey::movePrey()
 {
     movement.setRandomTarget();
-    movement.move();
 
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
+    movement.move();
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
 
     if (energy == PREY_CREATE_ENERGY) {

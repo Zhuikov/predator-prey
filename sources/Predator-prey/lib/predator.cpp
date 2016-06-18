@@ -13,7 +13,25 @@ void Predator::findPrey() noexcept
 
 void Predator::createPredator() noexcept
 {
-    //todo сделать как-нибудь
+    int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
+    int horizontal = movement.getCurrent().getH() + std::rand() % 3 - 1;
+
+    if (field->isEmpty(vertical, horizontal)) {
+        new Predator(vertical, horizontal, field, units_struct, max_life_time);
+    }
+    else {
+        bool FLAG = false;
+        for (int i = movement.getCurrent().getV() - 1; i <= movement.getCurrent().getV() + 1; i++) {
+            for (int j = movement.getCurrent().getH() - 1; j <= movement.getCurrent().getH() + 1; j++) {
+                if (field->isEmpty(i, j)) {
+                    new Predator(i, j, field, units_struct, max_life_time);
+                    FLAG = true;
+                    break;
+                }
+            }
+            if (FLAG == true) break;
+        }
+    }
 
     this->energy = 0;
 
@@ -43,7 +61,9 @@ Coordinates Predator::getPlace()
 
 void Predator::movePredator() noexcept
 {
-    findPrey();
+    if (target == nullptr || target->exist == false) {
+        findPrey();
+    }
 
     if (target == nullptr) {
         movement.setRandomTarget();
@@ -52,18 +72,18 @@ void Predator::movePredator() noexcept
         movement.setTarget(target->getPlace());
     }
 
+    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
     movement.move();
 
     if (target != nullptr && movement.getCurrent() == target->getPlace()) {
         killTarget();
     }
 
-    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
 
-//    if (energy == PREDATOR_CREATE_ENERGY) {
-//        createPredator();
-//    }
+    if (energy == PREDATOR_CREATE_ENERGY) {
+        createPredator();
+    }
 
     life_time++;
     if (life_time == max_life_time) {
