@@ -167,10 +167,13 @@ void ModelTest::predatorNoMoveTest()
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     new Predator(3, 4, &field, &units, 20);
+    new Predator(3, 3, &field, &units, 20);
     new Predator(4, 5, &field, &units, 20);
+    new Predator(5, 5, &field, &units, 20);
     new Predator(5, 4, &field, &units, 20);
     new Predator(4, 3, &field, &units, 20);
-
+    new Predator(3, 5, &field, &units, 20);
+    new Predator(5, 3, &field, &units, 20);
     tst_predator->movePredator();
     QCOMPARE(tst_predator->getPlace().getV(), 4);
     QCOMPARE(tst_predator->getPlace().getH(), 4);
@@ -326,7 +329,7 @@ void ModelTest::debugTest()
 
 void ModelTest::moveTest()
 {
-    Field field;
+    Field field(20, 20);
     Movement movement(Coordinates(0, 0), &field);
     movement.setTarget(Coordinates(5, 5));
     movement.move();

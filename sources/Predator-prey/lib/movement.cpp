@@ -18,7 +18,7 @@ void Movement::move()
 {
     double distance = getDistance(current, target);
 
-    if (distance <= speed)
+    if (std::floor(distance) <= speed)
     {
         current = target;
         return;
@@ -27,10 +27,20 @@ void Movement::move()
     int horizontal = round(((target.getH() - current.getH()) / distance) * speed);
     int vertical   = round(((target.getV() - current.getV()) / distance) * speed);
 
-    // вот тут надо проверять, свободна ли клетка, на которую встаем. Таргет может быть свободным,
-    // но место, куда идем - нет.
-    current.setH(current.getH() + horizontal);
-    current.setV(current.getV() + vertical);
+    bool isEmpty = false;
+
+    for (int i = horizontal; i != ((horizontal > 0) ? -1 : 1) && !isEmpty; i += ((horizontal > 0) ? -1 : 1))
+    {
+        for (int j = vertical; j != ((vertical > 0) ? -1 : 1) && !isEmpty; j += ((vertical > 0) ? -1 : 1))
+        {
+            isEmpty = field->isEmpty(current.getH() + i, current.getV() + j);
+            if (isEmpty)
+            {
+                current.setH(current.getH() + i);
+                current.setV(current.getV() + j);
+            }
+        }
+    }
 }
 
 void Movement::moveApart()
