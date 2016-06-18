@@ -12,7 +12,6 @@ class Grass;
  */
 class Prey : public Animal
 {
-    PreysBrain brain;
 
 protected:
     /**
@@ -36,12 +35,6 @@ protected:
     Units* units_struct;
 
     /**
-     * @brief метод поиска корма на соседних клетках;
-     * в случае успеха, записывает координаты в target
-     */
-    void findGrass();
-
-    /**
      * @brief метод, создающий жертву и записывающий ее в вектор
      */
     void createPrey();
@@ -57,12 +50,10 @@ public:
      */
     Prey(const int v, const int h, Field* field_pointer, Units* units_pointer);
 
-    Coordinates getPlace();
-
     /**
      * @brief метод, передвигающий жертву
      */
-    void movePrey();
+    virtual void move() noexcept override;
 
 };
 

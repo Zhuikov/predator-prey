@@ -159,7 +159,7 @@ void ModelTest::predatorNoMoveTest()
     new Predator(4, 3, &field, &units, 20);
     new Predator(3, 5, &field, &units, 20);
     new Predator(5, 3, &field, &units, 20);
-    tst_predator->movePredator();
+    tst_predator->move();
     QCOMPARE(tst_predator->getPlace().getV(), 4);
     QCOMPARE(tst_predator->getPlace().getH(), 4);
 
@@ -173,7 +173,7 @@ void ModelTest::predatorMoveKillTest()
     new Prey(3, 3, &field, &units);
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
-    units.predators[0]->movePredator();
+    units.predators[0]->move();
 
 //    QCOMPARE(tst_predator->getPlace().getV(), 4);
 //    QCOMPARE(tst_predator->getPlace().getH(), 3);
@@ -195,9 +195,9 @@ void ModelTest::predatorCreateTest()
     new Prey(2, 3, &field, &units);
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
-    tst_predator->movePredator();
+    tst_predator->move();
     moveEnd(&units);
-    tst_predator->movePredator();
+    tst_predator->move();
 
     QCOMPARE(tst_predator->getPlace().getV(), 2);
     QCOMPARE(tst_predator->getPlace().getH(), 3);
@@ -214,7 +214,7 @@ void ModelTest::predatorHungryTest()
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     for (int i = 0; i < 20; i++) {
-        tst_predator->movePredator();
+        tst_predator->move();
     }
     moveEnd(&units);
     int pred_size = units.predators.size();
@@ -231,11 +231,11 @@ void ModelTest::twoPredatorsTest()
     Predator* tst_predator2 = new Predator(2, 3, &field, &units, 20);
     new Prey(3, 4, &field, &units);
 
-    tst_predator1->movePredator();
-    tst_predator2->movePredator();
+    tst_predator1->move();
+    tst_predator2->move();
     moveEnd(&units);
-    tst_predator1->movePredator();
-    tst_predator2->movePredator();
+    tst_predator1->move();
+    tst_predator2->move();
     moveEnd(&units);
     QCOMPARE(units.preys.empty(), true);
 
@@ -257,7 +257,7 @@ void ModelTest::predatorPriorityTest()
     new Prey(3, 3, &field, &units);
     new Prey(5, 4, &field, &units);
 
-    tst_predator->movePredator();
+    tst_predator->move();
 
     QCOMPARE(tst_predator->getPlace().getV(), 5);
     QCOMPARE(tst_predator->getPlace().getH(), 4);
@@ -301,7 +301,7 @@ void ModelTest::debugTest()
 
     int num_of_predators_moves = 0;
     while (num_of_predators_moves < 5) {
-        for (unsigned int i = 0; i < units.predators.size(); i++) units.predators[i]->movePredator();
+        for (unsigned int i = 0; i < units.predators.size(); i++) units.predators[i]->move();
         moveEnd(&units);
         num_of_predators_moves ++;
     }

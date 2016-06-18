@@ -4,6 +4,7 @@
 #include "unit.h"
 #include "movement.h"
 #include "sense.h"
+#include "brain.h"
 
 /**
  * @brief класс, от которого наследуются хищники и жертвы
@@ -35,11 +36,6 @@ protected:
      */
     bool has_moved;
 
-//    /**
-//     * @brief direction - текущее направление животного
-//     */
-//    Direction direction;
-
     /**
      * @brief field - указатель на поле, где стоит животное
      */
@@ -55,12 +51,25 @@ protected:
      */
     void killTarget() noexcept;
 
+    /**
+     * @brief метод поиска корма на соседних клетках;
+     * в случае успеха, записывает координаты в target
+     */
+    virtual void findTarget() noexcept;
+
     Sense sense {nullptr};
     Movement movement {0, 0};
+    Brain *brain;
 
 public:
     
-    //virtual ~Animal() {}
+    Animal(const int v, const int h, Field* field_pointer);
+
+    Coordinates getPlace();
+
+    virtual void move() noexcept = 0;
+
+    virtual ~Animal() {}
 };
 
 #endif // ANIMAL_H

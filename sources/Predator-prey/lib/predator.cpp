@@ -4,13 +4,6 @@
 #include <cmath>
 #include <cstdlib>
 
-void Predator::findPrey() noexcept
-{
-    std::list< std::pair< Unit*, double > > targets;
-    targets = sense.getTargets(movement.getCurrent());
-    target = brain.getTarget(targets);
-}
-
 void Predator::createPredator() noexcept
 {
     int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
@@ -38,31 +31,20 @@ void Predator::createPredator() noexcept
 }
 
 Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int time_of_life) noexcept:
+    Animal(v, h, field_pointer),
     units_struct(units_pointer)
 {
-    life_time = 0;
     max_life_time = time_of_life;
-    energy = 0;
-    has_moved = false;
-    target = nullptr;
-    field = field_pointer;
-    movement = Movement(Coordinates(v, h), field);
-    sense = Sense(field);
-    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
     units_pointer->predators.push_back(this);
     type = UnitType::PREDATOR;
-    exist = true;
+    brain = new PredatorsBrain();
 }
 
-Coordinates Predator::getPlace()
-{
-    return movement.getCurrent();
-}
 
-void Predator::movePredator() noexcept
+void Predator::move() noexcept
 {
     if (target == nullptr || target->exist == false) {
-        findPrey();
+        findTarget();
     }
 
     if (target == nullptr) {

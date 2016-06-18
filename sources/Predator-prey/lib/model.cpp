@@ -56,7 +56,7 @@ void Model::movePreys() noexcept
 
     std::vector< Prey* >::iterator last = units.preys.end();
     for (std::vector< Prey* >::iterator i = units.preys.begin(); i != last; ++i) {
-        if ((*i)->exist == true) (*i)->movePrey();
+        if ((*i)->exist == true) (*i)->move();
     }
 
 }
@@ -67,7 +67,7 @@ void Model::movePredators() noexcept
 
     std::vector< Predator* >::iterator last = units.predators.end();
     for (std::vector< Predator* >::iterator i = units.predators.begin(); i !=last; ++i) {
-        if ((*i)->exist == true) (*i)->movePredator();
+        if ((*i)->exist == true) (*i)->move();
     }
 }
 
