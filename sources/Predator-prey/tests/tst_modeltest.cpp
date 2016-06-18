@@ -102,15 +102,6 @@ void ModelTest::coordinatesTest()
     Coordinates D;
     QCOMPARE(D.getV(), 0);
     QCOMPARE(D.getH(), 0);
-
-//    D.changeToDirection(Direction::RIGHT);
-//    QCOMPARE(D.getH(), 1);
-//    D.changeToDirection(Direction::DOWN);
-//    QCOMPARE(D.getV(), 1);
-//    D.changeToDirection(Direction::LEFT);
-//    QCOMPARE(D.getH(), 0);
-//    D.changeToDirection(Direction::UP);
-//    QCOMPARE(D.getV(), 0);
 }
 
 //TODO: очень длинный тест, надо разбить на несколько поменьше, на каждую тестируемую функциональность
@@ -132,23 +123,15 @@ void ModelTest::fieldTest()
     Units units;
     new Predator(1, 4, &field, &units, 20);
     QCOMPARE(field.isEmpty(1, 4), false);
-//    QCOMPARE(field.whatIsEmpty(4, 0), Direction::UP);
-//    QCOMPARE(field.whatIsEmpty(0, 0), Direction::RIGHT);
-//    QCOMPARE(field.whatIsEmpty(1, 4), Direction::UP);
-//    QCOMPARE(field.whatIsEmpty(2, 4), Direction::RIGHT);
-//    QCOMPARE(field.whatIsEmpty(0, 9), Direction::DOWN);
-//    QVERIFY_EXCEPTION_THROWN(field.whatIsEmpty(10, 3), BadFieldBoundary);
 
     new Predator(0, 1, &field, &units, 20);
     new Prey(1, 0, &field, &units);
     QCOMPARE(field.isEmpty(0, 0), true);
-//    QCOMPARE(field.whatIsEmpty(0, 0), Direction::NO_DIRECTION);
 
     new Predator(2, 5, &field, &units, 20);
     new Prey(3, 4, &field, &units);
     QVERIFY_EXCEPTION_THROWN(field.setPosition(-1, 0, nullptr), BadFieldBoundary);
     QVERIFY_EXCEPTION_THROWN(field.setPosition(10, 10, nullptr), BadFieldBoundary);
-//    QCOMPARE(field.whatIsEmpty(2, 4), Direction::LEFT);
 
 }
 
@@ -215,7 +198,6 @@ void ModelTest::predatorCreateTest()
     tst_predator->movePredator();
     moveEnd(&units);
     tst_predator->movePredator();
-    //tst_predator->movePredator();
 
     QCOMPARE(tst_predator->getPlace().getV(), 2);
     QCOMPARE(tst_predator->getPlace().getH(), 3);
