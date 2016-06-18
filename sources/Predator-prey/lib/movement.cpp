@@ -33,7 +33,7 @@ void Movement::move()
     {
         for (int j = vertical; j != ((vertical > 0) ? -1 : 1) && !isEmpty; j += ((vertical > 0) ? -1 : 1))
         {
-            isEmpty = field->isEmpty(current.getH() + i, current.getV() + j);
+            isEmpty = field->isEmpty(current.getV() + j, current.getH() + i);
             if (isEmpty)
             {
                 current.setH(current.getH() + i);

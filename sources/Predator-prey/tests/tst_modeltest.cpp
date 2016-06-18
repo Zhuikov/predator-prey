@@ -340,6 +340,7 @@ void ModelTest::debugTest2()
     movement.setTarget(Coordinates(4, 6));
 
     movement.move();
+    QCOMPARE(movement.getCurrent(), Coordinates(4, 4));
 
 }
 
