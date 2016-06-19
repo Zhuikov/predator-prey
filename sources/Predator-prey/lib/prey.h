@@ -20,11 +20,6 @@ protected:
     static const int PREY_CREATE_ENERGY = 2;
 
     /**
-     * @brief warning - флаг, преследуется ли данная жертва
-     */
-    bool warning;
-
-    /**
      * @brief dangerous_pred - координаты преследующего хищника
      */
     Coordinates dangerous_pred;

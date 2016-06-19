@@ -12,10 +12,6 @@ class Prey;
  */
 class Predator : public Animal
 {
-    /**
-     * @brief DISTANCE_FOR_RESET_TARGET - дистанция, при которой жертва убегает от хищника
-     */
-    static constexpr double DISTANCE_FOR_RESET_TARGET = 2.1;
 
 protected:
     /**
