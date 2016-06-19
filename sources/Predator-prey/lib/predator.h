@@ -31,7 +31,7 @@ protected:
     /**
      * @brief метод, создающий хищника на случайной соседней клетке; записывает его в вектор хищников
      */
-    void createPredator() noexcept;
+    virtual void createChildren() noexcept override;
 
 public:
 
@@ -45,10 +45,7 @@ public:
      */
     Predator(const int v, const int h, Field* field_pointer, Units* units_pointer, int time_of_life) noexcept;
 
-    /**
-     * @brief метод, передвигающий хищника
-     */
-    virtual void move() noexcept override;
+
 };
 
 #endif // PREDATOR_H

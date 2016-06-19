@@ -23,6 +23,40 @@ Coordinates Animal::getPlace()
     return movement.getCurrent();
 }
 
+void Animal::move() noexcept
+{
+
+    if (target == nullptr || target->exist == false) {
+        findTarget();
+    }
+
+    if (target == nullptr) {
+        movement.setRandomTarget();
+    }
+    else {
+        movement.setTarget(target->getPlace());
+    }
+
+    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
+    movement.move();
+
+    if (target != nullptr && movement.getCurrent() == target->getPlace()) {
+        killTarget();
+    }
+
+    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
+
+    if (energy == CREATE_ENERGY) {
+        createChildren();
+    }
+
+    life_time++;
+    if (life_time == max_life_time) {
+        field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
+        exist = false;
+    }
+}
+
 Animal::Animal(const int v, const int h, Field *field_pointer)
 {
     energy = 0;

@@ -15,6 +15,8 @@ class Animal : public Unit
 
 protected:
 
+    int CREATE_ENERGY;
+
     /**
      * @brief life_time - счетчик ходов животного на поле
      */
@@ -57,6 +59,8 @@ protected:
      */
     virtual void findTarget() noexcept;
 
+    virtual void createChildren() = 0;
+
     Sense sense {nullptr};
     Movement movement {0, 0};
     Brain *brain;
@@ -67,7 +71,7 @@ public:
 
     Coordinates getPlace();
 
-    virtual void move() noexcept = 0;
+    virtual void move() noexcept;
 
     virtual ~Animal() {}
 };

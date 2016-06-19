@@ -37,7 +37,7 @@ protected:
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор
      */
-    void createPrey();
+    virtual void createChildren() noexcept override;
 
 public:
 
@@ -49,11 +49,6 @@ public:
      * @param units_pointer - указатель на класс с векторами хищников и жертв
      */
     Prey(const int v, const int h, Field* field_pointer, Units* units_pointer);
-
-    /**
-     * @brief метод, передвигающий жертву
-     */
-    virtual void move() noexcept override;
 
 };
 

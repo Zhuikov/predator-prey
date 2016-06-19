@@ -4,7 +4,7 @@
 #include <cmath>
 #include <cstdlib>
 
-void Predator::createPredator() noexcept
+void Predator::createChildren() noexcept
 {
     int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
     int horizontal = movement.getCurrent().getH() + std::rand() % 3 - 1;
@@ -37,39 +37,8 @@ Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int
     max_life_time = time_of_life;
     units_pointer->predators.push_back(this);
     type = UnitType::PREDATOR;
+    CREATE_ENERGY = PREDATOR_CREATE_ENERGY;
     brain = new PredatorsBrain();
 }
 
 
-void Predator::move() noexcept
-{
-    if (target == nullptr || target->exist == false) {
-        findTarget();
-    }
-
-    if (target == nullptr) {
-        movement.setRandomTarget();
-    }
-    else {
-        movement.setTarget(target->getPlace());
-    }
-
-    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
-    movement.move();
-
-    if (target != nullptr && movement.getCurrent() == target->getPlace()) {
-        killTarget();
-    }
-
-    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
-
-    if (energy == PREDATOR_CREATE_ENERGY) {
-        createPredator();
-    }
-
-    life_time++;
-    if (life_time == max_life_time) {
-        field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
-        exist = false;
-    }
-}
