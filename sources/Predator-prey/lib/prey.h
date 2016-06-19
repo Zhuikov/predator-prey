@@ -37,7 +37,9 @@ protected:
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор
      */
-    virtual void createChildren() noexcept override;
+
+    virtual Animal* setChildren(const int v, const int h) override;
+
 
 public:
 
@@ -49,6 +51,8 @@ public:
      * @param units_pointer - указатель на класс с векторами хищников и жертв
      */
     Prey(const int v, const int h, Field* field_pointer, Units* units_pointer);
+
+    virtual ~Prey();
 
 };
 

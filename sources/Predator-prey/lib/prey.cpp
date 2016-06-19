@@ -2,10 +2,9 @@
 #include <ctime>
 #include <cstdlib>
 
-void Prey::createChildren() noexcept
+Animal *Prey::setChildren(const int v, const int h)
 {
-    // todo сделать это
-    this->energy = 0;
+    return new Prey(v, h, field, units_struct);
 }
 
 Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer):
@@ -22,5 +21,10 @@ Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer)
     CREATE_ENERGY = PREY_CREATE_ENERGY;
 
     brain = new PreysBrain();
+}
+
+Prey::~Prey()
+{
+    delete brain;
 }
 

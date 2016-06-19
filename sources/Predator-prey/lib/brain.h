@@ -13,6 +13,8 @@ public:
     int energy;
     int maxEnergy;
     // todo добавить все остальное
+
+    virtual ~Brain() {}
 };
 
 #endif // BRAIN_H

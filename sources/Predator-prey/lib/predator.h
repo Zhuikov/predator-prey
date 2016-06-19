@@ -28,10 +28,7 @@ protected:
      */
     Units* units_struct;
 
-    /**
-     * @brief метод, создающий хищника на случайной соседней клетке; записывает его в вектор хищников
-     */
-    virtual void createChildren() noexcept override;
+    virtual Animal* setChildren(const int v, const int h) override;
 
 public:
 
@@ -45,7 +42,7 @@ public:
      */
     Predator(const int v, const int h, Field* field_pointer, Units* units_pointer, int time_of_life) noexcept;
 
-
+    virtual ~Predator();
 };
 
 #endif // PREDATOR_H

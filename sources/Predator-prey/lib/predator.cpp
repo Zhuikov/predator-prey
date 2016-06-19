@@ -4,30 +4,10 @@
 #include <cmath>
 #include <cstdlib>
 
-void Predator::createChildren() noexcept
+
+Animal *Predator::setChildren(const int v, const int h)
 {
-    int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
-    int horizontal = movement.getCurrent().getH() + std::rand() % 3 - 1;
-
-    if (field->isEmpty(vertical, horizontal)) {
-        new Predator(vertical, horizontal, field, units_struct, max_life_time);
-    }
-    else {
-        bool FLAG = false;
-        for (int i = movement.getCurrent().getV() - 1; i <= movement.getCurrent().getV() + 1; i++) {
-            for (int j = movement.getCurrent().getH() - 1; j <= movement.getCurrent().getH() + 1; j++) {
-                if (field->isEmpty(i, j)) {
-                    new Predator(i, j, field, units_struct, max_life_time);
-                    FLAG = true;
-                    break;
-                }
-            }
-            if (FLAG == true) break;
-        }
-    }
-
-    this->energy = 0;
-
+    return new Predator(v, h, field, units_struct, max_life_time);
 }
 
 Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int time_of_life) noexcept:
@@ -39,6 +19,11 @@ Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int
     type = UnitType::PREDATOR;
     CREATE_ENERGY = PREDATOR_CREATE_ENERGY;
     brain = new PredatorsBrain();
+}
+
+Predator::~Predator()
+{
+    delete brain;
 }
 
 

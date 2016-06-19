@@ -18,6 +18,31 @@ void Animal::findTarget() noexcept
     target = brain->getTarget(targets);
 }
 
+void Animal::createChildren()
+{
+    int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
+    int horizontal = movement.getCurrent().getH() + std::rand() % 3 - 1;
+
+    if (field->isEmpty(vertical, horizontal)) {
+        setChildren(vertical, horizontal);
+    }
+    else {
+        bool FLAG = false;
+        for (int i = movement.getCurrent().getV() - 1; i <= movement.getCurrent().getV() + 1; i++) {
+            for (int j = movement.getCurrent().getH() - 1; j <= movement.getCurrent().getH() + 1; j++) {
+                if (field->isEmpty(i, j)) {
+                    setChildren(i, j);
+                    FLAG = true;
+                    break;
+                }
+            }
+            if (FLAG == true) break;
+        }
+    }
+
+    this->energy = 0;
+}
+
 Coordinates Animal::getPlace()
 {
     return movement.getCurrent();

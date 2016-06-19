@@ -57,9 +57,11 @@ protected:
      * @brief метод поиска корма на соседних клетках;
      * в случае успеха, записывает координаты в target
      */
-    virtual void findTarget() noexcept;
+    void findTarget() noexcept;
 
-    virtual void createChildren() = 0;
+    void createChildren();
+
+    virtual Animal* setChildren(const int v, const int h) = 0;
 
     Sense sense {nullptr};
     Movement movement {0, 0};
@@ -71,7 +73,7 @@ public:
 
     Coordinates getPlace();
 
-    virtual void move() noexcept;
+    void move() noexcept;
 
     virtual ~Animal() {}
 };
