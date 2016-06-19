@@ -2,12 +2,9 @@
 #include <ctime>
 #include <cstdlib>
 
-
-//TODO: дублирует метод из predator, можно попытаться вынести общее  в animal
-void Prey::createPrey()
+Animal *Prey::setChildren(const int v, const int h)
 {
-    // todo сделать это
-    this->energy = 0;
+    return new Prey(v, h, field, units_struct);
 }
 
 Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer):
@@ -20,19 +17,13 @@ Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer)
     units_struct->preys.push_back(this);
     type = UnitType::PREY;
 
+    CREATE_ENERGY = PREY_CREATE_ENERGY;
+
     brain = new PreysBrain();
 }
 
-
-void Prey::move() noexcept
+Prey::~Prey()
 {
-    movement.setRandomTarget();
-
-    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
-    movement.move();
-    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
-
-    if (energy == PREY_CREATE_ENERGY) {
-        createPrey();
-    }
+    delete brain;
 }
+

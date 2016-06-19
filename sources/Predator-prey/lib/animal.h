@@ -15,6 +15,8 @@ class Animal : public Unit
 
 protected:
 
+    int CREATE_ENERGY;
+
     /**
      * @brief life_time - счетчик ходов животного на поле
      */
@@ -55,7 +57,11 @@ protected:
      * @brief метод поиска корма на соседних клетках;
      * в случае успеха, записывает координаты в target
      */
-    virtual void findTarget() noexcept;
+    void findTarget() noexcept;
+
+    void createChildren();
+
+    virtual Animal* setChildren(const int v, const int h) = 0;
 
     Sense sense {nullptr};
     Movement movement {0, 0};
@@ -67,7 +73,7 @@ public:
 
     Coordinates getPlace();
 
-    virtual void move() noexcept = 0;
+    void move() noexcept;
 
     virtual ~Animal() {}
 };

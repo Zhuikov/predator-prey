@@ -32,7 +32,9 @@ protected:
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор
      */
-    void createPrey();
+
+    virtual Animal* setChildren(const int v, const int h) override;
+
 
 public:
 
@@ -45,10 +47,7 @@ public:
      */
     Prey(const int v, const int h, Field* field_pointer, Units* units_pointer);
 
-    /**
-     * @brief метод, передвигающий жертву
-     */
-    virtual void move() noexcept override;
+    virtual ~Prey();
 
 };
 
