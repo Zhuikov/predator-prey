@@ -86,6 +86,7 @@ void Animal::move() noexcept
 Animal::Animal(const int v, const int h, Field *field_pointer)
 {
     energy = 0;
+    max_life_time = 20;
     life_time = 0;
     has_moved = false;
     target = nullptr;

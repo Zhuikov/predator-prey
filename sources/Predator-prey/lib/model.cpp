@@ -54,9 +54,15 @@ void Model::movePreys() noexcept
 {
     incModelTime();
 
-    std::vector< Prey* >::iterator last = units.preys.end();
-    for (std::vector< Prey* >::iterator i = units.preys.begin(); i != last; ++i) {
-        if ((*i)->exist == true) (*i)->move();
+    //std::vector< Prey* >::iterator last = units.preys.end();
+    //for (std::vector< Prey* >::iterator i = units.preys.begin(); i != last; ++i) {
+    //    if ((*i)->exist == true) (*i)->move();
+    //}
+    unsigned int last = units.preys.size();
+    for (unsigned int i = 0; i != last; i++) {
+        if (units.preys[i]->exist == true) {
+                units.preys[i]->move();
+        }
     }
 
 }
