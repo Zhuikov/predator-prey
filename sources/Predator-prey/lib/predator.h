@@ -1,10 +1,8 @@
 #ifndef PREDATOR_H
 #define PREDATOR_H
-#include "modelapi.h"
 #include "animal.h"
 #include "predatorsbrain.h"
 
-class Units;
 class Prey;
 
 /**
@@ -17,12 +15,7 @@ protected:
     /**
      * @brief PREDATOR_CREATE_ENERGY - энергия, необходимая для создания хищника
      */
-    static const int PREDATOR_CREATE_ENERGY = 2;
-
-    /**
-     * @brief units_struct - указатель на класс с векторами хищников и жертв
-     */
-    Units* units_struct;
+    static const int PREDATOR_CREATE_ENERGY = 2;    
 
     virtual void killTarget() noexcept override;
 

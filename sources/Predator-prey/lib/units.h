@@ -1,12 +1,11 @@
 #ifndef UNITS_H
 #define UNITS_H
-#include "predator.h"
-#include "prey.h"
-#include "grass.h"
+
 #include <vector>
 
 class Predator;
 class Grass;
+class Prey;
 
 /**
  * @brief класс для содержания векторов хищников и жертв, а также корма для жертв

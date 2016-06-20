@@ -10,6 +10,8 @@
 #include "predator.h"
 #include "movement.h"
 #include "sense.h"
+#include "prey.h"
+#include "predator.h"
 
 //TODO: сделать отдельный проект с функциональными тестами и добавить их
 class ModelTest : public QObject

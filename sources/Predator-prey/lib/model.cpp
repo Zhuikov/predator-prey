@@ -1,6 +1,8 @@
 #include "model.h"
 #include <algorithm>
 #include <cstdlib>
+#include "predator.h"
+#include "prey.h"
 
 Model::Model(Settings *settings, int seed) noexcept:
     settings(settings),

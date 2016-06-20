@@ -5,6 +5,7 @@
 #include "movement.h"
 #include "sense.h"
 #include "brain.h"
+#include "units.h"
 
 /**
  * @brief класс, от которого наследуются хищники и жертвы
@@ -59,6 +60,8 @@ protected:
      */
     void findTarget() noexcept;
 
+    Units* units_struct;
+
     void createChildren();
 
     virtual Animal* setChildren(const int v, const int h) = 0;
@@ -69,7 +72,7 @@ protected:
 
 public:
     
-    Animal(const int v, const int h, Field* field_pointer);
+    Animal(const int v, const int h, Field* field_pointer, Units *units_pointer);
 
     Coordinates getPlace();
 

@@ -18,8 +18,7 @@ Animal* Predator::setChildren(const int v, const int h)
 }
 
 Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int time_of_life) noexcept:
-    Animal(v, h, field_pointer),
-    units_struct(units_pointer)
+    Animal(v, h, field_pointer, units_pointer)
 {
     max_life_time = time_of_life;
     units_pointer->predators.push_back(this);

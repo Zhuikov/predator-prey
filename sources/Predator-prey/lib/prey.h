@@ -1,10 +1,8 @@
 #ifndef PREY_H
 #define PREY_H
 #include "animal.h"
-#include "modelapi.h"
 #include "preysbrain.h"
 
-class Units;
 class Grass;
 
 /**
@@ -23,11 +21,6 @@ protected:
      * @brief dangerous_pred - координаты преследующего хищника
      */
     Coordinates dangerous_pred;
-
-    /**
-     * @brief units_struct - указатель на класс с векторами хищников и жертв
-     */
-    Units* units_struct;
 
     virtual void killTarget() noexcept override;
 
