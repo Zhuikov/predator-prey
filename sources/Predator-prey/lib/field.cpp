@@ -1,6 +1,4 @@
 #include "field.h"
-#include "badfield.h"
-#include "badboundary.h"
 
 Field::Field(int height, int length)
 {

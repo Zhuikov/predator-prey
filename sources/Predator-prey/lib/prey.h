@@ -3,8 +3,6 @@
 #include "animal.h"
 #include "preysbrain.h"
 
-class Grass;
-
 /**
  * @brief класс для реализации жертвы в модели
  */

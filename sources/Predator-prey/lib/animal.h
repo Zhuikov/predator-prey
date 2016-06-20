@@ -5,7 +5,6 @@
 #include "movement.h"
 #include "sense.h"
 #include "brain.h"
-#include "units.h"
 
 /**
  * @brief класс, от которого наследуются хищники и жертвы
