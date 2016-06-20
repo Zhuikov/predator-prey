@@ -1,8 +1,9 @@
 #ifndef SENSE_H
 #define SENSE_H
-#include "field.h"
-#include "unit.h"
 #include <list>
+#include "unit.h"
+#include "field.h"
+#include "coordinates.h"
 
 class Sense
 {

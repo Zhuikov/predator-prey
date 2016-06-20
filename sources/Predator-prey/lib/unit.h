@@ -1,6 +1,7 @@
 #ifndef UNIT_H
 #define UNIT_H
 #include "coordinates.h"
+#include "units.h"
 
 /**
  * @brief UnitType - перечисление всех возможных типов юнитов

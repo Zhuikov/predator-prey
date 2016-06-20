@@ -1,5 +1,4 @@
 #include "units.h"
-#include <iostream>
 #include "predator.h"
 #include "prey.h"
 #include "grass.h"

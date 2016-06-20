@@ -3,8 +3,6 @@
 #include "animal.h"
 #include "predatorsbrain.h"
 
-class Prey;
-
 /**
  * @brief класс, реализующий хищника в модели
  */

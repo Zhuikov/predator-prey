@@ -1,8 +1,7 @@
 #ifndef FIELD_H
 #define FIELD_H
-#include "settings.h"
-#include "coordinates.h"
 #include "unit.h"
+#include "badboundary.h"
 #include <vector>
 
 /**

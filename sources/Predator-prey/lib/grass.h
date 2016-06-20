@@ -1,9 +1,6 @@
 #ifndef GRASS_H
 #define GRASS_H
-#include "coordinates.h"
-#include "modelapi.h"
-
-class Units;
+#include "unit.h"
 
 class Grass : public Unit
 {

@@ -1,7 +1,4 @@
 #include "settings.h"
-#include "field.h"
-#include "badfield.h"
-#include "badnum.h"
 
 Settings::Settings(int field_length_, int field_height_, int num_of_predators_, int num_of_preys_,
                    int moves_without_meal_, int min_moves_without_meal_, int max_moves_without_meal_):

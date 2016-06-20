@@ -1,6 +1,8 @@
 #ifndef MODEL_H
 #define MODEL_H
 #include "modelapi.h"
+#include "units.h"
+#include "settings.h"
 #include <vector>
 #include <ctime>
 
