@@ -13,8 +13,6 @@ void Animal::killTarget() noexcept
 
 void Animal::findTarget() noexcept
 {
-    //std::list< std::pair< Unit*, double > > targets;
-    //targets = sense.getTargets(movement.getCurrent());
     target = brain->getTarget(sense.getTargets(movement.getCurrent()));
 }
 
