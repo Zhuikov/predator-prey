@@ -59,7 +59,8 @@ void Animal::move() noexcept
         movement.setRandomTarget();
     }
     else {
-        movement.setTarget(target->getPlace());
+        Coordinates targetCoords = target->getPlace();
+        movement.setTarget(targetCoords);
     }
 
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);

@@ -42,6 +42,8 @@ private Q_SLOTS:
     void moveTest();
     void moveApartTest();
 
+    void SFTest();
+
     void senseTest();
 };
 
@@ -362,6 +364,22 @@ void ModelTest::moveApartTest()
     movement.setTarget(Coordinates(5, 10));
     movement.moveApart();
     QCOMPARE(movement.getCurrent(), Coordinates(5, 4));
+}
+
+void ModelTest::SFTest()
+{
+    Settings settings;
+    settings.setFieldHeight(30);
+    settings.setFieldLength(30);
+    settings.setNumOfPredators(60);
+    settings.setNumOfPreys(60);
+
+    Model model(&settings);
+
+    while (!model.isEnd()) {
+        model.move();
+        model.remove();
+    }
 }
 
 void ModelTest::senseTest()

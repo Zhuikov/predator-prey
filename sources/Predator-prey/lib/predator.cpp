@@ -5,7 +5,7 @@
 #include <cstdlib>
 
 
-Animal *Predator::setChildren(const int v, const int h)
+Animal* Predator::setChildren(const int v, const int h)
 {
     return new Predator(v, h, field, units_struct, max_life_time);
 }
@@ -25,5 +25,3 @@ Predator::~Predator()
 {
     delete brain;
 }
-
-

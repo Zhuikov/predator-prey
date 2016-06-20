@@ -65,9 +65,17 @@ void Model::movePredators() noexcept
 {
     incModelTime();
 
-    std::vector< Predator* >::iterator last = units.predators.end();
-    for (std::vector< Predator* >::iterator i = units.predators.begin(); i !=last; ++i) {
-        if ((*i)->exist == true) (*i)->move();
+    //std::vector< Predator* >::iterator last = units.predators.end();
+    //for (std::vector< Predator* >::iterator i = units.predators.begin(); i !=last; ++i) {
+    //    if ((*i)->exist == true) {
+    //        (*i)->move();
+    //    }
+    //}
+    unsigned int last = units.predators.size();
+    for (unsigned int i = 0; i != last; i++) {
+        if (units.predators[i]->exist == true) {
+                units.predators[i]->move();
+        }
     }
 }
 
