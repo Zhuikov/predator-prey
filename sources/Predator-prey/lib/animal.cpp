@@ -80,6 +80,14 @@ void Animal::move() noexcept
     if (life_time == max_life_time) {
         field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
         exist = false;
+        if (type == UnitType::PREDATOR)
+        {
+            units_struct->predatorsNum--;
+        }
+        if (type == UnitType::PREY)
+        {
+            units_struct->preysNum--;
+        }
     }
 }
 

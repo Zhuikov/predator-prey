@@ -36,7 +36,7 @@ int Cli::modeWithLogs()
     logs->addLog(model);
     while( model->isEnd() == false ) {
         model->move();
-        model->remove();
+       // model->remove();
         logs->addLog(model);
     }
     return model->getStep();
@@ -46,7 +46,7 @@ int Cli::modeWithSteps()
 {
     while( model->isEnd() == false ) {
         model->move();
-        model->remove();
+       // model->remove();
     }
     return model->getStep();
 }
@@ -55,7 +55,7 @@ int Cli::modeWithWinner()
 {
     while( model->isEnd() == false ) {
         model->move();
-        model->remove();
+       // model->remove();
     }
     if (model->getPredatorsNum() > 0 && model->getPreysNum() == 0) return 1; // Predators win
     else if (model->getPredatorsNum() == 0 && model->getPreysNum() == 0) return 0; // Draw
