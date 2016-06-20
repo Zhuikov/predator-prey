@@ -19,8 +19,6 @@ Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer)
     dangerous_pred.setV(-1);
     dangerous_pred.setH(-1);
 
-    max_life_time = 10000;
-
     units_struct->preys.push_back(this);
     type = UnitType::PREY;
 

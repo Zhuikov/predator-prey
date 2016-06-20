@@ -94,7 +94,7 @@ void Animal::move() noexcept
 Animal::Animal(const int v, const int h, Field *field_pointer, Units *units_pointer) : units_struct(units_pointer)
 {
     energy = 0;
-    max_life_time = 20;
+    max_life_time = 1000;
     life_time = 0;
     has_moved = false;
     target = nullptr;
