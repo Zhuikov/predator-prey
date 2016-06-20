@@ -24,9 +24,9 @@ public:
     Field* getField() noexcept { return &field; }
     int getTime() const noexcept { return model_time; }
     int getDay() const noexcept { return model_day; }
-    int getStep() const noexcept { return model_day*24+model_time; }
-    unsigned int getPredatorsNum() const noexcept { return this->units.predators.size(); }
-    unsigned int getPreysNum() const noexcept { return units.preys.size(); }
+    int getStep() const noexcept { return model_day * 24 + model_time; }
+    unsigned int getPredatorsNum() const noexcept { return this->units.predatorsNum; }
+    unsigned int getPreysNum() const noexcept { return units.preysNum; }
     void movePreys() noexcept;
     void movePredators() noexcept;
     void move() noexcept;
@@ -37,9 +37,12 @@ public:
     void removePreys() noexcept;
     void remove() noexcept;
 
+
     void saveModel();
     void loadModel();
 
 };
+
+
 
 #endif // MODEL_H

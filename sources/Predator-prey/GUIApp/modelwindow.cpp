@@ -70,7 +70,7 @@ void ModelWindow::moveModel()
 {
     model->movePredators();
     model->movePreys();
-    model->remove();
+    //model->remove();
     field->update();
     status->drawStatus();
     if (model->isEnd() == true) {

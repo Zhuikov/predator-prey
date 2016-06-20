@@ -46,12 +46,12 @@ protected:
     /**
      * @brief target - указатель на текущую цель
      */
-    Unit* target;
+    Unit* target = nullptr;
 
     /**
      * @brief метод, уничтожающий target - цель (если она есть)
      */
-    void killTarget() noexcept;
+    virtual void killTarget() noexcept;
 
     /**
      * @brief метод поиска корма на соседних клетках;

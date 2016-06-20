@@ -5,6 +5,8 @@ Units::Units()
 {
     predators.reserve(1);
     preys.reserve(1);
+    predatorsNum = 0;
+    preysNum = 0;
 }
 
 Units::~Units()

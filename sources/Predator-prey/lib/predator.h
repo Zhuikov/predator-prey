@@ -24,6 +24,8 @@ protected:
      */
     Units* units_struct;
 
+    virtual void killTarget() noexcept override;
+
     virtual Animal* setChildren(const int v, const int h) override;
 
 public:

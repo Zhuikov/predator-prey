@@ -2,8 +2,14 @@
 #include <ctime>
 #include <cstdlib>
 
+void Prey::killTarget() noexcept
+{
+    Animal::killTarget();
+}
+
 Animal *Prey::setChildren(const int v, const int h)
 {
+    units_struct->preysNum ++;
     return new Prey(v, h, field, units_struct);
 }
 

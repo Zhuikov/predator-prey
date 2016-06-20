@@ -12,12 +12,15 @@ Model::Model(Settings *settings, int seed) noexcept:
     srand(seed);
     createPredators();
     createPreys();
+    units.predatorsNum = settings->getNumOfPredators();
+    units.preysNum = settings->getNumOfPreys();
 }
 
 
 bool Model::isEnd() const noexcept
 {
-   return (units.predators.empty() || units.preys.empty());
+   return units.predatorsNum == 0 || units.preysNum == 0;
+
 }
 
 void Model::createPredators() noexcept
@@ -58,8 +61,8 @@ void Model::movePreys() noexcept
     //for (std::vector< Prey* >::iterator i = units.preys.begin(); i != last; ++i) {
     //    if ((*i)->exist == true) (*i)->move();
     //}
-    unsigned int last = units.preys.size();
-    for (unsigned int i = 0; i != last; i++) {
+    //unsigned int last = units.preys.size();
+    for (unsigned int i = 0; i < units.preys.size(); i++) {
         if (units.preys[i]->exist == true) {
                 units.preys[i]->move();
         }
@@ -77,8 +80,8 @@ void Model::movePredators() noexcept
     //        (*i)->move();
     //    }
     //}
-    unsigned int last = units.predators.size();
-    for (unsigned int i = 0; i != last; i++) {
+    //unsigned int last = units.predators.size();
+    for (unsigned int i = 0; i < units.predators.size(); i++) {
         if (units.predators[i]->exist == true) {
                 units.predators[i]->move();
         }

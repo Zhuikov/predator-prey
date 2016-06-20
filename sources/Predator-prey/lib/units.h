@@ -29,6 +29,10 @@ public:
      */
     std::vector< Grass* > grass;
 
+    int predatorsNum;
+    int preysNum;
+
+
     Units();
     ~Units();
 };

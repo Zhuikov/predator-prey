@@ -29,6 +29,8 @@ protected:
      */
     Units* units_struct;
 
+    virtual void killTarget() noexcept override;
+
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор
      */
