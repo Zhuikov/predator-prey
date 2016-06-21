@@ -41,6 +41,11 @@ public:
     virtual unsigned int getPreysNum() const noexcept = 0;
 
     /**
+     * @brief метод, возвращающий количество травы на поле
+     */
+    virtual unsigned int getGrassNum() const noexcept = 0;
+
+    /**
      * @brief метод, проверяющий, не исчезли ли хищники или жертвы
      */
     virtual bool isEnd() const noexcept = 0;
@@ -54,6 +59,11 @@ public:
      * @brief метод, создающий жертв
      */
     virtual void createPreys() noexcept = 0;
+
+    /**
+     * @brief метод, создающий корм для жертв
+     */
+    virtual void createGrass() noexcept = 0;
 
     /**
      * @brief метод, удаляющий умерших хищников после хода

@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "predator.h"
 #include "prey.h"
+#include "grass.h"
 
 Model::Model(Settings *settings, int seed) noexcept:
     settings(settings),
@@ -14,6 +15,7 @@ Model::Model(Settings *settings, int seed) noexcept:
     srand(seed);
     createPredators();
     createPreys();
+    createGrass();
     units.predatorsNum = settings->getNumOfPredators();
     units.preysNum = settings->getNumOfPreys();
 }
@@ -51,8 +53,24 @@ void Model::createPreys() noexcept
         }
         while (field.isEmpty(v, h) == false);
 
-        new Prey(v, h, &field, &units);
+        new Prey(v, h, &field, &units, settings->getMovesWithoutMeal());
     }
+}
+
+void Model::createGrass() noexcept
+{
+    for (int i = 0; i < settings->getNumOfGrass(); i++) {
+        int v = 0;
+        int h = 0;
+        do {
+            v = rand() % settings->getFieldHeight();
+            h = rand() % settings->getFieldLength();
+        }
+        while (field.isEmpty(v, h) == false);
+
+        new Grass(v, h, &field, &units);
+    }
+    units.grassNum += settings->getNumOfGrass();
 }
 
 void Model::movePreys() noexcept

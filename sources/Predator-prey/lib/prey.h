@@ -38,7 +38,7 @@ public:
      * @param field_pointer - указатель на поле, где создается жертва
      * @param units_pointer - указатель на класс с векторами хищников и жертв
      */
-    Prey(const int v, const int h, Field* field_pointer, Units* units_pointer);
+    Prey(const int v, const int h, Field* field_pointer, Units* units_pointer, int TTL);
 
     virtual ~Prey();
 

@@ -16,6 +16,7 @@ class StatusFrame : public QFrame
 
     QLabel* predators;
     QLabel* preys;
+    QLabel* grass;
     QLabel* day;
     QLabel* time;
 
@@ -25,6 +26,7 @@ class StatusFrame : public QFrame
             "font-weight: bold;";
     QLabel* predators_number_label;
     QLabel* preys_number_label;
+    QLabel* grass_number_label;
     QLabel* day_number_label;
     QLabel* time_number_label;
 

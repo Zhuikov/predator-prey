@@ -5,7 +5,8 @@
 class Grass : public Unit
 {
 public:
-    Grass(const int v, const int h, Units* units);
+
+    Grass(const int v, const int h, Field* field, Units* units_pointer);
     Coordinates current;
 
     Coordinates getPlace() { return current; }

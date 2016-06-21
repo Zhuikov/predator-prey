@@ -1,6 +1,5 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
-#include "field.h"
 #include "unit.h"
 #include "movement.h"
 #include "sense.h"
@@ -39,11 +38,6 @@ protected:
     bool has_moved;
 
     /**
-     * @brief field - указатель на поле, где стоит животное
-     */
-    Field* field;
-
-    /**
      * @brief target - указатель на текущую цель
      */
     Unit* target = nullptr;
@@ -71,7 +65,7 @@ protected:
 
 public:
     
-    Animal(const int v, const int h, Field* field_pointer, Units *units_pointer);
+    Animal(const int v, const int h, Field* field_pointer, Units *units_pointer, int TTL);
 
     Coordinates getPlace();
 

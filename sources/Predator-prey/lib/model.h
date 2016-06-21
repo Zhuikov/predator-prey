@@ -29,12 +29,14 @@ public:
     int getStep() const noexcept { return model_day * 24 + model_time; }
     unsigned int getPredatorsNum() const noexcept { return this->units.predatorsNum; }
     unsigned int getPreysNum() const noexcept { return units.preysNum; }
+    unsigned int getGrassNum() const noexcept { return units.grassNum; }
     void movePreys() noexcept;
     void movePredators() noexcept;
     void move() noexcept;
     bool isEnd() const noexcept;
     void createPredators() noexcept;
     void createPreys() noexcept;
+    void createGrass() noexcept;
     void removePredators() noexcept;
     void removePreys() noexcept;
     void remove() noexcept;

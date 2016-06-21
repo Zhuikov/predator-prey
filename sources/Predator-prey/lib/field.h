@@ -4,6 +4,7 @@
 #include "badboundary.h"
 #include <vector>
 
+class Unit;
 /**
  * @brief класс для представления поля в программе
  */

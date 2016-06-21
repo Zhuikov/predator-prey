@@ -70,6 +70,16 @@ void FieldFrame::createUnits(QPainter &painter)
                                              cell_size - 2 * LINE_WIDTH_DELTA,
                                              cell_size - 2 * LINE_WIDTH_DELTA,
                                              brush);
+                            break;
+                }
+                case UnitType::GRASS : {
+                            brush.setColor(Qt::green);
+                            painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
+                                             i * cell_size + LINE_WIDTH_DELTA,
+                                             cell_size - 2 * LINE_WIDTH_DELTA,
+                                             cell_size - 2 * LINE_WIDTH_DELTA,
+                                             brush);
+                            break;
                 }
                 default : {}
                 }

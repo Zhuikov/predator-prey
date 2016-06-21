@@ -29,6 +29,7 @@ public:
 
     int predatorsNum;
     int preysNum;
+    int grassNum;
 
 
     Units();

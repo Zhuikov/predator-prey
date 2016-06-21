@@ -11,6 +11,7 @@
 #include "movement.h"
 #include "sense.h"
 #include "prey.h"
+#include "grass.h"
 #include "predator.h"
 
 //TODO: сделать отдельный проект с функциональными тестами и добавить их
@@ -35,6 +36,8 @@ private Q_SLOTS:
     void predatorPriorityTest();
     void predatorHungryTest();
     void twoPredatorsTest();
+
+    void preyCreateTest();
 
     void modelInitializeTest();
     void debugTest();
@@ -129,11 +132,11 @@ void ModelTest::fieldTest()
     QCOMPARE(field.isEmpty(1, 4), false);
 
     new Predator(0, 1, &field, &units, 20);
-    new Prey(1, 0, &field, &units);
+    new Prey(1, 0, &field, &units, 20);
     QCOMPARE(field.isEmpty(0, 0), true);
 
     new Predator(2, 5, &field, &units, 20);
-    new Prey(3, 4, &field, &units);
+    new Prey(3, 4, &field, &units, 20);
     QVERIFY_EXCEPTION_THROWN(field.setPosition(-1, 0, nullptr), BadFieldBoundary);
     QVERIFY_EXCEPTION_THROWN(field.setPosition(10, 10, nullptr), BadFieldBoundary);
 
@@ -174,7 +177,7 @@ void ModelTest::predatorMoveKillTest()
     Field field(10, 10);
     Units units;
 
-    new Prey(3, 3, &field, &units);
+    new Prey(3, 3, &field, &units, 20);
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     units.predators[0]->move();
@@ -195,8 +198,8 @@ void ModelTest::predatorCreateTest()
     Field field(10, 10);
     Units units;
 
-    new Prey(3, 3, &field, &units);
-    new Prey(2, 3, &field, &units);
+    new Prey(3, 3, &field, &units, 20);
+    new Prey(2, 3, &field, &units, 20);
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     tst_predator->move();
@@ -233,7 +236,7 @@ void ModelTest::twoPredatorsTest()
 
     Predator* tst_predator1 = new Predator(4, 5, &field, &units, 20);
     Predator* tst_predator2 = new Predator(2, 3, &field, &units, 20);
-    new Prey(3, 4, &field, &units);
+    new Prey(3, 4, &field, &units, 20);
 
     tst_predator1->move();
     tst_predator2->move();
@@ -252,14 +255,30 @@ void ModelTest::twoPredatorsTest()
 
 }
 
+void ModelTest::preyCreateTest()
+{
+    Field field;
+    Units units;
+
+    Prey* tst_prey = new Prey(4, 4, &field, &units, 1000);
+    new Grass(5, 4, &field, &units);
+    new Grass(5, 5, &field, &units);
+
+    tst_prey->move();
+    tst_prey->move();
+
+    unsigned int size = 2;
+    QVERIFY2(units.preys.size() == size, "prey hasn't created");
+}
+
 void ModelTest::predatorPriorityTest()
 {
     Field field(10, 10);
     Units units;
 
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
-    new Prey(3, 3, &field, &units);
-    new Prey(5, 4, &field, &units);
+    new Prey(3, 3, &field, &units, 20);
+    new Prey(5, 4, &field, &units, 20);
 
     tst_predator->move();
 
@@ -298,10 +317,10 @@ void ModelTest::debugTest()
     new Predator(9, 9, &field, &units, 5);
     new Predator(0, 0, &field, &units, 5);
 
-    new Prey(0, 1, &field, &units);
-    new Prey(0, 3, &field, &units);
-    new Prey(0, 2, &field, &units);
-    new Prey(0, 4, &field, &units);
+    new Prey(0, 1, &field, &units, 20);
+    new Prey(0, 3, &field, &units, 20);
+    new Prey(0, 2, &field, &units, 20);
+    new Prey(0, 4, &field, &units, 20);
 
     int num_of_predators_moves = 0;
     while (num_of_predators_moves < 5) {

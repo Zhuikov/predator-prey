@@ -1,8 +1,10 @@
 #ifndef UNIT_H
 #define UNIT_H
 #include "coordinates.h"
+#include "field.h"
 #include "units.h"
 
+class Field;
 /**
  * @brief UnitType - перечисление всех возможных типов юнитов
  */
@@ -18,6 +20,7 @@ class Unit
 
 protected:
     UnitType type;
+    Field* field;
 
 public:
 
