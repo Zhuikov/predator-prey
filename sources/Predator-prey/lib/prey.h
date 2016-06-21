@@ -15,18 +15,13 @@ protected:
      */
     static const int PREY_CREATE_ENERGY = 2;
 
-    /**
-     * @brief dangerous_pred - координаты преследующего хищника
-     */
-    Coordinates dangerous_pred;
-
     virtual void killTarget() noexcept override;
 
     /**
      * @brief метод, создающий жертву и записывающий ее в вектор
      */
 
-    virtual Animal* setChildren(const int v, const int h) override;
+    virtual Animal* setChild(const int v, const int h) override;
 
 
 public:

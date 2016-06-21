@@ -17,7 +17,7 @@ protected:
 
     virtual void killTarget() noexcept override;
 
-    virtual Animal* setChildren(const int v, const int h) override;
+    virtual Animal* setChild(const int v, const int h) override;
 
 public:
 

@@ -66,16 +66,6 @@ public:
     virtual void createGrass() noexcept = 0;
 
     /**
-     * @brief метод, удаляющий умерших хищников после хода
-     */
-    virtual void removePredators() noexcept = 0;
-
-    /**
-     * @brief метод, удаляющий умерших жертв после хода
-     */
-    virtual void removePreys() noexcept = 0;
-
-    /**
      * @brief метод, передвигающий жертв
      */
     virtual void movePreys() noexcept = 0;

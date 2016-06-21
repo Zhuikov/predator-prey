@@ -73,7 +73,6 @@ void ModelWindow::moveModel()
     if (model->getStep() % settings->getGrowInterval() == 0) {
         model->createGrass();
     }
-    //model->remove();
     field->update();
     status->drawStatus();
     if (model->isEnd() == true) {

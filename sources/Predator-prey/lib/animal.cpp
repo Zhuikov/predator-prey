@@ -16,20 +16,20 @@ void Animal::findTarget() noexcept
     target = brain->getTarget(sense.getTargets(movement.getCurrent()));
 }
 
-void Animal::createChildren()
+void Animal::createChild()
 {
     int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
     int horizontal = movement.getCurrent().getH() + std::rand() % 3 - 1;
 
     if (field->isEmpty(vertical, horizontal)) {
-        setChildren(vertical, horizontal);
+        setChild(vertical, horizontal);
     }
     else {
         bool FLAG = false;
         for (int i = movement.getCurrent().getV() - 1; i <= movement.getCurrent().getV() + 1; i++) {
             for (int j = movement.getCurrent().getH() - 1; j <= movement.getCurrent().getH() + 1; j++) {
                 if (field->isEmpty(i, j)) {
-                    setChildren(i, j);
+                    setChild(i, j);
                     FLAG = true;
                     break;
                 }
@@ -71,7 +71,7 @@ void Animal::move() noexcept
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
 
     if (energy == CREATE_ENERGY) {
-        createChildren();
+        createChild();
     }
 
     life_time++;
@@ -89,13 +89,12 @@ void Animal::move() noexcept
     }
 }
 
-Animal::Animal(const int v, const int h, Field *field_pointer, Units *units_pointer, int TTL) :
+Animal::Animal(const int v, const int h, Field* field_pointer, Units *units_pointer, int TTL) :
     max_life_time(TTL),
     units_struct(units_pointer)
 {
     energy = 0;
     life_time = 0;
-    has_moved = false;
     target = nullptr;
     field = field_pointer;
     movement = Movement(Coordinates(v, h), field);

@@ -79,10 +79,6 @@ public:
     int getHeight() const { return this->height; }
 
     /**
-     * @brief перегруженный оператор присваивания; при необходимости, изменяет развер поля
-     */
-
-    /**
      * @brief проверить, не находится ли позиция за границами поля
      * @param vertical_position по вертикали
      * @param horizontal_position по горизонтали

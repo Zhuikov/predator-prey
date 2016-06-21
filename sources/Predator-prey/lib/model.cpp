@@ -127,37 +127,3 @@ void Model::incModelTime() noexcept
         this->model_time = 0;
     }
 }
-
-//TODO: не говоря о прочем, этот метод и removePreys очень похожи, уверена, что используя наследование от animal, можно попытаться объединить в один полиморфный метод,
-//это можно обсудить отдельно после основного и очевидного рефакторинга
-
-
-void Model::removePredators() noexcept
-{
-    for (std::vector< Predator* >::iterator it = units.predators.begin(); it != units.predators.end(); ++it) {
-        if ( (*it)->exist == false ) {
-            delete (*it);
-            (*it) = nullptr;
-        }
-    }
-    units.predators.erase( std::remove(units.predators.begin(), units.predators.end(), nullptr),
-                            units.predators.end() );
-}
-
-void Model::removePreys() noexcept
-{
-    for (std::vector< Prey* >::iterator it = units.preys.begin(); it != units.preys.end(); ++it) {
-        if ( (*it)->exist == false ) {
-            delete (*it);
-            (*it) = nullptr;
-        }
-    }
-    units.preys.erase( std::remove(units.preys.begin(), units.preys.end(), nullptr),
-                            units.preys.end() );
-}
-
-void Model::remove() noexcept
-{
-    removePredators();
-    removePreys();
-}

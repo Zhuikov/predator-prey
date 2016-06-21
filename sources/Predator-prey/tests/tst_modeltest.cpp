@@ -24,7 +24,6 @@ public:
 
 private Q_SLOTS:
     int doubleCompare(double a, double b);
-    void moveEnd(Units*);
 
     void coordinatesTest();
     void fieldTest();
@@ -58,28 +57,6 @@ int ModelTest::doubleCompare(double a, double b)
 {
     if (fabs(a - b) < 10e-3) return 1;
     return 0;
-}
-
-//TODO: думаю, этот тест нереально понять никому, кроме автора
-void ModelTest::moveEnd(Units *units)
-{
-    for (std::vector< Predator* >::iterator it = units->predators.begin(); it != units->predators.end(); ++it) {
-        if ( (*it)->exist == false ) {
-            delete (*it);
-            (*it) = nullptr;
-        }
-    }
-    units->predators.erase( std::remove(units->predators.begin(), units->predators.end(), nullptr),
-                            units->predators.end() );
-
-    for (std::vector< Prey* >::iterator it = units->preys.begin(); it != units->preys.end(); ++it) {
-        if ( (*it)->exist == false ) {
-            delete (*it);
-            (*it) = nullptr;
-        }
-    }
-    units->preys.erase( std::remove(units->preys.begin(), units->preys.end(), nullptr),
-                            units->preys.end() );
 }
 
 void ModelTest::coordinatesTest()
@@ -189,8 +166,7 @@ void ModelTest::predatorMoveKillTest()
 
     QCOMPARE(tst_predator->getPlace().getV(), 3);
     QCOMPARE(tst_predator->getPlace().getH(), 3);
-    moveEnd(&units);
-    QCOMPARE(units.preys.empty(), true);
+    QCOMPARE(units.preysNum, 0);
 }
 
 void ModelTest::predatorCreateTest()
@@ -203,13 +179,11 @@ void ModelTest::predatorCreateTest()
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
 
     tst_predator->move();
-    moveEnd(&units);
     tst_predator->move();
 
     QCOMPARE(tst_predator->getPlace().getV(), 2);
     QCOMPARE(tst_predator->getPlace().getH(), 3);
-    int pred_size = units.predators.size();
-    QCOMPARE(pred_size, 2);
+    QCOMPARE(units.predatorsNum, 2);
 
 }
 
@@ -223,9 +197,7 @@ void ModelTest::predatorHungryTest()
     for (int i = 0; i < 20; i++) {
         tst_predator->move();
     }
-    moveEnd(&units);
-    int pred_size = units.predators.size();
-    QCOMPARE(pred_size, 0);
+    QCOMPARE(units.predatorsNum, 0);
 
 }
 
@@ -240,19 +212,9 @@ void ModelTest::twoPredatorsTest()
 
     tst_predator1->move();
     tst_predator2->move();
-    moveEnd(&units);
     tst_predator1->move();
     tst_predator2->move();
-    moveEnd(&units);
-    QCOMPARE(units.preys.empty(), true);
-
-    field.setPosition(tst_predator1->getPlace().getV(), tst_predator1->getPlace().getH(), nullptr);
-    field.setPosition(tst_predator2->getPlace().getV(), tst_predator2->getPlace().getH(), nullptr);
-    tst_predator1->exist = false;
-    tst_predator2->exist = false;
-    moveEnd(&units);
-    QCOMPARE(units.predators.empty(), true);
-
+    QCOMPARE(units.preysNum, 0);
 }
 
 void ModelTest::preyCreateTest()
@@ -267,8 +229,7 @@ void ModelTest::preyCreateTest()
     tst_prey->move();
     tst_prey->move();
 
-    unsigned int size = 2;
-    QVERIFY2(units.preys.size() == size, "prey hasn't created");
+    QVERIFY2(units.preysNum == 2, "prey hasn't created");
 }
 
 void ModelTest::predatorPriorityTest()
@@ -296,13 +257,11 @@ void ModelTest::modelInitializeTest()
 
     model.movePreys();
     model.movePredators();
-    model.remove();
     QCOMPARE(model.getDay(), 0);
     QCOMPARE(model.getTime(), 1);
 
     model.movePredators();
     model.movePreys();
-    model.remove();
     QCOMPARE(model.getTime(), 2);
 
     //QCOMPARE(model.isEnd(), false);
@@ -325,12 +284,10 @@ void ModelTest::debugTest()
     int num_of_predators_moves = 0;
     while (num_of_predators_moves < 5) {
         for (unsigned int i = 0; i < units.predators.size(); i++) units.predators[i]->move();
-        moveEnd(&units);
         num_of_predators_moves ++;
     }
-    moveEnd(&units);
-    int final_vec_size = units.predators.size();
-    QCOMPARE(final_vec_size, 3);
+
+    QCOMPARE(units.predatorsNum, 3);
 
 }
 
@@ -399,7 +356,6 @@ void ModelTest::SFTest()
 
     while (!model.isEnd()) {
         model.move();
-        model.remove();
     }
 }
 
@@ -415,12 +371,12 @@ void ModelTest::senseTest()
     Coordinates tst_coord2(6, 5);
 
     tst_list = sense.getTargets(tst_coord1);
-    unsigned int size = 2;
+    //unsigned int size = 2;
     //QCOMPARE(tst_list.size(), size);
 
     sense.setRadius(1);
     tst_list = sense.getTargets(tst_coord2);
-    size = 1;
+    //size = 1;
     //QCOMPARE(tst_list.size(), size);
 
     tst_list = sense.getTargets(Coordinates(1, 1));

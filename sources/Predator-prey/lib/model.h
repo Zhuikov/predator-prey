@@ -37,10 +37,6 @@ public:
     void createPredators() noexcept;
     void createPreys() noexcept;
     void createGrass() noexcept;
-    void removePredators() noexcept;
-    void removePreys() noexcept;
-    void remove() noexcept;
-
 
     void saveModel();
     void loadModel();

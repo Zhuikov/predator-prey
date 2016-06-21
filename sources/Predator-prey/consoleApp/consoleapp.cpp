@@ -12,7 +12,6 @@ void ConsoleApp::startModel()
         usleep(TIME_FOR_SLEEP);
         this->model->movePredators();
         this->model->movePreys();
-        this->model->remove();
         this->drawer->showModel();
     }
     this->drawer->showResult();

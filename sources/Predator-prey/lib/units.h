@@ -23,12 +23,23 @@ public:
     std::vector< Predator* > predators;
 
     /**
-     * @brief Units
+     * @brief grass - вектор с травой - кормом для жертв
      */
     std::vector< Grass* > grass;
 
+    /**
+     * @brief predatorsNum - текущее число хищников на поле
+     */
     int predatorsNum;
+
+    /**
+     * @brief preysNum - текущее число жертв на поле
+     */
     int preysNum;
+
+    /**
+     * @brief grassNum - текущее число травы на поле
+     */
     int grassNum;
 
 
