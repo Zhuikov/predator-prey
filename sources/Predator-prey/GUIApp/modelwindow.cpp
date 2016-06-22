@@ -70,7 +70,9 @@ void ModelWindow::moveModel()
 {
     model->movePredators();
     model->movePreys();
-    model->remove();
+    if (model->getStep() % settings->getGrowInterval() == 0) {
+        model->createGrass();
+    }
     field->update();
     status->drawStatus();
     if (model->isEnd() == true) {

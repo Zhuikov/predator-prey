@@ -1,17 +1,22 @@
 #ifndef GRASS_H
 #define GRASS_H
-#include "coordinates.h"
-#include "modelapi.h"
+#include "unit.h"
 
-class Units;
-
+/**
+ * @brief Класс для представления корма для жертв
+ */
 class Grass : public Unit
 {
-
 public:
-    Grass(const int v, const int h, Units* units);
-    Coordinates place;
-    bool eaten;
+
+    Grass(const int v, const int h, Field* field, Units* units_pointer);
+
+    /**
+     * @brief current - координаты корма
+     */
+    Coordinates current;
+
+    Coordinates getPlace() { return current; }
 };
 
 #endif // GRASS_H

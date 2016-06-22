@@ -1,7 +1,9 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
-#include "field.h"
 #include "unit.h"
+#include "movement.h"
+#include "sense.h"
+#include "brain.h"
 
 /**
  * @brief класс, от которого наследуются хищники и жертвы
@@ -9,32 +11,15 @@
 
 class Animal : public Unit
 {
-    /**
-     * @brief метод, выбирающий свободное направление;
-     * используется, если переход по выбранному направлению невозможен
-     */
-    void chooseEmptyDirection() noexcept;
 
 protected:
 
-    /**
-     * @brief DISTANCE_FOR_KILL - дистанция до жертвы, при которой можно ее съесть
-     */
-    static constexpr double DISTANCE_FOR_EAT = 1;
+    int CREATE_ENERGY;
 
     /**
-     * @brief DISTANCE_FOR_TARGET - дистанция для взятия жертвы в цель
+     * @brief life_time - счетчик ходов животного на поле - его возраст в ходах
      */
-    static constexpr double DISTANCE_FOR_TARGET = 1.4;
-
-    /**
-     * @brief DELTA - константа, необходимая для сравнения чисел
-     */
-    static constexpr double DELTA = 0.1;
-
-    /**
-     * @brief life_time - счетчик ходов животного на поле
-     */
+    // todo: эту штуку в мозг вынести
     int life_time;
 
     /**
@@ -48,62 +33,52 @@ protected:
     int energy;
 
     /**
-     * @brief has_moved - флаг; используется в случае, когда все четыре
-     * направления заблокированы
+     * @brief target - указатель на текущую цель
      */
-    bool has_moved;
+    Unit* target = nullptr;
 
     /**
-     * @brief direction - текущее направление животного
+     * @brief метод, уничтожающий target - цель (если она есть)
      */
-    Direction direction;
+    virtual void killTarget() noexcept;
 
     /**
-     * @brief field - указатель на поле, где стоит животное
+     * @brief метод поиска корма в радиусе sense
+     * в случае успеха, записывает координаты в target
      */
-    Field* field;
+    void findTarget() noexcept;
 
     /**
-     * @brief метод устанавливает направление, если соответствующая клетка свободна
-     * @return true, если удалось установить направление
+     * @brief units_struct - указатель на класс с векторами юнитов,
+     * а также их текущим числом
      */
-    bool setDirection(Direction) noexcept;
+    Units* units_struct;
 
     /**
-     * @brief метод, выбирающий случайное направление,
-     * записывает его в direction
+     * @brief метод, выбирающий случайную клетку рядом с животным для порождения
      */
-    void chooseRandomDirection() noexcept;
+    void createChild();
 
     /**
-     * @brief метод, выбирающий направление для следующего хода,
-     * записывает его в directon
+     * @brief метод, создающий животное определенного типа на клетке с задаными координатами
      */
-    virtual void directionFinding() noexcept = 0;
+    virtual Animal* setChild(const int v, const int h) = 0;
 
-    /**
-     * @brief метод, выбирающий направление, в зависимости от положения цели
-     */
-    virtual void chooseToTargetDirection() noexcept = 0;
-
-    /**
-     * @brief метод, перемещающий животное в направлении direction
-     */
-    virtual void go() noexcept;
+    Sense sense {nullptr};
+    Movement movement {0, 0};
+    Brain* brain;
 
 public:
-
-    /**
-     * @brief place - координаты животного на поле
-     */
-    Coordinates place;
-
-    /**
-     * @brief died - флаг; died = true, если животное умерло,
-     * died = false если животное живое
-     */
-    bool died;
     
+    Animal(const int v, const int h, Field* field_pointer, Units* units_pointer, int TTL);
+
+    Coordinates getPlace();
+
+    /**
+     * @brief метод, реализующий ход животного
+     */
+    void move() noexcept;
+
     virtual ~Animal() {}
 };
 

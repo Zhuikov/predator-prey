@@ -2,7 +2,7 @@
 
 Cli::Cli(int argc, char *argv[])
 {
-    assert(argc == 7); // c++11 statement, if false then error
+    assert(argc == 9); // c++11 statement, if false then error
 
     mode = *argv[1];
 
@@ -10,10 +10,12 @@ Cli::Cli(int argc, char *argv[])
     int field_height = atoi(argv[3]);
     int predators = atoi(argv[4]);
     int preys = atoi(argv[5]);
-    int seed = atoi(argv[6]);
+    int num_of_grass = atoi(argv[6]);
+    int grow_interval = atoi(argv[7]);
+    int seed = atoi(argv[8]);
 
-    settings = new Settings(field_length, field_height, predators, preys);
-    name = string(argv[2]) + 'x' + argv[3] + '_' + argv[4] + '_' + argv[5] + '_' + argv[6];
+    settings = new Settings(field_length, field_height, predators, preys, num_of_grass, grow_interval);
+    name = string(argv[2]) + 'x' + argv[3] + '_' + argv[4] + '_' + argv[5] + '_' + argv[6] + '_' + argv[7] + '_' + argv[8];
     model = new Model(settings, seed);
 }
 
@@ -36,7 +38,6 @@ int Cli::modeWithLogs()
     logs->addLog(model);
     while( model->isEnd() == false ) {
         model->move();
-        model->remove();
         logs->addLog(model);
     }
     return model->getStep();
@@ -44,20 +45,17 @@ int Cli::modeWithLogs()
 
 int Cli::modeWithSteps()
 {
-    while( model->isEnd() == false ) {
+    while( model->isEnd() == false )
         model->move();
-        model->remove();
-    }
     return model->getStep();
 }
 
 int Cli::modeWithWinner()
 {
-    while( model->isEnd() == false ) {
+    while( model->isEnd() == false )
         model->move();
-        model->remove();
-    }
     if (model->getPredatorsNum() > 0 && model->getPreysNum() == 0) return 1; // Predators win
     else if (model->getPredatorsNum() == 0 && model->getPreysNum() == 0) return 0; // Draw
     else if (model->getPredatorsNum() == 0 && model->getPreysNum() > 0) return -1; // Preys win
+    return -101; // some kind of wrong value
 }

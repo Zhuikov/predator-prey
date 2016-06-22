@@ -1,6 +1,5 @@
 #ifndef MODELAPI_H
 #define MODELAPI_H
-#include "units.h"
 #include "field.h"
 #include <vector>
 
@@ -42,6 +41,11 @@ public:
     virtual unsigned int getPreysNum() const noexcept = 0;
 
     /**
+     * @brief метод, возвращающий количество травы на поле
+     */
+    virtual unsigned int getGrassNum() const noexcept = 0;
+
+    /**
      * @brief метод, проверяющий, не исчезли ли хищники или жертвы
      */
     virtual bool isEnd() const noexcept = 0;
@@ -57,14 +61,9 @@ public:
     virtual void createPreys() noexcept = 0;
 
     /**
-     * @brief метод, удаляющий умерших хищников после хода
+     * @brief метод, создающий корм для жертв
      */
-    virtual void removePredators() noexcept = 0;
-
-    /**
-     * @brief метод, удаляющий умерших жертв после хода
-     */
-    virtual void removePreys() noexcept = 0;
+    virtual void createGrass() noexcept = 0;
 
     /**
      * @brief метод, передвигающий жертв

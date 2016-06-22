@@ -1,9 +1,12 @@
 #include "grass.h"
 
-Grass::Grass(const int v, const int h, Units *units):
-    eaten(false)
+Grass::Grass(const int v, const int h, Field* field, Units* units_pointer)
 {
-    place.setV(v);
-    place.setH(h);
-    units->grass.push_back(this);
+    current.setV(v);
+    current.setH(h);
+    this->field = field;
+    units_pointer->grass.push_back(this);
+    type = UnitType::GRASS;
+    exist = true;
+    field->setPosition(v, h, this);
 }
