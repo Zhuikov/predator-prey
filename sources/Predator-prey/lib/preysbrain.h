@@ -7,7 +7,7 @@ class PreysBrain : public Brain
 public:
     PreysBrain();
 
-    Unit* getTarget(std::list<std::pair< Unit *, double > > && targets);
+    Unit* getTarget(std::vector<std::pair< Unit *, double > > && targets);
 };
 
 #endif // PREYSBRAIN_H

@@ -5,9 +5,10 @@ Sense::Sense(Field *field, double radius):
     field(field)
 {}
 
-std::list< std::pair< Unit*, double > > Sense::getTargets(Coordinates current)
+std::vector< std::pair< Unit*, double > > Sense::getTargets(Coordinates current)
 {
-    std::list< std::pair< Unit*, double > > targets;
+    std::vector< std::pair< Unit*, double > > targets;
+    targets.reserve(4*senseRadius*senseRadius);
     for (int i = current.getV() - senseRadius; i <= current.getV() + senseRadius; i++) {
         for (int j = current.getH() - senseRadius; j <= current.getH() + senseRadius; j++) {
             if ((field->checkBoundary(i, j) == true) &&
