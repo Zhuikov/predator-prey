@@ -1,6 +1,6 @@
 #ifndef SENSE_H
 #define SENSE_H
-#include <vector>
+#include <list>
 #include "unit.h"
 #include "field.h"
 #include "coordinates.h"
@@ -32,7 +32,7 @@ public:
      * @return список пар < Unit* , double >, где первый аргумент -
      * указатель на юнита, второй - расстояние до него;
      */
-    std::vector< std::pair< Unit*, double > > getTargets(Coordinates current);
+    std::list< std::pair< Unit*, double > > getTargets(Coordinates current);
 };
 
 #endif // SENSE_H

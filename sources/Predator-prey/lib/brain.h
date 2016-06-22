@@ -1,7 +1,7 @@
 #ifndef BRAIN_H
 #define BRAIN_H
 #include "unit.h"
-#include <vector>
+#include <list>
 
 class Brain
 {
@@ -10,7 +10,7 @@ public:
     /**
      * @brief метод, возвращающий наиболее подходящую цель из данного списка
      */
-    virtual Unit* getTarget(std::vector< std::pair< Unit*, double > > && targets) = 0;
+    virtual Unit* getTarget(std::list< std::pair< Unit*, double > > && targets) = 0;
 
     int age;
     int energy;

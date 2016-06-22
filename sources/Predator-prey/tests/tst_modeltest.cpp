@@ -366,7 +366,7 @@ void ModelTest::senseTest()
     new Predator (3, 3, &field, &units, 20);
     new Predator(5, 5, &field, &units, 20);
     Sense sense(&field);
-    std::vector< std::pair< Unit*, double > >tst_list;
+    std::list< std::pair< Unit*, double > >tst_list;
     Coordinates tst_coord1(4, 4);
     Coordinates tst_coord2(6, 5);
 

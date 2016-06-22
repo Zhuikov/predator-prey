@@ -7,7 +7,7 @@ class PredatorsBrain : public Brain
 public:
     PredatorsBrain();
 
-    Unit* getTarget(std::vector<std::pair< Unit *, double > > && targets);
+    Unit* getTarget(std::list<std::pair< Unit *, double > > && targets);
 };
 
 #endif // PREDATORSBRAIN_H
