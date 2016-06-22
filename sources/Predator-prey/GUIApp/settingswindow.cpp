@@ -60,6 +60,8 @@ SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QWidget(pa
     save_button->resize(BUTTON_SIZE);
     save_button->move(WINDOW_SIZE.width() - 260, WINDOW_SIZE.height() - 120);
     connect(save_button, SIGNAL(clicked()), SLOT(saveSettings()));
+    connect(field_length, SIGNAL(editingFinished()), SLOT(saveSettings()));
+    connect(field_height, SIGNAL(editingFinished()), SLOT(saveSettings()));
 }
 
 QLabel* SettingsWindow::createLabel(QString text, int horizontal, int vertical, bool invisiblity)

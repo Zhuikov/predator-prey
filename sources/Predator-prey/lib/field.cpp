@@ -41,8 +41,8 @@ void Field::setPosition(int v, int h, Unit* unit)
 
 Unit* Field::getPosition(int v, int h) const
 {
-    if (checkBoundary(v, h) == false){
-        throw BadFieldBoundary(v, h);
-    }
+//    if (checkBoundary(v, h) == false){
+//        throw BadFieldBoundary(v, h);
+//    }
     return this->field[v][h];
 }
