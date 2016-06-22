@@ -89,7 +89,7 @@ double Movement::getDistance(Coordinates source, Coordinates dest)
     vertical = source.getV() - dest.getV();
 
     double distance;
-    distance = std::pow(std::pow(horizontal, 2) + std::pow(vertical, 2), 0.5);
+    distance = std::sqrt(std::pow(horizontal, 2) + std::pow(vertical, 2));
     return distance;
 }
 
