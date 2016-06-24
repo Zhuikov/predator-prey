@@ -14,6 +14,11 @@ void Brain::move(int distance)
     if (step > limit)
     {
         energy -= getMoveEnergy(distance);
+        stamina -= getMoveStamina(distance);
+        if (stamina > getMaxStamina())
+        {
+            stamina = getMaxStamina();
+        }
     }
 }
 
@@ -27,6 +32,7 @@ void Brain::update(int step)
     if (step == limit)
     {
         energy = getMaxEnergy(step);
+        stamina = getMaxStamina();
     }
 }
 
@@ -52,10 +58,46 @@ double Brain::getMoveEnergy(int distance)
     return distance * 0.2;
 }
 
+double Brain::getMaxStamina()
+{
+    return (1 - std::exp((-3*energy)/(getMaxEnergy(step) - energy))) * S_0;
+}
+
+double Brain::getMoveStamina(int distance)
+{
+     return ((- 2 * (distance/getMaxSpeed(step))) + 1) * S_m;
+}
+
 double Brain::getMaxSpeed(int step)
 {
     double age = getAge(step);
     return ((std::pow(age, 2) + (2 * age)) / (std::pow(age, 2) + 2.3) + 0.2) * V_0;
+}
+
+double Brain::getMaxAvailableSpeed()
+{
+    double speed = getMaxSpeed(step);
+    if (speed < stamina)
+    {
+        return speed;
+    }
+    else
+    {
+        return stamina;
+    }
+}
+
+double Brain::getComfortableSpeed()
+{
+    double speed = 0.4 * getMaxSpeed(step);
+    if (speed < stamina)
+    {
+        return speed;
+    }
+    else
+    {
+        return stamina;
+    }
 }
 
 double Brain::getLifeProcessEnergy(int step)

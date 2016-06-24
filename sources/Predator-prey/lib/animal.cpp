@@ -14,7 +14,7 @@ void Animal::killTarget() noexcept
 
 void Animal::findTarget() noexcept
 {
-    movement.setSpeed(brain->getMaxSpeed(life_time));
+    movement.setSpeed(brain->getMaxAvailableSpeed());
     target = brain->getTarget(sense.getTargets(movement.getCurrent()));
 }
 
@@ -60,7 +60,7 @@ void Animal::move() noexcept
 
     if (target == nullptr) {
         movement.setRandomTarget();
-        movement.setSpeed(0.4 * brain->getMaxSpeed(life_time));
+        movement.setSpeed(brain->getComfortableSpeed());
     }
     else {
         Coordinates targetCoords = target->getPlace();

@@ -20,12 +20,14 @@ public:
     static constexpr double age_coef = 0.07;
     static constexpr double V_0 = 8;
     static constexpr double E_0 = 100;
+    static constexpr double S_0 = 50;
+    static constexpr double S_m = 10;
     static constexpr double E_f = 65;
     static constexpr int limit = 10;
 
-    double step;
-    double energy;
-    double stamina;
+    double step = 1;
+    double energy = 1;
+    double stamina= 1;
 
     // todo добавить все остальное
 
@@ -37,7 +39,15 @@ public:
 
     double getMoveEnergy(int distance);
 
+    double getMaxStamina();
+
+    double getMoveStamina(int distance);
+
     double getMaxSpeed(int step);
+
+    double getMaxAvailableSpeed();
+
+    double getComfortableSpeed();
 
     double getLifeProcessEnergy(int step);
 
