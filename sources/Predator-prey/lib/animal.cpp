@@ -5,7 +5,8 @@
 void Animal::killTarget() noexcept
 {
     target->exist = false;
-
+    //здесь спросим у жертвы возраст
+    brain->eat(420);
     energy ++;
     life_time = -1;
     target = nullptr;
@@ -49,6 +50,8 @@ Coordinates Animal::getPlace()
 
 void Animal::move() noexcept
 {
+    brain->update(life_time);
+
     sense.setRadius(2 * brain->getMaxSpeed(life_time));
 
     if (target == nullptr || target->exist == false) {
@@ -65,7 +68,7 @@ void Animal::move() noexcept
     }
 
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
-    movement.move();
+    brain->move(movement.move());
 
     if (target != nullptr && movement.getCurrent() == target->getPlace()) {
         killTarget();
