@@ -3,19 +3,30 @@
 void Brain::eat(int step)
 {
     energy += getFoodValue(step);
+    if (energy > getMaxEnergy(this->step))
+    {
+        energy = getMaxEnergy(this->step);
+    }
 }
 
 void Brain::move(int distance)
 {
-    energy -= getMoveEnergy(distance);
+    if (step > limit)
+    {
+        energy -= getMoveEnergy(distance);
+    }
 }
 
 void Brain::update(int step)
 {
     this->step = step;
-    if (step > 100)
+    if (step > limit)
     {
         energy -= getLifeProcessEnergy(step);
+    }
+    if (step == limit)
+    {
+        energy = getMaxEnergy(step);
     }
 }
 

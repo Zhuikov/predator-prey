@@ -21,6 +21,7 @@ public:
     static constexpr double V_0 = 8;
     static constexpr double E_0 = 100;
     static constexpr double E_f = 65;
+    static constexpr int limit = 10;
 
     double step;
     double energy;
