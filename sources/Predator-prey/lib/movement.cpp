@@ -14,14 +14,14 @@ Coordinates Movement::getCurrent()
     return current;
 }
 
-void Movement::move()
+int Movement::move()
 {
     double distance = getDistance(current, target);
 
     if (std::floor(distance) <= speed)
     {
         current = target;
-        return;
+        return std::floor(distance);
     }
 
     int horizontal = round(((target.getH() - current.getH()) / distance) * speed);
@@ -38,9 +38,11 @@ void Movement::move()
             {
                 current.setH(current.getH() + i);
                 current.setV(current.getV() + j);
+                return std::floor(getDistance(current, Coordinates(current.getV() - j, current.getH() - i)));
             }
         }
     }
+    return std::floor(distance);
 }
 
 void Movement::moveApart()
