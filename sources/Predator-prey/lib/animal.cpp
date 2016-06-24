@@ -13,6 +13,7 @@ void Animal::killTarget() noexcept
 
 void Animal::findTarget() noexcept
 {
+    movement.setSpeed(brain->getMaxSpeed(brain->getAge(life_time)));
     target = brain->getTarget(sense.getTargets(movement.getCurrent()));
 }
 
@@ -48,6 +49,7 @@ Coordinates Animal::getPlace()
 
 void Animal::move() noexcept
 {
+    sense.setRadius(2 * brain->getMaxSpeed(brain->getAge(life_time)));
 
     if (target == nullptr || target->exist == false) {
         findTarget();
@@ -55,6 +57,7 @@ void Animal::move() noexcept
 
     if (target == nullptr) {
         movement.setRandomTarget();
+        movement.setSpeed(0.4 * brain->getMaxSpeed(brain->getAge(life_time)));
     }
     else {
         Coordinates targetCoords = target->getPlace();
