@@ -29,13 +29,23 @@ public:
     double energy = 1;
     double stamina= 1;
 
-    // todo добавить все остальное
+    double getMaxSpeed();
+
+    double getMaxAvailableSpeed();
+
+    double getComfortableSpeed();
+
+    virtual ~Brain() {}
+
+protected:
+
+    double getLifeProcessEnergy();
 
     double getAge(int step);
 
     double getFoodValue(int step);
 
-    double getMaxEnergy(int step);
+    double getMaxEnergy();
 
     double getMoveEnergy(int distance);
 
@@ -43,15 +53,7 @@ public:
 
     double getMoveStamina(int distance);
 
-    double getMaxSpeed(int step);
 
-    double getMaxAvailableSpeed();
-
-    double getComfortableSpeed();
-
-    double getLifeProcessEnergy(int step);
-
-    virtual ~Brain() {}
 };
 
 #endif // BRAIN_H

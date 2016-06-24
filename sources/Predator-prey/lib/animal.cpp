@@ -52,7 +52,7 @@ void Animal::move() noexcept
 {
     brain->update(life_time);
 
-    sense.setRadius(2 * brain->getMaxSpeed(life_time));
+    sense.setRadius(2 * brain->getMaxSpeed());
 
     if (target == nullptr || target->exist == false) {
         findTarget();
