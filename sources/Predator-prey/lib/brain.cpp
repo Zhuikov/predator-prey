@@ -61,7 +61,7 @@ double Brain::getMoveEnergy(int distance)
 
 double Brain::getMaxStamina()
 {
-    return (1 - std::exp((-3*energy)/(getMaxEnergy() - energy))) * S_0;
+    return (1 - std::exp((-3*energy)/(getMaxEnergy() + 0.01 - energy))) * S_0;
 }
 
 double Brain::getMoveStamina(int distance)
