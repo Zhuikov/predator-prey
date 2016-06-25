@@ -81,7 +81,7 @@ void Animal::move() noexcept
     }
 
     life_time++;
-    if (life_time == max_life_time || brain->energy <= 0) {
+    if (life_time == max_life_time || brain->getEnergy() <= 0) {
         field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
         exist = false;
         if (type == UnitType::PREDATOR)

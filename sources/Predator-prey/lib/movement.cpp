@@ -45,16 +45,28 @@ int Movement::move()
     return std::floor(distance);
 }
 
-void Movement::moveApart()
+int Movement::moveApart()
 {
     Coordinates tempTarget = target;
 
     target.setH( 2 * current.getH() - target.getH());
     target.setV( 2 * current.getV() - target.getV());
 
-    move();
+    if(target.getV() < 0)
+    {
+        target.setV(0);
+    }
+
+    if(target.getH() < 0)
+    {
+        target.setH(0);
+    }
+
+    int distance = move();
 
     target = tempTarget;
+
+    return distance;
 }
 
 

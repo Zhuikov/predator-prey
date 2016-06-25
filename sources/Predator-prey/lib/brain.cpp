@@ -101,6 +101,11 @@ double Brain::getComfortableSpeed()
     }
 }
 
+double Brain::getEnergy()
+{
+    return energy;
+}
+
 double Brain::getLifeProcessEnergy()
 {
     double age = getAge(step) / 6;

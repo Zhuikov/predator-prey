@@ -14,26 +14,20 @@ public:
     virtual Unit* getTarget(std::list< std::pair< Unit*, double > > && targets) = 0;
 
     void eat(int step);
+
     void move(int distance);
+
     void update(int step);
-
-    static constexpr double age_coef = 0.07;
-    static constexpr double V_0 = 8;
-    static constexpr double E_0 = 100;
-    static constexpr double S_0 = 50;
-    static constexpr double S_m = 10;
-    static constexpr double E_f = 65;
-    static constexpr int limit = 10;
-
-    double step = 1;
-    double energy = 1;
-    double stamina= 1;
 
     double getMaxSpeed();
 
     double getMaxAvailableSpeed();
 
     double getComfortableSpeed();
+
+    double getEnergy();
+
+    bool isRuningAway = false;
 
     virtual ~Brain() {}
 
@@ -52,6 +46,19 @@ protected:
     double getMaxStamina();
 
     double getMoveStamina(int distance);
+
+    static constexpr double age_coef = 0.07;
+    static constexpr double V_0 = 8;
+    static constexpr double E_0 = 100;
+    static constexpr double S_0 = 50;
+    static constexpr double S_m = 10;
+    static constexpr double E_f = 65;
+    static constexpr int limit = 50;
+
+    double step = 1;
+    double energy = 1;
+    double stamina= 1;
+
 
 
 };
