@@ -47,6 +47,8 @@ protected:
 
     double getMoveStamina(int distance);
 
+    Unit* find(std::list< std::pair< Unit*, double > > &targets, UnitType type);
+
     static constexpr double age_coef = 0.07;
     static constexpr double V_0 = 8;
     static constexpr double E_0 = 100;

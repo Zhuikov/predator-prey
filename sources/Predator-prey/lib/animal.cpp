@@ -54,9 +54,7 @@ void Animal::move() noexcept
 
     sense.setRadius(2 * brain->getMaxSpeed());
 
-    if (target == nullptr || target->exist == false) {
-        findTarget();
-    }
+    findTarget();
 
     if (target == nullptr) {
         movement.setRandomTarget();
@@ -68,8 +66,14 @@ void Animal::move() noexcept
     }
 
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
-    brain->move(movement.move());
-
+    if (brain->isRuningAway)
+    {
+        brain->move(movement.moveApart());
+    }
+    else
+    {
+        brain->move(movement.move());
+    }
     if (target != nullptr && movement.getCurrent() == target->getPlace()) {
         killTarget();
     }

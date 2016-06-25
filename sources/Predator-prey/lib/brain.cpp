@@ -66,7 +66,20 @@ double Brain::getMaxStamina()
 
 double Brain::getMoveStamina(int distance)
 {
-     return ((- 2 * (distance/getMaxSpeed())) + 1) * S_m;
+    return ((- 2 * (distance/getMaxSpeed())) + 1) * S_m;
+}
+
+Unit *Brain::find(std::list< std::pair< Unit*, double > > &targets, UnitType type)
+{
+    double distanceToTarget = 100000; // расстояние до ближайшей цели
+    Unit* result = nullptr;
+    for (std::list< std::pair< Unit*, double > >::const_iterator it = targets.begin(); it != targets.end(); ++it){
+        if ((it->first->getType() == type) && (it->second < distanceToTarget)) {
+            distanceToTarget = it->second;
+            result = it->first;
+        }
+    }
+    return result;
 }
 
 double Brain::getMaxSpeed()

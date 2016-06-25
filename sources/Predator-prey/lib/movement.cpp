@@ -57,6 +57,16 @@ int Movement::moveApart()
         target.setV(0);
     }
 
+    if(target.getV() >= field->getLength())
+    {
+        target.setV(field->getLength()-1);
+    }
+
+    if(target.getH() >= field->getHeight())
+    {
+        target.setH(field->getHeight()-1);
+    }
+
     if(target.getH() < 0)
     {
         target.setH(0);
