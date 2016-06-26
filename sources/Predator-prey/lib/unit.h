@@ -38,6 +38,9 @@ public:
      */
     virtual Coordinates getPlace() = 0;
 
+
+    virtual int getCurrentStep() = 0;
+
     /**
      * @brief exist - флаг существования юнита. Если юнит существует на поле, exist = true,
      * в противном случае exist = false

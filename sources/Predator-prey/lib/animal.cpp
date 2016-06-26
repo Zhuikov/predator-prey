@@ -5,8 +5,7 @@
 void Animal::killTarget() noexcept
 {
     target->exist = false;
-    //здесь спросим у жертвы возраст
-    brain->eat(420);
+    brain->eat(target->getCurrentStep());
     energy ++;
     life_time = -1;
     target = nullptr;
@@ -48,11 +47,20 @@ Coordinates Animal::getPlace()
     return movement.getCurrent();
 }
 
+int Animal::getCurrentStep()
+{
+    return life_time;
+}
+
 void Animal::move() noexcept
 {
     brain->update(life_time);
 
     sense.setRadius(2 * brain->getMaxSpeed());
+
+    //по идеи этого здесь не нужно, но на всякий случай
+    brain->isRuningAway = false;
+    target = nullptr;
 
     findTarget();
 

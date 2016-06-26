@@ -17,6 +17,8 @@ public:
     Coordinates current;
 
     Coordinates getPlace() { return current; }
+
+    int getCurrentStep() override;
 };
 
 #endif // GRASS_H

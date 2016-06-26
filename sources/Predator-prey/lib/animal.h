@@ -74,6 +74,8 @@ public:
 
     Coordinates getPlace();
 
+    int getCurrentStep() override;
+
     /**
      * @brief метод, реализующий ход животного
      */

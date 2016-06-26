@@ -10,3 +10,8 @@ Grass::Grass(const int v, const int h, Field* field, Units* units_pointer)
     exist = true;
     field->setPosition(v, h, this);
 }
+
+int Grass::getCurrentStep()
+{
+    return 428;
+}
