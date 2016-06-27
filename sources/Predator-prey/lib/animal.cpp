@@ -82,15 +82,20 @@ void Animal::move() noexcept
     {
         brain->move(movement.move());
     }
+
     if (target != nullptr && movement.getCurrent() == target->getPlace()) {
-        killTarget();
+        if (target->getType() != this->type)
+        {
+            killTarget();
+        }
+        else
+        {
+            createChild();
+            brain->reproduct();
+        }
     }
 
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
-
-    if (energy == CREATE_ENERGY) {
-        createChild();
-    }
 
     life_time++;
     if (life_time == max_life_time || brain->getEnergy() <= 0) {

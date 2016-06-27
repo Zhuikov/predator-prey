@@ -9,6 +9,11 @@ void Brain::eat(int step)
     }
 }
 
+void Brain::reproduct()
+{
+    energy = getMaxEnergy() * 0.7;
+}
+
 void Brain::move(int distance)
 {
     if (step > limit)
@@ -69,7 +74,7 @@ double Brain::getMoveStamina(int distance)
     return ((- 2 * (distance/getMaxSpeed())) + 1) * S_m;
 }
 
-Unit *Brain::find(std::list< std::pair< Unit*, double > > &targets, UnitType type)
+Unit* Brain::find(std::list< std::pair< Unit*, double > > &targets, UnitType type)
 {
     double distanceToTarget = 100000; // расстояние до ближайшей цели
     Unit* result = nullptr;

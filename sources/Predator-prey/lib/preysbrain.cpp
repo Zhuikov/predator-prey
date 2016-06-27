@@ -25,3 +25,9 @@ Unit* PreysBrain::getTarget(std::list< std::pair< Unit*, double > > && targets)
     isRuningAway = false;
     return result;
 }
+
+Unit* PreysBrain::getReproductionTarget(std::list<std::pair<Unit*, double> >&& targets)
+{
+    // todo реализовать
+    return nullptr;
+}

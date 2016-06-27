@@ -15,6 +15,8 @@ public:
 
     void eat(int step);
 
+    void reproduct();
+
     void move(int distance);
 
     void update(int step);
@@ -48,6 +50,8 @@ protected:
     double getMoveStamina(int distance);
 
     Unit* find(std::list< std::pair< Unit*, double > > &targets, UnitType type);
+
+    virtual Unit* getReproductionTarget(std::list<std::pair< Unit *, double > > && targets) = 0;
 
     static constexpr double age_coef = 0.07;
     static constexpr double V_0 = 8;
