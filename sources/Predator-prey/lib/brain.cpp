@@ -76,7 +76,7 @@ double Brain::getMoveStamina(int distance)
 
 Unit* Brain::find(std::list< std::pair< Unit*, double > > &targets, UnitType type)
 {
-    double distanceToTarget = 100000; // расстояние до ближайшей цели
+    double distanceToTarget = 100000;
     Unit* result = nullptr;
     for (std::list< std::pair< Unit*, double > >::const_iterator it = targets.begin(); it != targets.end(); ++it){
         if ((it->first->getType() == type) && (it->second < distanceToTarget)) {

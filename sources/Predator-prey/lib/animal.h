@@ -28,11 +28,6 @@ protected:
     int max_life_time;
 
     /**
-     * @brief energy - текущая энергия животного
-     */
-    int energy;
-
-    /**
      * @brief target - указатель на текущую цель
      */
     Unit* target = nullptr;

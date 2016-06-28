@@ -6,7 +6,6 @@ void Animal::killTarget() noexcept
 {
     target->exist = false;
     brain->eat(target->getCurrentStep());
-    energy ++;
     life_time = -1;
     target = nullptr;
 }
@@ -39,7 +38,7 @@ void Animal::createChild()
         }
     }
 
-    this->energy = 0;
+    brain->reproduct();
 }
 
 Coordinates Animal::getPlace()
@@ -58,7 +57,7 @@ void Animal::move() noexcept
 
     sense.setRadius(2 * brain->getMaxSpeed());
 
-    //по идеи этого здесь не нужно, но на всякий случай
+    //по идее этого здесь не нужно, но на всякий случай
     brain->isRuningAway = false;
     target = nullptr;
 
@@ -91,7 +90,6 @@ void Animal::move() noexcept
         else
         {
             createChild();
-            brain->reproduct();
         }
     }
 
@@ -116,7 +114,6 @@ Animal::Animal(const int v, const int h, Field* field_pointer, Units *units_poin
     max_life_time(TTL),
     units_struct(units_pointer)
 {
-    energy = 0;
     life_time = 0;
     target = nullptr;
     field = field_pointer;

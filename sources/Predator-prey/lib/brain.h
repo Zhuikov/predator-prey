@@ -63,7 +63,7 @@ protected:
 
     double step = 1;
     double energy = 1;
-    double stamina= 1;
+    double stamina = 1;
 
 
 

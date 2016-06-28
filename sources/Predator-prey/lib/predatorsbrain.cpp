@@ -14,21 +14,26 @@ Unit* PredatorsBrain::getTarget(std::list<std::pair< Unit* , double > > && targe
         return nullptr;
     }
 
-    if (k > 0.8)
+    Unit* result = nullptr;
+    if ((k > 0.8) && (step >= 200) && (step <= 900))
     {
-        getReproductionTarget(targets);
+        result = getReproductionTarget(targets);
     }
 
+    if (result != nullptr)
+    {
+        return result;
+    }
     return find(targets, UnitType::PREY);
 }
 
 Unit* PredatorsBrain::getReproductionTarget(std::list<std::pair< Unit*, double > > & targets)
 {
-    double distanceToTarget = 100000; // расстояние до ближайшей цели
+    double distanceToTarget = 100000;
     Unit* result = nullptr;
     for (std::list< std::pair< Unit*, double > >::const_iterator it = targets.begin(); it != targets.end(); ++it){
-        if ((it->first->getType() == UnitType::PREDATOR) && (it->first->getCurrentStep() >= 200) &&
-                (it->first->getCurrentStep() <= 900) && (it->second < distanceToTarget))
+        if ((it->first->getType() == UnitType::PREDATOR) && (it->second < distanceToTarget) &&
+                (it->first->getCurrentStep() >= 200) && (it->first->getCurrentStep() <= 900))
         {
             distanceToTarget = it->second;
             result = it->first;
