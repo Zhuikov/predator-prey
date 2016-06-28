@@ -49,8 +49,11 @@ int Movement::moveApart()
 {
     Coordinates tempTarget = target;
 
-    target.setH( 2 * current.getH() - target.getH());
-    target.setV( 2 * current.getV() - target.getV());
+    int horizontal = (current.getH() - target.getH()) * speed;
+    int vertical = (current.getV() - target.getV()) * speed;
+
+    target.setH(current.getH() + horizontal);
+    target.setV(current.getV() + vertical);
 
     if (target.getV() < 0)
     {
