@@ -37,7 +37,11 @@ int Cli::modeWithLogs()
     Logging *logs = new Logging(name);
     logs->addLog(model);
     while( model->isEnd() == false ) {
-        model->move();
+        model->movePredators();
+        model->movePreys();
+        if (model->getStep() % settings->getGrowInterval() == 0) {
+            model->createGrass();
+        }
         logs->addLog(model);
     }
     return model->getStep();
@@ -46,14 +50,26 @@ int Cli::modeWithLogs()
 int Cli::modeWithSteps()
 {
     while( model->isEnd() == false )
-        model->move();
+    {
+        model->movePredators();
+        model->movePreys();
+        if (model->getStep() % settings->getGrowInterval() == 0) {
+            model->createGrass();
+        }
+    }
     return model->getStep();
 }
 
 int Cli::modeWithWinner()
 {
     while( model->isEnd() == false )
-        model->move();
+    {
+        model->movePredators();
+        model->movePreys();
+        if (model->getStep() % settings->getGrowInterval() == 0) {
+            model->createGrass();
+        }
+    }
     if (model->getPredatorsNum() > 0 && model->getPreysNum() == 0) return 1; // Predators win
     else if (model->getPredatorsNum() == 0 && model->getPreysNum() == 0) return 0; // Draw
     else if (model->getPredatorsNum() == 0 && model->getPreysNum() > 0) return -1; // Preys win
