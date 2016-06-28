@@ -52,22 +52,22 @@ int Movement::moveApart()
     target.setH( 2 * current.getH() - target.getH());
     target.setV( 2 * current.getV() - target.getV());
 
-    if(target.getV() < 0)
+    if (target.getV() < 0)
     {
         target.setV(0);
     }
 
-    if(target.getV() >= field->getLength())
+    if (target.getV() >= field->getLength())
     {
-        target.setV(field->getLength()-1);
+        target.setV(field->getLength() - 1);
     }
 
-    if(target.getH() >= field->getHeight())
+    if (target.getH() >= field->getHeight())
     {
-        target.setH(field->getHeight()-1);
+        target.setH(field->getHeight() - 1);
     }
 
-    if(target.getH() < 0)
+    if (target.getH() < 0)
     {
         target.setH(0);
     }

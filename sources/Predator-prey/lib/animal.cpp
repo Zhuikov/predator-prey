@@ -6,7 +6,6 @@ void Animal::killTarget() noexcept
 {
     target->exist = false;
     brain->eat(target->getCurrentStep());
-    life_time = -1;
     target = nullptr;
 }
 
