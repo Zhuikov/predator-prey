@@ -26,7 +26,7 @@ Unit* PreysBrain::getTarget(std::list< std::pair< Unit*, double > > && targets)
     return result;
 }
 
-Unit* PreysBrain::getReproductionTarget(std::list<std::pair<Unit*, double> >&& targets)
+Unit* PreysBrain::getReproductionTarget(std::list<std::pair<Unit*, double> > & targets)
 {
     // todo реализовать
     return nullptr;

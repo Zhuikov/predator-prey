@@ -16,13 +16,13 @@ Unit* PredatorsBrain::getTarget(std::list<std::pair< Unit* , double > > && targe
 
     if (k > 0.8)
     {
-        getReproductionTarget(std::list<std::pair< Unit* , double > > && targets);
+        getReproductionTarget(targets);
     }
 
     return find(targets, UnitType::PREY);
 }
 
-Unit* PredatorsBrain::getReproductionTarget(std::list<std::pair< Unit*, double > > && targets)
+Unit* PredatorsBrain::getReproductionTarget(std::list<std::pair< Unit*, double > > & targets)
 {
     double distanceToTarget = 100000; // расстояние до ближайшей цели
     Unit* result = nullptr;

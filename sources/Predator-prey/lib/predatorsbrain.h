@@ -4,12 +4,14 @@
 
 class PredatorsBrain : public Brain
 {
+protected:
+
+    virtual Unit* getReproductionTarget(std::list<std::pair< Unit*, double > >& targets);
+
 public:
     PredatorsBrain();
 
     Unit* getTarget(std::list<std::pair< Unit *, double > > && targets);
-
-    virtual Unit* getReproductionTarget(std::list<std::pair< Unit *, double > > && targets);
 };
 
 #endif // PREDATORSBRAIN_H
