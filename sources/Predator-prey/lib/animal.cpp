@@ -11,7 +11,6 @@ void Animal::killTarget() noexcept
 
 void Animal::findTarget() noexcept
 {
-    movement.setSpeed(brain->getMaxAvailableSpeed());
     target = brain->getTarget(sense.getTargets(movement.getCurrent()));
 }
 
@@ -67,8 +66,8 @@ void Animal::move() noexcept
         movement.setSpeed(brain->getComfortableSpeed());
     }
     else {
-        Coordinates targetCoords = target->getPlace();
-        movement.setTarget(targetCoords);
+        movement.setSpeed(brain->getMaxAvailableSpeed());
+        movement.setTarget(target->getPlace());
     }
 
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
@@ -81,18 +80,24 @@ void Animal::move() noexcept
         brain->move(movement.move());
     }
 
-    if (target != nullptr && movement.getCurrent() == target->getPlace()) {
-        if (target->getType() != this->type)
-        {
-            killTarget();
-        }
-        else
-        {
-            createChild();
-        }
+    if (target != nullptr && movement.getCurrent() == target->getPlace())
+    {
+        killTarget();
+//        if (target->getType() != this->type)
+//        {
+//            killTarget();
+//        }
+//        else
+//        {
+//            createChild();
+//        }
     }
 
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
+
+    if (brain->isReady() == true) {
+        createChild();
+    }
 
     life_time++;
     if (life_time == max_life_time || brain->getEnergy() <= 0) {

@@ -6,7 +6,7 @@ class PreysBrain : public Brain
 {
 protected:
 
-    virtual Unit* getReproductionTarget(std::list<std::pair< Unit *, double > > & targets);
+    //virtual Unit* getReproductionTarget(std::list<std::pair< Unit *, double > > & targets);
 
 public:
     PreysBrain();

@@ -29,6 +29,11 @@ public:
 
     double getEnergy();
 
+    /**
+     * @brief возвращает true, если животное готово к размножению
+     */
+    bool isReady();
+
     bool isRuningAway = false;
 
     virtual ~Brain() {}
@@ -51,7 +56,7 @@ protected:
 
     Unit* find(std::list< std::pair< Unit*, double > > &targets, UnitType type);
 
-    virtual Unit* getReproductionTarget(std::list<std::pair< Unit *, double > > & targets) = 0;
+    //virtual Unit* getReproductionTarget(std::list<std::pair< Unit *, double > > & targets) = 0;
 
     static constexpr double age_coef = 0.07;
     static constexpr double V_0 = 8;

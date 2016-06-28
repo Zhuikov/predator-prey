@@ -124,6 +124,11 @@ double Brain::getEnergy()
     return energy;
 }
 
+bool Brain::isReady()
+{
+    return ((getEnergy() / getMaxEnergy() > 0.99) && (step >= 200) && (step <= 900));
+}
+
 double Brain::getLifeProcessEnergy()
 {
     double age = getAge(step) / 6;
