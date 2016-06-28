@@ -10,10 +10,6 @@ class Prey : public Animal
 {
 
 protected:
-    /**
-     * @brief PREY_CREATE_ENERGY - необходимая энергия для создания жертвы
-     */
-    static const int PREY_CREATE_ENERGY = 2;
 
     virtual void killTarget() noexcept override;
 
@@ -21,7 +17,7 @@ protected:
      * @brief метод, создающий жертву и записывающий ее в вектор
      */
 
-    virtual Animal* setChild(const int v, const int h) override;
+    virtual void setChild(const int v, const int h) noexcept override;
 
 
 public:

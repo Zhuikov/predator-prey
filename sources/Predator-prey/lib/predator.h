@@ -10,14 +10,10 @@ class Predator : public Animal
 {
 
 protected:
-    /**
-     * @brief PREDATOR_CREATE_ENERGY - энергия, необходимая для создания хищника
-     */
-    static const int PREDATOR_CREATE_ENERGY = 2;    
 
     virtual void killTarget() noexcept override;
 
-    virtual Animal* setChild(const int v, const int h) override;
+    virtual void setChild(const int v, const int h) noexcept override;
 
 public:
 

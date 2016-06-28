@@ -16,9 +16,9 @@ public:
      */
     Coordinates current;
 
-    Coordinates getPlace() { return current; }
+    Coordinates getPlace() noexcept { return current; }
 
-    int getCurrentStep() override;
+    int getCurrentStep() noexcept override;
 };
 
 #endif // GRASS_H

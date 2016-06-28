@@ -6,9 +6,9 @@ void Prey::killTarget() noexcept
     units_struct->grassNum = units_struct->grassNum - 1;
 }
 
-Animal* Prey::setChild(const int v, const int h)
+void Prey::setChild(const int v, const int h) noexcept
 {
-    return new Prey(v, h, field, units_struct, max_life_time);
+    new Prey(v, h, field, units_struct, max_life_time);
 }
 
 Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer, int TTL):
@@ -17,9 +17,6 @@ Prey::Prey(const int v, const int h, Field* field_pointer, Units *units_pointer,
     units_struct->preys.push_back(this);
     units_struct->preysNum ++;
     type = UnitType::PREY;
-
-    CREATE_ENERGY = PREY_CREATE_ENERGY;
-
     brain = new PreysBrain();
 }
 

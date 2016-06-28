@@ -36,10 +36,10 @@ public:
     /**
      * @brief метод, возвращающий координаты юнита на поле
      */
-    virtual Coordinates getPlace() = 0;
+    virtual Coordinates getPlace() noexcept = 0;
 
 
-    virtual int getCurrentStep() = 0;
+    virtual int getCurrentStep() noexcept = 0;
 
     /**
      * @brief exist - флаг существования юнита. Если юнит существует на поле, exist = true,
@@ -50,7 +50,7 @@ public:
     /**
      * @brief метод, возвращающий тип юнита
      */
-    UnitType getType() { return type; }
+    UnitType getType() noexcept { return type; }
 
     virtual ~Unit() {}
 };

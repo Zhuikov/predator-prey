@@ -13,13 +13,9 @@ class Animal : public Unit
 {
 
 protected:
-
-    int CREATE_ENERGY;
-
     /**
      * @brief life_time - счетчик ходов животного на поле - его возраст в ходах
      */
-    // todo: эту штуку в мозг вынести
     int life_time;
 
     /**
@@ -52,12 +48,12 @@ protected:
     /**
      * @brief метод, выбирающий случайную клетку рядом с животным для порождения
      */
-    void createChild();
+    void createChild() noexcept;
 
     /**
      * @brief метод, создающий животное определенного типа на клетке с задаными координатами
      */
-    virtual Animal* setChild(const int v, const int h) = 0;
+    virtual void setChild(const int v, const int h) noexcept = 0;
 
     Sense sense {nullptr};
     Movement movement {0, 0};
@@ -67,9 +63,9 @@ public:
     
     Animal(const int v, const int h, Field* field_pointer, Units* units_pointer, int TTL);
 
-    Coordinates getPlace();
+    Coordinates getPlace() noexcept;
 
-    int getCurrentStep() override;
+    int getCurrentStep() noexcept override;
 
     /**
      * @brief метод, реализующий ход животного

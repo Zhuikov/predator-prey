@@ -6,9 +6,9 @@ void Predator::killTarget() noexcept
     units_struct->preysNum = units_struct->preysNum - 1;
 }
 
-Animal* Predator::setChild(const int v, const int h)
+void Predator::setChild(const int v, const int h) noexcept
 {
-    return new Predator(v, h, field, units_struct, max_life_time);
+    new Predator(v, h, field, units_struct, max_life_time);
 }
 
 Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int time_of_life) noexcept:
@@ -17,7 +17,6 @@ Predator::Predator(int v, int h, Field *field_pointer, Units *units_pointer, int
     units_pointer->predators.push_back(this);
     units_pointer->predatorsNum ++;
     type = UnitType::PREDATOR;
-    CREATE_ENERGY = PREDATOR_CREATE_ENERGY;
     brain = new PredatorsBrain();
 }
 

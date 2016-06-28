@@ -13,26 +13,26 @@ public:
      */
     virtual Unit* getTarget(std::list< std::pair< Unit*, double > > && targets) = 0;
 
-    void eat(int step);
+    void eat(int targetsAge) noexcept;
 
-    void reproduct();
+    void reproduct() noexcept;
 
-    void move(int distance);
+    void move(int distance) noexcept;
 
-    void update(int step);
+    void update(int step) noexcept;
 
-    double getMaxSpeed();
+    double getMaxSpeed() noexcept;
 
-    double getMaxAvailableSpeed();
+    double getMaxAvailableSpeed() noexcept;
 
-    double getComfortableSpeed();
+    double getComfortableSpeed() noexcept;
 
-    double getEnergy();
+    double getEnergy() noexcept;
 
     /**
      * @brief возвращает true, если животное готово к размножению
      */
-    bool isReady();
+    bool isReady() noexcept;
 
     bool isRuningAway = false;
 
@@ -40,31 +40,31 @@ public:
 
 protected:
 
-    double getLifeProcessEnergy();
+    double getLifeProcessEnergy() noexcept;
 
-    double getAge(int step);
+    double getAge(int step) noexcept;
 
-    double getFoodValue(int step);
+    double getFoodValue(int step) noexcept;
 
-    double getMaxEnergy();
+    double getMaxEnergy() noexcept;
 
-    double getMoveEnergy(int distance);
+    double getMoveEnergy(int distance) noexcept;
 
-    double getMaxStamina();
+    double getMaxStamina() noexcept;
 
-    double getMoveStamina(int distance);
+    double getMoveStamina(int distance) noexcept;
 
-    Unit* find(std::list< std::pair< Unit*, double > > &targets, UnitType type);
+    Unit* find(std::list< std::pair< Unit* , double > > &targets, UnitType type) noexcept;
 
     //virtual Unit* getReproductionTarget(std::list<std::pair< Unit *, double > > & targets) = 0;
 
     static constexpr double age_coef = 0.07;
-    static constexpr double V_0 = 8;
+    static constexpr double V_0 = 8; //  8
     static constexpr double E_0 = 100;
     static constexpr double S_0 = 50;
     static constexpr double S_m = 10;
     static constexpr double E_f = 65;
-    static constexpr int limit = 50;
+    static constexpr int limit = 50; // 50
 
     double step = 1;
     double energy = 1;

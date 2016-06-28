@@ -14,7 +14,7 @@ void Animal::findTarget() noexcept
     target = brain->getTarget(sense.getTargets(movement.getCurrent()));
 }
 
-void Animal::createChild()
+void Animal::createChild() noexcept
 {
     int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
     int horizontal = movement.getCurrent().getH() + std::rand() % 3 - 1;
@@ -39,12 +39,12 @@ void Animal::createChild()
     brain->reproduct();
 }
 
-Coordinates Animal::getPlace()
+Coordinates Animal::getPlace() noexcept
 {
     return movement.getCurrent();
 }
 
-int Animal::getCurrentStep()
+int Animal::getCurrentStep() noexcept
 {
     return life_time;
 }
@@ -66,8 +66,8 @@ void Animal::move() noexcept
         movement.setSpeed(brain->getComfortableSpeed());
     }
     else {
-        movement.setSpeed(brain->getMaxAvailableSpeed());
         movement.setTarget(target->getPlace());
+        movement.setSpeed(brain->getMaxAvailableSpeed());
     }
 
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
@@ -118,7 +118,7 @@ Animal::Animal(const int v, const int h, Field* field_pointer, Units *units_poin
     max_life_time(TTL),
     units_struct(units_pointer)
 {
-    life_time = 0;
+    life_time = 1;
     target = nullptr;
     field = field_pointer;
     movement = Movement(Coordinates(v, h), field);
