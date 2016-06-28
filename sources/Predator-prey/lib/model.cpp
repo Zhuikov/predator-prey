@@ -76,12 +76,6 @@ void Model::createGrass() noexcept
 void Model::movePreys() noexcept
 {
     incModelTime();
-
-    //std::vector< Prey* >::iterator last = units.preys.end();
-    //for (std::vector< Prey* >::iterator i = units.preys.begin(); i != last; ++i) {
-    //    if ((*i)->exist == true) (*i)->move();
-    //}
-    //unsigned int last = units.preys.size();
     for (unsigned int i = 0; i < units.preys.size(); i++) {
         if (units.preys[i]->exist == true) {
                 units.preys[i]->move();
@@ -93,14 +87,6 @@ void Model::movePreys() noexcept
 void Model::movePredators() noexcept
 {
     incModelTime();
-
-    //std::vector< Predator* >::iterator last = units.predators.end();
-    //for (std::vector< Predator* >::iterator i = units.predators.begin(); i !=last; ++i) {
-    //    if ((*i)->exist == true) {
-    //        (*i)->move();
-    //    }
-    //}
-    //unsigned int last = units.predators.size();
     for (unsigned int i = 0; i < units.predators.size(); i++) {
         if (units.predators[i]->exist == true) {
                 units.predators[i]->move();

@@ -59,7 +59,7 @@ protected:
     //virtual Unit* getReproductionTarget(std::list<std::pair< Unit *, double > > & targets) = 0;
 
     static constexpr double age_coef = 0.07;
-    static constexpr double V_0 = 8; //  8
+    static constexpr double V_0 = 2; //  8
     static constexpr double E_0 = 100;
     static constexpr double S_0 = 50;
     static constexpr double S_m = 10;
