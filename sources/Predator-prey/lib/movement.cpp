@@ -54,25 +54,6 @@ int Movement::moveApart()
 
     target = current;
 
-//    if (target.getV() < 0)
-//    {
-//        target.setV(0);
-//    }
-
-//    if (target.getV() >= field->getLength())
-//    {
-//        target.setV(field->getLength() - 1);
-//    }
-
-//    if (target.getH() >= field->getHeight())
-//    {
-//        target.setH(field->getHeight() - 1);
-//    }
-
-//    if (target.getH() < 0)
-//    {
-//        target.setH(0);
-//    }
     bool isEmpty = false;
 
     for (int i = horizontal; i != ((horizontal > 0) ? -1 : 1) && !isEmpty; i += ((horizontal > 0) ? -1 : 1))
