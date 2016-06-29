@@ -32,7 +32,7 @@ public:
     /**
      * @brief возвращает true, если животное готово к размножению
      */
-    bool isReady() noexcept;
+    virtual bool isReady() noexcept;
 
     bool isRuningAway = false;
 
@@ -66,8 +66,8 @@ protected:
     static constexpr double E_f = 165; // 65
     static constexpr int limit = 50; // 50
 
-    double step = 1;
-    double energy = 1;
+    double step = 400;
+    double energy = getMaxEnergy();
     double stamina = 50;
 
 

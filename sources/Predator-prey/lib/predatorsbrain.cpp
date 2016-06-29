@@ -27,6 +27,12 @@ Unit* PredatorsBrain::getTarget(std::list<std::pair< Unit* , double > > && targe
     return find(targets, UnitType::PREY);
 }
 
+bool PredatorsBrain::isReady() noexcept
+{
+    double k = energy / getMaxEnergy();
+    return ((k >= 0.99) && (step >= 300) && (step <= 900));
+}
+
 //Unit* PredatorsBrain::getReproductionTarget(std::list<std::pair< Unit*, double > > & targets)
 //{
 //    double distanceToTarget = 100000;

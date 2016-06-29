@@ -67,6 +67,8 @@ public:
 
     int getCurrentStep() noexcept override;
 
+    void setAge(int age){life_time = age;}
+
     /**
      * @brief метод, реализующий ход животного
      */

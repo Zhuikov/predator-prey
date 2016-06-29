@@ -56,7 +56,7 @@ double Brain::getFoodValue(int step) noexcept
 double Brain::getMaxEnergy() noexcept
 {
     double age = getAge(step) / 7;
-    return ((std::pow(age, 2) + (2 * age)) / (std::pow(age, 2) + 3)) * E_0;
+    return (((std::pow(age, 2) + (2 * age)) / (std::pow(age, 2) + 3)) + 0.01) * E_0;
 }
 
 double Brain::getMoveEnergy(int distance) noexcept
@@ -127,7 +127,7 @@ double Brain::getEnergy() noexcept
 bool Brain::isReady() noexcept
 {
     double k = energy / getMaxEnergy();
-    return ((k > 0.99) && (step >= 70) && (step <= 900));
+    return ((k > 0.90) && (step >= 100) && (step <= 900));
 }
 
 double Brain::getLifeProcessEnergy() noexcept

@@ -12,6 +12,7 @@ public:
     PredatorsBrain();
 
     Unit* getTarget(std::list<std::pair< Unit *, double > > && targets);
+    bool isReady() noexcept;
 };
 
 #endif // PREDATORSBRAIN_H

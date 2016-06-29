@@ -38,7 +38,8 @@ void Model::createPredators() noexcept
         }
         while(field.isEmpty(v, h) == false);
 
-        new Predator(v, h, &field, &units, settings->getMovesWithoutMeal());
+        Predator* predator = new Predator(v, h, &field, &units, settings->getMovesWithoutMeal());
+        predator->setAge(400);
     }
 }
 
@@ -53,7 +54,8 @@ void Model::createPreys() noexcept
         }
         while (field.isEmpty(v, h) == false);
 
-        new Prey(v, h, &field, &units, settings->getMovesWithoutMeal());
+        Prey* prey = new Prey(v, h, &field, &units, settings->getMovesWithoutMeal());
+        prey->setAge(400);
     }
 }
 

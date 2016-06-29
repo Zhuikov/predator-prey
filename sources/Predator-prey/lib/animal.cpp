@@ -53,7 +53,7 @@ void Animal::move() noexcept
 {
     brain->update(life_time);
 
-    sense.setRadius(2 * brain->getMaxSpeed());
+    sense.setRadius(4 * brain->getMaxSpeed());
 
     //по идее этого здесь не нужно, но на всякий случай
     brain->isRuningAway = false;
