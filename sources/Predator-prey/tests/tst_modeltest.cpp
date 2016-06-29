@@ -135,17 +135,27 @@ void ModelTest::AZAZAZ()
     Field field(2, 2);
     Units units;
 
-    Prey* tst_prey = new Prey(0, 1, &field, &units, 1000);
+    Prey* tst_prey = new Prey(0, 0, &field, &units, 1000);
+    tst_prey->setAge(400);
 
-    for (int i = 0; i < 50; i++)
-    {
-        tst_prey->move();
-    }
-
-    new Grass(0, 0, &field, &units);
+    new Grass(0, 1, &field, &units);
+    new Grass(1, 1, &field, &units);
+    new Grass(1, 0, &field, &units);
 
     tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
 }
+
 
 void ModelTest::predatorNoMoveTest()
 {

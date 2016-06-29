@@ -91,14 +91,17 @@ void Movement::setRandomTarget()
         vertical = std::rand() % field->getLength();
         horizontal = std::rand() % field->getHeight();
     }
-    while (field->isEmpty(vertical, horizontal) == false);
+    while (((current.getV() + speed) < vertical ||
+            (current.getV() - speed) > vertical ||
+            (current.getH() + speed) < horizontal ||
+            (current.getH() - speed) < horizontal) == false);
     target.setV(vertical);
     target.setH(horizontal);
 }
 
 void Movement::setSpeed(double speed)
 {
-    this->speed = speed;
+    this->speed = std::fabs(speed);
 }
 
 double Movement::getDistance(Coordinates source, Coordinates dest)

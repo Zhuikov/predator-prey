@@ -18,12 +18,13 @@ void Animal::createChild() noexcept
 {
     int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
     int horizontal = movement.getCurrent().getH() + std::rand() % 3 - 1;
+    bool FLAG = false;
 
     if (field->isEmpty(vertical, horizontal)) {
         setChild(vertical, horizontal);
+        FLAG = true;
     }
     else {
-        bool FLAG = false;
         for (int i = movement.getCurrent().getV() - 1; i <= movement.getCurrent().getV() + 1; i++) {
             for (int j = movement.getCurrent().getH() - 1; j <= movement.getCurrent().getH() + 1; j++) {
                 if (field->isEmpty(i, j)) {
@@ -36,7 +37,9 @@ void Animal::createChild() noexcept
         }
     }
 
-    brain->reproduct();
+    if (FLAG == true) {
+        brain->reproduct();
+    }
 }
 
 Coordinates Animal::getPlace() noexcept
