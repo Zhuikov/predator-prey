@@ -2,7 +2,6 @@
 
 PredatorsBrain::PredatorsBrain()
 {
-
 }
 
 Unit* PredatorsBrain::getTarget(std::list<std::pair< Unit* , double > > && targets)

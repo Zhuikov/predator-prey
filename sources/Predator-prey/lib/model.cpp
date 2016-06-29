@@ -29,7 +29,7 @@ bool Model::isEnd() const noexcept
 
 void Model::createPredators() noexcept
 {
-    for(int i = 0; i < settings->getNumOfPredators(); i++) {
+    for (int i = 0; i < settings->getNumOfPredators(); i++) {
         int v = 0;
         int h = 0;
         do {
@@ -45,7 +45,7 @@ void Model::createPredators() noexcept
 
 void Model::createPreys() noexcept
 {
-    for(int i = 0; i < settings->getNumOfPreys(); i++) {
+    for (int i = 0; i < settings->getNumOfPreys(); i++) {
         int v = 0;
         int h = 0;
         do {
