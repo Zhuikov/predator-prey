@@ -11,7 +11,7 @@ void Brain::eat(int targetsAge) noexcept
 
 void Brain::reproduct() noexcept
 {
-    energy = getMaxEnergy() * 0.5;
+    energy = getMaxEnergy() * 0.9;
 }
 
 void Brain::move(int distance) noexcept
@@ -95,7 +95,7 @@ double Brain::getMaxSpeed() noexcept
 
 double Brain::getMaxAvailableSpeed() noexcept
 {
-    double speed = getMaxSpeed();
+    double speed = getMaxSpeed(); /// вот тут стамина возвращается = 1, если это ребенок
     if (speed < stamina)
     {
         return speed;
@@ -127,7 +127,7 @@ double Brain::getEnergy() noexcept
 bool Brain::isReady() noexcept
 {
     double k = energy / getMaxEnergy();
-    return ((k > 0.99) && (step >= 200) && (step <= 900));
+    return ((k > 0.99) && (step >= 70) && (step <= 900));
 }
 
 double Brain::getLifeProcessEnergy() noexcept

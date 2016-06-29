@@ -32,7 +32,6 @@ public:
     unsigned int getGrassNum() const noexcept { return units.grassNum; }
     void movePreys() noexcept;
     void movePredators() noexcept;
-    void move() noexcept;
     bool isEnd() const noexcept;
     void createPredators() noexcept;
     void createPreys() noexcept;

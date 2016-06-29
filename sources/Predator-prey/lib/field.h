@@ -34,7 +34,7 @@ public:
     /**
      * @brief MIN_FIELD_SIZE - минимальная длина и высота поля
      */
-    static constexpr int MIN_FIELD_SIZE = 10;
+    static constexpr int MIN_FIELD_SIZE = 2;
 
     /**
      * @brief конструктор с параметрами, создает поле указанных размеров

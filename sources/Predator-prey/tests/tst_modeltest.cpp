@@ -29,6 +29,8 @@ private Q_SLOTS:
     void fieldTest();
     void settingsTest();
 
+    void AZAZAZ();
+
     void predatorNoMoveTest();
     void predatorCreateTest();
     void predatorMoveKillTest();
@@ -126,6 +128,23 @@ void ModelTest::settingsTest()
     QVERIFY_EXCEPTION_THROWN(settings.setFieldHeight(-1), BadFieldHeight);
     QVERIFY_EXCEPTION_THROWN(settings.setFieldLength(-1), BadFieldLength);
     QVERIFY_EXCEPTION_THROWN(settings.setNumOfPredators(-1), BadNum);
+}
+
+void ModelTest::AZAZAZ()
+{
+    Field field(2, 2);
+    Units units;
+
+    Prey* tst_prey = new Prey(0, 1, &field, &units, 1000);
+
+    for (int i = 0; i < 50; i++)
+    {
+        tst_prey->move();
+    }
+
+    new Grass(0, 0, &field, &units);
+
+    tst_prey->move();
 }
 
 void ModelTest::predatorNoMoveTest()
@@ -354,8 +373,13 @@ void ModelTest::SFTest()
 
     Model model(&settings);
 
-    while (!model.isEnd()) {
-        model.move();
+    while (!model.isEnd())
+    {
+        model.movePredators();
+        model.movePreys();
+        if (model.getStep() % settings.getGrowInterval() == 0) {
+            model.createGrass();
+        }
     }
 }
 
