@@ -24,16 +24,16 @@ StatusFrame::StatusFrame(QWidget* parent, Model* model) : QFrame(parent)
 //    time_number_label->resize(65, 30);
 
     predators = new QLabel(this);
-    fillLabel(predators, "Хищники", 10, 10);
+    fillLabel(predators, "Predators", 10, 10);
 
     preys = new QLabel(this);
-    fillLabel(preys, "Жертвы", 18, 90);
+    fillLabel(preys, "Preys", 35, 90);
 
     grass = new QLabel(this);
-    fillLabel(grass, "Трава", 33, 170);
+    fillLabel(grass, "Grass", 43, 170);
 
     step = new QLabel(this);
-    fillLabel(step, "Шаг", 52, 250);
+    fillLabel(step, "Step", 50, 250);
 
 //    day = new QLabel(this);
 //    fillLabel(day, "День", 48, 250);
