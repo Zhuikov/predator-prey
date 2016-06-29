@@ -52,27 +52,40 @@ int Movement::moveApart()
     int horizontal = (current.getH() - target.getH()) * speed;
     int vertical = (current.getV() - target.getV()) * speed;
 
-    target.setH(current.getH() + horizontal);
-    target.setV(current.getV() + vertical);
+    target = current;
 
-    if (target.getV() < 0)
-    {
-        target.setV(0);
-    }
+//    if (target.getV() < 0)
+//    {
+//        target.setV(0);
+//    }
 
-    if (target.getV() >= field->getLength())
-    {
-        target.setV(field->getLength() - 1);
-    }
+//    if (target.getV() >= field->getLength())
+//    {
+//        target.setV(field->getLength() - 1);
+//    }
 
-    if (target.getH() >= field->getHeight())
-    {
-        target.setH(field->getHeight() - 1);
-    }
+//    if (target.getH() >= field->getHeight())
+//    {
+//        target.setH(field->getHeight() - 1);
+//    }
 
-    if (target.getH() < 0)
+//    if (target.getH() < 0)
+//    {
+//        target.setH(0);
+//    }
+    bool isEmpty = false;
+
+    for (int i = horizontal; i != ((horizontal > 0) ? -1 : 1) && !isEmpty; i += ((horizontal > 0) ? -1 : 1))
     {
-        target.setH(0);
+        for (int j = vertical; j != ((vertical > 0) ? -1 : 1) && !isEmpty; j += ((vertical > 0) ? -1 : 1))
+        {
+            isEmpty = field->isEmpty(current.getV() + j, current.getH() + i);
+            if (isEmpty)
+            {
+                target.setH(current.getH() + i);
+                target.setV(current.getV() + j);
+            }
+        }
     }
 
     int distance = move();
