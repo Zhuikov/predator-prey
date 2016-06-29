@@ -61,6 +61,10 @@ void Model::createPreys() noexcept
 
 void Model::createGrass() noexcept
 {
+    if (settings->getNumOfGrass() > (field.getHeight() * field.getLength() -
+            units.predatorsNum - units.predatorsNum - units.grassNum)) {
+        return;
+    }
     for (int i = 0; i < settings->getNumOfGrass(); i++) {
         int v = 0;
         int h = 0;

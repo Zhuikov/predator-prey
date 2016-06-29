@@ -15,10 +15,13 @@ StatusFrame::StatusFrame(QWidget* parent, Model* model) : QFrame(parent)
     preys_number_label->resize(50, 30);
     grass_number_label = new QLabel(this);
     grass_number_label->resize(50, 30);
-    day_number_label = new QLabel(this);
-    day_number_label->resize(50, 30);
-    time_number_label = new QLabel(this);
-    time_number_label->resize(65, 30);
+    step_number_label = new QLabel(this);
+    step_number_label->resize(50, 30);
+
+//    day_number_label = new QLabel(this);
+//    day_number_label->resize(50, 30);
+//    time_number_label = new QLabel(this);
+//    time_number_label->resize(65, 30);
 
     predators = new QLabel(this);
     fillLabel(predators, "Хищники", 10, 10);
@@ -29,11 +32,14 @@ StatusFrame::StatusFrame(QWidget* parent, Model* model) : QFrame(parent)
     grass = new QLabel(this);
     fillLabel(grass, "Трава", 33, 170);
 
-    day = new QLabel(this);
-    fillLabel(day, "День", 48, 250);
+    step = new QLabel(this);
+    fillLabel(step, "Шаг", 52, 250);
 
-    time = new QLabel(this);
-    fillLabel(time, "Время", 43, 330);
+//    day = new QLabel(this);
+//    fillLabel(day, "День", 48, 250);
+
+//    time = new QLabel(this);
+//    fillLabel(time, "Время", 43, 330);
 }
 
 void StatusFrame::fillLabel(QLabel* label, QString text, int horizontal, int vertical)
@@ -70,22 +76,25 @@ void StatusFrame::drawStatus()
         fillLabel(grass_number_label, output_string, 60, 205);
     }
 
-    output_string = QString::number(model->getDay(), 10);
-    if (model->getDay() < 10) {
-        fillLabel(day_number_label, output_string, 68, 285);
-    }
-    else {
-        fillLabel(day_number_label, output_string, 63, 285);
-    }
+    output_string = QString::number(model->getStep(), 10);
+    fillLabel(step_number_label, output_string, 60, 285);
 
-    output_string = QString::number(model->getTime(), 10);
-    if (model->getTime() < 10) {
-        output_string = "0" + output_string + ":00";
-    }
-    else {
-        output_string = output_string + ":00";
-    }
-    fillLabel(time_number_label, output_string, 47, 365);
+//    output_string = QString::number(model->getDay(), 10);
+//    if (model->getDay() < 10) {
+//        fillLabel(day_number_label, output_string, 68, 285);
+//    }
+//    else {
+//        fillLabel(day_number_label, output_string, 63, 285);
+//    }
+
+//    output_string = QString::number(model->getTime(), 10);
+//    if (model->getTime() < 10) {
+//        output_string = "0" + output_string + ":00";
+//    }
+//    else {
+//        output_string = output_string + ":00";
+//    }
+//    fillLabel(time_number_label, output_string, 47, 365);
 }
 
 void StatusFrame::paintEvent(QPaintEvent* event)
