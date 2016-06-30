@@ -95,7 +95,7 @@ double Brain::getMaxSpeed() noexcept
 
 double Brain::getMaxAvailableSpeed() noexcept
 {
-    double speed = getMaxSpeed(); /// вот тут стамина возвращается = 1, если это ребенок
+    double speed = getMaxSpeed();
     if (speed < stamina)
     {
         return speed;
@@ -122,12 +122,6 @@ double Brain::getComfortableSpeed() noexcept
 double Brain::getEnergy() noexcept
 {
     return energy;
-}
-
-bool Brain::isReady() noexcept
-{
-    double k = energy / getMaxEnergy();
-    return ((k > 0.90) && (step >= 100) && (step <= 900));
 }
 
 double Brain::getLifeProcessEnergy() noexcept

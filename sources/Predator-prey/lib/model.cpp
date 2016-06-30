@@ -7,9 +7,7 @@
 
 Model::Model(Settings *settings, int seed) noexcept:
     settings(settings),
-    model_time(0),
-    model_day(0),
-    has_changed(false),
+    model_step(0),
     field(settings->getFieldHeight(), settings->getFieldLength())
 {
     srand(seed);
@@ -28,7 +26,7 @@ bool Model::isEnd() const noexcept
 void Model::createPredators() noexcept
 {
     if (settings->getNumOfPredators() > (field.getHeight() * field.getLength() -
-            settings->getNumOfPreys() - settings->getNumOfPredators() - settings->getNumOfGrass()))
+        settings->getNumOfPreys() - settings->getNumOfPredators() - settings->getNumOfGrass()))
     {
         units.predatorsNum = 0;
         return;
@@ -51,7 +49,8 @@ void Model::createPredators() noexcept
 void Model::createPreys() noexcept
 {
     if (settings->getNumOfPreys() > (field.getHeight() * field.getLength() -
-        settings->getNumOfPreys() - settings->getNumOfPredators() - settings->getNumOfGrass())){
+        settings->getNumOfPreys() - settings->getNumOfPredators() - settings->getNumOfGrass()))
+    {
         units.preysNum = 0;
         return;
     }
@@ -73,7 +72,8 @@ void Model::createPreys() noexcept
 void Model::createGrass() noexcept
 {
     if (settings->getNumOfGrass() > (field.getHeight() * field.getLength() -
-            units.preysNum - units.predatorsNum - units.grassNum)) {
+        units.preysNum - units.predatorsNum - units.grassNum))
+    {
         return;
     }
     for (int i = 0; i < settings->getNumOfGrass(); i++) {
@@ -92,18 +92,15 @@ void Model::createGrass() noexcept
 
 void Model::movePreys() noexcept
 {
-    incModelTime();
     for (unsigned int i = 0; i < units.preys.size(); i++) {
         if (units.preys[i]->exist == true) {
                 units.preys[i]->move();
         }
     }
-
 }
 
 void Model::movePredators() noexcept
 {
-    incModelTime();
     for (unsigned int i = 0; i < units.predators.size(); i++) {
         if (units.predators[i]->exist == true) {
                 units.predators[i]->move();
@@ -111,16 +108,12 @@ void Model::movePredators() noexcept
     }
 }
 
-void Model::incModelTime() noexcept
+void Model::move() noexcept
 {
-    if (this->has_changed == false) {
-        this->model_time ++;
-        this->has_changed = true;
+    movePredators();
+    movePreys();
+    if (model_step % settings->getGrowInterval() == 0) {
+        createGrass();
     }
-    else has_changed = false;
-
-    if (this->model_time > 23) {
-        this->model_day ++;
-        this->model_time = 0;
-    }
+    model_step ++;
 }

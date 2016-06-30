@@ -16,7 +16,7 @@ public:
      */
     Coordinates current;
 
-    Coordinates getPlace() noexcept { return current; }
+    Coordinates getPlace() noexcept override { return current; }
 
     int getCurrentStep() noexcept override;
 };

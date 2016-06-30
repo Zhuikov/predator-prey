@@ -16,16 +16,6 @@ public:
     virtual Field* getField() noexcept = 0;
 
     /**
-     * @brief метод, возвращающий текущее время
-     */
-    virtual int getTime() const noexcept = 0;
-
-    /**
-     * @brief метод, вовращающий текущий день
-     */
-    virtual int getDay() const noexcept = 0;
-
-    /**
      * @brief метод, возвращающий текущий шаг
      */
     virtual int getStep() const noexcept = 0;
@@ -75,8 +65,10 @@ public:
      */
     virtual void movePredators() noexcept = 0;
 
-    void saveModel();
-    void loadModel();
+    /**
+     * @brief метод, реализующий один шаг модели
+     */
+    virtual void move() noexcept = 0;
 
     virtual ~ModelAPI() {}
 };

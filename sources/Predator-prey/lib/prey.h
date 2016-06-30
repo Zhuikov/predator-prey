@@ -13,12 +13,7 @@ protected:
 
     virtual void killTarget() noexcept override;
 
-    /**
-     * @brief метод, создающий жертву и записывающий ее в вектор
-     */
-
     virtual void setChild(const int v, const int h) noexcept override;
-
 
 public:
 
@@ -31,7 +26,7 @@ public:
      */
     Prey(const int v, const int h, Field* field_pointer, Units* units_pointer, int TTL);
 
-    virtual ~Prey();
+    virtual ~Prey() override;
 
 };
 

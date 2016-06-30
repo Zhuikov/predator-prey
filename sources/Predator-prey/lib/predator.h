@@ -27,7 +27,7 @@ public:
      */
     Predator(const int v, const int h, Field* field_pointer, Units* units_pointer, int time_of_life) noexcept;
 
-    virtual ~Predator();
+    virtual ~Predator() override;
 };
 
 #endif // PREDATOR_H

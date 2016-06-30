@@ -23,7 +23,6 @@ SOURCES += \
     movement.cpp \
     sense.cpp \
     brain.cpp \
-    unit.cpp \
     preysbrain.cpp \
     predatorsbrain.cpp
 

@@ -58,7 +58,6 @@ void Animal::move() noexcept
 
     sense.setRadius(4 * brain->getMaxSpeed());
 
-    //по идее этого здесь не нужно, но на всякий случай
     brain->isRuningAway = false;
     target = nullptr;
 

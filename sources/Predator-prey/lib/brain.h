@@ -11,7 +11,7 @@ public:
     /**
      * @brief метод, возвращающий наиболее подходящую цель из данного списка
      */
-    virtual Unit* getTarget(std::list< std::pair< Unit*, double > > && targets) = 0;
+    virtual Unit* getTarget(std::list< std::pair< Unit*, double > > && targets) noexcept = 0;
 
     void eat(int targetsAge) noexcept;
 
@@ -32,7 +32,7 @@ public:
     /**
      * @brief возвращает true, если животное готово к размножению
      */
-    virtual bool isReady() noexcept;
+    virtual bool isReady() noexcept = 0;
 
     bool isRuningAway = false;
 
