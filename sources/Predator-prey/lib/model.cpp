@@ -23,8 +23,8 @@ Model::Model(Settings *settings, int seed) noexcept:
 
 bool Model::isEnd() const noexcept
 {
-   return units.predatorsNum == 0 || units.preysNum == 0;
-
+    return ((units.predatorsNum == 0 || units.preysNum == 0) ||
+            (getStep() == 100000));
 }
 
 void Model::createPredators() noexcept
