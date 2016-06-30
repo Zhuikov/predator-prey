@@ -29,6 +29,11 @@ bool Model::isEnd() const noexcept
 
 void Model::createPredators() noexcept
 {
+    if (settings->getNumOfPredators() > (field.getHeight() * field.getLength() -
+            units.predatorsNum - units.predatorsNum - units.grassNum))
+    {
+        return;
+    }
     for (int i = 0; i < settings->getNumOfPredators(); i++) {
         int v = 0;
         int h = 0;
@@ -45,6 +50,11 @@ void Model::createPredators() noexcept
 
 void Model::createPreys() noexcept
 {
+    if (settings->getNumOfPreys() > (field.getHeight() * field.getLength() -
+        units.predatorsNum - units.predatorsNum - units.grassNum))
+    {
+        return;
+    }
     for (int i = 0; i < settings->getNumOfPreys(); i++) {
         int v = 0;
         int h = 0;
