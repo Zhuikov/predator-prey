@@ -16,8 +16,6 @@ Model::Model(Settings *settings, int seed) noexcept:
     createPredators();
     createPreys();
     createGrass();
-    units.predatorsNum = settings->getNumOfPredators();
-    units.preysNum = settings->getNumOfPreys();
 }
 
 
@@ -32,6 +30,7 @@ void Model::createPredators() noexcept
     if (settings->getNumOfPredators() > (field.getHeight() * field.getLength() -
             units.predatorsNum - units.predatorsNum - units.grassNum))
     {
+        units.predatorsNum = 0;
         return;
     }
     for (int i = 0; i < settings->getNumOfPredators(); i++) {
@@ -46,6 +45,7 @@ void Model::createPredators() noexcept
         Predator* predator = new Predator(v, h, &field, &units, settings->getMovesWithoutMeal());
         predator->setAge(400);
     }
+    units.predatorsNum = settings->getNumOfPredators();
 }
 
 void Model::createPreys() noexcept
@@ -53,6 +53,7 @@ void Model::createPreys() noexcept
     if (settings->getNumOfPreys() > (field.getHeight() * field.getLength() -
         units.predatorsNum - units.predatorsNum - units.grassNum))
     {
+        units.preysNum = 0;
         return;
     }
     for (int i = 0; i < settings->getNumOfPreys(); i++) {
@@ -67,6 +68,7 @@ void Model::createPreys() noexcept
         Prey* prey = new Prey(v, h, &field, &units, settings->getMovesWithoutMeal());
         prey->setAge(400);
     }
+    units.preysNum = settings->getNumOfPreys();
 }
 
 void Model::createGrass() noexcept
