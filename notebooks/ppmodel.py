@@ -1,7 +1,7 @@
 import subprocess
 
 
-def start_model(mode: object, height: object, width: object, n_preys: object, n_predators: object, n_grass: object, time: object, seed: object) -> object:
+def start_model(mode: object, height: object, width: object, n_predators: object, n_preys: object, n_grass: object, time: object, seed: object) -> object:
     height = str(height)
     width = str(width)
     n_preys = str(n_preys)
