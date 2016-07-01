@@ -15,15 +15,15 @@ public:
      */
     virtual Field* getField() noexcept = 0;
 
-    /**
-     * @brief метод, возвращающий текущее время
-     */
-    virtual int getTime() const noexcept = 0;
+//    /**
+//     * @brief метод, возвращающий текущее время
+//     */
+//    virtual int getTime() const noexcept = 0;
 
-    /**
-     * @brief метод, вовращающий текущий день
-     */
-    virtual int getDay() const noexcept = 0;
+//    /**
+//     * @brief метод, вовращающий текущий день
+//     */
+//    virtual int getDay() const noexcept = 0;
 
     /**
      * @brief метод, возвращающий текущий шаг
@@ -74,6 +74,8 @@ public:
      * @brief метод, передвигающий хищников
      */
     virtual void movePredators() noexcept = 0;
+
+    virtual void move() noexcept = 0;
 
     void saveModel();
     void loadModel();

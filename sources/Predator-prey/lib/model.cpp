@@ -7,9 +7,10 @@
 
 Model::Model(Settings *settings, int seed) noexcept:
     settings(settings),
-    model_time(0),
-    model_day(0),
-    has_changed(false),
+    model_step(0),
+   // model_time(0),
+   // model_day(0),
+   // has_changed(false),
     field(settings->getFieldHeight(), settings->getFieldLength())
 {
     srand(seed);
@@ -90,9 +91,19 @@ void Model::createGrass() noexcept
     units.grassNum += settings->getNumOfGrass();
 }
 
+void Model::move() noexcept
+{
+    model_step ++;
+    movePredators();
+    movePreys();
+    if (getStep() % settings->getGrowInterval() == 0) {
+        createGrass();
+    }
+}
+
 void Model::movePreys() noexcept
 {
-    incModelTime();
+//    incModelTime();
     for (unsigned int i = 0; i < units.preys.size(); i++) {
         if (units.preys[i]->exist == true) {
                 units.preys[i]->move();
@@ -103,7 +114,7 @@ void Model::movePreys() noexcept
 
 void Model::movePredators() noexcept
 {
-    incModelTime();
+//    incModelTime();
     for (unsigned int i = 0; i < units.predators.size(); i++) {
         if (units.predators[i]->exist == true) {
                 units.predators[i]->move();
@@ -111,16 +122,17 @@ void Model::movePredators() noexcept
     }
 }
 
-void Model::incModelTime() noexcept
-{
-    if (this->has_changed == false) {
-        this->model_time ++;
-        this->has_changed = true;
-    }
-    else has_changed = false;
+//void Model::incModelTime() noexcept
+//{
+//    model_step ++;
+//    if (this->has_changed == false) {
+//        this->model_time ++;
+//        this->has_changed = true;
+//    }
+//    else has_changed = false;
 
-    if (this->model_time > 23) {
-        this->model_day ++;
-        this->model_time = 0;
-    }
-}
+//    if (this->model_time > 23) {
+//        this->model_day ++;
+//        this->model_time = 0;
+//    }
+//}

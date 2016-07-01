@@ -68,11 +68,12 @@ void ModelWindow::startModel()
 
 void ModelWindow::moveModel()
 {
-    model->movePredators();
-    model->movePreys();
-    if (model->getStep() % settings->getGrowInterval() == 0) {
-        model->createGrass();
-    }
+//    model->movePredators();
+//    model->movePreys();
+//    if (model->getStep() % settings->getGrowInterval() == 0) {
+//        model->createGrass();
+//    }
+    model->move();
     field->update();
     status->drawStatus();
     if (model->isEnd() == true) {

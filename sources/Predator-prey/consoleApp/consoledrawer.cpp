@@ -31,16 +31,16 @@ void ConsoleDrawer::drawHead()
         std::cout << '*';
     }
 
-    int day = this->model->getDay();
-    std::cout << "День ";
-    if (day < 10) std::cout << '0' << day << ' ';
-        else std::cout << day << ' ';
+//    int day = this->model->getDay();
+//    std::cout << "День ";
+//    if (day < 10) std::cout << '0' << day << ' ';
+//        else std::cout << day << ' ';
 
-    int time = this->model->getTime();
-    std::cout << "Время ";
-    if (time < 10) std::cout << '0' << time;
-        else std::cout << time;
-    std::cout << ':' << "00";
+//    int time = this->model->getTime();
+//    std::cout << "Время ";
+//    if (time < 10) std::cout << '0' << time;
+//        else std::cout << time;
+//    std::cout << ':' << "00";
 
     for (int i = 0; i < num_of_stars_right; i++) {
         std::cout << '*';
