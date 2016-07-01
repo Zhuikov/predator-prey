@@ -13,5 +13,5 @@ Grass::Grass(const int v, const int h, Field* field, Units* units_pointer)
 
 int Grass::getCurrentStep() noexcept
 {
-    return 100; //было 428
+    return 100; // 428
 }

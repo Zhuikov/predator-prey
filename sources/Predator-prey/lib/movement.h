@@ -49,7 +49,7 @@ private:
     double getDistance(Coordinates source, Coordinates dest);
 
     /**
-     * @brief метод, округляющий ....??                                    <--------------------------------
+     * @brief метод, округляющий
      */
     int round(double number);
 

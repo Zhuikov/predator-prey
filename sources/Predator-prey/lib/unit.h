@@ -38,7 +38,9 @@ public:
      */
     virtual Coordinates getPlace() noexcept = 0;
 
-
+    /**
+     * @brief метод, возвращающий текущий возраст юнита в ходах
+     */
     virtual int getCurrentStep() noexcept = 0;
 
     /**

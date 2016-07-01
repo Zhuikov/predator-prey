@@ -16,30 +16,19 @@ StatusFrame::StatusFrame(QWidget* parent, Model* model) : QFrame(parent)
     grass_number_label = new QLabel(this);
     grass_number_label->resize(50, 30);
     step_number_label = new QLabel(this);
-    step_number_label->resize(50, 30);
-
-//    day_number_label = new QLabel(this);
-//    day_number_label->resize(50, 30);
-//    time_number_label = new QLabel(this);
-//    time_number_label->resize(65, 30);
+    step_number_label->resize(70, 30);
 
     predators = new QLabel(this);
     fillLabel(predators, "Predators", 10, 10);
 
     preys = new QLabel(this);
-    fillLabel(preys, "Preys", 35, 90);
+    fillLabel(preys, "Preys", 43, 90);
 
     grass = new QLabel(this);
     fillLabel(grass, "Grass", 43, 170);
 
     step = new QLabel(this);
     fillLabel(step, "Step", 50, 250);
-
-//    day = new QLabel(this);
-//    fillLabel(day, "День", 48, 250);
-
-//    time = new QLabel(this);
-//    fillLabel(time, "Время", 43, 330);
 }
 
 void StatusFrame::fillLabel(QLabel* label, QString text, int horizontal, int vertical)
@@ -78,23 +67,6 @@ void StatusFrame::drawStatus()
 
     output_string = QString::number(model->getStep(), 10);
     fillLabel(step_number_label, output_string, 60, 285);
-
-//    output_string = QString::number(model->getDay(), 10);
-//    if (model->getDay() < 10) {
-//        fillLabel(day_number_label, output_string, 68, 285);
-//    }
-//    else {
-//        fillLabel(day_number_label, output_string, 63, 285);
-//    }
-
-//    output_string = QString::number(model->getTime(), 10);
-//    if (model->getTime() < 10) {
-//        output_string = "0" + output_string + ":00";
-//    }
-//    else {
-//        output_string = output_string + ":00";
-//    }
-//    fillLabel(time_number_label, output_string, 47, 365);
 }
 
 void StatusFrame::paintEvent(QPaintEvent* event)
@@ -107,7 +79,7 @@ void StatusFrame::paintEvent(QPaintEvent* event)
     brush.setColor(Qt::red);
     painter.fillRect(115, 16, 25, 15, brush);
     brush.setColor(Qt::blue);
-    painter.fillRect(110, 96, 25, 15, brush);
+    painter.fillRect(107, 96, 25, 15, brush);
     brush.setColor(Qt::green);
-    painter.fillRect(105, 176, 25, 15, brush);
+    painter.fillRect(107, 176, 25, 15, brush);
 }

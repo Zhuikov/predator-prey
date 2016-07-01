@@ -29,8 +29,10 @@ SeedWindow::SeedWindow(ModelWindow* parent) : QDialog(parent, Qt::WindowTitleHin
     seed_line = new QLineEdit(this);
     seed_line->move(220, 14);
     seed_line->resize(80, 20);
-    seed_line->setStyleSheet("font-weight: bold;"
-                        "font-size: 14px;");
+    seed_line->setStyleSheet(
+               "font-weight: bold;"
+               "font-size: 14px;"
+               "color: #122faa");
     QString number = QString::number(parent->seed);
     seed_line->setText(number);
 }

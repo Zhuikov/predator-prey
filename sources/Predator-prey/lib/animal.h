@@ -64,10 +64,12 @@ public:
     Animal(const int v, const int h, Field* field_pointer, Units* units_pointer, int TTL);
 
     Coordinates getPlace() noexcept override;
-
     int getCurrentStep() noexcept override;
 
-    void setAge(int age){life_time = age;}
+    /**
+     * @brief метод, устанавливающий возраст животного
+     */
+    void setAge(int age) { life_time = age; }
 
     /**
      * @brief метод, реализующий ход животного

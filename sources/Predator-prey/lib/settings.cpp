@@ -17,7 +17,7 @@ Settings::Settings(int field_length_, int field_height_, int num_of_predators_, 
 int Settings::getMaxUnits() const
 {
     int max_num;
-    max_num = std::max(field_height, field_length) * 2;
+    max_num = std::max(field_height, field_length) * 22; // 2
 
     return max_num;
 }
