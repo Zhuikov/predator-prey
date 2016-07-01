@@ -7,7 +7,7 @@ ModelWindow::ModelWindow(QWidget* parent, Settings* settings) : QWidget(parent, 
     this->setFixedSize(WINDOW_SIZE);
     this->setWindowTitle("Predator-prey");
 
-    model = new Model(this->settings);
+    model = new Model(this->settings, seed);
 
     QPixmap background(":/settings_texture2.jpg");
     QPalette pal;
@@ -78,10 +78,15 @@ void ModelWindow::moveModel()
 
 void ModelWindow::generateModel()
 {
+    SeedWindow* seed_window = new SeedWindow(this);
+    seed_window->exec();
+    delete seed_window;
+
+    delete model;
     delete field;
     delete status;
-    delete model;
-    model = new Model(settings);
+
+    model = new Model(settings, seed);
     field = new FieldFrame(this, model->getField());
     status = new StatusFrame(this, model);
     field->show();
