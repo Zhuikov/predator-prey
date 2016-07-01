@@ -1,6 +1,5 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
-//#include "field.h"
 #include "badfield.h"
 #include "badnum.h"
 

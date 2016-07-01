@@ -32,7 +32,7 @@ public:
     /**
      * @brief возвращает true, если животное готово к размножению
      */
-    virtual bool isReady() noexcept;
+    virtual bool isReady() noexcept = 0;
 
     bool isRuningAway = false;
 

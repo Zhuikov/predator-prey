@@ -13,9 +13,9 @@ void ConsoleDrawer::showModel()
 
 void ConsoleDrawer::showResult()
 {
-    if (model->getPredatorsNum() == 0 && model->getPreysNum() > 0) std::cout << "Жертвы убежали от хищников!";
-    else if (model->getPredatorsNum() > 0 && model->getPreysNum() == 0) std::cout << "Хищники съели всех жертв!";
-    else if (model->getPredatorsNum() == 0 && model->getPreysNum() == 0) std::cout << "Ничья!";
+    if (model->getPredatorsNum() == 0 && model->getPreysNum() > 0) std::cout << "Preys have run from predators!";
+    else if (model->getPredatorsNum() > 0 && model->getPreysNum() == 0) std::cout << "Predators have eaten all preys";
+    else if (model->getPredatorsNum() == 0 && model->getPreysNum() == 0) std::cout << "Draw";
 
     std::cout << std::endl << std::endl;
 
@@ -23,7 +23,7 @@ void ConsoleDrawer::showResult()
 
 void ConsoleDrawer::drawHead()
 {
-    int lenght_of_string = std::strlen("День ХХ Время HH:MM");
+    int lenght_of_string = std::strlen("Step XXX");
     int num_of_stars_left = (this->field->getLength() * 2 - lenght_of_string) / 2;
     int num_of_stars_right = this->field->getLength() * 2 - lenght_of_string - num_of_stars_left;
 
@@ -31,16 +31,9 @@ void ConsoleDrawer::drawHead()
         std::cout << '*';
     }
 
-//    int day = this->model->getDay();
-//    std::cout << "День ";
-//    if (day < 10) std::cout << '0' << day << ' ';
-//        else std::cout << day << ' ';
-
-//    int time = this->model->getTime();
-//    std::cout << "Время ";
-//    if (time < 10) std::cout << '0' << time;
-//        else std::cout << time;
-//    std::cout << ':' << "00";
+    int step = this->model->getStep();
+    std::cout << "Step ";
+    std::cout << step;
 
     for (int i = 0; i < num_of_stars_right; i++) {
         std::cout << '*';
@@ -51,7 +44,7 @@ void ConsoleDrawer::drawHead()
 
 void ConsoleDrawer::drawStatistics()
 {
-    int length_of_string = std::strlen("Хищники XX Жертвы XX");
+    int length_of_string = std::strlen("Predators XX Preys XX");
     int num_of_stars_left = (this->field->getLength() * 2 - length_of_string) / 2;
     int num_of_stars_right = this->field->getLength() * 2 - length_of_string - num_of_stars_left;
 
@@ -59,12 +52,12 @@ void ConsoleDrawer::drawStatistics()
         std::cout << '*';
 
     int predators = this->model->getPredatorsNum();
-    std::cout << "Хищники ";
+    std::cout << "Predators ";
     if (predators >= 10) std::cout << predators;
         else std::cout << '0' << predators;
 
     int preys = this->model->getPreysNum();
-    std::cout << " Жертвы ";
+    std::cout << " Preys ";
     if (preys >= 10) std::cout << preys;
         else std::cout << '0' << preys;
 
@@ -77,8 +70,8 @@ void ConsoleDrawer::drawStatistics()
 
 void ConsoleDrawer::drawLegend()
 {
-    std::cout << "X - хищники" << std::endl;
-    std::cout << "O - жертвы" << std::endl;
+    std::cout << "X - predators" << std::endl;
+    std::cout << "O - preys" << std::endl;
 }
 
 void ConsoleDrawer::drawField()

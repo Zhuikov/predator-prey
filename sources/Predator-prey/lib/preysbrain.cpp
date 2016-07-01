@@ -35,6 +35,12 @@ Unit* PreysBrain::getTarget(std::list< std::pair< Unit*, double > > && targets)
     return result;
 }
 
+bool PreysBrain::isReady() noexcept
+{
+    double k = energy / getMaxEnergy();
+    return ((k > 0.90) && (step >= 100) && (step <= 900));
+}
+
 //Unit* PreysBrain::getReproductionTarget(std::list<std::pair< Unit*, double> > & targets)
 //{
 //    double distanceToTarget = 100000;

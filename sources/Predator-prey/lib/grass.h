@@ -15,9 +15,7 @@ public:
      * @brief current - координаты корма
      */
     Coordinates current;
-
     Coordinates getPlace() noexcept { return current; }
-
     int getCurrentStep() noexcept override;
 };
 

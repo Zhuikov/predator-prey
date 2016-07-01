@@ -38,7 +38,9 @@ public:
      */
     virtual Coordinates getPlace() noexcept = 0;
 
-
+    /**
+     * @brief метод, возвоащающий возраст юнита в шагах
+     */
     virtual int getCurrentStep() noexcept = 0;
 
     /**

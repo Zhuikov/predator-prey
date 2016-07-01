@@ -124,12 +124,6 @@ double Brain::getEnergy() noexcept
     return energy;
 }
 
-bool Brain::isReady() noexcept
-{
-    double k = energy / getMaxEnergy();
-    return ((k > 0.90) && (step >= 100) && (step <= 900));
-}
-
 double Brain::getLifeProcessEnergy() noexcept
 {
     double age = getAge(step) / 6;

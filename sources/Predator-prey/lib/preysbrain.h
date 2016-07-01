@@ -11,7 +11,8 @@ protected:
 public:
     PreysBrain();
 
-    Unit* getTarget(std::list<std::pair< Unit *, double > > && targets);
+    Unit* getTarget(std::list<std::pair< Unit *, double > > && targets) override;
+    bool isReady() noexcept override;
 };
 
 #endif // PREYSBRAIN_H

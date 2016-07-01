@@ -281,19 +281,13 @@ void ModelTest::modelInitializeTest()
     Settings sett;
     Model model(&sett);
 
-//    QCOMPARE(model.getDay(), 0);
-//    QCOMPARE(model.getTime(), 0);
+    QCOMPARE(model.getStep(), 0);
 
-    model.movePreys();
-    model.movePredators();
-//    QCOMPARE(model.getDay(), 0);
-//    QCOMPARE(model.getTime(), 1);
+    model.move();
+    QCOMPARE(model.getStep(), 1);
 
-    model.movePredators();
-    model.movePreys();
-//    QCOMPARE(model.getTime(), 2);
-
-    //QCOMPARE(model.isEnd(), false);
+    model.move();
+    QCOMPARE(model.getStep(), 2);
 }
 
 //TODO: слишком общее название для такого длинного теста
@@ -385,11 +379,7 @@ void ModelTest::SFTest()
 
     while (!model.isEnd())
     {
-        model.movePredators();
-        model.movePreys();
-        if (model.getStep() % settings.getGrowInterval() == 0) {
-            model.createGrass();
-        }
+        model.move();
     }
 }
 
