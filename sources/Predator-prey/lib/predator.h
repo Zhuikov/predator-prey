@@ -20,7 +20,7 @@ public:
      * @param v - координата по вертикали
      * @param h - координата по горизонтали
      * @param field_pointer - указатель на поле
-     * @param units_pointer - указатель на класс с векторами хищников и жертв
+     * @param units_pointer - указатель на класс с векторами хищников, жертв и травы
      * @param time_of_life - время жизни хищника без еды
      */
     Predator(const int v, const int h, Field* field_pointer, Units* units_pointer, int time_of_life) noexcept;

@@ -11,6 +11,7 @@ class Model : public ModelAPI
     Settings* settings;
     int model_step;
     Field field;
+
     /**
      * @brief Units - класс, в котором содержатся векторы юнитов: хищников, жертв и травы
      */

@@ -110,7 +110,7 @@ void Model::movePredators() noexcept
 
 void Model::move() noexcept
 {
-    model_step ++;
+    model_step ++;    // !!!
     movePredators();
     movePreys();
     if (model_step % settings->getGrowInterval() == 0) {

@@ -8,8 +8,10 @@ Sense::Sense(Field *field, double radius):
 std::list< std::pair< Unit*, double > > Sense::getTargets(Coordinates current)
 {
     std::list< std::pair< Unit*, double > > targets;
-    for (int i = current.getV() - senseRadius; i <= current.getV() + senseRadius; i++) {
-        for (int j = current.getH() - senseRadius; j <= current.getH() + senseRadius; j++) {
+    for (int i = current.getV() - senseRadius; i <= current.getV() + senseRadius; i++)
+    {
+        for (int j = current.getH() - senseRadius; j <= current.getH() + senseRadius; j++)
+        {
             if ((field->checkBoundary(i, j) == true) &&
                     (Coordinates(i, j) - current <= senseRadius) &&
                     (field->getPosition(i, j) != nullptr) &&

@@ -18,27 +18,25 @@ void Animal::createChild() noexcept
 {
     int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
     int horizontal = movement.getCurrent().getH() + std::rand() % 3 - 1;
-    bool FLAG = false;
 
-    if (field->isEmpty(vertical, horizontal)) {
+    if (field->isEmpty(vertical, horizontal))
+    {
         setChild(vertical, horizontal);
-        FLAG = true;
-    }
-    else {
-        for (int i = movement.getCurrent().getV() - 1; i <= movement.getCurrent().getV() + 1; i++) {
-            for (int j = movement.getCurrent().getH() - 1; j <= movement.getCurrent().getH() + 1; j++) {
-                if (field->isEmpty(i, j)) {
-                    setChild(i, j);
-                    FLAG = true;
-                    break;
-                }
-            }
-            if (FLAG == true) break;
-        }
+        brain->reproduct();
+        return;
     }
 
-    if (FLAG == true) {
-        brain->reproduct();
+    for (int i = movement.getCurrent().getV() - 1; i <= movement.getCurrent().getV() + 1; i++)
+    {
+        for (int j = movement.getCurrent().getH() - 1; j <= movement.getCurrent().getH() + 1; j++)
+        {
+            if (field->isEmpty(i, j))
+            {
+                setChild(i, j);
+                brain->reproduct();
+                return;
+            }
+        }
     }
 }
 
@@ -63,11 +61,13 @@ void Animal::move() noexcept
 
     findTarget();
 
-    if (target == nullptr) {
+    if (target == nullptr)
+    {
         movement.setRandomTarget();
         movement.setSpeed(brain->getComfortableSpeed());
     }
-    else {
+    else
+    {
         movement.setTarget(target->getPlace());
         movement.setSpeed(brain->getMaxAvailableSpeed());
     }
@@ -85,24 +85,18 @@ void Animal::move() noexcept
     if (target != nullptr && movement.getCurrent() == target->getPlace())
     {
         killTarget();
-//        if (target->getType() != this->type)
-//        {
-//            killTarget();
-//        }
-//        else
-//        {
-//            createChild();
-//        }
     }
 
     field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
 
-    if (brain->isReady() == true) {
+    if (brain->isReady() == true)
+    {
         createChild();
     }
 
-    life_time++;
-    if (life_time == max_life_time || brain->getEnergy() <= 0) {
+    life_time ++;
+    if (life_time == max_life_time || brain->getEnergy() <= 0)
+    {
         field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
         exist = false;
         if (type == UnitType::PREDATOR)
@@ -117,11 +111,11 @@ void Animal::move() noexcept
 }
 
 Animal::Animal(const int v, const int h, Field* field_pointer, Units *units_pointer, int TTL) :
+    life_time(1),
     max_life_time(TTL),
+    target(nullptr),
     units_struct(units_pointer)
 {
-    life_time = 1;
-    target = nullptr;
     field = field_pointer;
     movement = Movement(Coordinates(v, h), field);
     sense = Sense(field);

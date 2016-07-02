@@ -2,7 +2,6 @@
 
 PreysBrain::PreysBrain()
 {
-
 }
 
 Unit* PreysBrain::getTarget(std::list< std::pair< Unit*, double > > && targets) noexcept

@@ -3,6 +3,9 @@
 #include "coordinates.h"
 #include "field.h"
 
+/**
+ * @brief Класс для реализации передвижения животного по полю
+ */
 class Movement
 {
 public:
@@ -49,7 +52,7 @@ private:
     double getDistance(Coordinates source, Coordinates dest);
 
     /**
-     * @brief метод, округляющий
+     * @brief метод, округляющий число в большую по модулю сторону
      */
     int round(double number);
 
