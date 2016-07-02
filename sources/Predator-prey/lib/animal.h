@@ -21,7 +21,7 @@ protected:
     /**
      * @brief max_life_time - максимальное время жизни животного без еды
      */
-    int max_life_time;
+    const int max_life_time;
 
     /**
      * @brief target - указатель на текущую цель
@@ -65,7 +65,7 @@ public:
 
     Coordinates getPlace() noexcept override;
 
-    int getCurrentStep() noexcept override;
+    int getCurrentStep() const noexcept override;
 
     /**
      * @brief метод, устанавливающий возраст животного
