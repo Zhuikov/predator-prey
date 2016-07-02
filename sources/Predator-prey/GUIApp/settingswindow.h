@@ -20,7 +20,9 @@ class SettingsWindow : public QWidget
     QLabel* field_height_label;
     QLabel* predators_label;
     QLabel* preys_label;
+    QLabel* grass_label;
     QLabel* moves_without_meal_label;
+    QLabel* grow_interval_label;
     QLabel* success_label;
     QTimer* timer_for_label;
 
@@ -29,7 +31,9 @@ class SettingsWindow : public QWidget
     QSpinBox* field_height;
     QSpinBox* predators;
     QSpinBox* preys;
+    QSpinBox* grass;
     QSpinBox* moves_without_meal;
+    QSpinBox* grow_interval;
 
     QLabel* createLabel(QString text, int horizontal, int vertical, bool invisiblity = false);
     QSpinBox* createSpinBox(int min, int max, int horizontal, int vertical);

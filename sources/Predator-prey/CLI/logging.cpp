@@ -7,15 +7,10 @@ Logging::Logging(std::string &fileName)
 
 void Logging::addLog(Model *model)
 {
-    // this is for csv
     out << model->getStep() << ","
         << model->getPredatorsNum() << ","
-        << model->getPreysNum() << std::endl;
-
-    // this is for txt
-    // out << model->getStep() << " "
-    //     << model->getPredatorsNum() <<  " "
-    //     << model->getPreysNum() << std::endl;
+        << model->getPreysNum() << ","
+        << model->getGrassNum() << std::endl;
 }
 
 Logging::~Logging()
