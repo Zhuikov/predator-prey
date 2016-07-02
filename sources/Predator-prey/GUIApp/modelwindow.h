@@ -18,7 +18,7 @@ class ModelWindow : public QWidget
 
     const QSize WINDOW_SIZE { 660, 540 };
     const QSize BUTTON_SIZE { 180,  30 };
-    const int TIME_FOR_MOVE = 500;
+    const int TIME_FOR_MOVE = 250;              // 500
 
     QPushButton* menu_button;
     QPushButton* start_button;

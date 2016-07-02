@@ -1,55 +1,18 @@
 #ifndef PREDATOR_H
 #define PREDATOR_H
-#include "modelapi.h"
 #include "animal.h"
-
-class Units;
-class Prey;
+#include "predatorsbrain.h"
 
 /**
  * @brief класс, реализующий хищника в модели
  */
 class Predator : public Animal
 {
-    /**
-     * @brief DISTANCE_FOR_RESET_TARGET - дистанция, при которой жертва убегает от хищника
-     */
-    static constexpr double DISTANCE_FOR_RESET_TARGET = 2.1;
 
 protected:
-    /**
-     * @brief PREDATOR_CREATE_ENERGY - энергия, необходимая для создания хищника
-     */
-    static const int PREDATOR_CREATE_ENERGY = 2;
 
-    /**
-     * @brief target - указатель на текущую цель
-     */
-    Prey* target;
-
-    /**
-     * @brief units_struct - указатель на класс с векторами хищников и жертв
-     */
-    Units* units_struct;
-
-    void directionFinding() noexcept;
-    void chooseToTargetDirection() noexcept;
-
-    /**
-     * @brief метод поиска жертвы на соседних 8 клетках;
-     * в случае успеха записывает жертву в поле target
-     */
-    void findPrey() noexcept;
-
-    /**
-     * @brief метод, уничтожающий target - цель (если она есть)
-     */
-    void killPrey() noexcept;
-
-    /**
-     * @brief метод, создающий хищника на случайной соседней клетке; записывает его в вектор хищников
-     */
-    void createPredator() noexcept;
+    virtual void killTarget() noexcept override;
+    virtual void setChild(const int v, const int h) noexcept override;
 
 public:
 
@@ -63,10 +26,7 @@ public:
      */
     Predator(const int v, const int h, Field* field_pointer, Units* units_pointer, int time_of_life) noexcept;
 
-    /**
-     * @brief метод, передвигающий хищника
-     */
-    void movePredator() noexcept;
+    virtual ~Predator();
 };
 
 #endif // PREDATOR_H

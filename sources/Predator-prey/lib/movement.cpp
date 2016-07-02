@@ -1,9 +1,12 @@
 #include "movement.h"
 #include <cmath>
+#include <cstdlib>
 
-Movement::Movement(Coordinates current, double speed) : current(current), speed(speed)
+Movement::Movement(Coordinates current, Field *field, double speed) :
+    current(current),
+    speed(speed),
+    field(field)
 {
-
 }
 
 Coordinates Movement::getCurrent()
@@ -11,33 +14,66 @@ Coordinates Movement::getCurrent()
     return current;
 }
 
-void Movement::move()
+int Movement::move()
 {
     double distance = getDistance(current, target);
 
-    if (distance <= speed)
+    if (std::floor(distance) <= speed)
     {
         current = target;
-        return;
+        return std::floor(distance);
     }
 
     int horizontal = round(((target.getH() - current.getH()) / distance) * speed);
     int vertical   = round(((target.getV() - current.getV()) / distance) * speed);
 
-    current.setH(current.getH() + horizontal);
-    current.setV(current.getV() + vertical);
+    bool isEmpty = false;
+
+    for (int i = horizontal; i != ((horizontal > 0) ? -1 : 1) && !isEmpty; i += ((horizontal > 0) ? -1 : 1))
+    {
+        for (int j = vertical; j != ((vertical > 0) ? -1 : 1) && !isEmpty; j += ((vertical > 0) ? -1 : 1))
+        {
+            isEmpty = field->isEmpty(current.getV() + j, current.getH() + i);
+            if (isEmpty)
+            {
+                current.setH(current.getH() + i);
+                current.setV(current.getV() + j);
+                return std::floor(getDistance(current, Coordinates(current.getV() - j, current.getH() - i)));
+            }
+        }
+    }
+    return std::floor(distance);
 }
 
-void Movement::moveApart()
+int Movement::moveApart()
 {
     Coordinates tempTarget = target;
 
-    target.setH( 2 * current.getH() - target.getH());
-    target.setV( 2 * current.getV() - target.getV());
+    int horizontal = (current.getH() - target.getH()) * speed;
+    int vertical = (current.getV() - target.getV()) * speed;
 
-    move();
+    target = current;
+
+    bool isEmpty = false;
+
+    for (int i = horizontal; i != ((horizontal > 0) ? -1 : 1) && !isEmpty; i += ((horizontal > 0) ? -1 : 1))
+    {
+        for (int j = vertical; j != ((vertical > 0) ? -1 : 1) && !isEmpty; j += ((vertical > 0) ? -1 : 1))
+        {
+            isEmpty = field->isEmpty(current.getV() + j, current.getH() + i);
+            if (isEmpty)
+            {
+                target.setH(current.getH() + i);
+                target.setV(current.getV() + j);
+            }
+        }
+    }
+
+    int distance = move();
 
     target = tempTarget;
+
+    return distance;
 }
 
 
@@ -46,9 +82,26 @@ void Movement::setTarget(Coordinates target)
     this->target = target;
 }
 
+// мб метод сделать приватным и пусть вызывается, когда дали nullptr в качестве таргета
+void Movement::setRandomTarget()
+{
+    int vertical = 0;
+    int horizontal = 0;
+    do {
+        vertical = std::rand() % field->getLength();
+        horizontal = std::rand() % field->getHeight();
+    }
+    while (((current.getV() + speed) < vertical ||
+            (current.getV() - speed) > vertical ||
+            (current.getH() + speed) < horizontal ||
+            (current.getH() - speed) < horizontal) == false);
+    target.setV(vertical);
+    target.setH(horizontal);
+}
+
 void Movement::setSpeed(double speed)
 {
-    this->speed = speed;
+    this->speed = std::fabs(speed);
 }
 
 double Movement::getDistance(Coordinates source, Coordinates dest)
@@ -60,7 +113,7 @@ double Movement::getDistance(Coordinates source, Coordinates dest)
     vertical = source.getV() - dest.getV();
 
     double distance;
-    distance = std::pow(std::pow(horizontal, 2) + std::pow(vertical, 2), 0.5);
+    distance = std::sqrt(std::pow(horizontal, 2) + std::pow(vertical, 2));
     return distance;
 }
 

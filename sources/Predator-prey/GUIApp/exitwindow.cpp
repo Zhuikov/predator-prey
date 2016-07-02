@@ -16,17 +16,17 @@ ExitWindow::ExitWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint)
                 "color: #122faa;"
                 "font-size: 15px;"
                 "font-weight: bold;");
-    exit_label->move(WINDOW_SIZE.width() - 283, WINDOW_SIZE.height()  - 80);
-    exit_label->setText("Вы действительно хотите выйти?");
+    exit_label->move(WINDOW_SIZE.width() - 210, WINDOW_SIZE.height()  - 80);
+    exit_label->setText("Are you sure?");
     exit_label->show();
 
-    yes_button = new QPushButton("Да", this);
+    yes_button = new QPushButton("Yes", this);
     yes_button->resize(BUTTON_SIZE);
     yes_button->setStyleSheet(button_style);
     yes_button->move(WINDOW_SIZE.width() - 275, WINDOW_SIZE.height() - 50);
     connect(yes_button, SIGNAL(clicked()), SLOT(closeApp()));
 
-    no_button = new QPushButton("Нет", this);
+    no_button = new QPushButton("No", this);
     no_button->resize(BUTTON_SIZE);
     no_button->setStyleSheet(button_style);
     no_button->move(WINDOW_SIZE.width() - 125, WINDOW_SIZE.height() - 50);
