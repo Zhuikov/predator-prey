@@ -1,17 +1,17 @@
 #include "grass.h"
 
-Grass::Grass(const int v, const int h, Field* field, Units* units_pointer)
+Grass::Grass(const int v, const int h, Field* field_pointer, Units* units_pointer)
 {
     current.setV(v);
     current.setH(h);
-    this->field = field;
+    this->field = field_pointer;
     units_pointer->grass.push_back(this);
     type = UnitType::GRASS;
     exist = true;
-    field->setPosition(v, h, this);
+    field_pointer->setPosition(v, h, this);
 }
 
 int Grass::getCurrentStep() noexcept
 {
-    return 100; //было 428
+    return 100; // 428
 }

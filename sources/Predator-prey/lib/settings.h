@@ -73,7 +73,7 @@ public:
     int getFieldLength() const { return field_length; }
     int getFieldHeight() const { return field_height; }
     int getNumOfPreys()  const { return num_of_preys; }
-    int getNumOfPredators()   const { return num_of_predators; }
+    int getNumOfPredators() const { return num_of_predators; }
     int getNumOfGrass() const { return num_of_grass; }
     int getGrowInterval() const { return grow_interval; }
     int getMovesWithoutMeal() const { return moves_without_meal; }

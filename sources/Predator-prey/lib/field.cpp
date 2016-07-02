@@ -1,10 +1,9 @@
 #include "field.h"
 
-Field::Field(int height, int length)
+Field::Field(int height, int length) :
+    height(height),
+    length(length)
 {
-    this->height = height;
-    this->length = length;
-
     for(int i = 0; i < height; i++){
         field.push_back(std::vector< Unit* >(length, nullptr));
     }

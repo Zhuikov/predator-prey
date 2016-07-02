@@ -67,6 +67,9 @@ public:
 
     int getCurrentStep() noexcept override;
 
+    /**
+     * @brief метод, устанавливающий возраст животного
+     */
     void setAge(int age) noexcept { life_time = age; }
 
     /**

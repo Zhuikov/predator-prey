@@ -95,7 +95,7 @@ double Brain::getMaxSpeed() noexcept
 
 double Brain::getMaxAvailableSpeed() noexcept
 {
-    double speed = getMaxSpeed(); /// вот тут стамина возвращается = 1, если это ребенок
+    double speed = getMaxSpeed();
     if (speed < stamina)
     {
         return speed;

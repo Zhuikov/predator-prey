@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     modelwindow.cpp \
     fieldframe.cpp \
     statusframe.cpp \
-    resultwindow.cpp
+    resultwindow.cpp \
+    seedwindow.cpp
 
 HEADERS  += \
     mainmenu.h \
@@ -32,7 +33,8 @@ HEADERS  += \
     modelwindow.h \
     fieldframe.h \
     statusframe.h \
-    resultwindow.h
+    resultwindow.h \
+    seedwindow.h
 
 FORMS    += mainwindow.ui
 

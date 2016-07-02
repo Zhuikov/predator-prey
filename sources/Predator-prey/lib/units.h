@@ -1,7 +1,7 @@
 #ifndef UNITS_H
 #define UNITS_H
 #include <vector>
-//#include "unit.h"
+
 class Predator;
 class Grass;
 class Prey;

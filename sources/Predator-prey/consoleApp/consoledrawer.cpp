@@ -23,7 +23,7 @@ void ConsoleDrawer::showResult()
 
 void ConsoleDrawer::drawHead()
 {
-    int lenght_of_string = std::strlen("Step XXX");
+    int lenght_of_string = std::strlen("step xxx");
     int num_of_stars_left = (this->field->getLength() * 2 - lenght_of_string) / 2;
     int num_of_stars_right = this->field->getLength() * 2 - lenght_of_string - num_of_stars_left;
 
@@ -32,8 +32,8 @@ void ConsoleDrawer::drawHead()
     }
 
     int step = this->model->getStep();
-    std::cout << "Step ";
-    std::cout << step;
+    std::cout << "step ";
+    std::cout << step << ' ';
 
     for (int i = 0; i < num_of_stars_right; i++) {
         std::cout << '*';
@@ -70,8 +70,8 @@ void ConsoleDrawer::drawStatistics()
 
 void ConsoleDrawer::drawLegend()
 {
-    std::cout << "X - predators" << std::endl;
-    std::cout << "O - preys" << std::endl;
+    std::cout << "X - Predators" << std::endl;
+    std::cout << "O - Preys" << std::endl;
 }
 
 void ConsoleDrawer::drawField()
