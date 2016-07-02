@@ -20,26 +20,28 @@ public:
     ModelTest();
 
 private Q_SLOTS:
-    int doubleCompare(double a, double b);
+    bool doubleCompare(double a, double b);
 
     void coordinatesTest();
     void fieldTest();
     void predatorNoMoveTest();
     void predatorHungryTest();
+    void createPreyTest();
     void modelInitializeTest();
-    void debugTest2();
+    void blockMoveTest();
     void moveTest();
     void moveApartTest();
     void SFTest();
     void senseTest();
+
+    void modelFunctionalTest();
 };
 
 ModelTest::ModelTest() {}
 
-int ModelTest::doubleCompare(double a, double b)
+bool ModelTest::doubleCompare(double a, double b)
 {
-    if (fabs(a - b) < 10e-3) return 1;
-    return 0;
+    return (fabs(a - b) < 10e-3);
 }
 
 void ModelTest::coordinatesTest()
@@ -97,7 +99,6 @@ void ModelTest::fieldTest()
 
     new Predator(2, 5, &field, &units, 20);
     new Prey(3, 4, &field, &units, 20);
-
 }
 
 void ModelTest::predatorNoMoveTest()
@@ -118,7 +119,6 @@ void ModelTest::predatorNoMoveTest()
     tst_predator->move();
     QCOMPARE(tst_predator->getPlace().getV(), 4);
     QCOMPARE(tst_predator->getPlace().getH(), 4);
-
 }
 
 void ModelTest::predatorHungryTest()
@@ -132,6 +132,27 @@ void ModelTest::predatorHungryTest()
         tst_predator->move();
     }
     QCOMPARE(units.predatorsNum, 0);
+}
+
+void ModelTest::createPreyTest()
+{
+    Field field(5, 5);
+    Units units;
+
+    Prey* tst_prey = new Prey(2, 2, &field, &units, 1000);
+    tst_prey->setAge(400);
+
+    new Grass(3, 3, &field, &units);
+    new Grass(2, 3, &field, &units);
+    new Grass(3, 2, &field, &units);
+
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+    tst_prey->move();
+
+    QCOMPARE(units.preysNum, 2);
 }
 
 void ModelTest::modelInitializeTest()
@@ -148,7 +169,7 @@ void ModelTest::modelInitializeTest()
     QCOMPARE(model.getStep(), 2);
 }
 
-void ModelTest::debugTest2()
+void ModelTest::blockMoveTest()
 {
     Field field;
     Units units;
@@ -160,7 +181,6 @@ void ModelTest::debugTest2()
 
     movement.move();
     QCOMPARE(movement.getCurrent(), Coordinates(4, 4));
-
 }
 
 void ModelTest::moveTest()
@@ -188,8 +208,6 @@ void ModelTest::moveTest()
     QCOMPARE(movement.getCurrent(), Coordinates(2, 2));
     movement.move();
     QCOMPARE(movement.getCurrent(), Coordinates(0, 0));
-
-
 }
 
 void ModelTest::moveApartTest()
@@ -235,6 +253,18 @@ void ModelTest::senseTest()
 
     tst_list = sense.getTargets(Coordinates(1, 1));
     QCOMPARE(tst_list.empty(), true);
+}
+
+void ModelTest::modelFunctionalTest()
+{
+    Settings settings(30, 30, 2, 20, 20, 5, 2);
+    Model model(&settings);
+
+    while (model.isEnd() == false)
+    {
+        model.move();
+    }
+    QCOMPARE(model.getStep(), 230);
 }
 
 

@@ -40,6 +40,11 @@ class Settings
     int grow_interval;
 
     /**
+     * @brief seed - зерно модели для std::rand
+     */
+    int seed;
+
+    /**
      * @brief moves_without_meal - текущее время жизни животного без еды
      */
     int moves_without_meal;
@@ -64,7 +69,7 @@ class Settings
 public:
 
     Settings(int field_length_ = 100, int field_height_ = 100, int num_of_predators_ = 1, int num_of_preys_ = 1,
-             int num_of_grass_ = 3, int grow_interval_ = 5,
+             int num_of_grass_ = 3, int grow_interval_ = 5, int seed_ = 1,
              int moves_without_meal_ = 1000, int min_moves_without_meal_ = 5, int max_moves_without_meal_ = 1000);
 
     /**
@@ -76,6 +81,7 @@ public:
     int getNumOfPredators() const { return num_of_predators; }
     int getNumOfGrass() const { return num_of_grass; }
     int getGrowInterval() const { return grow_interval; }
+    int getSeed() const { return seed; }
     int getMovesWithoutMeal() const { return moves_without_meal; }
     int getMinMovesWithoutMeal() const { return min_moves_without_meal; }
     int getMaxMovesWithoutMeal() const { return max_moves_without_meal; }
@@ -91,6 +97,7 @@ public:
     void setNumOfPreys(const int);
     void setNumOfGrass(const int);
     void setGrowInterval(const int);
+    void setSeed(const int);
     void setMovesWithoutMeal(const int);
 
 };

@@ -34,7 +34,6 @@ class ModelWindow : public QWidget
 
 public:
     ModelWindow(QWidget* parent, Settings* settings);
-    int seed = 1;
     ~ModelWindow();
 
 private slots:

@@ -1,6 +1,6 @@
 #include "seedwindow.h"
 
-SeedWindow::SeedWindow(ModelWindow* parent) : QDialog(parent, Qt::WindowTitleHint)
+SeedWindow::SeedWindow(QWidget* parent, Settings* settings) : QDialog(parent, Qt::WindowTitleHint)
 {
     this->setFixedSize(WINDOW_SIZE);
     this->setWindowTitle("New seed");
@@ -10,7 +10,7 @@ SeedWindow::SeedWindow(ModelWindow* parent) : QDialog(parent, Qt::WindowTitleHin
     pal.setBrush(this->backgroundRole(), QBrush(background));
     this->setPalette(pal);
 
-    this->parent = parent;
+    this->settings = settings;
 
     ok_button = new QPushButton("OK", this);
     ok_button->setStyleSheet(button_style);
@@ -33,13 +33,13 @@ SeedWindow::SeedWindow(ModelWindow* parent) : QDialog(parent, Qt::WindowTitleHin
                "font-weight: bold;"
                "font-size: 14px;"
                "color: #122faa");
-    QString number = QString::number(parent->seed);
+    QString number = QString::number(settings->getSeed());
     seed_line->setText(number);
 }
 
 void SeedWindow::ok()
 {
     QString number = seed_line->text();
-    parent->seed = number.toInt();
+    settings->setSeed(number.toInt());
     this->close();
 }

@@ -5,12 +5,12 @@
 #include "prey.h"
 #include "grass.h"
 
-Model::Model(Settings *settings, int seed) noexcept:
+Model::Model(Settings *settings) noexcept:
     settings(settings),
     model_step(0),
     field(settings->getFieldHeight(), settings->getFieldLength())
 {
-    srand(seed);
+    srand(settings->getSeed());
     createPredators();
     createPreys();
     createGrass();

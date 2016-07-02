@@ -14,9 +14,9 @@ Cli::Cli(int argc, char *argv[])
     int grow_interval = atoi(argv[7]);
     int seed = atoi(argv[8]);
 
-    settings = new Settings(field_length, field_height, predators, preys, num_of_grass, grow_interval);
+    settings = new Settings(field_length, field_height, predators, preys, num_of_grass, grow_interval, seed);
     name = string(argv[2]) + 'x' + argv[3] + '_' + argv[4] + '_' + argv[5] + '_' + argv[6] + '_' + argv[7] + '_' + argv[8];
-    model = new Model(settings, seed);
+    model = new Model(settings);
 }
 
 int Cli::startModel()

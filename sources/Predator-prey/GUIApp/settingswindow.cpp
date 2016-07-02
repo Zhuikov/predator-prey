@@ -19,28 +19,32 @@ SettingsWindow::SettingsWindow(QWidget* parent, Settings *settings) : QWidget(pa
     grass_label = createLabel("Grass number", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 280);
     grow_interval_label = createLabel("Grow interval",
                                       WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 230);
+    seed_label = createLabel("Seed", WINDOW_SIZE.width() - 550, WINDOW_SIZE.height() - 180);
     success_label = createLabel("Settings saved successfully",
                                 WINDOW_SIZE.width() - 450, WINDOW_SIZE.height() - 70, true);
 
     field_length = createSpinBox(Field::MIN_FIELD_SIZE, Field::MAX_FIELD_SIZE,
-                                 WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 485);
+                                 WINDOW_SIZE.width() - 180, WINDOW_SIZE.height() - 485);
     field_length->setValue(settings->getFieldLength());
 
     field_height = createSpinBox(Field::MIN_FIELD_SIZE, Field::MAX_FIELD_SIZE,
-                                 WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 435);
+                                 WINDOW_SIZE.width() - 180, WINDOW_SIZE.height() - 435);
     field_height->setValue(settings->getFieldHeight());
 
-    predators = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 385);
+    predators = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 180, WINDOW_SIZE.height() - 385);
     predators->setValue(settings->getNumOfPredators());
 
-    preys = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 335);
+    preys = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 180, WINDOW_SIZE.height() - 335);
     preys->setValue(settings->getNumOfPreys());
 
-    grass = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 285);
+    grass = createSpinBox( 1, settings->getMaxUnits(), WINDOW_SIZE.width() - 180, WINDOW_SIZE.height() - 285);
     grass->setValue(settings->getNumOfGrass());
 
-    grow_interval = createSpinBox( 1, 999, WINDOW_SIZE.width() - 170, WINDOW_SIZE.height() - 235);
+    grow_interval = createSpinBox( 1, 999, WINDOW_SIZE.width() - 180, WINDOW_SIZE.height() - 235);
     grow_interval->setValue(settings->getGrowInterval());
+
+    seed = createSpinBox( 0, 1000000, WINDOW_SIZE.width() - 180, WINDOW_SIZE.height() - 185);
+    seed->setValue(settings->getSeed());
 
     back_button = new QPushButton("Back", this);
     back_button->setStyleSheet(button_style);
@@ -103,6 +107,7 @@ void SettingsWindow::saveSettings()
     settings->setFieldLength(field_length->value());
     predators->setMaximum(settings->getMaxUnits());
     preys->setMaximum(settings->getMaxUnits());
+    settings->setSeed(seed->value());
 
     try {
     settings->setNumOfPredators(predators->value());

@@ -18,7 +18,7 @@ class Model : public ModelAPI
     Units units;
 
 public:
-    explicit Model(Settings *settings, int seed = time(0)) noexcept;
+    explicit Model(Settings *settings) noexcept;
     Field* getField() noexcept override { return &field; }
     int getStep() const noexcept override { return model_step; }
     unsigned int getPredatorsNum() const noexcept override { return this->units.predatorsNum; }
