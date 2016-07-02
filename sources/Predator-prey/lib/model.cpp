@@ -26,7 +26,7 @@ bool Model::isEnd() const noexcept
 void Model::createPredators() noexcept
 {
     if (settings->getNumOfPredators() > (field.getHeight() * field.getLength() -
-            settings->getNumOfPreys() - settings->getNumOfPredators() - settings->getNumOfGrass()))
+        settings->getNumOfPreys() - settings->getNumOfPredators() - settings->getNumOfGrass()))
     {
         units.predatorsNum = 0;
         return;
@@ -49,7 +49,8 @@ void Model::createPredators() noexcept
 void Model::createPreys() noexcept
 {
     if (settings->getNumOfPreys() > (field.getHeight() * field.getLength() -
-        settings->getNumOfPreys() - settings->getNumOfPredators() - settings->getNumOfGrass())){
+        settings->getNumOfPreys() - settings->getNumOfPredators() - settings->getNumOfGrass()))
+    {
         units.preysNum = 0;
         return;
     }
@@ -71,7 +72,8 @@ void Model::createPreys() noexcept
 void Model::createGrass() noexcept
 {
     if (settings->getNumOfGrass() > (field.getHeight() * field.getLength() -
-            units.preysNum - units.predatorsNum - units.grassNum)) {
+        units.preysNum - units.predatorsNum - units.grassNum))
+    {
         return;
     }
     for (int i = 0; i < settings->getNumOfGrass(); i++) {
@@ -86,16 +88,6 @@ void Model::createGrass() noexcept
         new Grass(v, h, &field, &units);
     }
     units.grassNum += settings->getNumOfGrass();
-}
-
-void Model::move() noexcept
-{
-    model_step ++;
-    movePredators();
-    movePreys();
-    if (getStep() % settings->getGrowInterval() == 0) {
-        createGrass();
-    }
 }
 
 void Model::movePreys() noexcept
@@ -113,5 +105,15 @@ void Model::movePredators() noexcept
         if (units.predators[i]->exist == true) {
                 units.predators[i]->move();
         }
+    }
+}
+
+void Model::move() noexcept
+{
+    model_step ++;    // !!!
+    movePredators();
+    movePreys();
+    if (model_step % settings->getGrowInterval() == 0) {
+        createGrass();
     }
 }

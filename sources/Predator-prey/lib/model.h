@@ -6,14 +6,14 @@
 #include <vector>
 #include <ctime>
 
-//TODO указывать слово override для перекрывающих функций
 class Model : public ModelAPI
 {
-    Settings *settings;
+    Settings* settings;
     int model_step;
     Field field;
+
     /**
-     * @brief Units - класс, в котором содержатся векторы юнитов: хищников и жертв
+     * @brief Units - класс, в котором содержатся векторы юнитов: хищников, жертв и травы
      */
     Units units;
 

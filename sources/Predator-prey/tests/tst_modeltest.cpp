@@ -203,9 +203,12 @@ void ModelTest::predatorCreateTest()
     Field field(10, 10);
     Units units;
 
-    new Prey(3, 3, &field, &units, 20);
-    new Prey(2, 3, &field, &units, 20);
+    Prey* tst_prey1 = new Prey(3, 3, &field, &units, 20);
+    Prey* tst_prey2 = new Prey(2, 3, &field, &units, 20);
     Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
+    tst_prey1->setAge(430);
+    tst_prey2->setAge(344);
+    tst_predator->setAge(400);
 
     tst_predator->move();
     tst_predator->move();

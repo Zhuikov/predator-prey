@@ -2,10 +2,9 @@
 
 PreysBrain::PreysBrain()
 {
-
 }
 
-Unit* PreysBrain::getTarget(std::list< std::pair< Unit*, double > > && targets)
+Unit* PreysBrain::getTarget(std::list< std::pair< Unit*, double > > && targets) noexcept
 {
     double k = getEnergy()/getMaxEnergy();
     if (k > 0.8)

@@ -66,7 +66,7 @@ public:
     virtual void movePredators() noexcept = 0;
 
     /**
-     * @brief метод, реализующий ход модели
+     * @brief метод, реализующий один шаг модели
      */
     virtual void move() noexcept = 0;
 

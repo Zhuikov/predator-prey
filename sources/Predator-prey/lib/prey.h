@@ -10,7 +10,6 @@ class Prey : public Animal
 {
 
 protected:
-
     virtual void killTarget() noexcept override;
     virtual void setChild(const int v, const int h) noexcept override;
 
@@ -25,7 +24,7 @@ public:
      */
     Prey(const int v, const int h, Field* field_pointer, Units* units_pointer, int TTL);
 
-    virtual ~Prey();
+    virtual ~Prey() override;
 
 };
 

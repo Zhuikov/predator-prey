@@ -11,7 +11,7 @@ protected:
 public:
     PredatorsBrain();
 
-    Unit* getTarget(std::list<std::pair< Unit *, double > > && targets) override;
+    Unit* getTarget(std::list<std::pair< Unit *, double > > && targets) noexcept override;
     bool isReady() noexcept override;
 };
 

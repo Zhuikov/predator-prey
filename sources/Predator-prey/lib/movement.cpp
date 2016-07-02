@@ -82,7 +82,6 @@ void Movement::setTarget(Coordinates target)
     this->target = target;
 }
 
-// мб метод сделать приватным и пусть вызывается, когда дали nullptr в качестве таргета
 void Movement::setRandomTarget()
 {
     int vertical = 0;
