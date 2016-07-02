@@ -8,20 +8,20 @@
  */
 class BadNum : public std::exception
 {
-    int bad_number;
+    const int bad_number;
 
     /**
      * @brief min_boundary - нижняя граница промежутка
      */
-    int min_boundary;
+    const int min_boundary;
 
     /**
      * @brief max_boundary - верхняя граница промежутка
      */
-    int max_boundary;
+    const int max_boundary;
 
 public:
-    BadNum(int bad_number, int min_boundary, int max_boundary):
+    BadNum(const int bad_number, const int min_boundary, const int max_boundary):
         bad_number(bad_number),
         min_boundary(min_boundary),
         max_boundary(max_boundary)
@@ -41,12 +41,12 @@ public:
     /**
      * @brief метод, возвращающий верхнюю границу промежутка
      */
-    int getMaxBoundary() { return max_boundary; }
+    int getMaxBoundary() const { return max_boundary; }
 
     /**
      * @brief метод, возвращающий нижнюю границу промежутка
      */
-    int getMinBoundary() { return min_boundary; }
+    int getMinBoundary() const { return min_boundary; }
 };
 
 #endif // BADNUM_H

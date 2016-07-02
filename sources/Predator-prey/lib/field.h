@@ -83,7 +83,7 @@ public:
      * @param vertical_position по вертикали
      * @param horizontal_position по горизонтали
      */
-    bool checkBoundary(int vertical_position, int horizontal_position) const;
+    bool checkBoundary(const int vertical_position, const int horizontal_position) const;
 };
 
 #endif // FIELD_H

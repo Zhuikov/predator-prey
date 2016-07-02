@@ -9,7 +9,7 @@ Field::Field(int height, int length) :
     }
 }
 
-bool Field::checkBoundary(int v, int h) const
+bool Field::checkBoundary(const int v, const int h) const
 {
     if (v < 0 || v >= height || h < 0 || h >= length){
         return false;

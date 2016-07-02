@@ -9,10 +9,10 @@
  */
 class BadFieldLength : public std::exception
 {
-    int length;
+    const int length;
 
 public:
-    explicit BadFieldLength(int length): length(length) {}
+    explicit BadFieldLength(const int length): length(length) {}
     virtual const char *what() const throw()
     {
         const char *string = "Невозможно создать поле с введенной длиной";
@@ -21,12 +21,12 @@ public:
     /**
      * @brief метод, возвращающий минимальную длину поля
      */
-    int getMinLength() { return Field::MIN_FIELD_SIZE; }
+    int getMinLength() const { return Field::MIN_FIELD_SIZE; }
 
     /**
      * @brief метод, возвращающий максимальную длину поля
      */
-    int getMaxLength() { return Field::MAX_FIELD_SIZE; }
+    int getMaxLength() const { return Field::MAX_FIELD_SIZE; }
 };
 
 /**
@@ -35,10 +35,10 @@ public:
  */
 class BadFieldHeight : public std::exception
 {
-    int height;
+    const int height;
 
 public:
-    explicit BadFieldHeight(int height): height(height) {}
+    explicit BadFieldHeight(const int height): height(height) {}
     virtual const char *what() const throw()
     {
         const char *string = "Невозможно создать поле с введенной высотой";
@@ -48,12 +48,12 @@ public:
     /**
      * @brief метод, возвращающий минимальную высоту поля
      */
-    int getMinHeight() { return Field::MIN_FIELD_SIZE; }
+    int getMinHeight() const { return Field::MIN_FIELD_SIZE; }
 
     /**
      * @brief метод, возвращающий максимальную высоту поля
      */
-    int getMaxHeight() { return Field::MAX_FIELD_SIZE; }
+    int getMaxHeight() const { return Field::MAX_FIELD_SIZE; }
 };
 
 #endif // BADFIELD_H

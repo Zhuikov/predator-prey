@@ -12,7 +12,7 @@ public:
     PreysBrain();
 
     Unit* getTarget(std::list<std::pair< Unit *, double > > && targets) noexcept override;
-    bool isReady() noexcept override;
+    bool isReady() const noexcept override;
 };
 
 #endif // PREYSBRAIN_H

@@ -7,11 +7,11 @@
  */
 class BadFieldBoundary : public std::exception
 {
-    int vertical;
-    int horizontal;
+    const int vertical;
+    const int horizontal;
 
 public:
-    BadFieldBoundary(int v, int h): vertical(v), horizontal(h) {}
+    BadFieldBoundary(const int v, const int h): vertical(v), horizontal(h) {}
     virtual const char *what() const throw()
     {
         const char *string = "Элемента с такими индексами не существует";

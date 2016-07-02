@@ -34,7 +34,7 @@ Unit* PreysBrain::getTarget(std::list< std::pair< Unit*, double > > && targets) 
     return result;
 }
 
-bool PreysBrain::isReady() noexcept
+bool PreysBrain::isReady() const noexcept
 {
     double k = energy / getMaxEnergy();
     return ((k > 0.90) && (step >= 100) && (step <= 900));

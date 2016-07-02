@@ -6,7 +6,7 @@ void Predator::killTarget() noexcept
     units_struct->preysNum = units_struct->preysNum - 1;
 }
 
-void Predator::setChild(const int v, const int h) noexcept
+void Predator::setChild(const int v, const int h) const noexcept
 {
     new Predator(v, h, field, units_struct, max_life_time);
 }

@@ -40,7 +40,7 @@ void Animal::createChild() noexcept
     }
 }
 
-Coordinates Animal::getPlace() noexcept
+Coordinates Animal::getPlace() const noexcept
 {
     return movement.getCurrent();
 }

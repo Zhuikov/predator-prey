@@ -9,7 +9,7 @@ Movement::Movement(Coordinates current, Field *field, double speed) :
 {
 }
 
-Coordinates Movement::getCurrent()
+Coordinates Movement::getCurrent() const
 {
     return current;
 }

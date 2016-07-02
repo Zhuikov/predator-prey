@@ -14,7 +14,7 @@ public:
     /**
      * @brief метод, возвращающий текущие координаты цели
      */
-    Coordinates getCurrent();
+    Coordinates getCurrent() const;
 
     /**
      * @brief метод, передвигающий из текущих координат в координаты,

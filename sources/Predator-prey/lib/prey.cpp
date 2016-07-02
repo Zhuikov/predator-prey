@@ -6,7 +6,7 @@ void Prey::killTarget() noexcept
     units_struct->grassNum = units_struct->grassNum - 1;
 }
 
-void Prey::setChild(const int v, const int h) noexcept
+void Prey::setChild(const int v, const int h) const noexcept
 {
     new Prey(v, h, field, units_struct, max_life_time);
 }

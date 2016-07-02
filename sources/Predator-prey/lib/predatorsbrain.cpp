@@ -26,7 +26,7 @@ Unit* PredatorsBrain::getTarget(std::list<std::pair< Unit* , double > > && targe
     return find(targets, UnitType::PREY);
 }
 
-bool PredatorsBrain::isReady() noexcept
+bool PredatorsBrain::isReady() const noexcept
 {
     double k = energy / getMaxEnergy();
     return ((k >= 0.99) && (step >= 300) && (step <= 900));

@@ -53,7 +53,7 @@ protected:
     /**
      * @brief метод, создающий животное определенного типа на клетке с задаными координатами
      */
-    virtual void setChild(const int v, const int h) noexcept = 0;
+    virtual void setChild(const int v, const int h) const noexcept = 0;
 
     Sense sense {nullptr};
     Movement movement {0, 0};
@@ -63,14 +63,14 @@ public:
     
     Animal(const int v, const int h, Field* field_pointer, Units* units_pointer, int TTL);
 
-    Coordinates getPlace() noexcept override;
+    Coordinates getPlace() const noexcept override;
 
     int getCurrentStep() const noexcept override;
 
     /**
      * @brief метод, устанавливающий возраст животного
      */
-    void setAge(int age) noexcept { life_time = age; }
+    void setAge(const int age) noexcept { life_time = age; }
 
     /**
      * @brief метод, реализующий ход животного

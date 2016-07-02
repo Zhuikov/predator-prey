@@ -13,7 +13,7 @@ public:
      */
     virtual Unit* getTarget(std::list< std::pair< Unit*, double > > && targets) noexcept = 0;
 
-    void eat(int targetsAge) noexcept;
+    void eat(const int targetsAge) noexcept;
 
     void reproduct() noexcept;
 
@@ -21,7 +21,7 @@ public:
 
     void update(int step) noexcept;
 
-    double getMaxSpeed() noexcept;
+    double getMaxSpeed() const noexcept;
 
     double getMaxAvailableSpeed() noexcept;
 
@@ -32,7 +32,7 @@ public:
     /**
      * @brief возвращает true, если животное готово к размножению
      */
-    virtual bool isReady() noexcept = 0;
+    virtual bool isReady() const noexcept = 0;
 
     bool isRuningAway = false;
 
@@ -40,19 +40,19 @@ public:
 
 protected:
 
-    double getLifeProcessEnergy() noexcept;
+    double getLifeProcessEnergy() const noexcept;
 
-    double getAge(int step) noexcept;
+    double getAge(const int step) const noexcept;
 
-    double getFoodValue(int step) noexcept;
+    double getFoodValue(const int step) const noexcept;
 
-    double getMaxEnergy() noexcept;
+    double getMaxEnergy() const noexcept;
 
-    double getMoveEnergy(int distance) noexcept;
+    double getMoveEnergy(const int distance) const noexcept;
 
-    double getMaxStamina() noexcept;
+    double getMaxStamina() const noexcept;
 
-    double getMoveStamina(int distance) noexcept;
+    double getMoveStamina(const int distance) const noexcept;
 
     Unit* find(std::list< std::pair< Unit* , double > > &targets, UnitType type) noexcept;
 

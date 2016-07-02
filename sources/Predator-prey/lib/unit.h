@@ -36,7 +36,7 @@ public:
     /**
      * @brief метод, возвращающий координаты юнита на поле
      */
-    virtual Coordinates getPlace() noexcept = 0;
+    virtual Coordinates getPlace() const noexcept = 0;
 
     /**
      * @brief метод, возвращающий текущий возраст юнита в ходах

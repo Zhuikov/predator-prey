@@ -22,7 +22,7 @@ public:
      * @brief current - координаты корма
      */
     Coordinates current;
-    Coordinates getPlace() noexcept override { return current; }
+    Coordinates getPlace() const noexcept override { return current; }
     int getCurrentStep() const noexcept override;
 };
 

@@ -3,9 +3,6 @@
 #include <cmath>
 #include "field.h"
 #include "coordinates.h"
-#include "badfield.h"
-#include "badboundary.h"
-#include "badnum.h"
 #include "model.h"
 #include "predator.h"
 #include "movement.h"

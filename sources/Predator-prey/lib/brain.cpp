@@ -1,6 +1,6 @@
 #include "brain.h"
 
-void Brain::eat(int targetsAge) noexcept
+void Brain::eat(const int targetsAge) noexcept
 {
     energy += getFoodValue(targetsAge);
     if (energy > getMaxEnergy())
@@ -42,34 +42,34 @@ void Brain::update(int step) noexcept
     }
 }
 
-double Brain::getAge(int step) noexcept
+double Brain::getAge(const int step) const noexcept
 {
     return step * age_coef;
 }
 
-double Brain::getFoodValue(int step) noexcept
+double Brain::getFoodValue(const int step) const noexcept
 {
     double age = getAge(step) / 7;
     return (((5 * std::pow(age, 2)) + (5 * age)) / (7 * (std::pow(age, 2) + 3))) * E_f;
 }
 
-double Brain::getMaxEnergy() noexcept
+double Brain::getMaxEnergy() const noexcept
 {
     double age = getAge(step) / 7;
     return (((std::pow(age, 2) + (2 * age)) / (std::pow(age, 2) + 3)) + 0.01) * E_0;
 }
 
-double Brain::getMoveEnergy(int distance) noexcept
+double Brain::getMoveEnergy(const int distance) const noexcept
 {
     return distance * 0.2;
 }
 
-double Brain::getMaxStamina() noexcept
+double Brain::getMaxStamina() const noexcept
 {
     return (1 - std::exp((-3*energy)/(getMaxEnergy() + 0.01 - energy))) * S_0;
 }
 
-double Brain::getMoveStamina(int distance) noexcept
+double Brain::getMoveStamina(const int distance) const noexcept
 {
     return ((- 2 * (distance/getMaxSpeed())) + 1) * S_m;
 }
@@ -87,7 +87,7 @@ Unit* Brain::find(std::list< std::pair< Unit*, double > > &targets, UnitType typ
     return result;
 }
 
-double Brain::getMaxSpeed() noexcept
+double Brain::getMaxSpeed() const noexcept
 {
     double age = getAge(step);
     return ((std::pow(age, 2) + (2 * age)) / (std::pow(age, 2) + 2.3) + 0.2) * V_0;
@@ -124,7 +124,7 @@ double Brain::getEnergy() noexcept
     return energy;
 }
 
-double Brain::getLifeProcessEnergy() noexcept
+double Brain::getLifeProcessEnergy() const noexcept
 {
     double age = getAge(step) / 6;
     return std::pow(age, 3)/((4.5 * std::pow(age, 3)) - (14 * std::pow(age, 2)) + 18 * age - 0.1) + 2;
