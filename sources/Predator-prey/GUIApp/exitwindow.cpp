@@ -4,7 +4,7 @@ ExitWindow::ExitWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint)
 {
     this->parent = parent;
     this->setFixedSize(WINDOW_SIZE);
-    this->setWindowTitle("Подтверждение выхода");
+    this->setWindowTitle("Exit");
 
     QPixmap background(":/texture.jpg");
     QPalette pal;
@@ -14,9 +14,9 @@ ExitWindow::ExitWindow(QWidget* parent) : QDialog(parent, Qt::WindowTitleHint)
     exit_label =  new QLabel(this);
     exit_label->setStyleSheet(
                 "color: #122faa;"
-                "font-size: 15px;"
+                "font-size: 18px;"
                 "font-weight: bold;");
-    exit_label->move(WINDOW_SIZE.width() - 210, WINDOW_SIZE.height()  - 80);
+    exit_label->move(WINDOW_SIZE.width() - 220, WINDOW_SIZE.height()  - 82);
     exit_label->setText("Are you sure?");
     exit_label->show();
 

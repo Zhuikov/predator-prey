@@ -13,9 +13,9 @@ void ConsoleDrawer::showModel()
 
 void ConsoleDrawer::showResult()
 {
-    if (model->getPredatorsNum() == 0 && model->getPreysNum() > 0) std::cout << "Жертвы убежали от хищников!";
-    else if (model->getPredatorsNum() > 0 && model->getPreysNum() == 0) std::cout << "Хищники съели всех жертв!";
-    else if (model->getPredatorsNum() == 0 && model->getPreysNum() == 0) std::cout << "Ничья!";
+    if (model->getPredatorsNum() == 0 && model->getPreysNum() > 0) std::cout << "Preys have run from predators!";
+    else if (model->getPredatorsNum() > 0 && model->getPreysNum() == 0) std::cout << "Predators have eaten all preys";
+    else if (model->getPredatorsNum() == 0 && model->getPreysNum() == 0) std::cout << "Draw";
 
     std::cout << std::endl << std::endl;
 
@@ -33,14 +33,7 @@ void ConsoleDrawer::drawHead()
 
     int step = this->model->getStep();
     std::cout << "step ";
-    if (step < 10) std::cout << '0' << step << ' ';
-        else std::cout << step << ' ';
-
-//    int time = this->model->getTime();
-//    std::cout << "Время ";
-//    if (time < 10) std::cout << '0' << time;
-//        else std::cout << time;
-//    std::cout << ':' << "00";
+    std::cout << step << ' ';
 
     for (int i = 0; i < num_of_stars_right; i++) {
         std::cout << '*';
