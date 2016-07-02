@@ -27,29 +27,13 @@ private Q_SLOTS:
 
     void coordinatesTest();
     void fieldTest();
-    void settingsTest();
-
-    void AZAZAZ();
-
     void predatorNoMoveTest();
-    void predatorCreateTest();
-    void predatorMoveKillTest();
-    void predatorPriorityTest();
     void predatorHungryTest();
-    void twoPredatorsTest();
-
-    void preyCreateTest();
-
     void modelInitializeTest();
-    void debugTest();
-
     void debugTest2();
-
     void moveTest();
     void moveApartTest();
-
     void SFTest();
-
     void senseTest();
 };
 
@@ -116,46 +100,8 @@ void ModelTest::fieldTest()
 
     new Predator(2, 5, &field, &units, 20);
     new Prey(3, 4, &field, &units, 20);
-    QVERIFY_EXCEPTION_THROWN(field.setPosition(-1, 0, nullptr), BadFieldBoundary);
-    QVERIFY_EXCEPTION_THROWN(field.setPosition(10, 10, nullptr), BadFieldBoundary);
 
 }
-
-void ModelTest::settingsTest()
-{
-    Settings settings;
-
-    QVERIFY_EXCEPTION_THROWN(settings.setFieldHeight(-1), BadFieldHeight);
-    QVERIFY_EXCEPTION_THROWN(settings.setFieldLength(-1), BadFieldLength);
-    QVERIFY_EXCEPTION_THROWN(settings.setNumOfPredators(-1), BadNum);
-}
-
-void ModelTest::AZAZAZ()
-{
-    Field field(2, 2);
-    Units units;
-
-    Prey* tst_prey = new Prey(0, 0, &field, &units, 1000);
-    tst_prey->setAge(400);
-
-    new Grass(0, 1, &field, &units);
-    new Grass(1, 1, &field, &units);
-    new Grass(1, 0, &field, &units);
-
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-    tst_prey->move();
-}
-
 
 void ModelTest::predatorNoMoveTest()
 {
@@ -178,47 +124,6 @@ void ModelTest::predatorNoMoveTest()
 
 }
 
-void ModelTest::predatorMoveKillTest()
-{
-    Field field(10, 10);
-    Units units;
-
-    new Prey(3, 3, &field, &units, 20);
-    Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
-
-    units.predators[0]->move();
-
-//    QCOMPARE(tst_predator->getPlace().getV(), 4);
-//    QCOMPARE(tst_predator->getPlace().getH(), 3);
-
-//    units.predators[0]->movePredator();
-
-    QCOMPARE(tst_predator->getPlace().getV(), 3);
-    QCOMPARE(tst_predator->getPlace().getH(), 3);
-    QCOMPARE(units.preysNum, 0);
-}
-
-void ModelTest::predatorCreateTest()
-{
-    Field field(10, 10);
-    Units units;
-
-    Prey* tst_prey1 = new Prey(3, 3, &field, &units, 20);
-    Prey* tst_prey2 = new Prey(2, 3, &field, &units, 20);
-    Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
-    tst_prey1->setAge(430);
-    tst_prey2->setAge(344);
-    tst_predator->setAge(400);
-
-    tst_predator->move();
-    tst_predator->move();
-
-    QCOMPARE(tst_predator->getPlace().getV(), 2);
-    QCOMPARE(tst_predator->getPlace().getH(), 3);
-    QCOMPARE(units.predatorsNum, 2);
-
-}
-
 void ModelTest::predatorHungryTest()
 {
     Field field;
@@ -230,53 +135,6 @@ void ModelTest::predatorHungryTest()
         tst_predator->move();
     }
     QCOMPARE(units.predatorsNum, 0);
-
-}
-
-void ModelTest::twoPredatorsTest()
-{
-    Field field;
-    Units units;
-
-    Predator* tst_predator1 = new Predator(4, 5, &field, &units, 20);
-    Predator* tst_predator2 = new Predator(2, 3, &field, &units, 20);
-    new Prey(3, 4, &field, &units, 20);
-
-    tst_predator1->move();
-    tst_predator2->move();
-    tst_predator1->move();
-    tst_predator2->move();
-    QCOMPARE(units.preysNum, 0);
-}
-
-void ModelTest::preyCreateTest()
-{
-    Field field;
-    Units units;
-
-    Prey* tst_prey = new Prey(4, 4, &field, &units, 1000);
-    new Grass(5, 4, &field, &units);
-    new Grass(5, 5, &field, &units);
-
-    tst_prey->move();
-    tst_prey->move();
-
-    QVERIFY2(units.preysNum == 2, "prey hasn't created");
-}
-
-void ModelTest::predatorPriorityTest()
-{
-    Field field(10, 10);
-    Units units;
-
-    Predator* tst_predator = new Predator(4, 4, &field, &units, 20);
-    new Prey(3, 3, &field, &units, 20);
-    new Prey(5, 4, &field, &units, 20);
-
-    tst_predator->move();
-
-    QCOMPARE(tst_predator->getPlace().getV(), 5);
-    QCOMPARE(tst_predator->getPlace().getH(), 4);
 }
 
 void ModelTest::modelInitializeTest()
@@ -291,30 +149,6 @@ void ModelTest::modelInitializeTest()
 
     model.move();
     QCOMPARE(model.getStep(), 2);
-}
-
-//TODO: слишком общее название для такого длинного теста
-void ModelTest::debugTest()
-{
-    Field field(10, 10);
-    Units units;
-    new Predator(8, 9, &field, &units, 5);
-    new Predator(9, 9, &field, &units, 5);
-    new Predator(0, 0, &field, &units, 5);
-
-    new Prey(0, 1, &field, &units, 20);
-    new Prey(0, 3, &field, &units, 20);
-    new Prey(0, 2, &field, &units, 20);
-    new Prey(0, 4, &field, &units, 20);
-
-    int num_of_predators_moves = 0;
-    while (num_of_predators_moves < 5) {
-        for (unsigned int i = 0; i < units.predators.size(); i++) units.predators[i]->move();
-        num_of_predators_moves ++;
-    }
-
-    QCOMPARE(units.predatorsNum, 3);
-
 }
 
 void ModelTest::debugTest2()
@@ -398,13 +232,9 @@ void ModelTest::senseTest()
     Coordinates tst_coord2(6, 5);
 
     tst_list = sense.getTargets(tst_coord1);
-    //unsigned int size = 2;
-    //QCOMPARE(tst_list.size(), size);
 
     sense.setRadius(1);
     tst_list = sense.getTargets(tst_coord2);
-    //size = 1;
-    //QCOMPARE(tst_list.size(), size);
 
     tst_list = sense.getTargets(Coordinates(1, 1));
     QCOMPARE(tst_list.empty(), true);

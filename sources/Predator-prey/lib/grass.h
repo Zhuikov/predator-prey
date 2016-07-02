@@ -23,7 +23,7 @@ public:
      */
     Coordinates current;
     Coordinates getPlace() noexcept override { return current; }
-    int getCurrentStep() noexcept override;
+    int getCurrentStep() const noexcept override;
 };
 
 #endif // GRASS_H

@@ -41,7 +41,7 @@ public:
     /**
      * @brief метод, возвращающий текущий возраст юнита в ходах
      */
-    virtual int getCurrentStep() noexcept = 0;
+    virtual int getCurrentStep() const noexcept = 0;
 
     /**
      * @brief exist - флаг существования юнита. Если юнит существует на поле, exist = true,

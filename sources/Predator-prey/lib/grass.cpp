@@ -11,7 +11,7 @@ Grass::Grass(const int v, const int h, Field* field_pointer, Units* units_pointe
     field_pointer->setPosition(v, h, this);
 }
 
-int Grass::getCurrentStep() noexcept
+int Grass::getCurrentStep() const noexcept
 {
     return 100; // 428
 }
