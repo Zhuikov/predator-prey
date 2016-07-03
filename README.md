@@ -1,4 +1,5 @@
 # Хищник-жертва.
+[![Build Status](https://travis-ci.org/Zhuikov/predator-prey.svg?branch=develop)](https://travis-ci.org/Zhuikov/predator-prey)
 
 [Установка окружения разработки](setup_development_env.md)
 
