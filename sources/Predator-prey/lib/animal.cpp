@@ -45,7 +45,7 @@ Coordinates Animal::getPlace() noexcept
     return movement.getCurrent();
 }
 
-int Animal::getCurrentStep() noexcept
+int Animal::getCurrentStep() const noexcept
 {
     return life_time;
 }
