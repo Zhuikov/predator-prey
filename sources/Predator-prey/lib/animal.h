@@ -61,6 +61,14 @@ protected:
 
 public:
     
+    /**
+     * @brief Конструктор животного в модели
+     * @param v - координата на поле по вертикали
+     * @param h - координата на поле по горизонтали
+     * @param field_pointer - указатель на поле, где находится животное
+     * @param units_pointer - указатель на класс с векторами животных и травы
+     * @param TTL - максимальное время жизни животного
+     */
     Animal(const int v, const int h, Field* field_pointer, Units* units_pointer, int TTL);
 
     Coordinates getPlace() const noexcept override;

@@ -16,6 +16,9 @@ enum class UnitType
     GRASS
 };
 
+/**
+ * @brief Класс для представления агента в модели
+ */
 class Unit
 {
 

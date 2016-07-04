@@ -21,7 +21,7 @@ public:
     explicit Model(Settings *settings) noexcept;
     Field* getField() noexcept override { return &field; }
     int getStep() const noexcept override { return model_step; }
-    unsigned int getPredatorsNum() const noexcept override { return this->units.predatorsNum; }
+    unsigned int getPredatorsNum() const noexcept override { return units.predatorsNum; }
     unsigned int getPreysNum() const noexcept override { return units.preysNum; }
     unsigned int getGrassNum() const noexcept override { return units.grassNum; }
     void movePreys() noexcept override;
