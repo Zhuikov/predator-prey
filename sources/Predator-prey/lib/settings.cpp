@@ -1,14 +1,14 @@
 #include "settings.h"
-#include "field.h"
-#include "badfield.h"
-#include "badnum.h"
 
 Settings::Settings(int field_length_, int field_height_, int num_of_predators_, int num_of_preys_,
+                   int num_of_grass_, int grow_interval_,
                    int moves_without_meal_, int min_moves_without_meal_, int max_moves_without_meal_):
     field_length(field_length_),
     field_height(field_height_),
     num_of_predators(num_of_predators_),
     num_of_preys(num_of_preys_),
+    num_of_grass(num_of_grass_),
+    grow_interval(grow_interval_),
     moves_without_meal(moves_without_meal_),
     min_moves_without_meal(min_moves_without_meal_),
     max_moves_without_meal(max_moves_without_meal_)
@@ -17,7 +17,7 @@ Settings::Settings(int field_length_, int field_height_, int num_of_predators_, 
 int Settings::getMaxUnits() const
 {
     int max_num;
-    max_num = std::max(field_height, field_length) * 2;
+    max_num = std::max(field_height, field_length) * 50; // 2
 
     return max_num;
 }
@@ -76,4 +76,24 @@ void Settings::setNumOfPreys(const int num)
         throw BadNum(num, 1, MAX_NUM);
     }
     this->num_of_preys = num;
+}
+
+void Settings::setNumOfGrass(const int num)
+{
+    int MAX_NUM = this->getMaxUnits();
+
+    if (num < 1 || num > MAX_NUM) {
+        throw BadNum(num, 1, MAX_NUM);
+    }
+    this->num_of_grass = num;
+}
+
+void Settings::setGrowInterval(const int num)
+{
+    int MAX_NUM = this->max_moves_without_meal;
+
+    if (num < 1 || num > MAX_NUM) {
+        throw BadNum(num, 1, MAX_NUM);
+    }
+    this->grow_interval = num;
 }

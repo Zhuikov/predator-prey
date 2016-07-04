@@ -13,22 +13,22 @@ StatusFrame::StatusFrame(QWidget* parent, Model* model) : QFrame(parent)
     predators_number_label->resize(50, 30);
     preys_number_label = new QLabel(this);
     preys_number_label->resize(50, 30);
-    day_number_label = new QLabel(this);
-    day_number_label->resize(50, 30);
-    time_number_label = new QLabel(this);
-    time_number_label->resize(65, 30);
+    grass_number_label = new QLabel(this);
+    grass_number_label->resize(50, 30);
+    step_number_label = new QLabel(this);
+    step_number_label->resize(70, 30);
 
     predators = new QLabel(this);
-    fillLabel(predators, "Хищники", 10, 10);
+    fillLabel(predators, "Predators", 10, 10);
 
     preys = new QLabel(this);
-    fillLabel(preys, "Жертвы", 18, 110);
+    fillLabel(preys, "Preys", 43, 90);
 
-    day = new QLabel(this);
-    fillLabel(day, "День", 48, 210);
+    grass = new QLabel(this);
+    fillLabel(grass, "Grass", 43, 170);
 
-    time = new QLabel(this);
-    fillLabel(time, "Время", 43, 310);
+    step = new QLabel(this);
+    fillLabel(step, "Step", 50, 250);
 }
 
 void StatusFrame::fillLabel(QLabel* label, QString text, int horizontal, int vertical)
@@ -43,36 +43,30 @@ void StatusFrame::drawStatus()
 {
     QString output_string = QString::number(model->getPredatorsNum(), 10);
     if (model->getPredatorsNum() < 10) {
-        fillLabel(predators_number_label, output_string, 65, 50);
+        fillLabel(predators_number_label, output_string, 65, 45);
     }
     else {
-        fillLabel(predators_number_label, output_string, 60, 50);
+        fillLabel(predators_number_label, output_string, 60, 45);
     }
 
     output_string = QString::number(model->getPreysNum(), 10);
     if (model->getPreysNum() < 10) {
-        fillLabel(preys_number_label, output_string, 65, 150);
+        fillLabel(preys_number_label, output_string, 65, 125);
     }
     else {
-        fillLabel(preys_number_label, output_string, 60, 150);
+        fillLabel(preys_number_label, output_string, 60, 125);
     }
 
-    output_string = QString::number(model->getDay(), 10);
-    if (model->getDay() < 10) {
-        fillLabel(day_number_label, output_string, 68, 250);
+    output_string = QString::number(model->getGrassNum(), 10);
+    if (model->getGrassNum() < 10) {
+        fillLabel(grass_number_label, output_string, 65, 205);
     }
     else {
-        fillLabel(day_number_label, output_string, 63, 250);
+        fillLabel(grass_number_label, output_string, 60, 205);
     }
 
-    output_string = QString::number(model->getTime(), 10);
-    if (model->getTime() < 10) {
-        output_string = "0" + output_string + ":00";
-    }
-    else {
-        output_string = output_string + ":00";
-    }
-    fillLabel(time_number_label, output_string, 47, 350);
+    output_string = QString::number(model->getStep(), 10);
+    fillLabel(step_number_label, output_string, 60, 285);
 }
 
 void StatusFrame::paintEvent(QPaintEvent* event)
@@ -85,5 +79,7 @@ void StatusFrame::paintEvent(QPaintEvent* event)
     brush.setColor(Qt::red);
     painter.fillRect(115, 16, 25, 15, brush);
     brush.setColor(Qt::blue);
-    painter.fillRect(110, 116, 25, 15, brush);
+    painter.fillRect(107, 96, 25, 15, brush);
+    brush.setColor(Qt::green);
+    painter.fillRect(107, 176, 25, 15, brush);
 }

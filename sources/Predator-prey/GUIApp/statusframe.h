@@ -16,8 +16,10 @@ class StatusFrame : public QFrame
 
     QLabel* predators;
     QLabel* preys;
-    QLabel* day;
-    QLabel* time;
+    QLabel* grass;
+    QLabel* step;
+//    QLabel* day;
+//    QLabel* time;
 
     QString label_style =
             "color: #122faa;"
@@ -25,8 +27,10 @@ class StatusFrame : public QFrame
             "font-weight: bold;";
     QLabel* predators_number_label;
     QLabel* preys_number_label;
-    QLabel* day_number_label;
-    QLabel* time_number_label;
+    QLabel* grass_number_label;
+    QLabel* step_number_label;
+//    QLabel* day_number_label;
+//    QLabel* time_number_label;
 
     void fillLabel(QLabel*, QString, int, int);
     void paintEvent(QPaintEvent*);

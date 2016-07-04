@@ -7,7 +7,7 @@ class ExitWindow : public QDialog
 {
     Q_OBJECT
 
-    const QSize WINDOW_SIZE { 300, 90 };
+    const QSize WINDOW_SIZE { 320, 90 };
     const QSize BUTTON_SIZE { 120, 30 };
 
     QPushButton* yes_button;

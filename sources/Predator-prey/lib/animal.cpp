@@ -2,77 +2,123 @@
 #include <ctime>
 #include <cstdlib>
 
-void Animal::chooseEmptyDirection() noexcept
+void Animal::killTarget() noexcept
 {
-    direction = field->whatIsEmpty(place.getV(), place.getH());
-    if (direction == Direction::NO_DIRECTION) {
-        has_moved = true;
-        direction = Direction::UP;
-    }
+    target->exist = false;
+    brain->eat(target->getCurrentStep());
+    target = nullptr;
 }
 
-bool Animal::setDirection(Direction direction) noexcept
+void Animal::findTarget() noexcept
 {
-    switch (direction)
+    target = brain->getTarget(sense.getTargets(movement.getCurrent()));
+}
+
+void Animal::createChild() noexcept
+{
+    int vertical = movement.getCurrent().getV() + std::rand() % 3 - 1;
+    int horizontal = movement.getCurrent().getH() + std::rand() % 3 - 1;
+
+    if (field->isEmpty(vertical, horizontal))
     {
-        case Direction::UP: {
-            if (field->isEmpty(place.getV() - 1, place.getH())) {
-                this->direction = Direction::UP;
-                return true;
-            }
-        }
-        case Direction::DOWN: {
-            if (field->isEmpty(place.getV() + 1, place.getH())) {
-                this->direction = Direction::DOWN;
-                return true;
-            }
-        }
-        case Direction::LEFT: {
-            if (field->isEmpty(place.getV(), place.getH() - 1)) {
-                this->direction = Direction::LEFT;
-                return true;
-            }
-        }
-        case Direction::RIGHT: {
-            if (field->isEmpty(place.getV(), place.getH() + 1)) {
-                this->direction = Direction::RIGHT;
-                return true;
-            }
-        }
-        default: {}
+        setChild(vertical, horizontal);
+        brain->reproduct();
+        return;
     }
-    return false;
-}
 
-void Animal::chooseRandomDirection() noexcept
-{
-    int flag = rand() % 4;
-    //TODO: будет понятнее, если в case тоже использовать enum
-    switch (flag) {
-        case 0: {
-            if (setDirection(Direction::UP) == false)
-                chooseEmptyDirection();
-            break;
-        }
-        case 1: {
-            if (setDirection(Direction::RIGHT) == false)
-                chooseEmptyDirection();
-            break;
-        }
-        case 2: {
-            if (setDirection(Direction::LEFT) == false)
-                chooseEmptyDirection();
-            break;
-        }
-        case 3: {
-            if (setDirection(Direction::DOWN) == false)
-                chooseEmptyDirection();
-            break;
+    for (int i = movement.getCurrent().getV() - 1; i <= movement.getCurrent().getV() + 1; i++)
+    {
+        for (int j = movement.getCurrent().getH() - 1; j <= movement.getCurrent().getH() + 1; j++)
+        {
+            if (field->isEmpty(i, j))
+            {
+                setChild(i, j);
+                brain->reproduct();
+                return;
+            }
         }
     }
 }
 
-void Animal::go() noexcept
+Coordinates Animal::getPlace() noexcept
 {
-    place.changeToDirection(direction);
+    return movement.getCurrent();
+}
+
+int Animal::getCurrentStep() const noexcept
+{
+    return life_time;
+}
+
+void Animal::move() noexcept
+{
+    brain->update(life_time);
+
+    sense.setRadius(4 * brain->getMaxSpeed());
+
+    brain->isRuningAway = false;
+    target = nullptr;
+
+    findTarget();
+
+    if (target == nullptr)
+    {
+        movement.setRandomTarget();
+        movement.setSpeed(brain->getComfortableSpeed());
+    }
+    else
+    {
+        movement.setTarget(target->getPlace());
+        movement.setSpeed(brain->getMaxAvailableSpeed());
+    }
+
+    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
+    if (brain->isRuningAway)
+    {
+        brain->move(movement.moveApart());
+    }
+    else
+    {
+        brain->move(movement.move());
+    }
+
+    if (target != nullptr && movement.getCurrent() == target->getPlace())
+    {
+        killTarget();
+    }
+
+    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
+
+    if (brain->isReady() == true)
+    {
+        createChild();
+    }
+
+    life_time ++;
+    if (life_time == max_life_time || brain->getEnergy() <= 0)
+    {
+        field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), nullptr);
+        exist = false;
+        if (type == UnitType::PREDATOR)
+        {
+            units_struct->predatorsNum--;
+        }
+        if (type == UnitType::PREY)
+        {
+            units_struct->preysNum--;
+        }
+    }
+}
+
+Animal::Animal(const int v, const int h, Field* field_pointer, Units *units_pointer, int TTL) :
+    life_time(1),
+    max_life_time(TTL),
+    target(nullptr),
+    units_struct(units_pointer)
+{
+    field = field_pointer;
+    movement = Movement(Coordinates(v, h), field);
+    sense = Sense(field);
+    exist = true;
+    field->setPosition(movement.getCurrent().getV(), movement.getCurrent().getH(), this);
 }

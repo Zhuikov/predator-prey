@@ -1,6 +1,5 @@
 #ifndef MODELAPI_H
 #define MODELAPI_H
-#include "units.h"
 #include "field.h"
 #include <vector>
 
@@ -15,16 +14,6 @@ public:
      * @brief метод, возвращающий указатель на поле модели
      */
     virtual Field* getField() noexcept = 0;
-
-    /**
-     * @brief метод, возвращающий текущее время
-     */
-    virtual int getTime() const noexcept = 0;
-
-    /**
-     * @brief метод, вовращающий текущий день
-     */
-    virtual int getDay() const noexcept = 0;
 
     /**
      * @brief метод, возвращающий текущий шаг
@@ -42,6 +31,11 @@ public:
     virtual unsigned int getPreysNum() const noexcept = 0;
 
     /**
+     * @brief метод, возвращающий количество травы на поле
+     */
+    virtual unsigned int getGrassNum() const noexcept = 0;
+
+    /**
      * @brief метод, проверяющий, не исчезли ли хищники или жертвы
      */
     virtual bool isEnd() const noexcept = 0;
@@ -57,14 +51,9 @@ public:
     virtual void createPreys() noexcept = 0;
 
     /**
-     * @brief метод, удаляющий умерших хищников после хода
+     * @brief метод, создающий корм для жертв
      */
-    virtual void removePredators() noexcept = 0;
-
-    /**
-     * @brief метод, удаляющий умерших жертв после хода
-     */
-    virtual void removePreys() noexcept = 0;
+    virtual void createGrass() noexcept = 0;
 
     /**
      * @brief метод, передвигающий жертв
@@ -76,8 +65,10 @@ public:
      */
     virtual void movePredators() noexcept = 0;
 
-    void saveModel();
-    void loadModel();
+    /**
+     * @brief метод, реализующий один шаг модели
+     */
+    virtual void move() noexcept = 0;
 
     virtual ~ModelAPI() {}
 };

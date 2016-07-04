@@ -5,28 +5,28 @@ ModelWindow::ModelWindow(QWidget* parent, Settings* settings) : QWidget(parent, 
 {
     this->settings = settings;
     this->setFixedSize(WINDOW_SIZE);
-    this->setWindowTitle("Хищник-жертва");
+    this->setWindowTitle("Predator-prey");
 
-    model = new Model(this->settings);
+    model = new Model(this->settings, seed);
 
     QPixmap background(":/settings_texture2.jpg");
     QPalette pal;
     pal.setBrush(this->backgroundRole(), QBrush(background));
     this->setPalette(pal);
 
-    start_button = new QPushButton("Старт", this);
+    start_button = new QPushButton("Start", this);
     start_button->setStyleSheet(button_style);
     start_button->resize(BUTTON_SIZE);
     start_button->move(WINDOW_SIZE.width() - 640, WINDOW_SIZE.height() - 515);
     connect(start_button, SIGNAL(clicked()), SLOT(startModel()));
 
-    generate_button = new QPushButton("Сгенерировать", this);
+    generate_button = new QPushButton("Generate", this);
     generate_button->setStyleSheet(button_style);
     generate_button->resize(BUTTON_SIZE);
     generate_button->move(WINDOW_SIZE.width() - 420, WINDOW_SIZE.height() - 515);
     connect(generate_button, SIGNAL(clicked()), SLOT(generateModel()));
 
-    menu_button = new QPushButton("Выйти в меню", this);
+    menu_button = new QPushButton("Back to menu", this);
     menu_button->setStyleSheet(button_style);
     menu_button->resize(BUTTON_SIZE);
     menu_button->move(WINDOW_SIZE.width() - 200, WINDOW_SIZE.height() - 515);
@@ -68,9 +68,7 @@ void ModelWindow::startModel()
 
 void ModelWindow::moveModel()
 {
-    model->movePredators();
-    model->movePreys();
-    model->remove();
+    model->move();
     field->update();
     status->drawStatus();
     if (model->isEnd() == true) {
@@ -80,10 +78,15 @@ void ModelWindow::moveModel()
 
 void ModelWindow::generateModel()
 {
+    SeedWindow* seed_window = new SeedWindow(this);
+    seed_window->exec();
+    delete seed_window;
+
+    delete model;
     delete field;
     delete status;
-    delete model;
-    model = new Model(settings);
+
+    model = new Model(settings, seed);
     field = new FieldFrame(this, model->getField());
     status = new StatusFrame(this, model);
     field->show();

@@ -6,8 +6,10 @@
 #include "mainmenu.h"
 #include "fieldframe.h"
 #include "statusframe.h"
+#include "seedwindow.h"
 
 class StatusFrame;
+class SeedWindow;
 
 class ModelWindow : public QWidget
 {
@@ -18,7 +20,7 @@ class ModelWindow : public QWidget
 
     const QSize WINDOW_SIZE { 660, 540 };
     const QSize BUTTON_SIZE { 180,  30 };
-    const int TIME_FOR_MOVE = 500;
+    const int TIME_FOR_MOVE = 100;          // 500
 
     QPushButton* menu_button;
     QPushButton* start_button;
@@ -32,6 +34,7 @@ class ModelWindow : public QWidget
 
 public:
     ModelWindow(QWidget* parent, Settings* settings);
+    int seed = 1;
     ~ModelWindow();
 
 private slots:
