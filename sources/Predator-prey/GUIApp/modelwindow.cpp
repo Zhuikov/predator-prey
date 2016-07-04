@@ -99,15 +99,22 @@ void ModelWindow::generateModel()
 void ModelWindow::endModel()
 {
     timer->stop();
-    if (model->getPredatorsNum() == 0) {
-        ResultWindow* result = new ResultWindow(this, "preys");
+    if ((model->getPreysNum() == 0) && (model->getPredatorsNum() == 0)) {
+        ResultWindow* result = new ResultWindow(this, "draw");
         result->exec();
         delete result;
     }
-    if (model->getPreysNum() == 0) {
-        ResultWindow* result = new ResultWindow(this, "predators");
-        result->exec();
-        delete result;
+    else {
+        if (model->getPredatorsNum() == 0) {
+            ResultWindow* result = new ResultWindow(this, "preys");
+            result->exec();
+            delete result;
+        }
+        if (model->getPreysNum() == 0) {
+            ResultWindow* result = new ResultWindow(this, "predators");
+            result->exec();
+            delete result;
+        }
     }
     generate_button->setEnabled(true);
 }

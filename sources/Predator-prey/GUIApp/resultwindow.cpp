@@ -21,11 +21,15 @@ ResultWindow::ResultWindow(QWidget* parent, QString winners) : QDialog(parent, Q
                 "color: #122faa;"
                 "font-size: 18px;"
                 "font-weight: bold;");
+    if (winners == "draw") {
+        result_label->setText("Draw");
+        result_label->move(130, 10);
+    }
     if (winners == "predators") {
         result_label->setText("Predators have eaten all preys");
         result_label->move(15, 10);
     }
-    else {
+    if (winners == "preys") {
         result_label->setText("Preys have run from predators");
         result_label->move(15, 10);
     }
