@@ -10,4 +10,5 @@ time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to html --execute E
 time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to html --execute Experiment_3.ipynb
 time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to html --execute Experiment_4.ipynb
 time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to html --execute Experiment_5.ipynb
+time jupyter nbconvert  --ExecutePreprocessor.timeout=6000 --to html --execute Experiment_6.ipynb
 
