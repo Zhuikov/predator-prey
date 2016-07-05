@@ -1,35 +1,16 @@
-# Хищник-жертва.
+# Multi-Agent Predator-Prey System.
 [![Build Status](https://travis-ci.org/Zhuikov/predator-prey.svg?branch=develop)](https://travis-ci.org/Zhuikov/predator-prey)
 
-[Установка окружения разработки](setup_development_env.md)
+Artificial life systems attract the attention of researchers for their ability to model and study the natural processes by means of various software and hardware simulating environments. Among those, the predator-prey concept is widely used for modeling of the relations in ecosystems with contradictory goals of its members.
 
-## Задание.
-  На прямоугольном поле случайным образом размещаются "хищники" и "жертвы", после чего они поочередно делают ходы. Ход жертвы - случайное
-перемещение на соседнюю клетку, раз в несколько ходов жертва порождает еще одну жертву на соседней клетке. Ход хищника - уничтожение
-жертвы на соседней клетке, если это возможно, иначе - случайное перемещение на соседнюю клетку. Уничтожив несколько жертв, хищник
-порождает еще одного хищника на соседней клетке. Оставшись без еды на несколько ходов, хищник умирает. Реализовать на экране процесс
-борьбы хищников и жертв. Программа должна позволять сохранять вид игрового поля для использования его в будущем. 
+[Setup development environment](setup_development_env.md)
 
-## Концепция (vision statement)
-  На прямоугольном поле случайным образом размещаются "хищники" и "жертвы", после чего они поочередно делают ходы. Ход жертвы - случайное
-перемещение на соседнюю клетку. Раз в несколько ходов жертва порождает еще одну жертву на соседней клетке, если у нее достаточно энергии. Чтобы выжить и получить энергию, жертве неоходимо питаться. На случайной клетке поля "вырастают" растения - пища для жертвы. Ход хищника - уничтожение
-жертвы на соседней клетке, если это возможно, иначе - случайное перемещение на соседнюю клетку. Уничтожив несколько жертв, хищник
-порождает еще одного хищника на соседней клетке. Оставшись без еды на несколько ходов, хищник умирает. Реализовать на экране процесс
-борьбы хищников и жертв. Программа должна позволять сохранять вид игрового поля для использования его в будущем. 
+[C++ source code](https://github.com/Zhuikov/predator-prey/tree/develop/sources/Predator-prey)
 
-## Минимально работоспособный продукт (Minimum viable product)
-  На прямоугольном поле случайным образом размещаются "хищники" и "жертвы", после чего они поочередно делают ходы. Ход жертвы - случайное
-перемещение на соседнюю клетку, раз в несколько ходов жертва порождает еще одну жертву на соседней клетке. Ход хищника - уничтожение
-жертвы на соседней клетке, если это возможно, иначе - случайное перемещение на соседнюю клетку. Уничтожив несколько жертв, хищник
-порождает еще одного хищника на соседней клетке. Оставшись без еды на несколько ходов, хищник умирает. Реализовать на экране процесс
-борьбы хищников и жертв.  
+[Experiment notebooks](https://github.com/Zhuikov/predator-prey/tree/develop/notebooks)
 
-## Диаграмма прецедентов использования
-![Диаграмма прецедентов использования](https://github.com/Zhuikov/predator-prey/blob/master/report/pictures/UseCaseDiagram.png)
+[Docker file](https://github.com/Zhuikov/predator-prey/blob/develop/Dockerfile)
 
-## Диаграмма последовательностей
+[Conda environment file](https://github.com/Zhuikov/predator-prey/blob/develop/ppenv.yml)
 
-## Диаграмма компонентов
-![Диаграмма компонентов](https://github.com/Zhuikov/predator-prey/blob/master/report/pictures/ComponentDiagram1.png)
-
-  
+[Travis configuration file](https://github.com/Zhuikov/predator-prey/blob/develop/.travis.yml)
