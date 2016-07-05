@@ -257,14 +257,14 @@ void ModelTest::senseTest()
 
 void ModelTest::modelFunctionalTest()
 {
-    Settings settings(30, 30, 2, 20, 20, 5, 2);
+    Settings settings(50, 50, 1, 1, 1, 50, 123434);
     Model model(&settings);
 
     while (model.isEnd() == false)
     {
         model.move();
     }
-    QCOMPARE(model.getStep(), 230);
+    QCOMPARE(model.getStep(), 29);
 }
 
 
