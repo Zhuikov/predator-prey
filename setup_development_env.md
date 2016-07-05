@@ -1,32 +1,32 @@
 # Qt
-Скачать и установить Qt (В случае windows -- с установкой MinGW)
+Download and setup Qt (if you use Windows -- with MinGW setup)
 
 https://www.qt.io/ru/download-open-source/
 
 # Python
 ## Anaconda
-Скачать и установить дистрибутив Anaconda -- miniconda
+Download and setup distribution Anaconda -- miniconda
 
 http://conda.pydata.org/miniconda.html
 
-в файле ppenv.yml содержится окружения для conda, следует создать его в командной строке
+There are environments for conda in ppenv.yml file. You should create it in command line:
 
 `conda env create -f ppenv.yml`
 
-подробнее об окружениях conda -- http://conda.pydata.org/docs/using/envs.html
+Details about conda enviroments see here -- http://conda.pydata.org/docs/using/envs.html 
 
 ## Pycharm IDE
-Скачать и установить pycharm
+Download and setup PyCharm
 
 https://www.jetbrains.com/pycharm/download
 
-Сделать клон репозитория predator-prey, открыть папку /notebooks в pycharm --
-будет создан проект pycharm
+Clone repository Predator-Prey, open /notebooks in PyCharm -- 
+PyCharm project will be created
 
 File --> Settings --> Project:predator-prey --> Project interpreter
 
-Там нажать на кнопку с шестеренкой --> Add Local
+Press the button with cogwheel --> Add Local
 
-Там выбрать в папке с miniconda3/envs/ppenv/python.exe
+Choose in directory miniconda3/envs/ppenv/python.exe
 
- OK и все подхватится (окружение ppenv должно быть уже создано из командной строки)
+OK and that's all (environment ppenv has already created in command line)
