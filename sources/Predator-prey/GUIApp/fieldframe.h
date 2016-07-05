@@ -14,9 +14,10 @@ class FieldFrame : public QFrame
 
     QWidget* parent;
 
-    int cell_size;
+    double cell_size;
     void createField(QPainter &painter);
     void createUnits(QPainter &painter);
+    void drawUnit(QPainter &painter, Unit* unit);
     void paintEvent(QPaintEvent*);
 
 public:

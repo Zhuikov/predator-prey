@@ -23,7 +23,7 @@ ResultWindow::ResultWindow(QWidget* parent, QString winners) : QDialog(parent, Q
                 "font-weight: bold;");
     if (winners == "draw") {
         result_label->setText("Draw");
-        result_label->move(130, 10);
+        result_label->move(125, 10);
     }
     if (winners == "predators") {
         result_label->setText("Predators have eaten all preys");

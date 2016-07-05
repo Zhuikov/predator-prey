@@ -68,8 +68,8 @@ class Settings
 
 public:
 
-    Settings(int field_length_ = 100, int field_height_ = 100, int num_of_predators_ = 1, int num_of_preys_ = 1,
-             int num_of_grass_ = 3, int grow_interval_ = 5, int seed_ = 1,
+    Settings(int field_length_ = 50, int field_height_ = 50, int num_of_predators_ = 1, int num_of_preys_ = 10,
+             int num_of_grass_ = 20, int grow_interval_ = 5, int seed_ = 12345,
              int moves_without_meal_ = 1000, int min_moves_without_meal_ = 5, int max_moves_without_meal_ = 1000);
 
     /**

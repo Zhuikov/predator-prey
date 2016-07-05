@@ -2,11 +2,11 @@
 #include <QPainter>
 #include <QBrush>
 
-FieldFrame::FieldFrame(QWidget *parent, Field* field) : QFrame(parent)
+FieldFrame::FieldFrame(QWidget *parent, Field* field) :
+    QFrame(parent),
+    field(field)
 {
-    this->field = field;
     this->parent = parent;
-    cell_size = 0;
     field_size.setHeight(FIELD_SIDE);
     field_size.setWidth(FIELD_SIDE);
 
@@ -52,40 +52,42 @@ void FieldFrame::createUnits(QPainter &painter)
     for (int i = 0; i < field->getHeight(); i++) {
         for (int j = 0; j < field->getLength(); j++) {
             position = field->getPosition(i, j);
-            if (position != nullptr) {
-                switch (position->getType() ) {
-                case UnitType::PREDATOR : {
-                            brush.setColor(Qt::red);
-                            painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
-                                             i * cell_size + LINE_WIDTH_DELTA,
-                                             cell_size - 2 * LINE_WIDTH_DELTA,
-                                             cell_size - 2 * LINE_WIDTH_DELTA,
-                                             brush);
-                            break;
-                }
-                case UnitType::PREY : {
-                            brush.setColor(Qt::blue);
-                            painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
-                                             i * cell_size + LINE_WIDTH_DELTA,
-                                             cell_size - 2 * LINE_WIDTH_DELTA,
-                                             cell_size - 2 * LINE_WIDTH_DELTA,
-                                             brush);
-                            break;
-                }
-                case UnitType::GRASS : {
-                            brush.setColor(Qt::green);
-                            painter.fillRect(j * cell_size + LINE_WIDTH_DELTA,
-                                             i * cell_size + LINE_WIDTH_DELTA,
-                                             cell_size - 2 * LINE_WIDTH_DELTA,
-                                             cell_size - 2 * LINE_WIDTH_DELTA,
-                                             brush);
-                            break;
-                }
-                default : {}
-                }
+            if (position != nullptr)
+            {
+                drawUnit(painter, position);
             }
         }
     }
+}
+
+void FieldFrame::drawUnit(QPainter &painter, Unit* unit)
+{
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+
+    if ( unit->getType() == UnitType::PREDATOR ) brush.setColor(Qt::red);
+    else if ( unit->getType() == UnitType::PREY ) brush.setColor(Qt::blue);
+    else if ( unit->getType() == UnitType::GRASS ) brush.setColor(Qt::green);
+
+    int vertical = unit->getPlace().getV();
+    int horizontal = unit->getPlace().getH();
+
+//    if (unit->getCurrentStep() <= 50)       /// brain.limit
+//    {
+//        painter.fillRect(horizontal * cell_size + LINE_WIDTH_DELTA + cell_size / 5,
+//                         vertical * cell_size + LINE_WIDTH_DELTA + cell_size / 5,
+//                         cell_size - 2 * LINE_WIDTH_DELTA - cell_size / 5,
+//                         cell_size - 2 * LINE_WIDTH_DELTA - cell_size / 5,
+//                         brush);
+//    }
+//    else
+//    {
+        painter.fillRect(horizontal * cell_size + LINE_WIDTH_DELTA,
+                         vertical * cell_size + LINE_WIDTH_DELTA,
+                         cell_size - 2 * LINE_WIDTH_DELTA,
+                         cell_size - 2 * LINE_WIDTH_DELTA,
+                         brush);
+//    }
 }
 
 void FieldFrame::paintEvent(QPaintEvent* event)
