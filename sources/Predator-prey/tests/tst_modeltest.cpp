@@ -34,7 +34,8 @@ private Q_SLOTS:
     void SFTest();
     void senseTest();
 
-    void modelFunctionalTest();
+    void modelFunctionalTest_1();
+    void modelFunctionalTest_2();
 };
 
 ModelTest::ModelTest() {}
@@ -255,7 +256,7 @@ void ModelTest::senseTest()
     QCOMPARE(tst_list.empty(), true);
 }
 
-void ModelTest::modelFunctionalTest()
+void ModelTest::modelFunctionalTest_1()
 {
     Settings settings(50, 50, 1, 1, 1, 50, 123434);
     Model model(&settings);
@@ -265,6 +266,18 @@ void ModelTest::modelFunctionalTest()
         model.move();
     }
     QCOMPARE(model.getStep(), 29);
+}
+
+void ModelTest::modelFunctionalTest_2()
+{
+    Settings settings(30, 30, 100, 1, 1, 40, 2142);
+    Model model(&settings);
+
+    while (model.isEnd() == false)
+    {
+        model.move();
+    }
+    QCOMPARE(model.getStep(), 4);
 }
 
 
