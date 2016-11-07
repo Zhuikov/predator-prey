@@ -4,8 +4,11 @@
 double Coordinates::operator-(const Coordinates &a)
 {
     double distance_between_points = 0;
-    distance_between_points = sqrt((vertical - a.getV()) * (vertical - a.getV()) +
-                                   (horizontal - a.getH()) * (horizontal - a.getH()));
+
+    double relativeV = vertical - a.getV();
+    double relativeH = horizontal - a.getH();
+
+    distance_between_points = sqrt(relativeV * relativeV + relativeH * relativeH);
 
     return distance_between_points;
 }
