@@ -7,14 +7,36 @@ Sense::Sense(Field *field, double radius):
 
 std::vector< std::pair< Unit*, double > > Sense::getTargets(Coordinates current)
 {
-    //std::list< std::pair< Unit*, double > > targets;
     targets.clear();
-    for (int i = current.getV() - senseRadius; i <= current.getV() + senseRadius; i++)
+
+    int lowerBound = current.getV() - senseRadius;
+    while (!field->checkBoundary(lowerBound, current.getH())) {
+        lowerBound++;
+    }
+
+
+    int upperBound = current.getV() + senseRadius;
+    while (!field->checkBoundary(upperBound, current.getH())) {
+        upperBound--;
+    }
+
+
+    int leftBound = current.getH() - senseRadius;
+    while (!field->checkBoundary(current.getV(), leftBound)) {
+        leftBound++;
+    }
+
+
+    int rightBound = current.getH() + senseRadius;
+    while (!field->checkBoundary(current.getV(), rightBound)) {
+        rightBound--;
+    }
+
+    for (int i = lowerBound; i <= upperBound; i++)
     {
-        for (int j = current.getH() - senseRadius; j <= current.getH() + senseRadius; j++)
+        for (int j = leftBound; j <= rightBound; j++)
         {
-            if ((field->checkBoundary(i, j) == true) &&
-                    (Coordinates(i, j) - current <= senseRadius) &&
+            if ((Coordinates(i, j) - current <= senseRadius) &&
                     (field->getPosition(i, j) != nullptr) &&
                     (field->getPosition(i, j)->exist == true) &&
                     (Coordinates(i, j) != current))
