@@ -36,12 +36,13 @@ std::vector< std::pair< Unit*, double > > Sense::getTargets(Coordinates current)
     {
         for (int j = leftBound; j <= rightBound; j++)
         {
-            if ((Coordinates(i, j) - current <= senseRadius) &&
+            double distance = Coordinates(i, j) - current;
+            if ((distance <= senseRadius) &&
                     (field->getPosition(i, j) != nullptr) &&
                     (field->getPosition(i, j)->exist == true) &&
                     (Coordinates(i, j) != current))
             {
-                std::pair< Unit*, double > pair(field->getPosition(i, j), Coordinates(i, j) - current);
+                std::pair< Unit*, double > pair(field->getPosition(i, j), distance);
                 targets.push_back(pair);
             }
         }
