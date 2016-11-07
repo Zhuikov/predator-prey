@@ -27,7 +27,7 @@ public:
     /**
      * @brief метод, устанавливающий радиус поиска
      */
-    void setRadius(double radius) { senseRadius = radius; }
+    void setRadius(double radius) { senseRadius = radius; targets.reserve(radius * radius + 1); }
 
     /**
      * @brief метод, реализующий поиск целей на поле в радиусе senseRadius
