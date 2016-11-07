@@ -3,11 +3,12 @@
 Sense::Sense(Field *field, double radius):
     senseRadius(radius),
     field(field)
-{}
+{targets.reserve(radius * radius + 1);}
 
-std::list< std::pair< Unit*, double > > Sense::getTargets(Coordinates current)
+std::vector< std::pair< Unit*, double > > Sense::getTargets(Coordinates current)
 {
-    std::list< std::pair< Unit*, double > > targets;
+    //std::list< std::pair< Unit*, double > > targets;
+    targets.clear();
     for (int i = current.getV() - senseRadius; i <= current.getV() + senseRadius; i++)
     {
         for (int j = current.getH() - senseRadius; j <= current.getH() + senseRadius; j++)

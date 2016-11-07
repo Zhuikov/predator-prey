@@ -4,7 +4,7 @@ PredatorsBrain::PredatorsBrain()
 {
 }
 
-Unit* PredatorsBrain::getTarget(std::list<std::pair< Unit* , double > > && targets) noexcept
+Unit* PredatorsBrain::getTarget(std::vector<std::pair< Unit* , double > > && targets) noexcept
 {
     double k = getEnergy()/getMaxEnergy();
     if (k > 0.8)

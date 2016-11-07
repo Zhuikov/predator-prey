@@ -1,12 +1,15 @@
 #ifndef SENSE_H
 #define SENSE_H
-#include <list>
+#include <vector>
 #include "unit.h"
 #include "field.h"
 #include "coordinates.h"
 
 class Sense
 {
+
+    std::vector<std::pair< Unit*, double >> targets;
+
     /**
      * @brief senseRadius - радиус, в пределах которого происходит поиск целей на поле
      */
@@ -32,7 +35,7 @@ public:
      * @return список пар < Unit* , double >, где первый аргумент -
      * указатель на юнита, второй - расстояние до него;
      */
-    std::list< std::pair< Unit*, double > > getTargets(Coordinates current);
+    std::vector< std::pair< Unit*, double > > getTargets(Coordinates current);
 };
 
 #endif // SENSE_H

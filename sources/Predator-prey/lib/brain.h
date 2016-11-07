@@ -2,7 +2,7 @@
 #define BRAIN_H
 #include "unit.h"
 #include <cmath>
-#include <list>
+#include <vector>
 
 class Brain
 {
@@ -11,7 +11,7 @@ public:
     /**
      * @brief метод, возвращающий наиболее подходящую цель из данного списка
      */
-    virtual Unit* getTarget(std::list< std::pair< Unit*, double > > && targets) noexcept = 0;
+    virtual Unit* getTarget(std::vector< std::pair< Unit*, double > > && targets) noexcept = 0;
 
     void eat(int targetsAge) noexcept;
 
@@ -54,7 +54,7 @@ protected:
 
     double getMoveStamina(int distance) noexcept;
 
-    Unit* find(std::list< std::pair< Unit* , double > > &targets, UnitType type) noexcept;
+    Unit* find(std::vector< std::pair< Unit* , double > > &targets, UnitType type) noexcept;
 
     //virtual Unit* getReproductionTarget(std::list<std::pair< Unit *, double > > & targets) = 0;
 

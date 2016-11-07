@@ -1,4 +1,5 @@
 #include "brain.h"
+#include <list>
 
 void Brain::eat(int targetsAge) noexcept
 {
@@ -74,11 +75,11 @@ double Brain::getMoveStamina(int distance) noexcept
     return ((- 2 * (distance/getMaxSpeed())) + 1) * S_m;
 }
 
-Unit* Brain::find(std::list< std::pair< Unit*, double > > &targets, UnitType type) noexcept
+Unit* Brain::find(std::vector< std::pair< Unit*, double > > &targets, UnitType type) noexcept
 {
     double distanceToTarget = 100000;
     Unit* result = nullptr;
-    for (std::list< std::pair< Unit*, double > >::const_iterator it = targets.begin(); it != targets.end(); ++it){
+    for (std::vector< std::pair< Unit*, double > >::const_iterator it = targets.begin(); it != targets.end(); ++it){
         if ((it->first->getType() == type) && (it->second < distanceToTarget)) {
             distanceToTarget = it->second;
             result = it->first;
