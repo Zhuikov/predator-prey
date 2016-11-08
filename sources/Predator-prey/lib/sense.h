@@ -15,6 +15,8 @@ class Sense
      */
     double senseRadius;
 
+    double quadRadius;
+
     /**
      * @brief field - указатель на поле, на котором происходит поиск целей
      */
@@ -27,7 +29,12 @@ public:
     /**
      * @brief метод, устанавливающий радиус поиска
      */
-    void setRadius(double radius) { senseRadius = radius; targets.reserve(radius * radius + 1); }
+    void setRadius(double radius)
+    {
+        senseRadius = radius;
+        quadRadius = radius * radius;
+        targets.reserve(quadRadius + 1);
+    }
 
     /**
      * @brief метод, реализующий поиск целей на поле в радиусе senseRadius

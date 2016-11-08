@@ -1,9 +1,13 @@
 #include "sense.h"
+#include <cmath>
 
 Sense::Sense(Field *field, double radius):
     senseRadius(radius),
     field(field)
-{targets.reserve(radius * radius + 1);}
+{
+    quadRadius = radius * radius;
+    targets.reserve(quadRadius + 1);
+}
 
 std::vector< std::pair< Unit*, double > > Sense::getTargets(Coordinates current)
 {
@@ -36,13 +40,13 @@ std::vector< std::pair< Unit*, double > > Sense::getTargets(Coordinates current)
     {
         for (int j = leftBound; j <= rightBound; j++)
         {
-            double distance = Coordinates(i, j) - current;
-            if ((distance <= senseRadius) &&
+            double quadDistance = Coordinates(i, j).getQuadDistance(current);
+            if ((quadDistance <= quadRadius) &&
                     (field->getPosition(i, j) != nullptr) &&
                     (field->getPosition(i, j)->exist == true) &&
                     (Coordinates(i, j) != current))
             {
-                std::pair< Unit*, double > pair(field->getPosition(i, j), distance);
+                std::pair< Unit*, double > pair(field->getPosition(i, j), std::sqrt(quadDistance));
                 targets.push_back(pair);
             }
         }

@@ -43,6 +43,8 @@ public:
      */
     int getH() const { return horizontal; }
 
+    double getQuadDistance(const Coordinates &coord);
+
     /**
      * @brief Разность координат - расстояние между соответсвующими точками на плоскости
      */

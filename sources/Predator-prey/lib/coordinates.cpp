@@ -1,6 +1,14 @@
 #include "coordinates.h"
 #include <cmath>
 
+double Coordinates::getQuadDistance(const Coordinates &coord)
+{
+    double relativeV = vertical - coord.getV();
+    double relativeH = horizontal - coord.getH();
+
+    return relativeV * relativeV + relativeH * relativeH;
+}
+
 double Coordinates::operator-(const Coordinates &a)
 {
     double distance_between_points = 0;
