@@ -9,6 +9,7 @@ before_install:
 - docker build -t zhuikov/predator-prey .
 
 script:
+- docker run -v $TRAVIS_BUILD_DIR/sources:/sources lamtev/qt /bin/bash -c " cd sources/Predator-prey && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && cmake --build . "
 - docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources zhuikov/predator-prey /bin/bash -c "cd /sources/Predator-prey && qmake && make"
 - docker run -v /home/travis/build/Zhuikov/predator-prey/sources/:/sources zhuikov/predator-prey /sources/Predator-prey/tests/tst_modeltest
 - docker run -v /home/travis/build/Zhuikov/predator-prey/:/repo zhuikov/predator-prey /bin/bash -c "cd /repo/notebooks && ./nbconv.sh"

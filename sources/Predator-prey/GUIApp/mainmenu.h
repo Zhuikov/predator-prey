@@ -3,9 +3,9 @@
 #include "QtWidgets"
 #include "exitwindow.h"
 #include "settingswindow.h"
-#include "settings.h"
 #include "modelwindow.h"
 #include "model.h"
+#include "settings.h"
 
 static const QString button_style =
         "QPushButton {"

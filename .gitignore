@@ -8,7 +8,8 @@ build*
 *.tdo 
 *.toc 
 
-.idea/
+cmake-*
+.idea
 .vagrant/
 notebooks/.ipynb_checkpoints/
 .ipynb_checkpoints/

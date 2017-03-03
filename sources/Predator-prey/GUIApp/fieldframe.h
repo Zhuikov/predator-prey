@@ -1,5 +1,6 @@
 #ifndef FIELDFRAME_H
 #define FIELDFRAME_H
+
 #include "field.h"
 #include <QFrame>
 

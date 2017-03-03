@@ -1,5 +1,4 @@
 #include "consoleapp.h"
-#include "badfield.h"
 #include "unistd.h"
 
 void ConsoleApp::startModel()

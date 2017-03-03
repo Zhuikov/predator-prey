@@ -1,5 +1,7 @@
 #ifndef CONSOLEDRAWER_H
 #define CONSOLEDRAWER_H
+
+#include "field.h"
 #include "model.h"
 
 /**

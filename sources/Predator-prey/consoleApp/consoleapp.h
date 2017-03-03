@@ -1,5 +1,6 @@
 #ifndef CONSOLEAPP_H
 #define CONSOLEAPP_H
+
 #include "consoledialog.h"
 #include "consoledrawer.h"
 
