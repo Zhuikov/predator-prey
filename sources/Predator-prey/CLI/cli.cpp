@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "cli.h"
 
 Cli::Cli(int argc, char *argv[])

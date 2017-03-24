@@ -1,8 +1,7 @@
 #include "consoledialog.h"
-#include "badfield.h"
-#include "badnum.h"
 #include "badinput.h"
 #include <iostream>
+#include <cstdlib>
 
 int ConsoleDialog::readInt()
 {
