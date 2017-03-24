@@ -1,19 +1,17 @@
 #GUIApp
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
-
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5LinguistTools REQUIRED)
 
-qt5_add_resources(qrsrc resources/resources.qrc)
-
+set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(FORMS mainwindow.ui)
-
-include_directories(${CMAKE_SOURCE_DIR}/lib)
+set(QRSRC resources/resources.qrc)
 
 set(
         SOURCE_FILES
@@ -30,9 +28,9 @@ set(
         statusframe.cpp statusframe.h
 )
 
-qt5_wrap_ui(calculator_FORMS_HEADERS ${FORMS})
+include_directories(${CMAKE_SOURCE_DIR}/lib)
 
-add_executable(GUIApp ${SOURCE_FILES} ${qrsrc} ${FORMS})
+add_executable(GUIApp ${SOURCE_FILES} ${QRSRC} ${FORMS})
 
 
 target_link_libraries(GUIApp lib)
